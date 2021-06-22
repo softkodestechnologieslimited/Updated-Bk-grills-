@@ -17,6 +17,7 @@ const Staff = observer(() => {
   const { staffService, authService } = useContext(AppStateContext);
   const { currentUser } = authService;
   const [isLoading, setIsLoading] = useState(false);
+  const [deleted, setIsDeleted] = useState(false);
   const [staff, setStaff] = useState([]);
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,8 +90,10 @@ const Staff = observer(() => {
 
   const showDeleted = (e) => {
     if (e.target.checked) {
+      setIsDeleted(true)
       setStaff(staffService.allStaff.filter((staff) => staff.deleted === true));
     } else {
+      setIsDeleted(false)
       refreshStaff();
     }
   };
@@ -132,7 +135,7 @@ const Staff = observer(() => {
             <div className="w-full lg:w-8/12 mx-auto mb-12 px-4">
               {currentStaff.length !== 0 ? (
                 <Fade left>
-                  <StaffCard staff={currentStaff} user={currentUser} />
+                  <StaffCard staff={currentStaff} user={currentUser} deleted={deleted}/>
                 </Fade>
               ) : (
                 <div className="w-full flex justify-center">

@@ -17,6 +17,7 @@ const Orders = observer(() => {
   const { orderService, authService } = useContext(AppStateContext);
   const { currentUser } = authService;
   const [isLoading, setIsLoading] = useState(false);
+  const [deleted, setIsDeleted] = useState(false);
   const [orders, setOrders] = useState([]);
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -97,10 +98,12 @@ const Orders = observer(() => {
 
   const showDeleted = (e) => {
     if (e.target.checked) {
+      setIsDeleted(true)
       setOrders(
         orderService.recentOrders.filter((order) => order.deleted === true)
       );
     } else {
+      setIsDeleted(false)
       refreshOrders();
     }
   };
@@ -145,7 +148,7 @@ const Orders = observer(() => {
             <div className="w-full mx-auto mb-12 px-4">
               {currentOrders.length !== 0 ? (
                 <Fade left>
-                  <OrdersTable orders={currentOrders} refresh={refreshOrders} />
+                  <OrdersTable orders={currentOrders} refresh={refreshOrders} deleted={deleted} />
                 </Fade>
               ) : (
                 <div className="w-full flex justify-center">

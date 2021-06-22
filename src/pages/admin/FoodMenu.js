@@ -12,7 +12,7 @@ import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 const FoodMenu = () => {
   const { mealService } = useContext(AppStateContext);
   const foodItems = mealService.meals.filter(
-    (meal) => meal.category === "food" && meal.inStock === "true"
+    (meal) => meal.category === "food" && meal.inStock === "true" && meal.deleted !== true
   );
 
   const history = useHistory();

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StaffDropdown from "components/Dropdowns/StaffDropdown";
 
-const StaffCard = ({ staff, user }) => {
+const StaffCard = ({ staff, user,deleted }) => {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -70,7 +70,7 @@ const StaffCard = ({ staff, user }) => {
                         {
                           user.role === 'superAdmin' &&
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <StaffDropdown id={staff.id} />
+                            <StaffDropdown id={staff.id} deleted={deleted}/>
                           </td>
                         }
                       </tr>

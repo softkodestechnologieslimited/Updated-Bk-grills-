@@ -4,7 +4,7 @@ import { AppStateContext } from "../../context";
 // components
 import OrderDropdown from "../Dropdowns/OrderDropdown.js";
 
-const OrderTable = ({ orders, refresh }) => {
+const OrderTable = ({ orders, refresh, deleted }) => {
   const { authService } = useContext(AppStateContext);
   const { currentUser } = authService;
 
@@ -112,7 +112,7 @@ const OrderTable = ({ orders, refresh }) => {
                       &#8358;{order.total}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                      <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} />
+                      <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} deleted={deleted} />
                     </td>
                   </tr>
                 ))

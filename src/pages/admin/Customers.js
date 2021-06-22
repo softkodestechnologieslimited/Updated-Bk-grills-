@@ -17,6 +17,7 @@ const Customers = observer(() => {
   const { currentUser } = authService;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [deleted, setIsDeleted] = useState(false);
   const [customers, setCustomers] = useState([]);
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +48,7 @@ const Customers = observer(() => {
       setIsLoading(true);
       const response = await apiService.getCustomers();
       const { data } = response.data;
-      console.log(data);
+      // console.log(data);
       customerService.setCustomers([...data]);
 
       refreshCustomers();
@@ -94,12 +95,14 @@ const Customers = observer(() => {
 
   const showDeleted = (e) => {
     if (e.target.checked) {
+      setIsDeleted(true)
       setCustomers(
         customerService.allCustomers.filter(
           (customer) => customer.deleted === true
         )
       );
     } else {
+      setIsDeleted(false)
       refreshCustomers();
     }
   };
@@ -143,6 +146,7 @@ const Customers = observer(() => {
                 <CustomersCard
                   customers={currentCustomers}
                   refresh={refreshCustomers}
+                  deleted={deleted}
                 />
               ) : (
                 <div className="w-full flex justify-center">

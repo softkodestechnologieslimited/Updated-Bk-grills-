@@ -47,6 +47,9 @@ export class ApiService {
     this.axios.post("/auth/change-password", payload, addAuthorizedHeaders());
 
   // ADMIN PRIVILEGES FOR OTHER USERS
+  
+  unDeleteItem = async (payload) =>
+      this.axios.post("/auth/undelete", payload, addAuthorizedHeaders());
 
   deleteUser = async (payload) =>
     this.axios.post("/users/delete", payload, addAuthorizedHeaders());

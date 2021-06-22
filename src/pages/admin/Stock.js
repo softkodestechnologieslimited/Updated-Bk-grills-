@@ -19,6 +19,7 @@ const Stock = observer(() => {
   const { currentUser } = authService;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [deleted, setIsDeleted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [threshold] = useState(20);
 
@@ -129,8 +130,10 @@ const Stock = observer(() => {
 
   const showDeleted = (e) => {
     if (e.target.checked) {
+      setIsDeleted(true)
       setStock(mealService.meals.filter((meal) => meal.deleted === true));
     } else {
+      setIsDeleted(false)
       refreshStock();
     }
   };
@@ -226,6 +229,7 @@ const Stock = observer(() => {
                     refresh={refreshStock}
                     user={currentUser}
                     openModal={openModal}
+                    deleted={deleted}
                   />
                 </Fade>
               ) : (

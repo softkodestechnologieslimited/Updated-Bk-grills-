@@ -3,7 +3,7 @@ import { createPopper } from "@popperjs/core";
 import { Link } from "react-router-dom";
 import Jump from 'react-reveal/Jump';
 
-const StaffDropdown = ({ id }) => {
+const StaffDropdown = ({ id, deleted }) => {
   const node = useRef();
 
   // dropdown props
@@ -33,6 +33,26 @@ const StaffDropdown = ({ id }) => {
     // outside click
     closeDropdownPopover()
   };
+
+   const undeleteItem = async () => {
+    // try {
+    //   await apiService.deleteCustomer({ id });
+    //   closeDropdownPopover();
+    //   await customerService.deleteCustomer(id);
+    //   addToast("Customer deleted successfully", {
+    //     appearance: 'success',
+    //     autoDismiss: true,
+    //   })
+
+    //   refresh(); // use this to refresh the customers
+    // } catch (error) {
+    //   const message = apiService.getErrorMessage(error);
+    //   addToast(message, {
+    //     appearance: 'error',
+    //     autoDismiss: true,
+    //   })
+    // }
+  }
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClick);
@@ -67,7 +87,23 @@ const StaffDropdown = ({ id }) => {
           "bg-white text-base z-50 text-center flex-col py-2 list-none rounded shadow-lg min-w-48"
         }
       >
-        <Jump>
+        {
+          deleted ? (
+                 <Jump>
+              <button
+                onClick={undeleteItem}
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
+                }
+
+              >
+                <i className="fas fa-trash-alt mr-2"></i>
+          Undo Delete
+              </button>
+            </Jump>
+          ) : (
+            <>
+            <Jump>
           <Link
             to={`/dashboard/staff/${id}`}
             className={
@@ -79,6 +115,10 @@ const StaffDropdown = ({ id }) => {
           Modify
         </Link>
         </Jump>
+            </>
+          )
+        }
+        
       </div>
     </div>
   );

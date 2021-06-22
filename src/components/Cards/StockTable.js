@@ -3,7 +3,7 @@ import React from "react";
 // components
 import StockmenuDropdown from "../Dropdowns/StockmenuDropdown.js";
 
-const StockTable = ({ meals, refresh, user, openModal }) => {
+const StockTable = ({ meals, refresh, user, openModal, deleted }) => {
   return (
     <>
       <div
@@ -68,7 +68,7 @@ const StockTable = ({ meals, refresh, user, openModal }) => {
               {
                 meals.map((meal, idx) => (
                   <tr key={idx}>
-                    <th className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
+                    <th className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                       <span
                         className=
                         "font-bold text-gray-700"
@@ -91,7 +91,7 @@ const StockTable = ({ meals, refresh, user, openModal }) => {
                       &#8358;{meal.price}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                      <StockmenuDropdown id={meal.id} refresh={refresh} />
+                      <StockmenuDropdown id={meal.id} refresh={refresh} deleted={deleted} />
                     </td>
                   </tr>
                 ))

@@ -45,7 +45,7 @@ const Menu = () => {
         <AdminNavbar />
         <div className="relative px-4 md:px-10 mx-auto w-full md:pt-32 pt-12 md:mt-0 mt-24">
           {currentUser.role !== "waiter" && (
-            <div className="relative px-4">
+            <div className="relative px-4 mt-6">
               <Link
                 className="bg-blue-800 text-white active:bg-blue-800 custom-btn font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"

@@ -7,7 +7,7 @@ import { useToasts } from 'react-toast-notifications'
 import Jump from 'react-reveal/Jump';
 
 
-const OrderDropdown = ({ id, refresh, orderStatus }) => {
+const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
   const node = useRef();
 
   // dropdown props
@@ -73,6 +73,26 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
     }
   }
 
+  const undeleteItem = async () => {
+    // try {
+    //   await apiService.deleteCustomer({ id });
+    //   closeDropdownPopover();
+    //   await customerService.deleteCustomer(id);
+    //   addToast("Customer deleted successfully", {
+    //     appearance: 'success',
+    //     autoDismiss: true,
+    //   })
+
+    //   refresh(); // use this to refresh the customers
+    // } catch (error) {
+    //   const message = apiService.getErrorMessage(error);
+    //   addToast(message, {
+    //     appearance: 'error',
+    //     autoDismiss: true,
+    //   })
+    // }
+  }
+
   return (
     <div ref={node}>
       <a
@@ -95,7 +115,23 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
           "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        <Jump>
+        {
+          deleted ? (
+            <>
+            <button
+                onClick={undeleteItem}
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
+                }
+
+              >
+                <i className="fas fa-trash-alt mr-2"></i>
+          Undo Delete
+              </button>
+            </>
+          ) : (
+            <>
+              <Jump>
           <Link
             to={`/dashboard/orders/${id}`}
             className={
@@ -140,6 +176,10 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
             </Jump>
           )
         }
+            </>
+          )
+        }
+        
 
       </div>
     </div>
