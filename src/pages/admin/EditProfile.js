@@ -15,18 +15,19 @@ import FullScreenLoader from "../../components/fullScreenLoader";
 
 const EditProfile = () => {
   const { authService } = useContext(AppStateContext);
-  const { email } = authService.currentUser;
+  // const { email } = authService.currentUser;
 
   const [profileDetails, setProfileDetails] = useState({
-    name: "",
-    phone: "",
+    name: authService.currentUser.name,
+    email: authService.currentUser.email,
+    phone: authService.currentUser.phone,
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { addToast } = useToasts()
 
-  const { name, phone } = profileDetails;
+  const { name, phone, email } = profileDetails;
 
 
   const handleSubmit = async (e) => {
@@ -103,7 +104,7 @@ const EditProfile = () => {
                       <label className="block">
                         <span className="text-gray-700">Email Address</span>
                         <input type='email' className="form-input text-gray-700 mt-1 block w-full my-4 p-3 bg-white" placeholder="Email" name='email' value={email}
-                          disabled />
+                        />
                       </label>
                     </div>
                     <div className="relative w-full mb-3">

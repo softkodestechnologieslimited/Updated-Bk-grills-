@@ -2,21 +2,18 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AppStateContext } from "../../context";
 import apiService from "../../context/apiService";
-import { useToasts } from 'react-toast-notifications'
-import Fade from 'react-reveal/Fade';
-
+import { useToasts } from "react-toast-notifications";
+import Fade from "react-reveal/Fade";
 
 // components
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 
-
 const Menu = () => {
-  const { authService, mealService } = useContext(AppStateContext)
+  const { authService, mealService } = useContext(AppStateContext);
   const { currentUser } = authService;
-  const { addToast } = useToasts()
-
+  const { addToast } = useToasts();
 
   useEffect(() => {
     if (mealService.meals.length) return;
@@ -29,15 +26,17 @@ const Menu = () => {
     try {
       const response = await apiService.getMeals();
       const { data } = response.data;
+      // console.log(data);
+      // mealService.setMeals(data);
       mealService.setMeals([...data]);
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
-        appearance: 'error',
+        appearance: "error",
         autoDismiss: true,
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -45,18 +44,17 @@ const Menu = () => {
       <div className="relative md:ml-64 bg-gray-900">
         <AdminNavbar />
         <div className="relative px-4 md:px-10 mx-auto w-full md:pt-32 pt-12 md:mt-0 mt-24">
-          {
-            currentUser.role !== 'waiter' && (
-              <div className="relative px-4">
-                <Link
-                  className="bg-blue-800 text-white active:bg-blue-800 custom-btn font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
-                  to="/dashboard/addmeal"
-                >
-                  <i className="fas fa-plus mr-2"></i> Add Item
-            </Link>
-              </div>
-            )
-          }
+          {currentUser.role !== "waiter" && (
+            <div className="relative px-4">
+              <Link
+                className="bg-blue-800 text-white active:bg-blue-800 custom-btn font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                to="/dashboard/addmeal"
+              >
+                <i className="fas fa-plus mr-2"></i> Add Item
+              </Link>
+            </div>
+          )}
 
           <Fade left cascade>
             <div className="flex flex-wrap mt-16">
@@ -68,13 +66,16 @@ const Menu = () => {
                     className="w-full align-middle rounded-t-lg"
                   />
                   <blockquote className="relative p-8 mb-4">
-                    <h4 className="text-xl font-bold text-gray-800 mb-4 ml-3">Food</h4>
+                    <h4 className="text-xl font-bold text-gray-800 mb-4 ml-3">
+                      Food
+                    </h4>
                     <Link
-                      className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                      className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
                       to="/dashboard/food"
                     >
                       View
-                  </Link>
+                    </Link>
                   </blockquote>
                 </div>
               </div>
@@ -88,13 +89,14 @@ const Menu = () => {
                   <blockquote className="relative p-8 mb-4">
                     <h4 className="text-xl font-bold text-gray-800 mb-4 ml-3">
                       Drinks
-                  </h4>
+                    </h4>
                     <Link
-                      className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                      className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
                       to="/dashboard/drinks"
                     >
                       View
-                  </Link>
+                    </Link>
                   </blockquote>
                 </div>
               </div>

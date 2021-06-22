@@ -8,7 +8,8 @@ import styled from "styled-components";
 import Zoom from 'react-reveal/Zoom';
 
 // import cart from '../../assets/img/food-cart-64.png'
-import cart from '../../assets/img/fast-cart-64.png'
+// import cart from '../../assets/img/shopping-cart.png'
+import cart from '../../assets/img/fast-cart.png'
 
 const CartDropdown = observer(() => {
   const node = useRef();
@@ -77,9 +78,8 @@ const CartDropdown = observer(() => {
         <div className="items-center flex">
           <div className="relative w-full h-full inline-flex items-center justify-center">
 
-            <img src={cart} alt="cart" />
-            {/* <i className="fas fa-shopping-cart fa-3x text-grey-800"></i> */}
-            <span className='absolute font-bold text-lg mr-4 mt-3 top-0 right-0 text-gray-900'>
+            <img src={cart} alt="cart" className='h-20' />
+            <span className='absolute font-bold text-lg top-0 left-1 mt-5 cart-text text-white'>
               {cartService.meals.length}
             </span>
           </div>

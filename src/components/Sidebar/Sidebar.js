@@ -114,6 +114,32 @@ const Sidebar = () => {
                 currentUser.role !== 'waiter' ? (<AdminSideNav />) : (<StaffSideNav />)
               }
 
+              {
+                currentUser.role === 'superAdmin' && (
+                  <li className="items-center">
+                    <Link
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (window.location.href.indexOf("/dashboard/log") !== -1
+                          ? "text-blue-500 hover:text-blue-600"
+                          : "text-white hover:text-gray-600")
+                      }
+                      to="/dashboard/log"
+                    >
+                      <i
+                        className={
+                          "fas fa-clipboard-list mr-2 text-sm " +
+                          (window.location.href.indexOf("/dashboard/log") !== -1
+                            ? "opacity-75"
+                            : "text-gray-400")
+                        }
+                      ></i>{" "}
+                        Log
+                      </Link>
+                  </li>
+                )
+              }
+
               {/* Divider */}
               <hr className="my-4 md:min-w-full" />
 
@@ -147,7 +173,7 @@ const Sidebar = () => {
                 >
                   <i
                     className=
-                    "fas fa-tools mr-2 text-sm text-white"
+                    "fas fa-sign-out-alt mr-2 text-sm text-white"
                   ></i>{" "}
                   Logout
                 </button>

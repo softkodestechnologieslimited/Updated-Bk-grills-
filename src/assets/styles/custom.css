@@ -15,6 +15,10 @@
   max-height: 10rem;
 }
 
+.cart-text {
+  margin-left: 20px;
+}
+
 .modal-fixed {
   position: fixed;
   top: 0;

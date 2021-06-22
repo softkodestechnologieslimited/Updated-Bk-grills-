@@ -81,7 +81,12 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
         ref={btnDropdownRef}
         onClick={toggleDropdown}
       >
-        <i className="fas fa-ellipsis-v"></i>
+        <button
+          className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 "
+          type="button"
+        >
+          More
+            </button>
       </a>
       <div
         ref={popoverDropdownRef}
@@ -99,7 +104,7 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
 
           >
             <i className="fas fa-edit mr-2"></i>
-          Edit
+          Process Order
         </Link>
         </Jump>
         {
@@ -114,13 +119,13 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
 
             >
               <i className="fas fa-print mr-2"></i>
-          Print
+          Print Receipt
         </Link>
           </Jump>
         }
 
         {
-          currentUser.role !== 'waiter' && (
+          currentUser.role === 'superAdmin' && (
             <Jump>
               <button
                 onClick={deleteItem}

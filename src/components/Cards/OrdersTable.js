@@ -17,7 +17,7 @@ const OrderTable = ({ orders, refresh }) => {
       >
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+            <div className="relative w-full px-4 max-w-full flex-grow flex-1 py-2">
               {currentUser.role === 'admin' ? (
                 <h3
                   className=
@@ -80,14 +80,14 @@ const OrderTable = ({ orders, refresh }) => {
                 <th
                   className=
                   "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200"
-                ></th>
+                >Action</th>
               </tr>
             </thead>
             <tbody>
               {
                 orders.map((order, idx) => (
                   <tr key={idx}>
-                    <th className="border-t-0 px-6 align-middle text-capitalize border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
+                    <th className="border-t-0 px-6 align-middle text-capitalize border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                       <span
                         className=
                         "ml-3 font-bold text-gray-700"
@@ -111,7 +111,7 @@ const OrderTable = ({ orders, refresh }) => {
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       &#8358;{order.total}
                     </td>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                       <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} />
                     </td>
                   </tr>

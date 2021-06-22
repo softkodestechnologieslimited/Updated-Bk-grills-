@@ -25,6 +25,7 @@ import AddCustomer from "../pages/admin/AddCustomer.js";
 import EditCustomer from "../pages/admin/EditCustomer.js";
 import AddStaff from "../pages/admin/AddStaff.js";
 import Staff from "../pages/admin/Staff.js";
+import Log from "../pages/admin/Log.js";
 import EditStaff from "../pages/admin/EditStaff.js";
 import Password from "../pages/admin/Password.js";
 import EditProfile from "../pages/admin/EditProfile.js";
@@ -80,6 +81,8 @@ const Admin = () => {
           <Route exact path="/dashboard/expenses" component={Expenses} />
           {/* <Route exact path="/dashboard/expenses/:id" component={StockItem} /> */}
           <Route exact path="/dashboard/addexpense" component={AddExpense} />
+
+          <Route exact path="/dashboard/log" component={Log} />
         </Suspense>
       </Switch>
     </>
