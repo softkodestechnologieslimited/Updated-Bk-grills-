@@ -1,60 +1,43 @@
 import React, { useState } from "react";
 // import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import apiService from "../../context/apiService";
-import { useToasts } from 'react-toast-notifications'
+import { useToasts } from "react-toast-notifications";
 
-const StockModal = ({ onClose, defaultThreshold }) => {
-  const [threshold, setThreshold] = useState(defaultThreshold)
-  const { addToast } = useToasts()
+const StockModal = ({ onClose, defaultThreshold, updateThreshold }) => {
+  const [threshold, setThreshold] = useState(defaultThreshold);
+  const { addToast } = useToasts();
   // const history = useHistory();
 
   const closeModal = () => {
     onClose();
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // further validations can be done on the input 
-      if (!threshold) {
-        addToast("Provide a threshold!", {
-          appearance: 'error',
-          autoDismiss: true,
-        })
-        return
-      }
-
-      // let response;
-
-      // addToast(status, {
-      //   appearance: 'success',
-      //   autoDismiss: true,
-      // })
-
-    } catch (error) {
-      const message = apiService.getErrorMessage(error); // the getErrorMessage is a helper function to get the exact messages from the server
-      // console.log(message || 'Sorry, an error occurred');
-      addToast(message, {
-        appearance: 'error',
+    if (!threshold) {
+      addToast("Provide a threshold!", {
+        appearance: "error",
         autoDismiss: true,
-      })
-      closeModal();
+      });
+      return;
     }
+
+    updateThreshold(threshold);
+    // history.push("/dashboard/stock");
+
+    closeModal();
   };
 
   const handleChange = (e) => {
     const { value } = e.target;
 
     setThreshold(value);
-  }
+  };
 
   return (
     <ModalWrapper>
-      <div
-        className="justify-center items-center mx-auto flex overflow-x-hidden overflow-y-auto z-50 outline-none focus:outline-none"
-      >
+      <div className="justify-center items-center mx-auto flex overflow-x-hidden overflow-y-auto z-50 outline-none focus:outline-none">
         <div className="relative w-full my-6 mx-auto max-w-sm">
           {/*content*/}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-8/12 bg-white outline-none focus:outline-none">
@@ -62,14 +45,15 @@ const StockModal = ({ onClose, defaultThreshold }) => {
             <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t">
               <h3 className="text-3xl text-gray-800 font-semibold text-capitalize">
                 <i className="fas fa-exclamation-circle mr-4 text-blue-500"></i>
-                threshold for stock availability</h3>
+                threshold for stock availability
+              </h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={closeModal}
               >
                 <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none font-extrabold">
                   ×
-                    </span>
+                </span>
               </button>
             </div>
             {/*body*/}
@@ -81,9 +65,15 @@ const StockModal = ({ onClose, defaultThreshold }) => {
                 <div className="relative w-full mb-3">
                   <label className="block">
                     <span className="text-gray-700">Low in stock</span>
-                    <input type='number' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter a number" name='threshold' value={threshold}
+                    <input
+                      type="number"
+                      className="form-input text-gray-700 mt-1 block w-full my-4 p-3"
+                      placeholder="Enter a number"
+                      name="threshold"
+                      value={threshold}
                       onChange={handleChange}
-                      required />
+                      required
+                    />
                   </label>
                 </div>
 
@@ -119,7 +109,7 @@ const ModalWrapper = styled.div`
   background: #00000078;
   z-index: 100;
 
-  > div{
+  > div {
     width: min(600px, 90%);
   }
 `;

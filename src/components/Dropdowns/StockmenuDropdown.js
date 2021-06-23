@@ -1,13 +1,18 @@
-import React, { useState, createRef, useContext, useRef, useEffect } from "react";
+import React, {
+  useState,
+  createRef,
+  useContext,
+  useRef,
+  useEffect,
+} from "react";
 import { createPopper } from "@popperjs/core";
 import { Link } from "react-router-dom";
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
-import { useToasts } from 'react-toast-notifications'
-import Jump from 'react-reveal/Jump';
+import { useToasts } from "react-toast-notifications";
+import Jump from "react-reveal/Jump";
 
-
-const StockMenuDropdown = ({ id, refresh , deleted}) => {
+const StockMenuDropdown = ({ id, refresh, deleted }) => {
   const node = useRef();
 
   // dropdown props
@@ -25,21 +30,20 @@ const StockMenuDropdown = ({ id, refresh , deleted}) => {
   };
 
   const { mealService } = useContext(AppStateContext);
-  const { addToast } = useToasts()
-
+  const { addToast } = useToasts();
 
   const toggleDropdown = (e) => {
     e.preventDefault();
     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-  }
+  };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (node.current.contains(e.target)) {
       // inside click
       return;
     }
     // outside click
-    closeDropdownPopover()
+    closeDropdownPopover();
   };
 
   useEffect(() => {
@@ -52,48 +56,45 @@ const StockMenuDropdown = ({ id, refresh , deleted}) => {
     // eslint-disable-next-line
   }, []);
 
-
   const deleteItem = async () => {
     try {
       await apiService.deleteMeal({ id });
       closeDropdownPopover();
-      await mealService.deleteMeal(id)
+      await mealService.deleteMeal(id);
       addToast("Meal deleted successfully", {
-        appearance: 'success',
+        appearance: "success",
         autoDismiss: true,
-      })
+      });
 
       refresh(); // use this to refresh the stocks
-
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
-        appearance: 'error',
+        appearance: "error",
         autoDismiss: true,
-      })
+      });
     }
-  }
+  };
 
-   const undeleteItem = async () => {
-    // try {
-    //   await apiService.deleteCustomer({ id });
-    //   closeDropdownPopover();
-    //   await customerService.deleteCustomer(id);
-    //   addToast("Customer deleted successfully", {
-    //     appearance: 'success',
-    //     autoDismiss: true,
-    //   })
+  const undeleteItem = async () => {
+    try {
+      await apiService.unDeleteItem({ id, type: "" });
+      closeDropdownPopover();
+      //  await customerService.undeleteCustomer(id);
+      addToast("meal undeleted successfully", {
+        appearance: "success",
+        autoDismiss: true,
+      });
 
-    //   refresh(); // use this to refresh the customers
-    // } catch (error) {
-    //   const message = apiService.getErrorMessage(error);
-    //   addToast(message, {
-    //     appearance: 'error',
-    //     autoDismiss: true,
-    //   })
-    // }
-  }
-
+      refresh(); // use this to refresh the customers
+    } catch (error) {
+      const message = apiService.getErrorMessage(error);
+      addToast(message, {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    }
+  };
 
   return (
     <div ref={node}>
@@ -109,7 +110,7 @@ const StockMenuDropdown = ({ id, refresh , deleted}) => {
           type="button"
         >
           More
-            </button>
+        </button>
       </a>
       <div
         ref={popoverDropdownRef}
@@ -118,48 +119,42 @@ const StockMenuDropdown = ({ id, refresh , deleted}) => {
           "bg-white text-base z-50 text-center flex-col py-2 list-none rounded shadow-lg min-w-48"
         }
       >
-        {
-          deleted ? (
-            <>
-               <button
-                onClick={undeleteItem}
+        {deleted ? (
+          <>
+            <button
+              onClick={undeleteItem}
+              className={
+                "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
+              }
+            >
+              <i className="fas fa-trash-alt mr-2"></i>
+              Undo Delete
+            </button>
+          </>
+        ) : (
+          <>
+            <Jump>
+              <Link
+                to={`/dashboard/stock/${id}`}
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
+                }
+              >
+                <i className="fas fa-edit mr-4"></i>
+                Edit Item
+              </Link>
+              <button
+                onClick={deleteItem}
                 className={
                   "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
                 }
-
               >
                 <i className="fas fa-trash-alt mr-2"></i>
-          Undo Delete
+                Delete Item
               </button>
-            </>
-          ) : (
-            <>
-            <Jump>
-          <Link
-            to={`/dashboard/stock/${id}`}
-            className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
-            }
-
-          >
-            <i className="fas fa-edit mr-4"></i>
-          Edit Item
-        </Link>
-          <button
-            onClick={deleteItem}
-            className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
-            }
-
-          >
-            <i className="fas fa-trash-alt mr-2"></i>
-          Delete Item
-        </button>
-        </Jump>
-            </>
-          )
-        }
-        
+            </Jump>
+          </>
+        )}
       </div>
     </div>
   );

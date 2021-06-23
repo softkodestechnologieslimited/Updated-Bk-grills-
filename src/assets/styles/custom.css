@@ -32,3 +32,9 @@
 .custom-btn:hover {
   background-color: #4299e1;
 }
+
+.form-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}

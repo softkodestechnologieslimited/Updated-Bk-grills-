@@ -21,7 +21,7 @@ const Stock = observer(() => {
   const [isLoading, setIsLoading] = useState(false);
   const [deleted, setIsDeleted] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [threshold] = useState(20);
+  const [threshold, setThreshold] = useState(20);
 
   const [stock, setStock] = useState([]);
   const [query, setQuery] = useState("");
@@ -130,19 +130,27 @@ const Stock = observer(() => {
 
   const showDeleted = (e) => {
     if (e.target.checked) {
-      setIsDeleted(true)
+      setIsDeleted(true);
       setStock(mealService.meals.filter((meal) => meal.deleted === true));
     } else {
-      setIsDeleted(false)
+      setIsDeleted(false);
       refreshStock();
     }
+  };
+
+  const updateThreshold = (newThreshold) => {
+    setThreshold(newThreshold);
   };
 
   return (
     <>
       {isLoading ? <FullScreenLoader /> : <></>}
       {showModal ? (
-        <StockModal onClose={closeModal} defaultThreshold={threshold} />
+        <StockModal
+          onClose={closeModal}
+          defaultThreshold={threshold}
+          updateThreshold={updateThreshold}
+        />
       ) : null}
       <Sidebar />
       <div className="relative md:ml-64 bg-gray-900">
@@ -230,6 +238,7 @@ const Stock = observer(() => {
                     user={currentUser}
                     openModal={openModal}
                     deleted={deleted}
+                    threshold={threshold}
                   />
                 </Fade>
               ) : (
