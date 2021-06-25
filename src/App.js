@@ -8,6 +8,7 @@ import "./assets/styles/tailwind.css";
 import Spinner from "./components/spinner/Spinner";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import AppStateProvider from "context";
+import ClockInService from "./context/ClockInService";
 
 const Homepage = lazy(() => import("./pages/homepage/Homepage"));
 const Aboutpage = lazy(() => import("./pages/about/About"));
@@ -16,27 +17,30 @@ const Menupage = lazy(() => import("./pages/menu/Menu"));
 const Gallerypage = lazy(() => import("./pages/gallery/Gallery"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Admin = lazy(() => import("./layouts/Admin"));
-
+const Attendance = lazy(()=> import('./pages/attendance/Attendance'))
 
 const App = () => {
   return (
-    <AppStateProvider>
-      <ToastProvider>
-        <Switch>
-          <ErrorBoundary>
-            <Suspense fallback={<Spinner />}>
-              <Route exact path="/" component={Homepage} />
-              <Route exact path="/about" component={Aboutpage} />
-              <Route exact path="/menu" component={Menupage} />
-              <Route exact path="/contact" component={Contactpage} />
-              <Route exact path="/gallery" component={Gallerypage} />
-              <Route path="/login" component={Login} />
-              <Route path="/dashboard" component={Admin} />
-            </Suspense>
-          </ErrorBoundary>
-        </Switch>
-      </ToastProvider>
-    </AppStateProvider>
+    <ClockInService>
+      <AppStateProvider>
+        <ToastProvider>
+          <Switch>
+            <ErrorBoundary>
+              <Suspense fallback={<Spinner />}>
+                <Route exact path="/" component={Homepage} />
+                <Route exact path="/about" component={Aboutpage} />
+                <Route exact path="/menu" component={Menupage} />
+                <Route exact path="/contact" component={Contactpage} />
+                <Route exact path="/gallery" component={Gallerypage} />
+                <Route path="/login" component={Login} />
+                <Route path="/dashboard" component={Admin} />
+                <Route path="/attendance" component={Attendance} />
+              </Suspense>
+            </ErrorBoundary>
+          </Switch>
+        </ToastProvider>
+      </AppStateProvider>
+    </ClockInService>
   );
 };
 

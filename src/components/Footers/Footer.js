@@ -31,74 +31,76 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="footer-widget opening-hrs">
-          <h3 className="widget-title">
-            <span>opening Hours</span>
-          </h3>
-          <div className="widget-content">
-            <p>
-              Get some tomatoes, and, if they were eaten with the great
-              extravagance to season with butter.
-            </p>
+        <div className='footer-grid'>
+          <div className="footer-widget opening-hrs">
+            <h3 className="widget-title">
+              <span>opening Hours</span>
+            </h3>
+            <div className="widget-content">
+              <p>
+                Get some tomatoes, and, if they were eaten with the great
+                extravagance to season with butter.
+              </p>
+            </div>
+            <div className="fy-day" content="Monday 12:00 PM - 11:00 PM">
+              {" "}
+              <strong className="fy-float-left">Monday</strong>{" "}
+              <span className="fy-float-right">12:00 PM - 11:00 PM</span>
+            </div>
+            <div className="fy-day" content="Tuesday 12:00 PM - 11:00 PM">
+              {" "}
+              <strong className="fy-float-left">Tuesday</strong>{" "}
+              <span className="fy-float-right">12:00 PM - 11:00 PM</span>
+            </div>
+            <div className="fy-day" content="Wednesday 12:00 PM - 11:00 PM">
+              {" "}
+              <strong className="fy-float-left">Wednesday</strong>{" "}
+              <span className="fy-float-right">12:00 PM - 11:00 PM</span>
+            </div>
+            <div className="fy-day" content="Thursday 12:00 PM - 11:00 PM">
+              {" "}
+              <strong className="fy-float-left">Thursday</strong>{" "}
+              <span className="fy-float-right">12:00 PM - 11:00 PM</span>
+            </div>
+            <div className="fy-day" content="Friday 12:00 PM - 11:00 PM">
+              {" "}
+              <strong className="fy-float-left">Friday</strong>{" "}
+              <span className="fy-float-right">12:00 PM - 11:00 PM</span>
+            </div>
+            <div className="fy-day" content="Saturday 12:00 PM - 11:00 PM">
+              {" "}
+              <strong className="fy-float-left">Saturday</strong>{" "}
+              <span className="fy-float-right">12:00 PM - 11:00 PM</span>
+            </div>
+            <div className="fy-day" content="Sunday Closed">
+              {" "}
+              <strong className="fy-float-left">Sunday</strong>{" "}
+              <span className="fy-float-right">Closed</span>
+            </div>
           </div>
-          <div className="fy-day" content="Monday 12:00 PM - 11:00 PM">
-            {" "}
-            <strong className="fy-float-left">Monday</strong>{" "}
-            <span className="fy-float-right">12:00 PM - 11:00 PM</span>
-          </div>
-          <div className="fy-day" content="Tuesday 12:00 PM - 11:00 PM">
-            {" "}
-            <strong className="fy-float-left">Tuesday</strong>{" "}
-            <span className="fy-float-right">12:00 PM - 11:00 PM</span>
-          </div>
-          <div className="fy-day" content="Wednesday 12:00 PM - 11:00 PM">
-            {" "}
-            <strong className="fy-float-left">Wednesday</strong>{" "}
-            <span className="fy-float-right">12:00 PM - 11:00 PM</span>
-          </div>
-          <div className="fy-day" content="Thursday 12:00 PM - 11:00 PM">
-            {" "}
-            <strong className="fy-float-left">Thursday</strong>{" "}
-            <span className="fy-float-right">12:00 PM - 11:00 PM</span>
-          </div>
-          <div className="fy-day" content="Friday 12:00 PM - 11:00 PM">
-            {" "}
-            <strong className="fy-float-left">Friday</strong>{" "}
-            <span className="fy-float-right">12:00 PM - 11:00 PM</span>
-          </div>
-          <div className="fy-day" content="Saturday 12:00 PM - 11:00 PM">
-            {" "}
-            <strong className="fy-float-left">Saturday</strong>{" "}
-            <span className="fy-float-right">12:00 PM - 11:00 PM</span>
-          </div>
-          <div className="fy-day" content="Sunday Closed">
-            {" "}
-            <strong className="fy-float-left">Sunday</strong>{" "}
-            <span className="fy-float-right">Closed</span>
-          </div>
-        </div>
 
-        <div className="footer-widget footer-about-us">
-          <h3 className="widget-title">
-            <span>About Us</span>
-          </h3>
-          <div className="widget-content">
-            <p>
-              Take your sauce with breadcrumbs, and pour in salted water, and
-              put one-quarter the fire. The unique recipes for seven or fold up
-              again for five potatoes, turn brownish and serve it an hour.
-            </p>
-            <p>
-              Put on slowly, in salted water and, if you wish; sprinkle into
-              slices. Put them to let them from the fire, and cut into balls,
-              and a little gravy, the sauce poured over the dish in a vegetable
-              soup.
-            </p>
+          <div className="footer-widget footer-about-us">
+            <h3 className="widget-title">
+              <span>About Us</span>
+            </h3>
+            <div className="widget-content">
+              <p>
+                Take your sauce with breadcrumbs, and pour in salted water, and
+                put one-quarter the fire. The unique recipes for seven or fold up
+                again for five potatoes, turn brownish and serve it an hour.
+              </p>
+              <p>
+                Put on slowly, in salted water and, if you wish; sprinkle into
+                slices. Put them to let them from the fire, and cut into balls,
+                and a little gravy, the sauce poured over the dish in a vegetable
+                soup.
+              </p>
+            </div>
+            <Link to="/about" className="widget-btn">
+              {" "}
+              About us{" "}
+            </Link>
           </div>
-          <Link to="/about" className="widget-btn">
-            {" "}
-            About us{" "}
-          </Link>
         </div>
       </div>
 

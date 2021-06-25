@@ -47,5 +47,9 @@
     font-weight: 500;
     transition: 0.2s ease-out;
     text-transform: capitalize;
+
+    &:hover {
+      background-color: darken($color: #dc3432, $amount: 15);
+    }
   }
 }

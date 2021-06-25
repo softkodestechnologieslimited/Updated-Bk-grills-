@@ -14,6 +14,8 @@ import img9 from "../../assets/img/gallery-img (9).jpg";
 
 import "./gallery.styles.scss";
 
+const imagesArray = [img1, img2, img3, img7, img5, img6, img4, img8, img9]
+
 const Gallery = () => {
   return (
     <>
@@ -25,7 +27,16 @@ const Gallery = () => {
           </div>
 
           <div className="gallery-images">
-            <div className="img-wrapper">
+            {
+              imagesArray.map((image, index)=>(
+                <div className="img-wrapper" key={index}>
+                  <figure className="post-image">
+                    <img className="gallery-image" alt={`gallery pic${index+1}`} src={image} />
+                  </figure>
+                </div>
+              ))
+            }
+            {/* <div className="img-wrapper">
               <figure className="post-image">
                 <img className="gallery-image" alt="gallery pic" src={img1} />
               </figure>
@@ -69,7 +80,7 @@ const Gallery = () => {
               <figure className="post-image">
                 <img className="gallery-image" alt="gallery pic" src={img9} />
               </figure>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

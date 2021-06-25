@@ -1,0 +1,92 @@
+.clock-in-con {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba($color: white, $alpha: 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal {
+    width: 500px;
+    background-color: lighten($color: #12111b, $amount: 5);
+    border-radius: 5px;
+
+    @media (max-width: 550px) {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  .title {
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid rgba($color: white, $alpha: 0.2);
+    h5 {
+      font-weight: 600;
+      font-size: 23px;
+    }
+  }
+
+  .body {
+    width: 100%;
+    padding: 2.5rem 1.5rem;
+
+    .react-select__control,
+    .react-select__menu {
+      background-color: #12111b;
+      border: none;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+      &:active {
+        border: none;
+        outline: none;
+      }
+    }
+    .react-select__single-value,
+    .react-select__input {
+      color: white;
+    }
+
+    .react-select__option {
+      cursor: pointer;
+    }
+    .react-select__option:hover {
+      opacity: 0.5;
+      color: darken($color: white, $amount: 10);
+    }
+
+    .btn-con {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+
+      button {
+        padding: 10px 25px;
+        background-color: #dc3432;
+        border-radius: 3px;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
+        border: none;
+        outline: none;
+      }
+      .clock:hover {
+        background-color: darken($color: #dc3432, $amount: 15);
+      }
+      .cancel {
+        background-color: lighten($color: #12111b, $amount: 10);
+      }
+      .cancel:hover {
+        background-color: darken($color: #12111b, $amount: 10);
+      }
+    }
+  }
+}

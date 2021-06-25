@@ -3,10 +3,21 @@
 }
 
 .footer-widget-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  // display: grid;
+  // grid-template-columns: repeat(3, 1fr);
+  // justify-items: center;
+  // gap: 20px;
   padding: 3rem 0;
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    @media (max-width: 950px) {
+      grid-template-columns: 1fr;
+    }
+  }
 
   .footer-widget {
     padding: 0 20px;
@@ -22,6 +33,7 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
 
     &::before {
       content: "";
@@ -31,11 +43,12 @@
       height: inherit;
       width: 100%;
       transition: all 0.4s ease 0s;
-      background-color: rgba(black, 0.4);
+      background-color: rgba(black, 0.65);
       z-index: 1;
     }
 
     .visit-us-content {
+      position: relative;
       z-index: 2;
 
       .title {
@@ -43,6 +56,10 @@
         font-size: 18px;
         text-transform: uppercase;
         color: white;
+
+        span {
+          font-size: 30px;
+        }
       }
 
       .btn-wrapper {
@@ -75,10 +92,12 @@
   }
 
   .widget-content {
+    margin: 0 auto;
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: 20px;
     line-height: 1.618;
     text-align: center;
+    max-width: 650px;
   }
 
   .fy-day {
@@ -237,7 +256,7 @@
 // media queries
 @media screen and (max-width: 768px) {
   .footer-widget-container {
-    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: repeat(2, 1fr);
 
     & .visit-us {
       display: none;
