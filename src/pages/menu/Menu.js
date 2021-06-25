@@ -20,7 +20,7 @@ const Menu = () => {
           </div>
           <div className="list-group">
             <a href="#!" className="list-group-item active">
-              Food (Grill)
+              Kitchen specials
             </a>
 
             <a href="#!" className="list-group-item">
@@ -55,7 +55,7 @@ const Menu = () => {
 
         {/* search results wrapper */}
         <div className="grid-item search-result-wrapper">
-          <div className="category-title">Beverages</div>
+          <div className="category-title">Food</div>
 
           <div className="search-results">
             <MenuItem />
@@ -82,10 +82,10 @@ const Menu = () => {
               <div className="card-items-wrapper">
                 <ul className="cart-items">
                   <li className="cart-item">
-                    <div className="cart-item-title">Margherita </div>
+                    <div className="cart-item-title">Margarita </div>
 
                     <div className="card-item-price">
-                      $<span>200</span>
+                      <span>$200</span>
                       <div className="card-item-actions">
                         <i className="fas fa-minus-circle"></i>
                         <span>1</span>
@@ -94,10 +94,10 @@ const Menu = () => {
                     </div>
                   </li>
                   <li className="cart-item">
-                    <div className="cart-item-title">Margherita </div>
+                    <div className="cart-item-title">Margarita </div>
 
                     <div className="card-item-price">
-                      $<span>200</span>
+                      <span>$200</span>
                       <div className="card-item-actions">
                         <i className="fas fa-minus-circle"></i>
                         <span>1</span>
@@ -106,10 +106,10 @@ const Menu = () => {
                     </div>
                   </li>
                   <li className="cart-item">
-                    <div className="cart-item-title">Margherita </div>
+                    <div className="cart-item-title">Margarita </div>
 
                     <div className="card-item-price">
-                      $<span>200</span>
+                      <span>$200</span>
                       <div className="card-item-actions">
                         <i className="fas fa-minus-circle"></i>
                         <span>1</span>

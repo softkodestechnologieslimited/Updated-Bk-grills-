@@ -31,14 +31,16 @@ form.search-form {
     font-size: 16px;
     box-shadow: none;
     border-color: #e5e5e5;
+    color: black;
 
     &::placeholder {
       font-size: 20px;
+      // color: black;
     }
 
     &:focus,
     :active {
-      outline: none;
+      outline: 0;
     }
 
     @media (max-width: 599px) {

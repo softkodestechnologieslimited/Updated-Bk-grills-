@@ -30,6 +30,9 @@
 }
 
 .search-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition: margin 0.25s ease;
   position: relative;
   margin-bottom: 20px;
@@ -78,7 +81,7 @@
     }
 
     @media (max-width: 768px) {
-      flex-direction: row;
+      // flex-direction: row;
 
       .list-group-item {
         margin-left: 10px;
@@ -153,6 +156,7 @@
 }
 
 .menu-cart-wrapper {
+  width: 200px;
   position: relative;
   overflow: visible;
   box-sizing: border-box;
@@ -194,7 +198,7 @@
 
     .card-items-wrapper,
     .card-total-wrapper {
-      padding: 15px;
+      padding: 0px 25px 15px 25px;
       max-height: 280px;
       width: 100%;
       overflow-y: auto;
@@ -207,17 +211,28 @@
       margin-top: 10px;
       display: flex;
       justify-content: space-between;
+      flex-direction: column;
       // align-items: center;
 
+      .cart-item-title {
+        display: block;
+        width: 100%;
+      }
+
       .card-item-price {
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        // text-align: center;
       }
 
       .card-item-actions {
-        margin-top: 8px;
+        // margin-top: 8px;
 
         i {
           margin: 0 5px;
+          cursor: pointer;
         }
       }
     }
@@ -237,5 +252,11 @@
     text-transform: capitalize;
     display: block;
     width: 100%;
+
+  
   }
+}
+.checkout-btn {
+  position: absolute;
+  bottom: -20px;
 }

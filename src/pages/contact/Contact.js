@@ -98,8 +98,8 @@ const Contact = () => {
             </div>
 
             <div className="contact-map">
-              <h3>BigK Grills</h3>
-              <p>Ikoyo Avenue, off shell road, Sapele, Delta state</p>
+              <h3>Chateau le roi</h3>
+              <p>No. 8 Abaka St, end off lucky london street, osubi/ugolo. okpe L.G.A Delta State.</p>
 
               <div>Map will be here!</div>
             </div>

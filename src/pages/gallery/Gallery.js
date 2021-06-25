@@ -2,15 +2,15 @@ import React from "react";
 import Footer from "../../components/Footers/Footer";
 import Header from "../../components/Headers/Header";
 
-import img1 from "../../assets/img/gallery-img (1).jpg";
-import img2 from "../../assets/img/gallery-img (2).jpg";
-import img3 from "../../assets/img/gallery-img (3).jpg";
-import img4 from "../../assets/img/gallery-img (4).jpg";
-import img5 from "../../assets/img/gallery-img (5).jpg";
-import img6 from "../../assets/img/gallery-img (6).jpg";
-import img7 from "../../assets/img/gallery-img (7).jpg";
-import img8 from "../../assets/img/gallery-img (8).jpg";
-import img9 from "../../assets/img/gallery-img (9).jpg";
+import img1 from "../../assets/img/gallery-img1.jpg";
+import img2 from "../../assets/img/gallery-img2.jpg";
+import img3 from "../../assets/img/gallery-img3.jpg";
+import img4 from "../../assets/img/gallery-img4.jpg";
+import img5 from "../../assets/img/gallery-img5.jpg";
+import img6 from "../../assets/img/gallery-img6.jpg";
+import img7 from "../../assets/img/gallery-img7.jpg";
+import img8 from "../../assets/img/gallery-img8.jpg";
+import img9 from "../../assets/img/gallery-img9.jpg";
 
 import "./gallery.styles.scss";
 
@@ -23,6 +23,12 @@ const Gallery = () => {
           <div className="gallery-header">
             <h1>Gallery</h1>
           </div>
+
+          <p className="gallery-text">
+          The reason chateau has an edge over most places is that you don't only enjoy the luxury of eating and
+             drinking because we also have a swimming pool where everyone can have a deep to
+              take the impact of stress of your body.
+          </p>
 
           <div className="gallery-images">
             <div className="img-wrapper">

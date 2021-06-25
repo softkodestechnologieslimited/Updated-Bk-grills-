@@ -1,5 +1,5 @@
 import React from "react";
-import { formatter } from "react-currency-formatter";
+import { formatter } from "../../utils";
 
 // components
 

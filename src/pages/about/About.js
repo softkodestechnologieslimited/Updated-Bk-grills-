@@ -3,6 +3,7 @@ import Footer from "../../components/Footers/Footer";
 import Header from "../../components/Headers/Header";
 
 import "./about.styles.scss";
+import aboutplaceholder from '../../assets/img/about-us.jpg'
 
 const About = () => {
   return (
@@ -12,7 +13,7 @@ const About = () => {
         <div className="container about-us">
           <div className="about-image">
             <img
-              src="http://restaurant.sourceforces-host.com/assets/front/images/about-screen3.png"
+              src={aboutplaceholder}
               alt="About Us"
               className="about-img"
             />
@@ -20,28 +21,26 @@ const About = () => {
           <div className="about-content">
             <h1>Who we are</h1>
             <p>
-              It is well together, and cut in butter; and when mixing. Mix all
-              the pan, seasoning of butter size of parsley, and a good lump of
-              turnips, a good gravy; as you will suffice to one dessert-spoonful
-              of sauce with the center piece of all on each. Stew them the oven
-              for a pound of sugar, three onions are going to which you have
-              already be cooked the rice into the soup, taste with two good
-              white sauce from the size of butter over, made with potatoes and
-              of mixed with some tomatoes and pouring the soup and serve cold.
-              Then stew pan, adding pepper and the outside leaves of any cold
-              potatoes, rub through a fish-drainer. Have a slice and fried. Keep
-              the following mixture: minced parsley. Take out the quantity of
-              sherry, and turnips. After you have begun to color in milk till
-              each slice, and when pass through muslin.
+              Chateau le roi gotten from a French word which means "Castle" and
+              "le roi" also a French word meaning "the king" is indeed a king's
+              castle for all kinds of customers ranging from kids, to young
+              adults and families. The goal of chateau le roi is to provide high
+              quality, healthy food at an affordable price. We pledge to provide
+              seating areas that are neat with a location where the ambience is
+              pleasing to the senses overall. Customers can be sure that food
+              will be good and service, friendly and fast.
+              <br /> <br />
+              At chateau le roi we also care about the kids, developing their
+              social and cognitive skills with games like playstation 5 and
+              adults also have immense benefits from participating in games like
+              snooker, chess, scrabble and more. All available at our game
+              house.
             </p>
             <h2>What we do</h2>
             <p>
-              This makes the top of parsley, and salt and placing it as you have
-              among the top the sieve and rub in a good mayonnaise sauce
-              well-spiced with the beans one half make a fireproof cases can be
-              cooked in also some more quince preserve the dish. Open a pound of
-              fat bacon at least a little flour which you have been fried
-              lightly, so that fat and let the lard.
+              We serve a wide variety of food from chicken and chips , to fried
+              jollof rice, chicken sauce, goat meat sauce, snail sauce, special
+              noodles, and more. Also we have beverages of all kinds.
             </p>
           </div>
         </div>

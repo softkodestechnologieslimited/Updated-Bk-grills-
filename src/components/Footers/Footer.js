@@ -18,8 +18,10 @@ const Footer = () => {
             </h3>
             <div className="widget-content">
               <p>
-                Add salt, turning into the middle of butter and stir well, a
-                very liquid. Peel them to form of the backbone.
+                Chateau le roi gotten from a French word which means "Castle"
+                and "le roi" also a French word meaning "the king" is indeed a
+                king's castle for all kinds of customers ranging from kids, to
+                young adults and families...
               </p>
             </div>
             <div className="btn-wrapper">
@@ -37,8 +39,7 @@ const Footer = () => {
           </h3>
           <div className="widget-content">
             <p>
-              Get some tomatoes, and, if they were eaten with the great
-              extravagance to season with butter.
+              Our facilities are open to the public at these times everyday.
             </p>
           </div>
           <div className="fy-day" content="Monday 12:00 PM - 11:00 PM">
@@ -84,16 +85,17 @@ const Footer = () => {
           </h3>
           <div className="widget-content">
             <p>
-              Take your sauce with breadcrumbs, and pour in salted water, and
-              put one-quarter the fire. The unique recipes for seven or fold up
-              again for five potatoes, turn brownish and serve it an hour.
+              Chateau le roi gotten from a French word which means "Castle" and
+              "le roi" also a French word meaning "the king" is indeed a king's
+              castle for all kinds of customers ranging from kids, to young
+              adults and families...
             </p>
-            <p>
-              Put on slowly, in salted water and, if you wish; sprinkle into
-              slices. Put them to let them from the fire, and cut into balls,
-              and a little gravy, the sauce poured over the dish in a vegetable
-              soup.
-            </p>
+            {/* <p>
+              Chateau le roi gotten from a French word which means "Castle" and
+              "le roi" also a French word meaning "the king" is indeed a king's
+              castle for all kinds of customers ranging from kids, to young
+              adults and families...
+            </p> */}
           </div>
           <Link to="/about" className="widget-btn">
             {" "}
@@ -128,7 +130,8 @@ const Footer = () => {
                 rel="noreferrer"
               >
                 {" "}
-                No. 8 Abaka St, end o lucky london street, osubi/ugolo. okpe L.G.A Delta State.{" "}
+                No. 8 Abaka St, end off lucky london street, osubi/ugolo. okpe
+                L.G.A Delta State.{" "}
               </a>
             </div>
             <div className="fy-phone">
@@ -249,7 +252,8 @@ const Footer = () => {
         </div>
         <div className="copyright">
           <span>
-            Copyright © {new Date().getFullYear()} <a href="#!">Chateau le roi</a>
+            Copyright © {new Date().getFullYear()}{" "}
+            <a href="#!">Chateau le roi</a>
           </span>
           <span>
             by <a href="https://soft-kode.com">Softkodes Technologies</a>
