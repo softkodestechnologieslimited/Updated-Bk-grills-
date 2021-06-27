@@ -25,3 +25,13 @@ export const formatDate = (date)=>{
   const time = new Intl.DateTimeFormat('en',{timeStyle: 'short'}).format(date)
   return `${month} ${day}, ${year} ${time}`
 }
+
+export const formatTime = (date)=>{
+  const time = new Intl.DateTimeFormat('en',{timeStyle: 'short'}).format(date)
+  return time
+}
+
+export const formatTicketDate = (date)=>{
+  const newDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(date)
+  return newDate
+}

@@ -17,7 +17,7 @@ const Menupage = lazy(() => import("./pages/menu/Menu"));
 const Gallerypage = lazy(() => import("./pages/gallery/Gallery"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Admin = lazy(() => import("./layouts/Admin"));
-const Attendance = lazy(()=> import('./pages/attendance/Attendance'))
+
 
 const App = () => {
   return (
@@ -34,7 +34,6 @@ const App = () => {
                 <Route exact path="/gallery" component={Gallerypage} />
                 <Route path="/login" component={Login} />
                 <Route path="/dashboard" component={Admin} />
-                <Route path="/attendance" component={Attendance} />
               </Suspense>
             </ErrorBoundary>
           </Switch>

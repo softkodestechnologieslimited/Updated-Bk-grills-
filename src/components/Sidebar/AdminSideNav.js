@@ -97,6 +97,50 @@ const AdminSideNav = () => {
         <Link
           className={
             "text-xs uppercase py-3 font-bold block " +
+            (window.location.href.indexOf("/dashboard/attendance") !== -1
+              ? "text-blue-500 hover:text-blue-600"
+              : "text-white hover:text-gray-600")
+          }
+          to="/dashboard/attendance"
+        >
+          <i
+            className={
+              "fas fa-address-book mr-2 text-sm " +
+              (window.location.href.indexOf("/dashboard/attendance") !== -1
+                ? "opacity-75"
+                : "text-gray-400")
+            }
+          ></i>{" "}
+              Attendance
+            </Link>
+      </li>
+
+      <li className="items-center">
+        <Link
+          className={
+            "text-xs uppercase py-3 font-bold block " +
+            (window.location.href.indexOf("/dashboard/swimming-ticket") !== -1
+              ? "text-blue-500 hover:text-blue-600"
+              : "text-white hover:text-gray-600")
+          }
+          to="/dashboard/swimming-ticket"
+        >
+          <i
+            className={
+              "fas fa-address-book mr-2 text-sm " +
+              (window.location.href.indexOf("/dashboard/swimming-ticket") !== -1
+                ? "opacity-75"
+                : "text-gray-400")
+            }
+          ></i>{" "}
+              Swimming Ticket
+            </Link>
+      </li>
+
+      <li className="items-center">
+        <Link
+          className={
+            "text-xs uppercase py-3 font-bold block " +
             (window.location.href.indexOf("/dashboard/customers") !== -1
               ? "text-blue-500 hover:text-blue-600"
               : "text-white hover:text-gray-600")

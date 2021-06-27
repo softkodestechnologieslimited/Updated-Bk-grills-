@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useClockedInContext } from 'context/ClockInService'
 import Select from 'react-select'
+import Zoom from 'react-reveal/Zoom'
+
 import './clockin.styles.scss'
 
 
@@ -10,7 +12,7 @@ const customStyles = {
     borderBottom: '1px solid rgba(0,0,0,0.4)',
     color: state.isSelected ? '#ccc' : 'white',
     padding: 10,
-    backgroundColor: ' #12111b',
+    backgroundColor: 'white',
   }),
 }
 
@@ -43,30 +45,32 @@ const ClockInModal = ({ closeModal, selected, setSelected }) => {
 
   return (
     <div className='clock-in-con' onClick={handleModal}>
-      <div className='modal'>
-          <div className="title">
-            <h5>Clock in staff</h5>
-          </div>
-          <div className="body">
-            <Select options={options} onChange={(value)=>{setSelected(value)}} 
-            isSearchable 
-            placeholder='Select Staff'
-            styles={customStyles}
-            className='react-select-container'
-            classNamePrefix='react-select'
-            />
-             <div className="btn-con">
-              <button type='button' className="button clock"
-              onClick={handleClock}
-              >
-                clock in
-              </button>
-              <button type='button' className="button cancel">
-                cancel
-              </button>
+      <Zoom>
+        <div className='modal'>
+            <div className="title">
+              <h5>Clock in staff</h5>
             </div>
-          </div>
-      </div>
+            <div className="body">
+              <Select options={options} onChange={(value)=>{setSelected(value)}} 
+              isSearchable 
+              placeholder='Select Staff'
+              styles={customStyles}
+              className='react-select-container'
+              classNamePrefix='react-select'
+              />
+              <div className="btn-con">
+                <button type='button' className="button clock active:bg-indigo-600 bg-blue-800 "
+                onClick={handleClock}
+                >
+                  clock in
+                </button>
+                <button type='button' className="button cancel">
+                  cancel
+                </button>
+              </div>
+            </div>
+        </div>
+      </Zoom>
     </div>
   )
 }
