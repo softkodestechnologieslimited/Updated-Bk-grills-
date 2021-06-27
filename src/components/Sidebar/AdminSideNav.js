@@ -127,7 +127,7 @@ const AdminSideNav = () => {
         >
           <i
             className={
-              "fas fa-address-book mr-2 text-sm " +
+              "fas fa-ticket-alt mr-2 text-sm " +
               (window.location.href.indexOf("/dashboard/swimming-ticket") !== -1
                 ? "opacity-75"
                 : "text-gray-400")
