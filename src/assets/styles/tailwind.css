@@ -543,9 +543,9 @@ samp {
  *
  * https://github.com/mozdevs/cssremedy/issues/14
  */
-
+/* svg,
+  */
 img,
-svg,
 video,
 canvas,
 audio,

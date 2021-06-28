@@ -1,0 +1,318 @@
+.cards {
+  display: block;
+  width: 100%;
+  margin-bottom: 250px;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 500px;
+  }
+
+  .sm-cards-con {
+    display: flex;
+    // flex: 20%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: all 0.5s ease;
+    padding: 0px 30px;
+    transform: translateY(-75px);
+    margin: auto;
+
+    .cards-buff {
+      width: auto;
+      margin: auto;
+      max-width: 100%;
+      flex-grow: 1;
+      flex-basis: 0;
+      padding: 0px 20px 0px 20px;
+
+      @media (max-width: 1024px) {
+        flex-basis: 50%;
+        min-width: 50%;
+        max-width: 50%;
+        padding-bottom: 40px;
+      }
+
+      @media (max-width: 780px) {
+        flex-basis: 100%;
+        min-width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .sm-cards {
+      margin: auto;
+      padding-bottom: 40px;
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      background: url("https://cdn.pixabay.com/photo/2017/06/12/20/45/charcoal-2396754_1280.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+
+      width: auto;
+      font-weight: 400;
+
+      //   @media (max-width: 1024px) {
+      //     flex-basis: 50%;
+      //     max-width: 50%;
+      //   }
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        background: rgba(61, 57, 63, 0.7);
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        transition: all 0.7s ease;
+      }
+
+      &:hover::before {
+        background: rgba(48, 45, 50, 0.8);
+      }
+
+      &:hover {
+        border-top: 1px solid #c84646;
+        box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      h3 {
+        display: flex;
+        text-transform: uppercase;
+        color: #fff;
+        transition: all 0.5s ease;
+        position: relative;
+        z-index: 50;
+        min-height: 80px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      p {
+        font-size: 15px;
+        padding: 0px 40px 30px 40px;
+        line-height: 1.5;
+        position: relative;
+        z-index: 50;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      button {
+        position: relative;
+        background-color: transparent;
+        border: 2px solid #c84646;
+        border-radius: 3px;
+        padding: 10px 40px;
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: all 0.5s ease;
+        z-index: 50;
+
+        &:hover {
+          border-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.lg-card-con {
+  width: 100%;
+  margin: auto;
+
+  .lg-img {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    background-image: url("https://cdn.pixabay.com/photo/2016/01/22/02/13/meat-1155132_1280.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(38, 35, 40, 0.6);
+      //   box-shadow: inset 0 2px 20px rgb(0 0 0 / 10%);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(to right, rgba(38, 35, 40, 0), #262328);
+
+      @media (max-width: 1024px) {
+        background-image: linear-gradient(
+          to bottom,
+          rgba(38, 35, 40, 0),
+          #262328
+        );
+      }
+    }
+
+    .lg-img-text {
+      position: relative;
+      z-index: 99;
+      height: 100%;
+      width: 50%;
+      margin: auto 0 auto auto;
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 0px 40px;
+
+      @media(max-width: 1024px) {
+        width: 70%;
+        text-align: center;
+        margin: auto auto 0px auto;
+        transform: translateY(60%);
+      }
+
+      @media(max-width: 700px) {
+        width: 100%;
+        padding: 0 20px;
+      } 
+
+
+      h2 {
+        display: inline-block;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: 700;
+        font-size: 36px;
+        position: relative;
+        z-index: 99;
+        padding-bottom: 15px;
+
+        @media (max-width: 1024px) {
+          &::after {
+            left: 50% !important;
+            transform: translateX(-50%);
+          }
+        }
+
+        &::after {
+          display: inline-block;
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+          content: "";
+          width: 80px;
+          height: 2.5px;
+          background: #c84646;
+          z-index: 98;
+        }
+      }
+
+      p {
+        position: relative;
+        z-index: 99;
+        color: rgba(234, 234, 234, 0.6);
+        line-height: 1.5;
+      }
+
+      .lg-img-address {
+        .address-flex {
+          width: 90%;
+          display: flex;
+          align-items: center;
+          // padding: 20px;
+
+          @media(max-width: 1024px) {
+            width: 70%;
+            margin: auto;
+          }
+
+          .svg {
+            svg {
+              width: 24px;
+              height: 24px;
+
+              path {
+                fill: rgba(234, 234, 234, 0.4);
+              }
+            }
+          }
+
+         .span {
+           padding: 5px 0px 5px 44px;
+
+          span {
+            display: inline-block;
+            position: relative;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(234, 234, 234, 0.2);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            
+
+            &:hover {
+              color: #fff;
+              border-bottom: 1px solid #c84646;
+            }
+          }
+         }
+        }
+      }
+
+      .lg-img-btns {
+        display: flex;
+        width: 100%;
+        text-align: start;
+
+        @media(max-width: 1024px) {
+          flex-direction: column;
+        }
+
+        button {
+          border: 2px solid #c84646;
+          border-radius: 3px;
+          padding: 10px 40px;
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: 700;
+          letter-spacing: 2px;
+          transition: all .5s ease;
+
+          @media (max-width: 1024px) {
+            width: 45%;
+            margin: auto;
+          
+          }
+
+          &:hover {
+            border: 2px solid white;
+          }
+        }
+
+        .btn-pad {
+          transform: translateX(10px);
+
+          @media (max-width: 1024px) {
+            transform: unset;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+}

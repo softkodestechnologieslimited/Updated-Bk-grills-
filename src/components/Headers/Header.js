@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../assets/img/logo.png";
@@ -12,19 +12,74 @@ const Header = ({ active }) => {
     navRef.current.classList.toggle("open");
   };
 
+  //detect scroll snippet https://codesandbox.io/s/detect-scroll-direction-with-memoization-lhwnd?file=/src/App.js
+
+  const [y, setY] = useState(window.scrollY);
+
+  const handleScroll = useCallback(
+    (e) => {
+      const window = e.currentTarget;
+      if (y > window.scrollY) {
+        console.log(y, window.scrollY, "scroll up");
+        let nav = document.querySelector(".nav-wrapper");
+        // nav.style.backgroundColor = "rgba(48, 45, 50, 0.7)";
+        nav.className =
+        "nav-wrapper nav-scroll";
+      } else if (y < window.scrollY) {
+        console.log(y, "scroll down");
+        document.querySelector(".nav-wrapper").className =
+          "nav-wrapper nav-height";
+      }
+      
+      if (y > window.scrollY && window.scrollY === 0) {
+        console.log('stop');
+        document.querySelector(".nav-wrapper").className = "nav-wrapper";
+      }
+
+      // while (window.scrollY === 0) {
+      //   document.querySelector(".nav-scroll").style.backgroundcolor = "none";
+      // }
+      setY(window.scrollY);
+    },
+    [y]
+  );
+
+  useEffect(() => {
+    setY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
   return (
-    <div className="container nav-wrapper">
+    <div className="nav-wrapper">
       <div className="nav-logo">
         <Link to="/">
-          <img src={logo} alt="Bigk Grill" className="logo" />
+          <img src={logo} alt="Chateau-le-roi" className="logo" />
         </Link>
       </div>
 
-      <div className="hamburger" onClick={navToggle}>
+      {/* <div className="hamburger" onClick={navToggle}>
         <div className="line"></div>
         <div className="line"></div>
         <div className="line"></div>
-      </div>
+      </div> */}
+
+      <svg
+        onClick={navToggle}
+        className="hamburger"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path
+          className="addshape"
+          d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+        ></path>
+      </svg>
 
       <div className="nav-menu">
         <ul className="nav-list" ref={navRef}>
@@ -100,16 +155,16 @@ const Header = ({ active }) => {
             </Link>
           </li>
 
-          <li className="nav-list-item hidden-xs">
+          {/*   <li className="nav-list-item hidden-xs">
             <Link className="nav-cart" to="/menu">
               <span>
                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                {/* <span id="items_count" className="cart-count">
+                 <span id="items_count" className="cart-count">
                   0
-                </span> */}
+                </span> 
               </span>{" "}
             </Link>
-          </li>
+          </li>*/}
         </ul>
       </div>
 
