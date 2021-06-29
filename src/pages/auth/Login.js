@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <>
       {isLoading ? <FullScreenLoader /> : <></>}
-      <div className="form-container">
+      <form className="form-container">
         <div className="form-content">
           <img src={logo} alt="logo" className="form-logo mx-auto" />
           <p>Log in to your account to continue.</p>
@@ -123,7 +123,7 @@ const Login = () => {
           </form>
 
         </div>
-      </div>
+      </form>
     </>
   );
 };
