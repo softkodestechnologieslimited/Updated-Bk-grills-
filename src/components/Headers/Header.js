@@ -1,7 +1,8 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./header.styles.scss";
 import logo from "../../assets/img/logo.png";
+// import "./header.styles.scss";
+
 
 
 const Header = ({ active }) => {

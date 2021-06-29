@@ -1,10 +1,10 @@
 import React, { CSSProperties } from "react";
-import Header from "../../components/Headers/Header";
 import HomepageCards from "../../components/Cards/HomepageCards"
 import Subscribe from "../../components/Cards/Subscribe"
 // import Search from "../../components/search/Search";
 // import MenuItem from "../../components/MenuItem/MenuItem";
 import Footer from "../../components/Footers/Footer";
+import Header from "../../components/Headers/Header";
 
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
