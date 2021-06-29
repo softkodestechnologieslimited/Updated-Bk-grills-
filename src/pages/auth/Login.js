@@ -97,7 +97,7 @@ const Login = () => {
                 value={email}
                 onChange={handleChange}
                 required
-                style={{ transition: "all .15s ease" }}
+                // style={{ transition: "all .15s ease" }}
               />
             </div>
 
@@ -125,7 +125,7 @@ const Login = () => {
                 value={password}
                 onChange={handleChange}
                 required
-                style={{ transition: "all .15s ease" }}
+                // style={{ transition: "all .15s ease" }}
               />
             </div>
 

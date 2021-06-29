@@ -164,6 +164,8 @@
     }
 
     .opening-hours {
+      position: relative;
+      z-index: 99;
       @media (min-width: 780px) {
         padding-left: 40px;
       }
@@ -225,6 +227,8 @@
     }
 
     .about-us {
+      position: relative;
+      z-index: 99;
       @media (max-width: 1024px) {
         flex-basis: 50%;
         min-width: 50%;
@@ -465,6 +469,8 @@
       justify-content: center;
       width: 100%;
       margin: 50px auto;
+      position: relative;
+      z-index: 99;
 
       .bottom-nav {
         // display: flex;
