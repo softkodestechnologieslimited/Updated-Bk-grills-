@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import Footer from "../../components/Footers/Footer";
 import Header from "../../components/Headers/Header";
 
@@ -18,15 +18,6 @@ import img9 from "../../assets/img/gallery-img9.jpg";
 import "./gallery.styles.scss";
 
 const Gallery = () => {
-  const arrowStyles: CSSProperties = {
-    position: "absolute",
-    zIndex: 999,
-    top: "calc(50% - 15px)",
-    width: 30,
-    height: 30,
-    cursor: "pointer",
-    transition: "all 1s ease",
-  };
   return (
     <div className="gallery-body">
       <div className="gallery-wrapper">
