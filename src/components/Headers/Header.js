@@ -20,19 +20,19 @@ const Header = ({ active }) => {
     (e) => {
       const window = e.currentTarget;
       if (y > window.scrollY) {
-        console.log(y, window.scrollY, "scroll up");
+        // console.log(y, window.scrollY, "scroll up");
         let nav = document.querySelector(".nav-wrapper");
         // nav.style.backgroundColor = "rgba(48, 45, 50, 0.7)";
         nav.className =
         "nav-wrapper nav-scroll";
       } else if (y < window.scrollY) {
-        console.log(y, "scroll down");
+        // console.log(y, "scroll down");
         document.querySelector(".nav-wrapper").className =
           "nav-wrapper nav-height";
       }
       
       if (y > window.scrollY && window.scrollY === 0) {
-        console.log('stop');
+        // console.log('stop');
         document.querySelector(".nav-wrapper").className = "nav-wrapper";
       }
 

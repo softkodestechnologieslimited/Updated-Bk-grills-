@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./footer.styles.scss";
 
 const Footer = () => {
@@ -19,7 +19,9 @@ const Footer = () => {
                       ipsum sit amet
                     </p>
 
-                    <button className="btn"> view more</button>
+                   <Link to="/gallery">
+                   <button className="btn"> view more</button>
+                   </Link>
                   </div>
                 </div>
               </div>
@@ -77,7 +79,9 @@ const Footer = () => {
                 king's castle...
               </p>
 
+              <Link to="/about">
               <button className="btn">about us</button>
+              </Link>
             </div>
           </div>
 
@@ -353,13 +357,19 @@ const Footer = () => {
           <div className="fin">
             <div className="bottom-nav">
               <span>
+                <Link to="/">
                 <h2>home</h2>
+                </Link>
               </span>
               <span>
+                <Link to="/menu">
                 <h2>menu</h2>
+                </Link>
               </span>
               <span>
+                <Link to="/gallery">
                 <h2>gallery</h2>
+                </Link>
               </span>
             </div>
 
@@ -369,11 +379,12 @@ const Footer = () => {
               <h3>
                 by <></>
                 <span>
-                  <a href="_blank">  Softkode technologies </a>
+                  {/* <Link to="/"> */}
+                  <a href="#">  Softkode technologies </a>
+                  {/* </Link> */}
                 </span>
               </h3>
             </div>
-
 
             
           </div>

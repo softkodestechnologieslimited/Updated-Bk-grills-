@@ -3,6 +3,8 @@ import HomepageCards from "../../components/Cards/HomepageCards"
 import Subscribe from "../../components/Cards/Subscribe"
 // import Search from "../../components/search/Search";
 // import MenuItem from "../../components/MenuItem/MenuItem";
+import { Link } from "react-router-dom";
+
 import Footer from "../../components/Footers/Footer";
 import Header from "../../components/Headers/Header";
 
@@ -105,7 +107,21 @@ const Homepage = () => {
             )
           }
         >
-          <div className="header-content">
+          <div className="header-content header-background-one">
+            <div className="header-text">
+              <h1>The Best Quality and Tasty Food </h1>
+              <p>
+                At Chateau le roi we provide an exquisite and healthy <br />{" "}
+                dining experience with for customers of all ages at affordable
+                prices.
+              </p>
+              <Link to="/menu">
+              <button className="btn header-btn"> VIEW MORE</button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="header-content header-background-two">
             <div className="header-text">
               <h1>The Best Quality and Tasty Food </h1>
               <p>
@@ -117,19 +133,7 @@ const Homepage = () => {
             </div>
           </div>
 
-          <div className="header-content">
-            <div className="header-text">
-              <h1>The Best Quality and Tasty Food </h1>
-              <p>
-                At Chateau le roi we provide an exquisite and healthy <br />{" "}
-                dining experience with for customers of all ages at affordable
-                prices.
-              </p>
-              <button className="btn header-btn"> VIEW MORE</button>
-            </div>
-          </div>
-
-          <div className="header-content">
+          <div className="header-content header-background-three">
             <div className="header-text">
               <h1>The Best Quality and Tasty Food </h1>
               <p>

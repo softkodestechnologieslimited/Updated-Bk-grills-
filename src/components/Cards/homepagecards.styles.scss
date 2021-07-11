@@ -258,6 +258,7 @@
 
           span {
             display: inline-block;
+            text-align: start;
             position: relative;
             font-size: 14px;
             border-bottom: 1px solid rgba(234, 234, 234, 0.2);
@@ -283,7 +284,14 @@
           flex-direction: column;
         }
 
+        a {
+          text-align: center;
+        }
+
         button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border: 2px solid #c84646;
           border-radius: 3px;
           padding: 10px 40px;
