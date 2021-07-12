@@ -34,6 +34,8 @@ const Staff = observer(() => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(()=>{console.log(staff);},[staff])
+
   const refreshStaff = () => {
     setStaff(staffService.allStaff)
   }

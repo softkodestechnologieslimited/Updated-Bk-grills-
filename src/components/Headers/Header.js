@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-
-import logo from "../../assets/img/logo.png";
+import logo from '../../assets/img/logos/NewLogo.JPG'
 
 import "./header.styles.scss";
 
@@ -16,7 +15,7 @@ const Header = ({ active }) => {
     <div className="container nav-wrapper">
       <div className="nav-logo">
         <Link to="/">
-          <img src={logo} alt="Bigk Grill" className="logo" />
+          <img src={logo} style={{maxWidth: '98px', borderRadius: '50%'}} alt="Bigk Grill" className="logo" />
         </Link>
       </div>
 

@@ -7,7 +7,8 @@ import { useToasts } from 'react-toast-notifications'
 // components
 import FullScreenLoader from "../../components/fullScreenLoader";
 
-import logo from "../../assets/img/logo.png";
+// import logo from "../../assets/img/logo.png";
+import logo from '../../assets/img/logos/NewLogo.JPG'
 import "./login.styles.scss";
 
 
@@ -67,7 +68,7 @@ const Login = () => {
       {isLoading ? <FullScreenLoader /> : <></>}
       <div className="form-container">
         <div className="form-content">
-          <img src={logo} alt="logo" className="form-logo mx-auto" />
+          <img src={logo} alt="logo" style={{maxWidth: '98px', borderRadius: '50%'}} className="form-logo mx-auto" />
           <p>Log in to your account to continue.</p>
 
           <form onSubmit={handleSubmit} className="login-form">

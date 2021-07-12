@@ -9,7 +9,8 @@ import CartDropdown from "../Dropdowns/CartDropdown.js";
 import AdminSideNav from './AdminSideNav'
 import StaffSideNav from './StaffSideNav'
 
-import logo from "../../assets/img/logo.png";
+// import logo from "../../assets/img/logo.png";
+import logo from '../../assets/img/logos/NewLogo.JPG'
 
 const Sidebar = () => {
   const [collapseShow, setCollapseShow] = useState("hidden");
@@ -52,12 +53,12 @@ const Sidebar = () => {
             className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-0 px-0"
             to="/dashboard"
           >
-            <img src={logo} alt="" className='h-3 w-3 block mx-auto' />
+            <img src={logo} style={{maxWidth: '98px', borderRadius: '50%'}} alt="" className='h-3 w-3 block mx-auto' />
           </Link>) : (<Link
             className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
             to="/dashboard/cartmenu"
           >
-            <img src={logo} alt="" className='h-3 w-3 block mx-auto' />
+            <img src={logo} style={{maxWidth: '98px', borderRadius: '50%'}} alt="" className='h-3 w-3 block mx-auto' />
           </Link>)}
 
           {/* User */}

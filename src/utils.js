@@ -32,6 +32,16 @@ export const formatTime = (date)=>{
 }
 
 export const formatTicketDate = (date)=>{
-  const newDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(date)
+  const newDate = new Intl.DateTimeFormat('en').format(date)
+  return newDate
+}
+
+export const formatLongDate = (date)=>{
+  const newDate = new Intl.DateTimeFormat('en-Gb', {dateStyle: 'full'}).format(date)
+  return newDate
+}
+
+export const formatShortDate = (date)=>{
+  const newDate = new Intl.DateTimeFormat('en', {dateStyle: 'short'}).format(date)
   return newDate
 }

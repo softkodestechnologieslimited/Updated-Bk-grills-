@@ -4,6 +4,7 @@ import Select from 'react-select'
 import Zoom from 'react-reveal/Zoom'
 
 import './clockin.styles.scss'
+import Spinner from 'components/spinner/Spinner'
 
 
 const customStyles = {
@@ -16,15 +17,17 @@ const customStyles = {
   }),
 }
 
-const ClockInModal = ({ closeModal, selected, setSelected }) => {
+const ClockInModal = (props) => {
+  const { closeModal, selected, setSelected, staff, setStaff, loading } = props
   const [options, setOptions] = useState([])
 
-  const { testStaff, ClockInStaff } = useClockedInContext()
+  const { testStaff } = useClockedInContext()
 
   useEffect(()=>{
     let newOptions = []
-    newOptions = testStaff.filter(item=> item.clockedIn !== true)
+    newOptions = staff.filter(item=> item.clockedIn !== true)
     setOptions(prev => prev = [...newOptions])
+      // eslint-disable-next-line
   },[testStaff])
 
   const handleModal = (e)=>{
@@ -36,7 +39,9 @@ const ClockInModal = ({ closeModal, selected, setSelected }) => {
   const handleClock = (e)=>{
     e.preventDefault()
     if(selected.id){
-      ClockInStaff(selected.id);
+      const index = staff.indexOf(selected)
+      let newStaff = [...staff.slice(0,index), {...staff[index], clockedIn: true}, ...staff.slice(index+1)]
+      setStaff(prev => prev = [...newStaff])
       closeModal()
     }
     return
@@ -47,7 +52,7 @@ const ClockInModal = ({ closeModal, selected, setSelected }) => {
     <div className='clock-in-con' onClick={handleModal}>
       <Zoom>
         <div className='modal'>
-            <div className="title">
+           {!loading && <> <div className="title">
               <h5>Clock in staff</h5>
             </div>
             <div className="body">
@@ -68,7 +73,10 @@ const ClockInModal = ({ closeModal, selected, setSelected }) => {
                   cancel
                 </button>
               </div>
-            </div>
+            </div></>}
+            {
+              loading && <Spinner />
+            }
         </div>
       </Zoom>
     </div>

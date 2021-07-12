@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-// import { AppStateContext } from "../../context";
-// import apiService from "../../context/apiService";
-// import { useToasts } from 'react-toast-notifications'
+import React, { useState, useEffect, useContext } from 'react'
+import { AppStateContext } from "../../context";
+import apiService from "../../context/apiService";
+import { useToasts } from 'react-toast-notifications'
 import { useClockedInContext } from 'context/ClockInService';
 import '../attendance/attendance.styles.scss'
 import Fade from 'react-reveal/Fade';
@@ -16,13 +16,31 @@ import AttendanceCard from 'components/Cards/AttendanceCard';
 
 
 const Attendance = () => {
-  // const { staffService } = useContext(AppStateContext);
+  const { staffService } = useContext(AppStateContext);
   const { filteredClock, handleSearch } = useClockedInContext()
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [staff, setStaff] = useState([]);
   const [showModal, setShowModal] = useState(false)
   const [selected, setSelected] = useState({})
+  const [staff, setStaff] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { addToast } = useToasts()
 
+
+  useEffect(() => {
+    if (staff.length) {
+      refreshStaff()
+      return;
+    }
+
+    getStaff();
+
+    // eslint-disable-next-line
+  }, []);
+
+  const refreshStaff = () => {
+    let newArray = []
+    newArray = staffService.allStaff.map(item=> ({...item, label: item.name, value: item.id, clockedIn: false}))
+    setStaff(newArray)
+  }
  
   const closeModal = ()=>{
     setSelected(prev => prev = {})
@@ -31,6 +49,25 @@ const Attendance = () => {
 
   const handleShowModal = ()=>{
     setShowModal(prev => prev = true)
+  }
+
+  const getStaff = async () => {
+    try {
+      setIsLoading(true);
+      const response = await apiService.getUsers();
+      const { data } = response.data;
+      staffService.setStaff([...data]);
+
+      refreshStaff()
+    } catch (error) {
+      const message = apiService.getErrorMessage(error);
+      addToast(message, {
+        appearance: 'error',
+        autoDismiss: true,
+      })
+    } finally {
+      setIsLoading(false);
+    }
   }
 
 
@@ -52,7 +89,7 @@ const Attendance = () => {
             <div className="flex flex-wrap mt-4">
               <Fade left>
                 <div className="w-full lg:w-8/12 mx-auto mb-12 px-4">
-                  <AttendanceCard filteredClock={filteredClock} onClick={handleShowModal} />
+                  <AttendanceCard staff={staff} filteredClock={filteredClock} onClick={handleShowModal} />
                 </div>
               </Fade>
             </div>
@@ -60,7 +97,7 @@ const Attendance = () => {
         </div>
         <FooterAdmin />
       </div>
-      {showModal && <ClockInModal closeModal={closeModal} selected={selected} setSelected={setSelected} />}
+      {showModal && <ClockInModal loading={isLoading} staff={staff} setStaff={setStaff} closeModal={closeModal} selected={selected} setSelected={setSelected} />}
     </>
   )
 }
