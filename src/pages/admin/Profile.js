@@ -2,9 +2,10 @@ import React from 'react'
 
 // components
 import ProfileCard from "../../components/Cards/ProfileCard.js";
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
+
 
 const Profile = () => {
   return (

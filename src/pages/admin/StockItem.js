@@ -3,8 +3,8 @@ import React from 'react'
 // components
 import MenuItemCard from "../../components/Cards/MenuItemCard.js";
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
-import Sidebar from "../.././components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
+import Sidebar from "../../components/Sidebar/Sidebar.js";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 
 const StockItem = () => {
   return (

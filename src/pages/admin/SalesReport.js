@@ -11,11 +11,11 @@ import Fade from 'react-reveal/Fade';
 import "react-datepicker/dist/react-datepicker.css";
 
 // components
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
-import Sidebar from "../.././components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
+import Sidebar from "../../components/Sidebar/Sidebar.js";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 import ReportModal from "../../components/Modals/ReportModal";
-import FullScreenLoader from "../.././components/fullScreenLoader/";
+import FullScreenLoader from "../../components/fullScreenLoader";
 
 const SalesReport = () => {
   const [startDate, setStartDate] = useState(new Date());

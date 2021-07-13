@@ -6,12 +6,12 @@ import { useToasts } from 'react-toast-notifications'
 import Fade from 'react-reveal/Fade';
 
 // components
-// import StaffCard from "components/Cards/StaffCard.js";
-import AdminNavbar from "../.././components/Navbars/AdminNavbar";
-import Sidebar from "../.././components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
-import FullScreenLoader from "../.././components/fullScreenLoader";
-import Pagination from "../.././components/Pagination/Pagination";
+import StaffCard from "components/Cards/StaffCard.js";
+import AdminNavbar from "components/Navbars/AdminNavbar.js";
+import Sidebar from "components/Sidebar/Sidebar.js";
+import FooterAdmin from "components/Footers/FooterAdmin.js";
+import FullScreenLoader from "components/fullScreenLoader";
+import Pagination from "components/Pagination/Pagination";
 
 const Staff = observer(() => {
   const { staffService } = useContext(AppStateContext);
@@ -33,6 +33,8 @@ const Staff = observer(() => {
 
     // eslint-disable-next-line
   }, []);
+
+  useEffect(()=>{console.log(staff);},[staff])
 
   const refreshStaff = () => {
     setStaff(staffService.allStaff)
@@ -109,7 +111,7 @@ const Staff = observer(() => {
               {
                 currentStaff.length !== 0 ? (
                   <Fade left>
-                    {/* <StaffCard staff={currentStaff} /> */}
+                    <StaffCard staff={currentStaff} />
                   </Fade>
                 ) : (
                   <div className="w-full flex justify-center">

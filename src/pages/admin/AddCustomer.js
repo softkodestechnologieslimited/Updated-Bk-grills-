@@ -7,10 +7,10 @@ import Fade from 'react-reveal/Fade';
 import { useToasts } from 'react-toast-notifications'
 
 // components
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
-import FullScreenLoader from "../.././components/fullScreenLoader";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
+import FullScreenLoader from "../../components/fullScreenLoader";
 
 
 const AddCustomer = () => {

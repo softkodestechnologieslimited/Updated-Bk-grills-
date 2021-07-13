@@ -8,11 +8,11 @@ import Pulse from 'react-reveal/Pulse';
 
 
 // components
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 import AdminMenuItem from "../../components/MenuItem/AdminMenuItem.js";
-import FullScreenLoader from "../.././components/fullScreenLoader";
+import FullScreenLoader from "../../components/fullScreenLoader";
 import Pagination from "../../components/Pagination/Pagination";
 
 

@@ -15,3 +15,33 @@ export const triggerFileDownload = (file, fileName) => {
   document.body.appendChild(link);
   link.click();
 }
+
+
+
+export const formatDate = (date)=>{
+  const year = new Intl.DateTimeFormat('en',{year: 'numeric'}).format(date)
+  const month = new Intl.DateTimeFormat('en',{month: 'long'}).format(date)
+  const day = new Intl.DateTimeFormat('en',{day: 'numeric'}).format(date)
+  const time = new Intl.DateTimeFormat('en',{timeStyle: 'short'}).format(date)
+  return `${month} ${day}, ${year} ${time}`
+}
+
+export const formatTime = (date)=>{
+  const time = new Intl.DateTimeFormat('en',{timeStyle: 'short'}).format(date)
+  return time
+}
+
+export const formatTicketDate = (date)=>{
+  const newDate = new Intl.DateTimeFormat('en').format(date)
+  return newDate
+}
+
+export const formatLongDate = (date)=>{
+  const newDate = new Intl.DateTimeFormat('en-Gb', {dateStyle: 'full'}).format(date)
+  return newDate
+}
+
+export const formatShortDate = (date)=>{
+  const newDate = new Intl.DateTimeFormat('en', {dateStyle: 'short'}).format(date)
+  return newDate
+}

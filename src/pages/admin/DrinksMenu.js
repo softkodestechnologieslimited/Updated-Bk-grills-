@@ -6,9 +6,9 @@ import Fade from 'react-reveal/Fade';
 
 // components
 import DrinksTable from "../../components/Cards/DrinksTable.js";
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 
 const DrinksMenu = () => {
   const { mealService } = useContext(AppStateContext)

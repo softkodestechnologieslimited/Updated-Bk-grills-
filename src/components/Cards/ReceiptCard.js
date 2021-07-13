@@ -5,11 +5,8 @@ import { AppStateContext } from "../../context";
 import { useToasts } from 'react-toast-notifications'
 import ReactToPrint from 'react-to-print';
 import { format } from 'date-fns'
-
-import FullScreenLoader from "../fullScreenLoader";
-
+import FullScreenLoader from "../../components/fullScreenLoader";
 import logo from "../../assets/img/logo.png";
-
 
 const ReceiptCard = () => {
   const [orderDetails, setOrderDetails] = useState({ customer_name: "", meals: [], payment_method: "", payment_status: "", total: "", waiter_name: "", status: '', day: '', month: "", year: "" });

@@ -67,3 +67,11 @@ a {
   outline: 0;
 }
 
+.table-row {
+  cursor: pointer;
+  margin: 1rem 0;
+}
+
+.table-row:hover {
+  background-color: #f4f4f4;
+}

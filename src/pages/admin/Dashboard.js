@@ -8,7 +8,7 @@ import { formatter } from '../../utils'
 // components
 import CardBarChart from "../../components/Cards/CardBarChart.js";
 import CardLineChart from "../../components/Cards/CardLineChart.js";
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import HeaderStats from "../../components/Headers/HeaderStats.js";
 import FooterAdmin from "../../components/Footers/FooterAdmin.js";

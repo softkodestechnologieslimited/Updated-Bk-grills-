@@ -6,10 +6,10 @@ import { useToasts } from 'react-toast-notifications'
 
 // components
 import CustomersCard from "../../components/Cards/CustomersCard.js";
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
-import FullScreenLoader from "../.././components/fullScreenLoader";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
+import FullScreenLoader from "../../components/fullScreenLoader";
 import Pagination from "../../components/Pagination/Pagination";
 
 const Customers = observer(() => {

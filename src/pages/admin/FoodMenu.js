@@ -6,9 +6,9 @@ import Pulse from 'react-reveal/Pulse';
 
 // components
 import FoodItem from "../../components/MenuItem/FoodItem.js";
-import AdminNavbar from "../.././components/Navbars/AdminNavbar.js";
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import FooterAdmin from "../.././components/Footers/FooterAdmin";
+import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 
 const FoodMenu = () => {
   const { mealService } = useContext(AppStateContext)

@@ -19,11 +19,11 @@ const ScrollToTop = withRouter(_ScrollToTop);
 
 ReactDOM.render(
   <BrowserRouter>
-    <React.StrictMode>
+    <React.Fragment>
       <ScrollToTop>
         <App />
       </ScrollToTop>
-    </React.StrictMode>
+    </React.Fragment>
   </BrowserRouter>,
   document.getElementById("root")
 );

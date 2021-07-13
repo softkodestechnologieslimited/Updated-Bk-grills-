@@ -1,6 +1,9 @@
 .menu-item {
   margin: 0.5rem 0;
+<<<<<<< HEAD
   // height: 200px;
+=======
+>>>>>>> 7aeb4abdbc93ca0d5cc1d9347251658af119fcf3
 }
 
 .menu-item-card {
@@ -17,8 +20,12 @@
 }
 
 .img-responsive {
+<<<<<<< HEAD
   // height: 180px;
   height: auto;
+=======
+  height: 180px;
+>>>>>>> 7aeb4abdbc93ca0d5cc1d9347251658af119fcf3
   width: 100%;
 
   // @media (max-width: 599px) {
@@ -49,5 +56,12 @@
     font-weight: 500;
     transition: 0.2s ease-out;
     text-transform: capitalize;
+<<<<<<< HEAD
+=======
+
+    &:hover {
+      background-color: darken($color: #dc3432, $amount: 15);
+    }
+>>>>>>> 7aeb4abdbc93ca0d5cc1d9347251658af119fcf3
   }
 }
