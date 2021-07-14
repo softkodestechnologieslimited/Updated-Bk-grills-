@@ -380,7 +380,7 @@ const Footer = () => {
                 by <></>
                 <span>
                   {/* <Link to="/"> */}
-                  <a href="#">  Softkode technologies </a>
+                  <p>  Softkode technologies </p>
                   {/* </Link> */}
                 </span>
               </h3>

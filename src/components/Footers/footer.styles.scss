@@ -547,7 +547,7 @@
           span {
             color: rgba(254, 254, 254, 0.26);
             font-size: 14px;
-            a {
+            a, p {
               color: inherit;
               font-size: inherit;
               display: inline-block;
@@ -556,7 +556,7 @@
               
             }
 
-            &:hover a {
+            &:hover a, p {
               border-bottom: 1px solid #c84646;
               color: white;
             }

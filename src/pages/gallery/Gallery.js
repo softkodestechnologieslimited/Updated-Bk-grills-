@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../../components/Footers/Footer";
 import Header from "../../components/Headers/Header";
 
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Gallery, PhotoSwipe } from "react-pswp";
+
+// import { Carousel } from "react-responsive-carousel";
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import img1 from "../../assets/img/gallery-img1.jpg";
 import img2 from "../../assets/img/gallery-img2.jpg";
@@ -16,8 +18,42 @@ import img8 from "../../assets/img/gallery-img8.jpg";
 import img9 from "../../assets/img/gallery-img9.jpg";
 
 import "./gallery.styles.scss";
+import "react-pswp/dist/index.css";
 
-const Gallery = () => {
+const GalleryPage = () => {
+  const [index, setIndex] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const images = [
+    { image: img1 },
+    { image: img2 },
+    { image: img3 },
+    { image: img4 },
+    { image: img5 },
+    { image: img6 },
+    { image: img7 },
+    { image: img8 },
+    { image: img9 },
+  ];
+
+  const container = images.map((img, i) => ({
+    uid: i,
+    src: img["image"],
+    msrc: img["image"],
+    w: 1000,
+    h: 1000,
+    title: "gallery image",
+  }));
+
+  // const container = images.map((e => e.index) {
+  //   uid
+  // })
+
+  useEffect(() => {
+    if (!open && index !== null) setOpen(true);
+    // eslint-disable-next-line
+  }, [index]);
+
   return (
     <div className="gallery-body">
       <div className="gallery-wrapper">
@@ -36,7 +72,76 @@ const Gallery = () => {
         </div>
       </div>
 
-      <div className="gallery-images-wrapper">
+      <div className="center-images">
+        <Gallery
+          container={container}
+          onClick={setIndex}
+          wrapperClass="gallery-images"
+          itemClass="img-wrapper"
+          imgClass="gallery-image"
+        />
+      </div>
+
+      <PhotoSwipe
+        container={container}
+        onIndexChange={setIndex}
+        onOpenChange={setOpen}
+        index={index}
+        open={open}
+        theme={{
+          // foreground: "#1A202C",
+          background: "#262328",
+        }}
+      />
+      {/* <div className="gallery-images">
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img1} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img2} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img3} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img7} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img5} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img6} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img4} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img8} />
+            </figure>
+          </div>
+          <div className="img-wrapper">
+            <figure className="post-image">
+              <img className="gallery-image" alt="gallery pic" src={img9} />
+            </figure>
+          </div>
+        </div> */}
+
+      {/* <div className="gallery-images-wrapper">
         <div className="gallery-images">
           <Carousel
             autoPlay
@@ -133,11 +238,11 @@ const Gallery = () => {
               </div>
           </Carousel>
         </div>
-      </div>
+      </div> */}
 
       <Footer />
     </div>
   );
 };
 
-export default Gallery;
+export default GalleryPage;
