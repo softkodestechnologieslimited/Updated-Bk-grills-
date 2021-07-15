@@ -1,0 +1,40 @@
+.meal-item-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px));
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.h-90 {
+  min-height: 90vh;
+}
+
+.max-h-40 {
+  max-height: 10rem;
+}
+
+.cart-text {
+  margin-left: 20px;
+}
+
+.modal-fixed {
+  position: fixed;
+  top: 0;
+  left: 16rem;
+  bottom: 0;
+  right: 0;
+  width: 60vw;
+  height: 100%;
+}
+
+.custom-btn:hover {
+  background-color: #4299e1;
+}
+
+.form-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
