@@ -25,10 +25,7 @@ import AddCustomer from "../pages/admin/AddCustomer.js";
 import EditCustomer from "../pages/admin/EditCustomer.js";
 import AddStaff from "../pages/admin/AddStaff.js";
 import Staff from "../pages/admin/Staff.js";
-<<<<<<< HEAD
 import Log from "../pages/admin/Log.js";
-=======
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 import EditStaff from "../pages/admin/EditStaff.js";
 import Password from "../pages/admin/Password.js";
 import EditProfile from "../pages/admin/EditProfile.js";
@@ -87,7 +84,6 @@ const Admin = () => {
           <Route exact path="/dashboard/expenses" component={Expenses} />
           {/* <Route exact path="/dashboard/expenses/:id" component={StockItem} /> */}
           <Route exact path="/dashboard/addexpense" component={AddExpense} />
-<<<<<<< HEAD
 
           <Route exact path="/dashboard/attendance" component={Attendance} />
           <Route exact path="/dashboard/swimming-ticket" component={SwimmingTickets} />
@@ -96,11 +92,6 @@ const Admin = () => {
 
           <Route exact path="/dashboard/log" component={Log} />
 
-=======
-          <Route exact path="/dashboard/attendance" component={Attendance} />
-          <Route exact path="/dashboard/swimming-ticket" component={SwimmingTickets} />
-          <Route exact path="/dashboard/swimming-ticket/history" component={TicketHistory} />
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
         </Suspense>
       </Switch>
     </>

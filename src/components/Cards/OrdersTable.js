@@ -4,11 +4,7 @@ import { AppStateContext } from "../../context";
 // components
 import OrderDropdown from "../Dropdowns/OrderDropdown.js";
 
-<<<<<<< HEAD
 const OrderTable = ({ orders, refresh, deleted }) => {
-=======
-const OrderTable = ({ orders, refresh }) => {
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   const { authService } = useContext(AppStateContext);
   const { currentUser } = authService;
 
@@ -21,11 +17,7 @@ const OrderTable = ({ orders, refresh }) => {
       >
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
-<<<<<<< HEAD
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 py-2">
-=======
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
               {currentUser.role === 'admin' ? (
                 <h3
                   className=
@@ -88,22 +80,14 @@ const OrderTable = ({ orders, refresh }) => {
                 <th
                   className=
                   "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200"
-<<<<<<< HEAD
                 >Action</th>
-=======
-                ></th>
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
               </tr>
             </thead>
             <tbody>
               {
                 orders.map((order, idx) => (
                   <tr key={idx}>
-<<<<<<< HEAD
                     <th className="border-t-0 px-6 align-middle text-capitalize border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-=======
-                    <th className="border-t-0 px-6 align-middle text-capitalize border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                       <span
                         className=
                         "ml-3 font-bold text-gray-700"

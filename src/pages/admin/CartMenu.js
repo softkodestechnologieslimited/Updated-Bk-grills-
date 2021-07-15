@@ -1,17 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppStateContext } from "../../context";
 import apiService from "../../context/apiService";
-<<<<<<< HEAD
 import { useToasts } from "react-toast-notifications";
 import { observer } from "mobx-react-lite";
 import Pulse from "react-reveal/Pulse";
-=======
-import { useToasts } from 'react-toast-notifications'
-import { observer } from "mobx-react-lite";
-import Pulse from 'react-reveal/Pulse';
-
-
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
 // components
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
@@ -21,7 +13,6 @@ import AdminMenuItem from "../../components/MenuItem/AdminMenuItem.js";
 import FullScreenLoader from "../../components/fullScreenLoader";
 import Pagination from "../../components/Pagination/Pagination";
 
-<<<<<<< HEAD
 const CartMenu = observer(() => {
   const { mealService } = useContext(AppStateContext);
   const [meals, setMeals] = useState(
@@ -29,23 +20,12 @@ const CartMenu = observer(() => {
       (meal) => meal.inStock === "true" && meal.deleted !== true
     )
   );
-=======
-
-const CartMenu = observer(() => {
-  const { mealService } = useContext(AppStateContext);
-  const [meals, setMeals] = useState(mealService.meals.filter(meals => meals.inStock === true));
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [mealsPerPage] = useState(10);
-<<<<<<< HEAD
   const { addToast } = useToasts();
-=======
-  const { addToast } = useToasts()
-
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   useEffect(() => {
     if (meals.length) return;
@@ -61,22 +41,17 @@ const CartMenu = observer(() => {
       const response = await apiService.getMeals();
       const { data } = response.data;
 
-<<<<<<< HEAD
       // console.log(data);
 
       const inStockMeals = data.filter(
         (meal) => meal.inStock === "true" && meal.deleted !== true
       );
-=======
-      const inStockMeals = data.filter(meal => meal.inStock === true)
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       setMeals(inStockMeals);
 
       mealService.setMeals([...data]);
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
-<<<<<<< HEAD
         appearance: "error",
         autoDismiss: true,
       });
@@ -84,15 +59,6 @@ const CartMenu = observer(() => {
       setIsLoading(false);
     }
   };
-=======
-        appearance: 'error',
-        autoDismiss: true,
-      })
-    } finally {
-      setIsLoading(false);
-    }
-  }
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   const filteredMeals = meals.filter((meal) => {
     if (!query && category) {
@@ -104,19 +70,14 @@ const CartMenu = observer(() => {
     }
 
     if (query && category) {
-<<<<<<< HEAD
       return (
         meal.title.toLowerCase().includes(query) && meal.category === category
       );
-=======
-      return meal.title.toLowerCase().includes(query) && meal.category === category
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
     }
 
     return meal;
   });
 
-<<<<<<< HEAD
   const onFilterChange = (e) => {
     if (e.target.name === "search") {
       setQuery(e.target.value.toLowerCase());
@@ -126,18 +87,6 @@ const CartMenu = observer(() => {
 
     setCurrentPage(1);
   };
-=======
-
-  const onFilterChange = (e) => {
-    if (e.target.name === "search") {
-      setQuery(e.target.value.toLowerCase())
-    } else if (e.target.name === 'category') {
-      setCategory(e.target.value.toLowerCase())
-    }
-
-    setCurrentPage(1);
-  }
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   // Get current meals
   const indexOfLastMeal = currentPage * mealsPerPage;
@@ -145,17 +94,9 @@ const CartMenu = observer(() => {
   const currentMeals = filteredMeals.slice(indexOfFirstMeal, indexOfLastMeal);
   const isLastPage = indexOfLastMeal >= filteredMeals.length;
 
-<<<<<<< HEAD
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-=======
-
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   return (
     <>
       {isLoading ? <FullScreenLoader /> : <></>}
@@ -164,11 +105,7 @@ const CartMenu = observer(() => {
         <AdminNavbar />
         <div className="relative px-4 md:px-10 mx-auto h-90 w-full md:pt-32 pt-12 md:mt-0 mt-24">
           <div className="px-4 flex flex-wrap justify-between">
-<<<<<<< HEAD
             <form className="w-full lg:w-6/12 mx-auto">
-=======
-            <form className='w-full lg:w-6/12 mx-auto'>
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
               <input
                 type="text"
                 name="search"
@@ -181,7 +118,6 @@ const CartMenu = observer(() => {
             <div className="flex w-full lg:w-4/12 items-center lg:justify-start justify-between mx-4">
               <label
                 className="block text-white font-bold mr-3"
-<<<<<<< HEAD
                 htmlFor="category"
               >
                 <i className="fas fa-filter"></i> Filter by
@@ -196,33 +132,14 @@ const CartMenu = observer(() => {
                 </option>
                 <option value="food">Food</option>
                 <option value="drinks">Drinks</option>
-=======
-                htmlFor='category'
-              >
-                <i className="fas fa-filter"></i> Filter by
-              </label>
-              <select name="category" onChange={onFilterChange} className="form-select block w-6/12 placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3">
-                <option value="" defaultValue>
-                  Category
-                  </option>
-                <option value='food'
-                >Food</option>
-                <option value='drinks'
-                >Drinks</option>
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
               </select>
             </div>
           </div>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
           <div className="flex flex-wrap mt-4">
             <div className="w-full mb-12">
               <Pulse>
                 <div className="flex flex-wrap mt-8">
-<<<<<<< HEAD
                   {currentMeals.length !== 0 ? (
                     currentMeals.map((meal, idx) => (
                       <AdminMenuItem meal={meal} key={idx} />
@@ -234,15 +151,6 @@ const CartMenu = observer(() => {
                       </p>
                     </div>
                   )}
-=======
-                  {currentMeals.length !== 0 ?
-                    currentMeals.map((meal, idx) => (<AdminMenuItem meal={meal} key={idx} />)) : (
-                      <div className="w-full flex justify-center">
-                        <p className="py-5 px-6 font-bold text-xl text-red-500">No Item found!</p>
-                      </div>
-                    )
-                  }
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                 </div>
               </Pulse>
             </div>
@@ -253,16 +161,10 @@ const CartMenu = observer(() => {
               <div className="flex justify-center w-full">
                 <p className="my-4 text-gray-900 font-bold">
                   Showing{" "}
-<<<<<<< HEAD
                   {`${indexOfFirstMeal + 1} - ${
                     isLastPage ? filteredMeals.length : indexOfLastMeal
                   }`}{" "}
                   of {filteredMeals.length}
-=======
-                  {`${indexOfFirstMeal + 1} - ${isLastPage ? filteredMeals.length : indexOfLastMeal
-                    }`}{" "}
-               of {filteredMeals.length}
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                 </p>
               </div>
             ) : (
@@ -270,7 +172,6 @@ const CartMenu = observer(() => {
             )}
           </>
 
-<<<<<<< HEAD
           {currentMeals.length !== 0 ? (
             <div className="flex justify-center w-full">
               <Pagination
@@ -283,31 +184,11 @@ const CartMenu = observer(() => {
           ) : (
             ""
           )}
-=======
-          {
-            currentMeals.length !== 0 ? (
-              <div className="flex justify-center w-full">
-                <Pagination
-                  itemsPerPage={mealsPerPage}
-                  totalItems={filteredMeals.length}
-                  paginate={paginate}
-                  currentPage={currentPage}
-                />
-              </div>
-            ) : (
-              ""
-            )
-          }
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
         </div>
         <FooterAdmin />
       </div>
     </>
   );
-<<<<<<< HEAD
 });
-=======
-})
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
 export default CartMenu;

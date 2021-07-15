@@ -2,18 +2,12 @@ import { makeAutoObservable } from "mobx";
 
 export class CustomerService {
   allCustomers;
-<<<<<<< HEAD
   deletedCustomers;
-=======
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   constructor() {
     makeAutoObservable(this);
     this.allCustomers = [];
-<<<<<<< HEAD
     this.deletedCustomers = [];
-=======
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   }
 
   getSingleCustomer(customerId) {
@@ -35,7 +29,6 @@ export class CustomerService {
     if (customerIndex === -1) return
 
     const copy = [...this.allCustomers];
-<<<<<<< HEAD
     const deletedCustomer = copy.splice(customerIndex, 1);
     // console.log(deletedCustomer)
     this.deletedCustomers = [...this.deletedCustomers, ...deletedCustomer]
@@ -52,10 +45,6 @@ export class CustomerService {
 
     this.allCustomers = [...this.allCustomers, ...customer]
     this.deletedCustomers = [...copy]
-=======
-    copy.splice(customerIndex, 1);
-    this.allCustomers = [...copy];
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   }
 
 }

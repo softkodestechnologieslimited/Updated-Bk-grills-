@@ -7,11 +7,7 @@ import aboutplaceholder from '../../assets/img/about-us.jpg'
 
 const About = () => {
   return (
-<<<<<<< HEAD
     <div>
-=======
-    <>
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       <Header active="about" />
       <section className="about-wrapper">
         <div className="container about-us">
@@ -51,11 +47,7 @@ const About = () => {
       </section>
 
       <Footer />
-<<<<<<< HEAD
     </div>
-=======
-    </>
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   );
 };
 

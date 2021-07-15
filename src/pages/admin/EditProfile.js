@@ -15,31 +15,19 @@ import FullScreenLoader from "../../components/fullScreenLoader";
 
 const EditProfile = () => {
   const { authService } = useContext(AppStateContext);
-<<<<<<< HEAD
   // const { email } = authService.currentUser;
 
   const [profileDetails, setProfileDetails] = useState({
     name: authService.currentUser.name,
     email: authService.currentUser.email,
     phone: authService.currentUser.phone,
-=======
-  const { email } = authService.currentUser;
-
-  const [profileDetails, setProfileDetails] = useState({
-    name: "",
-    phone: "",
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { addToast } = useToasts()
 
-<<<<<<< HEAD
   const { name, phone, email } = profileDetails;
-=======
-  const { name, phone } = profileDetails;
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
 
   const handleSubmit = async (e) => {
@@ -116,11 +104,7 @@ const EditProfile = () => {
                       <label className="block">
                         <span className="text-gray-700">Email Address</span>
                         <input type='email' className="form-input text-gray-700 mt-1 block w-full my-4 p-3 bg-white" placeholder="Email" name='email' value={email}
-<<<<<<< HEAD
                         />
-=======
-                          disabled />
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                       </label>
                     </div>
                     <div className="relative w-full mb-3">

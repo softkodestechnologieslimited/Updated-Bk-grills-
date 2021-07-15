@@ -52,7 +52,6 @@ const ModifyStaffDropdown = ({ openModal, setType }) => {
         ref={btnDropdownRef}
         onClick={toggleDropdown}
       >
-<<<<<<< HEAD
         {/* <i className="fas fa-ellipsis-v"></i> */}
         <button
           className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 "
@@ -60,9 +59,6 @@ const ModifyStaffDropdown = ({ openModal, setType }) => {
         >
           More
             </button>
-=======
-        <i className="fas fa-ellipsis-v"></i>
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       </a>
       <div
         ref={popoverDropdownRef}

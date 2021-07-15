@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AppStateContext } from "../../context";
@@ -14,37 +13,15 @@ import StaffSideNav from "./StaffSideNav";
 import logo from '../../assets/img/logos/NewLogo.JPG'
 
 
-=======
-import React, { useState, useContext, } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { AppStateContext } from "../../context";
-import { useToasts } from 'react-toast-notifications'
-
-
-import UserDropdown from "../Dropdowns/UserDropdown.js";
-import CartDropdown from "../Dropdowns/CartDropdown.js";
-import AdminSideNav from './AdminSideNav'
-import StaffSideNav from './StaffSideNav'
-
-import logo from "../../assets/img/logo.png";
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
 const Sidebar = () => {
   const [collapseShow, setCollapseShow] = useState("hidden");
 
-<<<<<<< HEAD
   const { authService, cartService } = useContext(AppStateContext);
 
   const { currentUser } = authService;
 
   const { addToast } = useToasts();
-=======
-  const { authService, cartService } = useContext(AppStateContext)
-
-  const { currentUser } = authService;
-
-  const { addToast } = useToasts()
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   const history = useHistory();
 
@@ -53,28 +30,16 @@ const Sidebar = () => {
     authService.logoutUser(); // log user out
 
     addToast("Logout successful", {
-<<<<<<< HEAD
       appearance: "success",
       autoDismiss: true,
     });
     history.push("/login");
   };
-=======
-      appearance: 'success',
-      autoDismiss: true,
-    })
-    history.push('/login');
-  }
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   return (
     <>
       <nav className="md:left-0 md:block md:fixed fixed top-0 md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-gray-800 flex flex-wrap items-center justify-between md:w-64 w-full z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
-<<<<<<< HEAD
-=======
-
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
           {/* Toggler */}
           <button
             className="cursor-pointer text-white opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
@@ -85,10 +50,6 @@ const Sidebar = () => {
           </button>
 
           {/* Brand */}
-<<<<<<< HEAD
-
-=======
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
           {currentUser.role !== 'waiter' ? (<Link
             className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-0 px-0"
             to="/dashboard"
@@ -101,7 +62,6 @@ const Sidebar = () => {
             <img src={logo} style={{maxWidth: '98px', borderRadius: '50%'}} alt="" className='h-3 w-3 block mx-auto' />
           </Link>)}
 
-<<<<<<< HEAD
 
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
@@ -111,14 +71,6 @@ const Sidebar = () => {
               ) : (
                 <CartDropdown />
               )}
-=======
-          {/* User */}
-          <ul className="md:hidden items-center flex flex-wrap list-none">
-            <li className="inline-block relative">
-              {
-                currentUser.role !== 'waiter' ? (<UserDropdown />) : (<CartDropdown />)
-              }
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
             </li>
           </ul>
           {/* Collapse */}
@@ -132,7 +84,6 @@ const Sidebar = () => {
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-gray-300">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-<<<<<<< HEAD
                   {currentUser.role !== "waiter" ? (
                     <Link
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
@@ -148,19 +99,6 @@ const Sidebar = () => {
                       BigK Grills
                     </Link>
                   )}
-=======
-                  {currentUser.role !== 'waiter' ? (<Link
-                    className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-                    to="/dashboard"
-                  >
-                    BigK Grills
-                  </Link>) : (<Link
-                    className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-                    to="/dashboard/menu"
-                  >
-                    BigK Grills
-                  </Link>)}
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                 </div>
                 <div className="w-6/12 flex justify-end">
                   <button
@@ -181,7 +119,6 @@ const Sidebar = () => {
 
             {/* Navigation */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-<<<<<<< HEAD
               {currentUser.role !== "waiter" ? (
                 <AdminSideNav />
               ) : (
@@ -211,11 +148,6 @@ const Sidebar = () => {
                   </Link>
                 </li>
               )}
-=======
-              {
-                currentUser.role !== 'waiter' ? (<AdminSideNav />) : (<StaffSideNav />)
-              }
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
               {/* Divider */}
               <hr className="my-4 md:min-w-full" />
@@ -238,32 +170,16 @@ const Sidebar = () => {
                         : "text-white")
                     }
                   ></i>{" "}
-<<<<<<< HEAD
                   Profile
                 </Link>
-=======
-              Profile
-            </Link>
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
               </li>
 
               <li className="items-center">
                 <button
-<<<<<<< HEAD
                   className="text-xs uppercase py-3 font-bold block text-white hover:text-gray-600"
                   onClick={logout}
                 >
                   <i className="fas fa-sign-out-alt mr-2 text-sm text-white"></i>{" "}
-=======
-                  className=
-                  "text-xs uppercase py-3 font-bold block text-white hover:text-gray-600"
-                  onClick={logout}
-                >
-                  <i
-                    className=
-                    "fas fa-tools mr-2 text-sm text-white"
-                  ></i>{" "}
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                   Logout
                 </button>
               </li>
@@ -272,14 +188,7 @@ const Sidebar = () => {
         </div>
       </nav>
     </>
-<<<<<<< HEAD
   );
 };
 
 export default Sidebar;
-=======
-  )
-}
-
-export default Sidebar
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928

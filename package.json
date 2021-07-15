@@ -37,10 +37,7 @@
     "react-toast-notifications": "^2.4.4",
     "styled-components": "^5.3.0",
     "tailwindcss": "^1.9.6",
-<<<<<<< HEAD
     "uuid": "^8.3.2",
-=======
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -68,13 +65,8 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
     "autoprefixer": "^9.8.6",
     "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1"
-=======
-    "postcss": "^7.0.36",
-    "fsevents": "^2.3.2"
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   }
 }
