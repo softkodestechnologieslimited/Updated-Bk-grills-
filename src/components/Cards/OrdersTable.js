@@ -111,13 +111,8 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       &#8358;{order.total}
                     </td>
-<<<<<<< HEAD
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                       <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} deleted={deleted} />
-=======
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                      <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} />
->>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                     </td>
                   </tr>
                 ))
