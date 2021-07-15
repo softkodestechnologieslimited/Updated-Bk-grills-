@@ -1,7 +1,7 @@
 import React, { Suspense, useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { AppStateContext } from "../context";
-import { usePusherNotifications } from "notificationHook";
+import { usePusherNotifications } from "../notificationHook";
 
 // components
 import Spinner from "../components/spinner/Spinner";

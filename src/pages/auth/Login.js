@@ -7,8 +7,7 @@ import { useToasts } from "react-toast-notifications";
 // components
 import FullScreenLoader from "../../components/fullScreenLoader";
 
-// import logo from "../../assets/img/logo.png";
-import logo from '../../assets/img/logos/NewLogo.JPG'
+import logo from "../../assets/img/logo.png";
 import "./login.styles.scss";
 
 const Login = () => {
@@ -68,13 +67,29 @@ const Login = () => {
       {isLoading ? <FullScreenLoader /> : <></>}
       <div className="form-container">
         <div className="form-content">
-          <img src={logo} alt="logo" style={{maxWidth: '98px', borderRadius: '50%'}} className="form-logo mx-auto" />
-          <p>Log in to your account to continue.</p>
-
           <form onSubmit={handleSubmit} className="login-form">
+            <div className="form-logo">
+              <img src={logo} alt="logo" className="form-logo mx-auto" />
+              <p>Log in to your account to continue.</p>
+            </div>
+
             <div className="form-item">
               <label htmlFor="grid-password">Email</label>
-              <i className="fas fa-user"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-user"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
               <input
                 type="email"
                 name="email"
@@ -82,13 +97,27 @@ const Login = () => {
                 value={email}
                 onChange={handleChange}
                 required
-                style={{ transition: "all .15s ease" }}
+                // style={{ transition: "all .15s ease" }}
               />
             </div>
 
             <div className="form-item">
               <label htmlFor="grid-password">Password</label>
-              <i className="fas fa-lock"></i>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-lock"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>{" "}
               <input
                 type="password"
                 name="password"
@@ -96,7 +125,7 @@ const Login = () => {
                 value={password}
                 onChange={handleChange}
                 required
-                style={{ transition: "all .15s ease" }}
+                // style={{ transition: "all .15s ease" }}
               />
             </div>
 
@@ -104,9 +133,8 @@ const Login = () => {
 
             <div className="btn-wrapper">
               <button
-                className="login-btn"
+                className="btn login-btn"
                 type="submit"
-                style={{ transition: "all .15s ease" }}
               >
                 Login
               </button>

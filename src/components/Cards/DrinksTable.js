@@ -1,5 +1,5 @@
 import React from "react";
-import { formatter } from "utils";
+import { formatter } from "../../utils";
 
 // components
 

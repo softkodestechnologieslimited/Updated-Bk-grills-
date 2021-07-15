@@ -6,7 +6,7 @@ import { useToasts } from 'react-toast-notifications'
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
 import { observer } from "mobx-react-lite";
-import FullScreenLoader from "../../components/fullScreenLoader";
+import FullScreenLoader from "../fullScreenLoader";
 
 import cartSvg from "../../assets/img/emptycart.svg";
 

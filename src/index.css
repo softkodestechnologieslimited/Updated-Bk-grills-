@@ -2,17 +2,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* margin: 0; */
+  font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #12111b;
-  color: #fff;
+  background-color: #262328;
+  color: rgba(234, 234, 234, .6);
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -25,7 +26,7 @@ code {
     monospace;
 }
 
-.container {
+/* .container {
   max-width: 85vw;
   margin: auto;
   padding: 1rem;
@@ -35,29 +36,35 @@ code {
   .container {
     max-width: 90vw;
   }
-}
+} */
 
 ul {
-  list-style: none;
+  list-style-type: none;
 }
 
 a {
   text-decoration: none;
-  font-size: 15px;
+  /* font-size: 15px;
   font-weight: 500;
-  color: #fff;
+  color: #fff; */
 }
 
 .btn {
-  display: inline-block;
+  /*  display: inline-block;
   padding: 6px 12px;
   font-size: 14px;
-  font-weight: normal;
+ font-weight: normal; */
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  border-radius: 4px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  /* border-radius: 4px; */
+}
+
+.btn:focus {
+  outline: 0;
 }
 
 .table-row {

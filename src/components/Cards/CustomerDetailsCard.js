@@ -4,7 +4,7 @@ import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
 import { useToasts } from 'react-toast-notifications'
 
-import FullScreenLoader from "../../components/fullScreenLoader";
+import FullScreenLoader from "../fullScreenLoader";
 
 const CustomerDetailsCard = () => {
   const [itemDetails, setItemDetails] = useState({

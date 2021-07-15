@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { AppStateContext } from "../../context";
 
-import FullScreenLoader from "components/fullScreenLoader";
-import ModifyStaffDropdown from "components/Dropdowns/ModifyStaffDropdown";
-import StaffModal from "components/Modals/StaffModal";
+import FullScreenLoader from "../fullScreenLoader";
+import ModifyStaffDropdown from "../Dropdowns/ModifyStaffDropdown";
+import StaffModal from "../Modals/StaffModal";
 
 const StaffDetailsCard = () => {
   const [staffDetails, setStaffDetails] = useState({

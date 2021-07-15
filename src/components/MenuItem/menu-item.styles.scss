@@ -1,5 +1,6 @@
 .menu-item {
   margin: 0.5rem 0;
+  // height: 200px;
 }
 
 .menu-item-card {
@@ -16,7 +17,8 @@
 }
 
 .img-responsive {
-  height: 180px;
+  // height: 180px;
+  height: auto;
   width: 100%;
 
   // @media (max-width: 599px) {
@@ -47,9 +49,5 @@
     font-weight: 500;
     transition: 0.2s ease-out;
     text-transform: capitalize;
-
-    &:hover {
-      background-color: darken($color: #dc3432, $amount: 15);
-    }
   }
 }

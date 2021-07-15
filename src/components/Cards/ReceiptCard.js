@@ -5,11 +5,9 @@ import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
 import ReactToPrint from "react-to-print";
 import { format } from "date-fns";
-
 import FullScreenLoader from "../../components/fullScreenLoader";
-
-// import logo from "../../assets/img/logo.png";
 import logo from "../../assets/img/new-logo.jpeg";
+
 
 const ReceiptCard = () => {
   const [orderDetails, setOrderDetails] = useState({

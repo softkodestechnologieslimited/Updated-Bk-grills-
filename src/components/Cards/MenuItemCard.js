@@ -6,7 +6,7 @@ import { useToasts } from 'react-toast-notifications'
 import styled from "styled-components";
 import Fade from 'react-reveal/Fade';
 
-import FullScreenLoader from "../../components/fullScreenLoader";
+import FullScreenLoader from "../fullScreenLoader";
 
 const StockItemCard = () => {
   const [itemDetails, setItemDetails] = useState({

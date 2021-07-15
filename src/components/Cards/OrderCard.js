@@ -6,7 +6,7 @@ import { useToasts } from 'react-toast-notifications'
 import Fade from 'react-reveal/Fade';
 
 
-import FullScreenLoader from "../../components/fullScreenLoader";
+import FullScreenLoader from "../fullScreenLoader";
 
 const OrderCard = () => {
   const [orderDetails, setOrderDetails] = useState({ customer_name: "", meals: [], payment_method: "", payment_status: "", total: "", waiter_name: "", status: '' });
