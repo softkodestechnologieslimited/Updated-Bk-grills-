@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+
 import logo from '../../assets/img/logos/NewLogo.JPG'
+
 
 import "./header.styles.scss";
 

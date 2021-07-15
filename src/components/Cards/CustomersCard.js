@@ -6,18 +6,27 @@ import Fade from 'react-reveal/Fade';
 // components
 import CustomerDropdown from "../Dropdowns/CustomerDropdown.js";
 
-const CustomersCard = ({ customers, refresh }) => {
+const CustomersCard = ({ customers, refresh , deleted }) => {
   return (
     <>
       <Fade left>
 
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
           <div className="rounded-t mb-0 px-4 py-3 border-0">
-            <div className="flex flex-wrap items-center">
-              <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+            <div className="flex flex-wrap items-center py-2">
+              {
+                deleted ? (
+                   <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                <h3 className="font-semibold text-base text-gray-800">
+                  Deleted Customers
+                </h3>
+              </div>
+                ) : (
+                  <>
+                    <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                 <h3 className="font-semibold text-base text-gray-800">
                   Customers
-            </h3>
+                </h3>
               </div>
               <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                 <Link
@@ -26,8 +35,12 @@ const CustomersCard = ({ customers, refresh }) => {
                   to="/dashboard/addcustomer"
                 >
                   <i className="fas fa-plus mr-2"></i> New
-            </Link>
+                </Link>
               </div>
+                  </>
+                )
+              }
+              
             </div>
           </div>
           <div className="block w-full overflow-x-auto">
@@ -57,7 +70,7 @@ const CustomersCard = ({ customers, refresh }) => {
                             {customer.phoneNumber}
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                            <CustomerDropdown id={customer.id} refresh={refresh} />
+                            <CustomerDropdown id={customer.id} refresh={refresh} deleted={deleted}/>
                           </td>
                         </tr>
                       ))

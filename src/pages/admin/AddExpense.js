@@ -8,7 +8,6 @@ import { useToasts } from 'react-toast-notifications'
 import Fade from 'react-reveal/Fade';
 
 
-
 // components
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
@@ -21,7 +20,7 @@ const AddExpense = () => {
   const [itemDetails, setItemDetails] = useState({
     cost: "",
     description: "",
-    quantity: "",
+    // quantity: "",
     staff_id: "",
     staff_name: "",
   });
@@ -33,7 +32,7 @@ const AddExpense = () => {
   const { addToast } = useToasts()
 
 
-  const { description, cost, quantity, staff_id, staff_name } = itemDetails;
+  const { description, cost, staff_id, staff_name } = itemDetails;
 
   const date = moment(startDate).format("MMMM DD YYYY");
 
@@ -66,7 +65,7 @@ const AddExpense = () => {
 
       setIsLoading(true)
 
-      const response = await apiService.addExpense({ cost, description, date, quantity, staff_id, staff_name });
+      const response = await apiService.addExpense({ cost, description, date, staff_id, staff_name });
       const { data } = response.data;
 
       console.log(data)
@@ -126,15 +125,18 @@ const AddExpense = () => {
                     <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Description</span>
-                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Description" name='description' value={description}
+                        {/* <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Description" name='description' value={description}
                           onChange={handleChange}
-                          required />
+                          required /> */}
+                        <textarea className="form-input text-gray-700 mt-1 block w-full my-4 p-3" name="description" placeholder="Enter a brief description" rows="6" value={description}
+                          onChange={handleChange}
+                          required></textarea>
                       </label>
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block">
-                        <span className="text-gray-700">Cost</span>
-                        <input type="number" className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter cost" name="cost" value={cost} onChange={handleChange}
+                        <span className="text-gray-700">Total Cost</span>
+                        <input type="number" className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter Total Cost" name="cost" value={cost} onChange={handleChange}
                           required />
                       </label>
                     </div>
@@ -146,13 +148,13 @@ const AddExpense = () => {
                       <DatePicker selected={startDate} onChange={date => setStartDate(date)} className='text-gray-600 mt-2 p-3' required />
                     </div>
 
-                    <div className="relative w-full mb-3">
+                    {/* <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Quantity</span>
                         <input type='number' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter quantity" name="quantity" value={quantity} onChange={handleChange}
                         />
                       </label>
-                    </div>
+                    </div> */}
 
                     <small className="text-red-500 font-bold">
                       {error}

@@ -15,6 +15,10 @@
   max-height: 10rem;
 }
 
+.cart-text {
+  margin-left: 20px;
+}
+
 .modal-fixed {
   position: fixed;
   top: 0;
@@ -27,4 +31,10 @@
 
 .custom-btn:hover {
   background-color: #4299e1;
+}
+
+.form-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 }

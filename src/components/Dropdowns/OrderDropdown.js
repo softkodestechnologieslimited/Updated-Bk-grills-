@@ -1,13 +1,18 @@
-import React, { useState, createRef, useContext, useRef, useEffect } from "react";
+import React, {
+  useState,
+  createRef,
+  useContext,
+  useRef,
+  useEffect,
+} from "react";
 import { createPopper } from "@popperjs/core";
 import { Link } from "react-router-dom";
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
-import { useToasts } from 'react-toast-notifications'
-import Jump from 'react-reveal/Jump';
+import { useToasts } from "react-toast-notifications";
+import Jump from "react-reveal/Jump";
 
-
-const OrderDropdown = ({ id, refresh, orderStatus }) => {
+const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
   const node = useRef();
 
   // dropdown props
@@ -27,20 +32,20 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
 
   const { orderService, authService } = useContext(AppStateContext);
   const { currentUser } = authService;
-  const { addToast } = useToasts()
+  const { addToast } = useToasts();
 
   const toggleDropdown = (e) => {
     e.preventDefault();
     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-  }
+  };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (node.current.contains(e.target)) {
       // inside click
       return;
     }
     // outside click
-    closeDropdownPopover()
+    closeDropdownPopover();
   };
 
   useEffect(() => {
@@ -59,19 +64,39 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
       closeDropdownPopover();
       await orderService.deleteOrder(id);
       addToast("Order deleted successfully", {
-        appearance: 'success',
+        appearance: "success",
         autoDismiss: true,
-      })
+      });
 
       refresh(); // use this to refresh the Orders
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
-        appearance: 'error',
+        appearance: "error",
         autoDismiss: true,
-      })
+      });
     }
-  }
+  };
+
+  const undeleteItem = async () => {
+    try {
+      await apiService.unDeleteItem({ id, type: "order" });
+      closeDropdownPopover();
+      //  await customerService.undeleteCustomer(id);
+      addToast("order undeleted successfully", {
+        appearance: "success",
+        autoDismiss: true,
+      });
+
+      refresh(); // use this to refresh the customers
+    } catch (error) {
+      const message = apiService.getErrorMessage(error);
+      addToast(message, {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    }
+  };
 
   return (
     <div ref={node}>
@@ -81,7 +106,12 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
         ref={btnDropdownRef}
         onClick={toggleDropdown}
       >
-        <i className="fas fa-ellipsis-v"></i>
+        <button
+          className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 "
+          type="button"
+        >
+          More
+        </button>
       </a>
       <div
         ref={popoverDropdownRef}
@@ -90,52 +120,60 @@ const OrderDropdown = ({ id, refresh, orderStatus }) => {
           "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        <Jump>
-          <Link
-            to={`/dashboard/orders/${id}`}
-            className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 text-center"
-            }
-
-          >
-            <i className="fas fa-edit mr-2"></i>
-          Edit
-        </Link>
-        </Jump>
-        {
-          orderStatus === "completed" &&
-          <Jump>
-
-            <Link
-              to={`/dashboard/orders/print/${id}`}
+        {deleted ? (
+          <>
+            <button
+              onClick={undeleteItem}
               className={
-                "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 text-center"
+                "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
               }
-
             >
-              <i className="fas fa-print mr-2"></i>
-          Print
-        </Link>
-          </Jump>
-        }
-
-        {
-          currentUser.role !== 'waiter' && (
-            <Jump>
-              <button
-                onClick={deleteItem}
-                className={
-                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
-                }
-
-              >
-                <i className="fas fa-trash-alt mr-2"></i>
-              Delete
+              <i className="fas fa-trash-alt mr-2"></i>
+              Undo Delete
             </button>
+          </>
+        ) : (
+          <>
+            <Jump>
+              <Link
+                to={`/dashboard/orders/${id}`}
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 text-center"
+                }
+              >
+                <i className="fas fa-edit mr-2"></i>
+                Process Order
+              </Link>
             </Jump>
-          )
-        }
+            {orderStatus === "completed" && (
+              <Jump>
+                <Link
+                  to={`/dashboard/orders/print/${id}`}
+                  className={
+                    "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 text-center"
+                  }
+                >
+                  <i className="fas fa-print mr-2"></i>
+                  Print Receipt
+                </Link>
+              </Jump>
+            )}
 
+            {currentUser.role === "superAdmin" && (
+              <Jump>
+                <button
+                  onClick={deleteItem}
+                  className={
+                    "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
+                  }
+                >
+                  <i className="fas fa-trash-alt mr-2"></i>
+                  Delete
+                </button>
+              </Jump>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
