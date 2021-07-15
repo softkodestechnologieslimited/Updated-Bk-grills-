@@ -1,6 +1,7 @@
 import React, { useState, createRef, useRef, useEffect } from "react";
 import { createPopper } from "@popperjs/core";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import Jump from "react-reveal/Jump";
 import apiService from "../../context/apiService";
 import { useToasts } from "react-toast-notifications";
@@ -8,6 +9,12 @@ import { useToasts } from "react-toast-notifications";
 const StaffDropdown = ({ id, deleted }) => {
   const node = useRef();
   const { addToast } = useToasts();
+=======
+import Jump from 'react-reveal/Jump';
+
+const StaffDropdown = ({ id }) => {
+  const node = useRef();
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
@@ -26,14 +33,21 @@ const StaffDropdown = ({ id, deleted }) => {
   const toggleDropdown = (e) => {
     e.preventDefault();
     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
+<<<<<<< HEAD
   };
 
   const handleClick = (e) => {
+=======
+  }
+
+  const handleClick = e => {
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
     if (node.current.contains(e.target)) {
       // inside click
       return;
     }
     // outside click
+<<<<<<< HEAD
     closeDropdownPopover();
   };
 
@@ -55,6 +69,9 @@ const StaffDropdown = ({ id, deleted }) => {
         autoDismiss: true,
       });
     }
+=======
+    closeDropdownPopover()
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   };
 
   useEffect(() => {
@@ -75,6 +92,7 @@ const StaffDropdown = ({ id, deleted }) => {
         ref={btnDropdownRef}
         onClick={toggleDropdown}
       >
+<<<<<<< HEAD
         {/* <i className="fas fa-ellipsis-v"></i> */}
         <button
           className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 "
@@ -82,6 +100,9 @@ const StaffDropdown = ({ id, deleted }) => {
         >
           More
         </button>
+=======
+        <i className="fas fa-ellipsis-v"></i>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       </a>
       <div
         ref={popoverDropdownRef}
@@ -90,6 +111,7 @@ const StaffDropdown = ({ id, deleted }) => {
           "bg-white text-base z-50 text-center flex-col py-2 list-none rounded shadow-lg min-w-48"
         }
       >
+<<<<<<< HEAD
         {deleted ? (
           <Jump>
             <button
@@ -117,6 +139,20 @@ const StaffDropdown = ({ id, deleted }) => {
             </Jump>
           </>
         )}
+=======
+        <Jump>
+          <Link
+            to={`/dashboard/staff/${id}`}
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
+            }
+
+          >
+            <i className="fas fa-edit mr-4"></i>
+          Modify
+        </Link>
+        </Jump>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       </div>
     </div>
   );

@@ -15,10 +15,13 @@
   max-height: 10rem;
 }
 
+<<<<<<< HEAD
 .cart-text {
   margin-left: 20px;
 }
 
+=======
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 .modal-fixed {
   position: fixed;
   top: 0;
@@ -32,9 +35,12 @@
 .custom-btn:hover {
   background-color: #4299e1;
 }
+<<<<<<< HEAD
 
 .form-logo {
   width: 90px;
   height: 90px;
   border-radius: 50%;
 }
+=======
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928

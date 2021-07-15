@@ -1,8 +1,12 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 
 import logo from '../../assets/img/logos/NewLogo.JPG'
 
+=======
+import logo from "../../assets/img/logo.png";
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 import "./header.styles.scss";
 
 

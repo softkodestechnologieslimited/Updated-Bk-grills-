@@ -6,13 +6,18 @@ import {Fade} from 'react-reveal/Fade';
 // components
 import CustomerDropdown from "../Dropdowns/CustomerDropdown.js";
 
+<<<<<<< HEAD
 const CustomersCard = ({ customers, refresh , deleted }) => {
+=======
+const CustomersCard = ({ customers, refresh }) => {
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   return (
     <>
       <Fade left>
 
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
           <div className="rounded-t mb-0 px-4 py-3 border-0">
+<<<<<<< HEAD
             <div className="flex flex-wrap items-center py-2">
               {
                 deleted ? (
@@ -27,6 +32,13 @@ const CustomersCard = ({ customers, refresh , deleted }) => {
                 <h3 className="font-semibold text-base text-gray-800">
                   Customers
                 </h3>
+=======
+            <div className="flex flex-wrap items-center">
+              <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                <h3 className="font-semibold text-base text-gray-800">
+                  Customers
+            </h3>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
               </div>
               <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                 <Link
@@ -35,12 +47,17 @@ const CustomersCard = ({ customers, refresh , deleted }) => {
                   to="/dashboard/addcustomer"
                 >
                   <i className="fas fa-plus mr-2"></i> New
+<<<<<<< HEAD
                 </Link>
               </div>
                   </>
                 )
               }
               
+=======
+            </Link>
+              </div>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
             </div>
           </div>
           <div className="block w-full overflow-x-auto">
@@ -70,7 +87,11 @@ const CustomersCard = ({ customers, refresh , deleted }) => {
                             {customer.phoneNumber}
                           </td>
                           <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+<<<<<<< HEAD
                             <CustomerDropdown id={customer.id} refresh={refresh} deleted={deleted}/>
+=======
+                            <CustomerDropdown id={customer.id} refresh={refresh} />
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                           </td>
                         </tr>
                       ))

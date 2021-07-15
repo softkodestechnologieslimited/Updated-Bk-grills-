@@ -33,7 +33,11 @@ const ExpensesCard = ({ expenses }) => {
                       Item Description
                 </th>
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+<<<<<<< HEAD
                       Total Cost
+=======
+                      Cost
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                 </th>
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                       Date Purchased
@@ -41,9 +45,15 @@ const ExpensesCard = ({ expenses }) => {
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                       Staff Name
                 </th>
+<<<<<<< HEAD
                     {/* <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                       Quantity
                 </th> */}
+=======
+                    <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                      Quantity
+                </th>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                     <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                     </th>
                   </tr>
@@ -64,11 +74,19 @@ const ExpensesCard = ({ expenses }) => {
                         <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           {expense.staff_name}
                         </td>
+<<<<<<< HEAD
                         {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           {expense.quantity || <span className="font-bold text-xl">
                             -
                           </span>}
                         </td> */}
+=======
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                          {expense.quantity || <span className="font-bold text-xl">
+                            -
+                          </span>}
+                        </td>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           {/* <ExpensesDropdown /> */}
                         </td>

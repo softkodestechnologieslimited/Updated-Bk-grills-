@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {
   useState,
   createRef,
@@ -5,14 +6,25 @@ import React, {
   useRef,
   useEffect,
 } from "react";
+=======
+import React, { useState, createRef, useContext, useRef, useEffect } from "react";
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 import { createPopper } from "@popperjs/core";
 import { Link } from "react-router-dom";
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
+<<<<<<< HEAD
 import { useToasts } from "react-toast-notifications";
 import Jump from "react-reveal/Jump";
 
 const StockMenuDropdown = ({ id, refresh, deleted }) => {
+=======
+import { useToasts } from 'react-toast-notifications'
+import Jump from 'react-reveal/Jump';
+
+
+const StockMenuDropdown = ({ id, refresh }) => {
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   const node = useRef();
 
   // dropdown props
@@ -30,20 +42,35 @@ const StockMenuDropdown = ({ id, refresh, deleted }) => {
   };
 
   const { mealService } = useContext(AppStateContext);
+<<<<<<< HEAD
   const { addToast } = useToasts();
+=======
+  const { addToast } = useToasts()
+
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   const toggleDropdown = (e) => {
     e.preventDefault();
     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
+<<<<<<< HEAD
   };
 
   const handleClick = (e) => {
+=======
+  }
+
+  const handleClick = e => {
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
     if (node.current.contains(e.target)) {
       // inside click
       return;
     }
     // outside click
+<<<<<<< HEAD
     closeDropdownPopover();
+=======
+    closeDropdownPopover()
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   };
 
   useEffect(() => {
@@ -56,10 +83,15 @@ const StockMenuDropdown = ({ id, refresh, deleted }) => {
     // eslint-disable-next-line
   }, []);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   const deleteItem = async () => {
     try {
       await apiService.deleteMeal({ id });
       closeDropdownPopover();
+<<<<<<< HEAD
       await mealService.deleteMeal(id);
       addToast("Meal deleted successfully", {
         appearance: "success",
@@ -95,6 +127,25 @@ const StockMenuDropdown = ({ id, refresh, deleted }) => {
       });
     }
   };
+=======
+      await mealService.deleteMeal(id)
+      addToast("Meal deleted successfully", {
+        appearance: 'success',
+        autoDismiss: true,
+      })
+
+      refresh(); // use this to refresh the stocks
+
+    } catch (error) {
+      const message = apiService.getErrorMessage(error);
+      addToast(message, {
+        appearance: 'error',
+        autoDismiss: true,
+      })
+    }
+  }
+
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   return (
     <div ref={node}>
@@ -104,6 +155,7 @@ const StockMenuDropdown = ({ id, refresh, deleted }) => {
         ref={btnDropdownRef}
         onClick={toggleDropdown}
       >
+<<<<<<< HEAD
         {/* <i className="fas fa-ellipsis-v"></i> */}
         <button
           className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 "
@@ -111,6 +163,9 @@ const StockMenuDropdown = ({ id, refresh, deleted }) => {
         >
           More
         </button>
+=======
+        <i className="fas fa-ellipsis-v"></i>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       </a>
       <div
         ref={popoverDropdownRef}
@@ -119,6 +174,7 @@ const StockMenuDropdown = ({ id, refresh, deleted }) => {
           "bg-white text-base z-50 text-center flex-col py-2 list-none rounded shadow-lg min-w-48"
         }
       >
+<<<<<<< HEAD
         {deleted ? (
           <>
             <button
@@ -155,6 +211,30 @@ const StockMenuDropdown = ({ id, refresh, deleted }) => {
             </Jump>
           </>
         )}
+=======
+        <Jump>
+          <Link
+            to={`/dashboard/stock/${id}`}
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
+            }
+
+          >
+            <i className="fas fa-edit mr-4"></i>
+          Edit
+        </Link>
+          <button
+            onClick={deleteItem}
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
+            }
+
+          >
+            <i className="fas fa-trash-alt mr-2"></i>
+          Delete
+        </button>
+        </Jump>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {
   useState,
   createRef,
@@ -5,14 +6,25 @@ import React, {
   useRef,
   useEffect,
 } from "react";
+=======
+import React, { useState, createRef, useContext, useRef, useEffect } from "react";
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 import { createPopper } from "@popperjs/core";
 import { Link } from "react-router-dom";
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
+<<<<<<< HEAD
 import { useToasts } from "react-toast-notifications";
 import Jump from "react-reveal/Jump";
 
 const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
+=======
+import { useToasts } from 'react-toast-notifications'
+import Jump from 'react-reveal/Jump';
+
+
+const OrderDropdown = ({ id, refresh, orderStatus }) => {
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   const node = useRef();
 
   // dropdown props
@@ -32,20 +44,34 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
 
   const { orderService, authService } = useContext(AppStateContext);
   const { currentUser } = authService;
+<<<<<<< HEAD
   const { addToast } = useToasts();
+=======
+  const { addToast } = useToasts()
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   const toggleDropdown = (e) => {
     e.preventDefault();
     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
+<<<<<<< HEAD
   };
 
   const handleClick = (e) => {
+=======
+  }
+
+  const handleClick = e => {
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
     if (node.current.contains(e.target)) {
       // inside click
       return;
     }
     // outside click
+<<<<<<< HEAD
     closeDropdownPopover();
+=======
+    closeDropdownPopover()
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   };
 
   useEffect(() => {
@@ -64,14 +90,21 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
       closeDropdownPopover();
       await orderService.deleteOrder(id);
       addToast("Order deleted successfully", {
+<<<<<<< HEAD
         appearance: "success",
         autoDismiss: true,
       });
+=======
+        appearance: 'success',
+        autoDismiss: true,
+      })
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
       refresh(); // use this to refresh the Orders
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
+<<<<<<< HEAD
         appearance: "error",
         autoDismiss: true,
       });
@@ -97,6 +130,13 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
       });
     }
   };
+=======
+        appearance: 'error',
+        autoDismiss: true,
+      })
+    }
+  }
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
 
   return (
     <div ref={node}>
@@ -106,12 +146,16 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
         ref={btnDropdownRef}
         onClick={toggleDropdown}
       >
+<<<<<<< HEAD
         <button
           className="bg-blue-800 text-white active:bg-blue-600 custom-btn font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 "
           type="button"
         >
           More
         </button>
+=======
+        <i className="fas fa-ellipsis-v"></i>
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       </a>
       <div
         ref={popoverDropdownRef}
@@ -120,6 +164,7 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
           "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
+<<<<<<< HEAD
         {deleted ? (
           <>
             <button
@@ -174,6 +219,54 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
             )}
           </>
         )}
+=======
+        <Jump>
+          <Link
+            to={`/dashboard/orders/${id}`}
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 text-center"
+            }
+
+          >
+            <i className="fas fa-edit mr-2"></i>
+          Edit
+        </Link>
+        </Jump>
+        {
+          orderStatus === "completed" &&
+          <Jump>
+
+            <Link
+              to={`/dashboard/orders/print/${id}`}
+              className={
+                "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 text-center"
+              }
+
+            >
+              <i className="fas fa-print mr-2"></i>
+          Print
+        </Link>
+          </Jump>
+        }
+
+        {
+          currentUser.role !== 'waiter' && (
+            <Jump>
+              <button
+                onClick={deleteItem}
+                className={
+                  "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-red-500"
+                }
+
+              >
+                <i className="fas fa-trash-alt mr-2"></i>
+              Delete
+            </button>
+            </Jump>
+          )
+        }
+
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
       </div>
     </div>
   );

@@ -12,7 +12,11 @@ import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 
 const DrinksMenu = () => {
   const { mealService } = useContext(AppStateContext)
+<<<<<<< HEAD
   const drinks = mealService.meals.filter(meal => meal.category === 'drinks' && meal.inStock === true && meal.deleted !== true);
+=======
+  const drinks = mealService.meals.filter(meal => meal.category === 'drinks' && meal.inStock === true);
+>>>>>>> 24b52f90c601d2036fd49e3f6c8671e0b2458928
   const history = useHistory();
 
 
