@@ -35,14 +35,20 @@
     padding: 20px;
 
     .form-logo {
+      width: 100%;
       text-align: center;
+      margin-bottom: 40px;
+
+
+      .logo {
+        padding-bottom: 40px;
+      }
 
       p {
         font-weight: 700;
         color: #888ea8;
         font-size: 13px;
         padding-top: 10px;
-        padding-bottom: 40px;
       }
     }
 

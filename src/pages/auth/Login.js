@@ -69,7 +69,7 @@ const Login = () => {
         <div className="form-content">
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-logo">
-              <img src={logo} alt="logo" className="form-logo mx-auto" />
+              <img src={logo} alt="logo" className="logo mx-auto" />
               <p>Log in to your account to continue.</p>
             </div>
 
