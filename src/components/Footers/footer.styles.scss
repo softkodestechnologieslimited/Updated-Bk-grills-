@@ -137,19 +137,6 @@
               line-height: 1.5;
               padding-bottom: 40px;
             }
-
-            button {
-              border: 2px solid #c84646;
-              border-radius: 3px;
-              padding: 10px 40px;
-              transition: all 0.5s ease;
-              font-weight: 700;
-              color: #fff;
-              font-size: 14px;
-
-              &:hover {
-                border: 2px solid white;
-              }
             }
           }
         }
@@ -272,20 +259,7 @@
         padding-bottom: 20px;
       }
 
-      button {
-        padding: 10px 40px;
-        border: 2px solid #c84646;
-        border-radius: 3px;
-        text-transform: uppercase;
-        transition: all 0.5s ease;
-        font-size: 15px;
-        font-weight: 700;
-        color: #fff;
 
-        &:hover {
-          border: 2px solid white;
-        }
-      }
     }
 
     .f-contact {
@@ -564,5 +538,4 @@
         }
       }
     }
-  }
 }

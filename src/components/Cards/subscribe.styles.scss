@@ -4,7 +4,7 @@
   background: #262328;
   padding-bottom: 80px;
 
-  form {
+  .form-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -54,8 +54,8 @@
       padding-left: 50px;
 
       @media (max-width: 1024px) {
-          width: 100%;
-          padding-bottom: 40px;
+        width: 100%;
+        padding-bottom: 40px;
         padding-left: unset;
         text-align: center;
       }
@@ -68,7 +68,7 @@
         text-transform: uppercase;
 
         @media (max-width: 1024px) {
-            padding-top: 10px;
+          padding-top: 10px;
         }
       }
 
@@ -82,7 +82,7 @@
       }
     }
 
-    .form-actions {
+    form {
       display: flex;
       // flex-direction: column;
       width: 45%;
@@ -92,68 +92,49 @@
       align-items: center;
 
       @media (max-width: 1024px) {
-          margin: auto;
-          flex-direction: row;
-          width: 100%;
-          justify-content: space-around;
-          align-items: center;
+        margin: auto;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
       }
-      @media(max-width: 600px) {
-          flex-direction: column;
-          align-items: center;
+      @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
       }
 
       input {
-        outline: 0;
+        width: 60%;
         padding: 10px 20px;
-        background-color: transparent;
-        transition: all 0.5s ease;
-        border-radius: 3px;
         border: 2px solid rgba(255, 255, 255, 0.2);
-
-
-        @media(max-width: 1024px) {
-            width: 40%;
-        }
-
+        
         @media (max-width: 600px) {
-            width: 100%;
+          width: 100%;
+          margin-bottom: 20px;
         }
 
-        &::placeholder {
-            font-size: 14px;
-        }
+  
 
         &:focus {
           outline: 0;
-          border: 2px solid white;
+          border-color:white;
         }
       }
 
       button {
-          display: inline-block;
-        // width: 70%;
-        background-color: transparent;
-        border: 2px solid #c84646;
-        border-radius: 3px;
-        padding: 10px 40px;
-        transition: all 0.5s ease;
-        text-transform: uppercase;
-        text-align: center;
-        font-size: 14px;
-        font-weight: 700;
-        color: #fff;
+        width: 35%;
+    
 
         @media (max-width: 1024px) {
-            width: 35%;
+          // width: 35%;
         }
         @media (max-width: 600px) {
-            width: 90%;
+          width: 90%;
         }
 
-        &:hover {
-          border: 2px solid white;
-        }
+        // &:hover {
+        //   border: 2px solid white;
+        // }
       }
     }
   }

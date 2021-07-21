@@ -5,7 +5,7 @@ import Fade from 'react-reveal/Fade';
 import CardStats from "../Cards/CardStats.js";
 
 
-const HeaderStats = ({ staffCount, customersCount, ordersCount, salesTotal }) => {
+const HeaderStats = ({ staffCount, customersCount, ordersCount, salesTotal, subscribersCount }) => {
   return (
     <>
       {/* Header */}
@@ -40,12 +40,17 @@ const HeaderStats = ({ staffCount, customersCount, ordersCount, salesTotal }) =>
                   />
                 </div>
                 <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-                  <CardStats
+                <CardStats
                     statSubtitle="CUSTOMERS"
                     statTitle={customersCount}
                     statIconName="fas fa-users"
                     statIconColor="bg-pink-500"
-                  />
+                  /><CardStats
+                  statSubtitle="SUBSCRIBERS"
+                  statTitle={subscribersCount}
+                  statIconName="fas fa-users"
+                  statIconColor="bg-pink-500"
+                />
                 </div>
               </div>
             </Fade>

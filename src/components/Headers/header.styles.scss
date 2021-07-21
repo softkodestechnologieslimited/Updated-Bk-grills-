@@ -72,6 +72,7 @@
       &::after {
         position: absolute;
         content: "";
+        display: inline-block;
         width: 0%;
         height: 2px;
         background: #c84646;
@@ -155,7 +156,7 @@
       a {
         // font-size: 12px;
         font-weight: 550;
-        padding: 0.2rem;
+        padding-bottom: 10px;
       }
     }
 

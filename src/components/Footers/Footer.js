@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import Button from '../Button'
 import "./footer.styles.scss";
 
 const Footer = () => {
@@ -20,7 +22,7 @@ const Footer = () => {
                     </p>
 
                    <Link to="/gallery">
-                   <button className="btn"> view more</button>
+                   <Button className="btn-bordered"> view more</Button>
                    </Link>
                   </div>
                 </div>
@@ -80,7 +82,7 @@ const Footer = () => {
               </p>
 
               <Link to="/about">
-              <button className="btn">about us</button>
+              <Button className="btn-bordered">about us</Button>
               </Link>
             </div>
           </div>

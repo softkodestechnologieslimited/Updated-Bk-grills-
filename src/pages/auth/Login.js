@@ -3,6 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
+import Button from '../../components/Button'
+import Input from '../../components/Input'
 
 // components
 import FullScreenLoader from "../../components/fullScreenLoader";
@@ -90,7 +92,7 @@ const Login = () => {
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              <input
+              <Input
                 type="email"
                 name="email"
                 placeholder="e.g John@gmail.com"
@@ -118,13 +120,12 @@ const Login = () => {
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>{" "}
-              <input
+              <Input
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={password}
                 onChange={handleChange}
-                required
                 // style={{ transition: "all .15s ease" }}
               />
             </div>
@@ -132,12 +133,12 @@ const Login = () => {
             <small className="text-red-500 font-bold">{error}</small>
 
             <div className="btn-wrapper">
-              <button
+              <Button
                 className="btn login-btn"
                 type="submit"
               >
                 Login
-              </button>
+              </Button>
             </div>
 
             <div className="login-footer">

@@ -1,6 +1,8 @@
 import React, { CSSProperties } from "react";
-import HomepageCards from "../../components/Cards/HomepageCards"
-import Subscribe from "../../components/Cards/Subscribe"
+import HomepageCards from "../../components/Cards/HomepageCards";
+import Subscribe from "../../components/Cards/Subscribe";
+import Button from "../../components/Button";
+
 // import Search from "../../components/search/Search";
 // import MenuItem from "../../components/MenuItem/MenuItem";
 import { Link } from "react-router-dom";
@@ -21,21 +23,16 @@ const Homepage = () => {
     width: 30,
     height: 30,
     cursor: "pointer",
-    transition: 'all 1s ease',
-
+    transition: "all 1s ease",
   };
 
   // const [hover, setHover] = useState(false)
-
-
-
 
   // const toggleHover = () => {
   //   this.setState({hover: !this.state.hover})
   //   console.log('working')
   // }
-  // const [stylehover, setHover ] = useState(false) 
-
+  // const [stylehover, setHover ] = useState(false)
 
   return (
     <>
@@ -59,7 +56,7 @@ const Homepage = () => {
                 className="arrows prev"
                 onClick={onClickHandler}
                 title={label}
-                style={{ ...arrowStyles, left: 15, }}
+                style={{ ...arrowStyles, left: 15 }}
                 // width="24"
                 // height="24"
                 version="1.1"
@@ -70,8 +67,7 @@ const Homepage = () => {
                   className="shape"
                   fill="rgba(38, 35, 40, 0.6)"
                   points="16.4,3.5 15,2.1 6.5,10.6 5.1,12 6.5,13.4 15,21.9 16.4,20.5 7.9,12"
-                > 
-                </polygon>
+                ></polygon>
               </svg>
             )
           }
@@ -88,10 +84,9 @@ const Homepage = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
-
-                <style type='text/css'>
+                <style type="text/css">
                   {`.shape { animation: arr 3s ease 1s infinite; transition: all .5s ease; }`}
-                  {`.arrows:hover  .shape{ fill: white; transition: all .5s ease;}` }
+                  {`.arrows:hover  .shape{ fill: white; transition: all .5s ease;}`}
                   {`@keyframes arr {
                     from {fill: rgba(38, 35, 40, 0.6)}
                     to { fill: white;}
@@ -115,8 +110,11 @@ const Homepage = () => {
                 dining experience with for customers of all ages at affordable
                 prices.
               </p>
+
               <Link to="/menu">
-              <button className="btn header-btn"> VIEW MORE</button>
+                <Button className="btn-bordered btn-underline">
+                  view more
+                </Button>
               </Link>
             </div>
           </div>
@@ -129,7 +127,12 @@ const Homepage = () => {
                 dining experience with for customers of all ages at affordable
                 prices.
               </p>
-              <button className="btn header-btn"> VIEW MORE</button>
+              <Link to="/menu">
+                <Button className="btn-bordered btn-underline">
+                  {" "}
+                  view more
+                </Button>
+              </Link>{" "}
             </div>
           </div>
 
@@ -141,16 +144,21 @@ const Homepage = () => {
                 dining experience with for customers of all ages at affordable
                 prices.
               </p>
-              <button className="btn header-btn"> VIEW MORE</button>
+              <Link to="/menu">
+                <Button className="btn-bordered btn-underline">
+                  {" "}
+                  view more
+                </Button>
+              </Link>
             </div>
           </div>
         </Carousel>
         {/* <Search /> */}
       </div>
 
-        <HomepageCards />
+      <HomepageCards />
 
-        <Subscribe />
+      <Subscribe />
 
       <Footer />
     </>
