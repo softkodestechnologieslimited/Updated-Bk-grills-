@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { format } from 'date-fns'
-import {formatter} from "react-currency-formatter";
+// import {formatter} from "react-currency-formatter";
 
 const ExpensesCard = ({ expenses }) => {
   return (
