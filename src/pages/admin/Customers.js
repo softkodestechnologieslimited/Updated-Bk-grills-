@@ -5,7 +5,7 @@ import apiService from "../../context/apiService";
 import { useToasts } from "react-toast-notifications";
 
 // components
-import CustomersCard from "../../components/Cards/CustomersCard.js";
+import CustomersCard from "../../components/Cards/CustomersCard";
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FooterAdmin from "../../components/Footers/FooterAdmin.js";
@@ -18,7 +18,7 @@ const Customers = observer(() => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [deleted, setIsDeleted] = useState(false);
-  const [customers, setCustomers] = useState([]);
+  const [customers, setAllCustomers] = useState([]);
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [customersPerPage] = useState(10);
@@ -36,11 +36,11 @@ const Customers = observer(() => {
   }, []);
 
   const refreshCustomers = () => {
-    setCustomers(
-      customerService.allCustomers.filter(
-        (customer) => customer.deleted !== true
-      )
-    );
+    // setAllCustomers(
+    //   customerService.allCustomers.filter(
+    //     (customer) => customer.deleted !== true
+    //   )
+    // );
   };
 
   const getCustomers = async () => {
@@ -48,11 +48,10 @@ const Customers = observer(() => {
       setIsLoading(true);
       const response = await apiService.getCustomers();
       const { data } = response.data;
-      // console.log(data);
+      console.log(data);
       customerService.setCustomers([...data]);
 
       refreshCustomers();
-      // setCustomers([...data])
     } catch (error) {
       const message = apiService.getErrorMessage(error);
 
@@ -96,7 +95,7 @@ const Customers = observer(() => {
   const showDeleted = (e) => {
     if (e.target.checked) {
       setIsDeleted(true)
-      setCustomers(
+      setAllCustomers(
         customerService.allCustomers.filter(
           (customer) => customer.deleted === true
         )
@@ -145,7 +144,7 @@ const Customers = observer(() => {
               {currentCustomers.length !== 0 ? (
                 <CustomersCard
                   customers={currentCustomers}
-                  refresh={refreshCustomers}
+                  refresh={refreshCustomers()}
                   deleted={deleted}
                 />
               ) : (
