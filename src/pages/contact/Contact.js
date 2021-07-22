@@ -1,10 +1,32 @@
-import React from "react";
+import React,  {useState} from "react";
+// import {Link} from 'react-router-dom'
 import Footer from "../../components/Footers/Footer";
 import Header from "../../components/Headers/Header";
+import Button from "../../components/Button"
+import Input from '../../components/Input'
+
+// import Contactmap from "../../components/Contactmap"
+
+import GoogleMapReact from "google-map-react";
 
 import "./contact.styles.scss";
 
 const Contact = () => {
+
+  const [inputValue, setInputValue] = useState('')
+
+  const Contactmap = ({ text }) => <p>{text}</p>;
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('submitted contact');
+  }
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value)
+    console.log(inputValue);
+  }
+
   return (
     <>
       <Header active="contact" />
@@ -17,8 +39,12 @@ const Contact = () => {
             No. 8 Abaka St, end off lucky london street, osubi/ugolo. okpe L.G.A
             Delta State.
           </p>
+          <div className="map">
 
-          <div className="map">Map will be here!</div>
+         <GoogleMapReact>
+         <Contactmap text="MAP"></Contactmap>
+         </GoogleMapReact>
+          </div>
           <p>
             Do you have any questions? Do not hesitate to contact us, and we
             will try to accommodate you.
@@ -32,7 +58,7 @@ const Contact = () => {
                 Do you have any questions? Do not hesitate to contact us, and we
                 will try to accommodate you.
               </p> */}
-            <form className="contact-form">
+            <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-group group-a">
                 <div className="form-group-item">
                   <label htmlFor="fy_name">
@@ -43,12 +69,13 @@ const Contact = () => {
                     </abbr>
                   </label>
 
-                  <input
+                  <Input
                     type="text"
                     name="name"
                     className="contact-input"
                     placeholder="Name ..."
-                  ></input>
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group-item">
                   <label htmlFor="name">
@@ -59,12 +86,13 @@ const Contact = () => {
                     </abbr>
                   </label>
 
-                  <input
+                  <Input
                     type="email"
                     name="email"
                     className="contact-input"
                     placeholder="Email ..."
-                  ></input>
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group-item">
                   <label htmlFor="fy_name">
@@ -75,12 +103,13 @@ const Contact = () => {
                     </abbr>
                   </label>
 
-                  <input
+                  <Input
                     type="text"
                     name="phone"
                     className="contact-input"
                     placeholder="Phone ..."
-                  ></input>
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
               <div className="form-group group-b">
@@ -96,18 +125,19 @@ const Contact = () => {
                     name="message"
                     className="contact-textarea"
                     placeholder="Message ..."
+                    onChange={handleChange}
                   ></textarea>
                 </div>
               </div>
 
               <div className="btn-wrapper">
-                <button
-                  className="form-btn"
+                <Button
+                  className="btn-bordered form-btn"
                   type="submit"
                   style={{ transition: "all .15s ease" }}
                 >
                   Send
-                </button>
+                </Button>
               </div>
             </form>
           </div>
@@ -115,6 +145,7 @@ const Contact = () => {
       </div>
 
       <Footer />
+      
     </>
   );
 };

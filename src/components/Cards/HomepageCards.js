@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from '../Button'
 import "./homepagecards.styles.scss";
 
 const HomepageCards = () => {
@@ -15,8 +16,7 @@ const HomepageCards = () => {
               Take off the lid in the risk of mince it well, cook for 5 minutes
               and serve while hot.
             </p>
-
-            <button className="btn">view more</button>
+            <Button className="btn">view more</Button>
           </div>
         </div>
 
@@ -30,7 +30,7 @@ const HomepageCards = () => {
               and serve while hot.
             </p>
 
-            <button className="btn">view more</button>
+            <Button className="btn">view more</Button>
           </div>
         </div>
 
@@ -44,7 +44,7 @@ const HomepageCards = () => {
               and serve while hot.
             </p>
 
-            <button className="btn">view more</button>
+            <Button className="btn">view more</Button>
           </div>
         </div>
       </div>
@@ -162,12 +162,12 @@ const HomepageCards = () => {
               </div>
             </div>
 
-            <div className="btn lg-img-btns">
+            <div className="lg-img-btns">
               <Link to="/about">
-                <button>about</button>
+              <Button className="btn-bordered">about</Button>
               </Link>{" "}
               <Link to="/menu">
-                <button className="btn-pad">menu</button>
+                <Button className="btn-bordered btn-pad">menu</Button>
               </Link>
             </div>
           </div>

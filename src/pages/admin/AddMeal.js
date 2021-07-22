@@ -17,10 +17,8 @@ import { uploadImageToCloud } from "../../firebase";
 const AddItem = () => {
   const [itemDetails, setItemDetails] = useState({
     title: "",
-    description: "",
+    desc: "",
     category: "",
-    quantity: "",
-    price: "",
   });
   const [error, setError] = useState('');
   const [imageUrl, setImageUrl] = useState("")
@@ -29,14 +27,14 @@ const AddItem = () => {
   const history = useHistory();
   const { addToast } = useToasts()
 
-  const { title, description, category, price, quantity } = itemDetails;
+  const { title, desc} = itemDetails;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // further validations can be done on the input
-      if (!title || !category || !price || !description || !imageUrl) {
+      if (!title || !desc || !imageUrl) {
         addToast("Fill all fields please", {
           appearance: 'error',
           autoDismiss: true,
@@ -46,7 +44,7 @@ const AddItem = () => {
       }
       setIsLoading(true)
       const { imageLink, imageId } = await uploadImageToCloud(imageUrl);
-      const response = await apiService.createMeal({ title, description, category, price, quantity, image: imageLink, imageId });
+      const response = await apiService.createMeal({ title, desc, image: imageLink, imageId });
       const { data } = response.data;
 
       mealService.addMeal({ ...data }); // save meal item to the app state
@@ -124,8 +122,8 @@ const AddItem = () => {
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block">
-                        <span className="text-gray-700">Description</span>
-                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Description" name='description' value={description}
+                        <span className="text-gray-700">desc</span>
+                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="desc" name='desc' value={desc}
                           onChange={handleChange}
                           required />
                       </label>
@@ -137,7 +135,7 @@ const AddItem = () => {
                         <input type="file" accept="image/*" onChange={handleImageInput} className="form-input text-gray-700 mt-1 block w-full my-4 py-3" />
                       </label>
                     </div>
-                    <div className="relative w-full mb-3">
+                    {/* <div className="relative w-full mb-3">
                       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
                         <span className="text-gray-700">Select Category</span>
                         <select className="form-select block w-full my-4 p-3" onChange={handleChange} name='category' value={category} required>
@@ -157,15 +155,15 @@ const AddItem = () => {
                           onChange={handleChange}
                         />
                       </label>
-                    </div>
-                    <div className="relative w-full mb-3">
+                    </div> */}
+                    {/* <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Price</span>
                         <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Price" name='price' value={price}
                           onChange={handleChange}
                           required />
                       </label>
-                    </div>
+                    </div> */}
 
                     <small className="text-red-500 font-bold">
                       {error}
