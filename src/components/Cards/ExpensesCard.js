@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { format } from 'date-fns'
-import { formatter } from "react-currency-formatter";
+import {formatter} from "react-currency-formatter";
 
 const ExpensesCard = ({ expenses }) => {
   return (
@@ -56,7 +56,9 @@ const ExpensesCard = ({ expenses }) => {
                           <span className="font-bold">{expense.description}</span>
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          {formatter.format(expense.cost)}
+                          {expense.cost}
+                          {/* {formatter.format(expense.cost)} */}
+
                         </td>
                         <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           {format(new Date(expense.year, expense.month, expense.day), 'MM/dd/yyyy')}
