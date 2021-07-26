@@ -10,7 +10,10 @@ export class StaffService {
 
   getSingleStaff(staffId) {
     const staffIndex = this.allStaff.findIndex(staff => staff.id === staffId);
+    
+    console.log(this.allStaff[staffIndex])
     return this.allStaff[staffIndex]
+    
   }
 
   setStaff(staff) {

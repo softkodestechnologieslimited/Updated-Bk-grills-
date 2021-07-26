@@ -17,7 +17,7 @@ const CartMenu = observer(() => {
   const { mealService } = useContext(AppStateContext);
   const [meals, setMeals] = useState(
     mealService.meals.filter(
-      (meal) => meal.inStock === "true" && meal.deleted !== true
+      (meal) => meal.status === true
     )
   );
   const [isLoading, setIsLoading] = useState(false);
@@ -39,14 +39,14 @@ const CartMenu = observer(() => {
     try {
       setIsLoading(true);
       const response = await apiService.getMeals();
-      const { data } = response.data;
+      const { data } = response;
 
-      // console.log(data);
+      console.log(data);
 
-      const inStockMeals = data.filter(
-        (meal) => meal.inStock === "true" && meal.deleted !== true
-      );
-      setMeals(inStockMeals);
+      // const inStockMeals = data.filter(
+      //   (meal) => meal.status === true
+      // );
+      setMeals(data);
 
       mealService.setMeals([...data]);
     } catch (error) {
@@ -66,12 +66,12 @@ const CartMenu = observer(() => {
     }
 
     if (query && !category) {
-      return meal.title.toLowerCase().includes(query);
+      return meal.item.toLowerCase().includes(query);
     }
 
     if (query && category) {
       return (
-        meal.title.toLowerCase().includes(query) && meal.category === category
+        meal.item.toLowerCase().includes(query) && meal.category === category
       );
     }
 
@@ -84,6 +84,7 @@ const CartMenu = observer(() => {
     } else if (e.target.name === "category") {
       setCategory(e.target.value.toLowerCase());
     }
+    console.log(currentMeals, meals);
 
     setCurrentPage(1);
   };
@@ -123,7 +124,7 @@ const CartMenu = observer(() => {
                 <i className="fas fa-filter"></i> Filter by
               </label>
               <select
-                name="category"
+                name="category"f
                 onChange={onFilterChange}
                 className="form-select block w-6/12 placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3"
               >

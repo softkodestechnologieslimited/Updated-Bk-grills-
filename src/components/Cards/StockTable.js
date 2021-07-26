@@ -63,7 +63,7 @@ const StockTable = ({
                 <tr key={idx}>
                   <th className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                     <span className="font-bold text-gray-700">
-                      {meal.title}
+                      {meal.item}
                     </span>
                   </th>
                   <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
@@ -73,20 +73,20 @@ const StockTable = ({
                     <i
                       className={
                         "fas fa-circle mr-2 " +
-                        (meal.quantity >= threshold || meal.inStock
+                        (meal.status  !== true
                           ? "text-green-500"
                           : "text-yellow-500")
                       }
                     ></i>
 
-                    {meal.quantity >= threshold || meal.inStock
+                    {meal.status  !== true  
                       ? "Available"
                       : "low in Stock"}
                   </td>
-                  <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                    {meal.quantity || (
-                      <span className="font-bold text-xl">-</span>
-                    )}
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                    {/* {meal.quantity || ( */}
+                      <span className="">{meal.desc}</span>
+                    {/* )} */}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                     &#8358;{meal.price}

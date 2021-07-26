@@ -65,7 +65,7 @@ const AdminMenuItem = observer(({ meal }) => {
 
           <blockquote className="relative p-3">
             <div className="flex justify-between">
-              <h4 className="text-base text-gray-800 mb-2 text-capitalize">{meal.title}</h4>
+              <h4 className="text-base text-gray-800 mb-2 text-capitalize">{meal.item}</h4>
               <p className="text-base font-bold text-gray-800 mb-2">&#8358;{meal.price}</p>
             </div>
 

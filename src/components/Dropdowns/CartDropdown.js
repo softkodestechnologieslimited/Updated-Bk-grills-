@@ -33,7 +33,7 @@ const CartDropdown = observer(() => {
   const itemSummaryInCart = cartService.meals.map(meal => (
     <div className="my-4 text-gray-800" key={nanoid()}>
       <div className="cart-item-container mb-4 flex justify-between">
-        <span className="font-bold">{meal.title}</span>
+        <span className="font-bold">{meal.item}</span>
         <span className="price pl-3">
           {meal.quantity} x &#8358;{meal.price}
         </span>

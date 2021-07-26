@@ -11,14 +11,16 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 import FullScreenLoader from "../../components/fullScreenLoader";
+import Input from "components/Input"
 
 
 const AddStaff = () => {
   const emptyData = {
-    name: "",
+    first_name: "",
+    last_name: '',
     email: "",
     phone: "",
-    password: "",
+    address: "",
     role: "",
   }
 
@@ -30,14 +32,14 @@ const AddStaff = () => {
   const { addToast } = useToasts()
 
 
-  const { name, email, phone, password, role } = itemDetails;
+  const { first_name, last_name, email, phone, address, role } = itemDetails;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // further validations can be done on the input 
-      if (!name || !email || !phone || !password) {
+      if (!first_name || !last_name || !email || !phone || !address) {
         addToast("Fill all fields please", {
           appearance: 'error',
           autoDismiss: true,
@@ -48,10 +50,10 @@ const AddStaff = () => {
       // console.log('adding new staff');
       setIsLoading(true)
 
-      const response = await apiService.createUser({ name, email, phone, password, role });
-      const { data } = response.data;
+      const response = await apiService.addStaff({ first_name, last_name, email, phone, address, role });
+      // const { data } = response.data;
 
-      staffService.addStaff(data); // save staff to the app state
+      staffService.addStaff(response.data); // save staff to the app state
       addToast("Staff added successfully", {
         appearance: 'success',
         autoDismiss: true,
@@ -104,17 +106,23 @@ const AddStaff = () => {
 
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg bg-gray-300">
                   <form onSubmit={handleSubmit} className="flex-auto p-5 lg:p-10">
-                    <div className="relative w-full mb-3">
+                  <div className="relative w-full mb-3">
                       <label className="block">
-                        <span className="text-gray-700">Full Name</span>
-                        <input type='text' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter full name" name="name" value={name} onChange={handleChange}
+                        <span className="text-gray-700">First Name</span>
+                        <Input type='text' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter first name" name="first_name" value={first_name} onChange={handleChange}
+                          required />
+                      </label>
+                    </div>    <div className="relative w-full mb-3">
+                      <label className="block">
+                        <span className="text-gray-700">Last Name</span>
+                        <Input type='text' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter last name" name="last_name" value={last_name} onChange={handleChange}
                           required />
                       </label>
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Email</span>
-                        <input type="email" className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter email" name="email" value={email} onChange={handleChange}
+                        <Input type="email" className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter email" name="email" value={email} onChange={handleChange}
                           required />
                       </label>
                     </div>
@@ -128,8 +136,8 @@ const AddStaff = () => {
 
                     <div className="relative w-full mb-3">
                       <label className="block">
-                        <span className="text-gray-700">Password</span>
-                        <input type="password" className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter Password" value={password} name='password' onChange={handleChange}
+                        <span className="text-gray-700">Address</span>
+                        <Input type="text" className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Enter Password" value={address} name='address' onChange={handleChange}
                           required />
                       </label>
                     </div>
@@ -137,14 +145,14 @@ const AddStaff = () => {
                       <div className="mt-4">
                         <span className="text-gray-700">Role</span>
                         <div className="mt-2">
-                          <label className="block items-center">
-                            <input type="radio" className="form-radio" name="role" value="superAdmin" checked={role === "superAdmin"} onChange={handleChange} />
+                          {/* <label className="block items-center">
+                            <Input type="radio" className="form-radio" name="role" value="superAdmin" checked={role === "superAdmin"} onChange={handleChange} />
                             <span className="ml-2 text-gray-700">Super Admin</span>
-                          </label>
+                          </label> 
                           <label className="block items-center">
-                            <input type="radio" className="form-radio" name="role" value="admin" checked={role === "admin"} onChange={handleChange} />
+                            <input type="radio" className="form-radio" name="role"  value="admin" checked={role === "admin"} onChange={handleChange} />
                             <span className="ml-2 text-gray-700">Admin</span>
-                          </label>
+                          </label>*/}
                           <label className="block items-center">
                             <input type="radio" className="form-radio" name="role" value="waiter" checked={role === "waiter"} onChange={handleChange} />
                             <span className="ml-2 text-gray-700">Waiter</span>

@@ -9,6 +9,14 @@ const axiosInstance = axios.create({
   },
 });
 
+const axiosSecondInstance = axios.create({
+  baseURL: "https://rms.pythonanywhere.com/api",
+
+  headers: {
+    "Content-type": "application/json",
+  },
+});
+
 const addAuthorizedHeaders = () => {
   const token = sessionStorage.getItem(StorageKeys.TOKEN) || "";
 
@@ -23,6 +31,7 @@ const addAuthorizedHeaders = () => {
 
 export class ApiService {
   axios = axiosInstance;
+  axiosTwo = axiosSecondInstance;
 
   getErrorMessage(error) {
     // check for error message from server and return that
@@ -31,14 +40,22 @@ export class ApiService {
     return error.message;
   }
 
+  //USER NEW API
+
+  login = async (payload) => this.axiosTwo.post("/user/token/", payload);
+
+  getUsers = async () => this.axiosTwo.get("/staffs");
+
+  addStaff = async (payload) => this.axiosTwo.post("/staffs", payload);
+
   // USER
 
-  login = async (payload) => this.axios.post("/auth/login", payload);
+  // login = async (payload) => this.axios.post("/auth/login", payload);
 
-  getUsers = async () => this.axios.get("/users", addAuthorizedHeaders());
+  // getUsers = async () => this.axios.get("/users", addAuthorizedHeaders());
 
-  createUser = async (payload) =>
-    this.axios.post("/auth/create", payload, addAuthorizedHeaders());
+  // createUser = async (payload) =>
+  //   this.axios.post("/auth/create", payload, addAuthorizedHeaders());
 
   editUser = async (payload) =>
     this.axios.put("/users", payload, addAuthorizedHeaders()); // for editing profile details
@@ -47,9 +64,9 @@ export class ApiService {
     this.axios.post("/auth/change-password", payload, addAuthorizedHeaders());
 
   // ADMIN PRIVILEGES FOR OTHER USERS
-  
+
   unDeleteItem = async (payload) =>
-      this.axios.post("/auth/undelete", payload, addAuthorizedHeaders());
+    this.axios.post("/auth/undelete", payload, addAuthorizedHeaders());
 
   deleteUser = async (payload) =>
     this.axios.post("/users/delete", payload, addAuthorizedHeaders());
@@ -60,12 +77,21 @@ export class ApiService {
   modifyRole = async (payload) =>
     this.axios.post("/users/modify-role", payload, addAuthorizedHeaders());
 
+  //STOCK new api
+  getMeals = async () => this.axiosTwo.get("/items");
+
+  createMeal = async (payload) => this.axiosTwo.post('/items/', payload)
+
+  deleteMeal = async (payload) =>
+  this.axiosTwo.delete(`/items/${payload.id}`);
+
+
   // MEALS
 
-  getMeals = async () => this.axios.get("/meals", addAuthorizedHeaders());
+  // getMeals = async () => this.axios.get("/meals", addAuthorizedHeaders());
 
-  createMeal = async (payload) =>
-    this.axios.post("/meals", payload, addAuthorizedHeaders());
+  // createMeal = async (payload) =>
+  //   this.axios.post("/meals", payload, addAuthorizedHeaders());
 
   updateMeal = async (payload) =>
     this.axios.put("/meals", payload, addAuthorizedHeaders());
@@ -73,8 +99,20 @@ export class ApiService {
   getSingleMeal = async (payload) =>
     this.axios.get(`/meals/${payload.id}`, addAuthorizedHeaders());
 
-  deleteMeal = async (payload) =>
-    this.axios.delete(`/meals?id=${payload.id}`, addAuthorizedHeaders());
+  // deleteMeal = async (payload) =>
+  //   this.axios.delete(`/meals?id=${payload.id}`, addAuthorizedHeaders());
+
+  //MEALS ENDPOINTS FROM PYTHON API
+
+  getMealsPy = async () => this.axiosTwo.get("/menu");
+
+  //SUBSCRIBE
+
+  getSubscribers = async () => this.axiosTwo.get("/subscribe/");
+
+  addSubscriber = async (payload) => this.axiosTwo.post("/subscribe/", payload);
+
+  deleteSubscriber = async (payload) => this.axiosTwo.delete(``);
 
   // CUSTOMERS
 
@@ -100,12 +138,19 @@ export class ApiService {
       addAuthorizedHeaders()
     );
 
+    //ORDERS new api
+    getOrders = async () => this.axiosTwo.get("/orders")
+
+    createOrder = async (payload) =>
+    this.axiosTwo.post("/order/", payload);
+
+
   // ORDERS
 
-  getOrders = async () => this.axios.get("/orders", addAuthorizedHeaders());
+  // getOrders = async () => this.axios.get("/orders", addAuthorizedHeaders());
 
-  createOrder = async (payload) =>
-    this.axios.post("/orders", payload, addAuthorizedHeaders());
+  // createOrder = async (payload) =>
+  //   this.axios.post("/orders", payload, addAuthorizedHeaders());
 
   getSingleOrder = async (payload) =>
     this.axios.get(`/orders/${payload.id}`, addAuthorizedHeaders());
@@ -122,15 +167,21 @@ export class ApiService {
       ...addAuthorizedHeaders(),
     });
 
+  // EXPENSES new api
+
+  getExpenses = async () => this.axiosTwo.get("/expense");
+
+  addExpense = async (payload) => this.axiosTwo.post("/expense/", payload);
+
   //  EXPENSES
 
-  getExpenses = async () => this.axios.get("/expenses", addAuthorizedHeaders());
+  // getExpenses = async () => this.axios.get("/expenses", addAuthorizedHeaders());
 
-  getExpensesByDay = async (payload) =>
-    this.axios.get(`/expenses/date?date=${payload}`, addAuthorizedHeaders());
+  // getExpensesByDay = async (payload) =>
+  //   this.axios.get(`/expenses/date?date=${payload}`, addAuthorizedHeaders());
 
-  addExpense = async (payload) =>
-    this.axios.post("/expenses", payload, addAuthorizedHeaders());
+  // addExpense = async (payload) =>
+  //   this.axios.post("/expenses", payload, addAuthorizedHeaders());
 
   // LOGS
 

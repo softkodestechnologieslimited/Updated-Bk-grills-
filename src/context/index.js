@@ -6,6 +6,7 @@ import orderService from "./ordersService";
 import staffService from "./staffService";
 import customerService from "./customerService";
 import expenseService from "./expenseService";
+import subscriptionService from "./subscriptionSerivce"
 
 
 
@@ -16,7 +17,8 @@ const defaultStoreValues = {
   mealService,
   cartService,
   customerService,
-  expenseService
+  expenseService,
+  subscriptionService,
 }
 
 export const AppStateContext = createContext(defaultStoreValues);

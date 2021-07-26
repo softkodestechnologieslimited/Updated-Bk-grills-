@@ -40,11 +40,13 @@ const Expenses = observer(() => {
     try {
       setIsLoading(true);
       const response = await apiService.getExpenses();
-      const { data } = response.data;
+      const { data } = response;
+      console.log(data);
       expenseService.setExpenses([...data]);
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
+        
         appearance: 'error',
         autoDismiss: true,
       })

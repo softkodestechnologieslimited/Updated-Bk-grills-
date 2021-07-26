@@ -38,7 +38,7 @@ const Attendance = () => {
 
   const refreshStaff = () => {
     let newArray = []
-    newArray = staffService.allStaff.map(item=> ({...item, label: item.name, value: item.id, clockedIn: false}))
+    newArray = staffService.allStaff.map(item=> ({...item, label: item.first_name + item.last_name, value: item.id, clockedIn: false}))
     setStaff(newArray)
   }
  
@@ -55,7 +55,7 @@ const Attendance = () => {
     try {
       setIsLoading(true);
       const response = await apiService.getUsers();
-      const { data } = response.data;
+      const { data } = response;
       staffService.setStaff([...data]);
 
       refreshStaff()

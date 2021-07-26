@@ -35,6 +35,7 @@ import AddExpense from "../pages/admin/AddExpense.js";
 import Attendance from "pages/admin/Attendance";
 import SwimmingTickets from "pages/admin/SwimmingTickets";
 import TicketHistory from "pages/admin/TicketHistory";
+import Subscribers from "../pages/admin/Subscribers.js"
 
 
 const Admin = () => {
@@ -88,6 +89,8 @@ const Admin = () => {
           <Route exact path="/dashboard/attendance" component={Attendance} />
           <Route exact path="/dashboard/swimming-ticket" component={SwimmingTickets} />
           <Route exact path="/dashboard/swimming-ticket/history" component={TicketHistory} />
+
+          <Route exact path="/dashboard/subscribers" component={Subscribers} />
 
 
           <Route exact path="/dashboard/log" component={Log} />

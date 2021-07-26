@@ -89,14 +89,14 @@ const Sidebar = () => {
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
                       to="/dashboard"
                     >
-                      BigK Grills
+                      Chateau le roi
                     </Link>
                   ) : (
                     <Link
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
                       to="/dashboard/menu"
                     >
-                      BigK Grills
+                      Chateau le roi
                     </Link>
                   )}
                 </div>
@@ -151,7 +151,7 @@ const Sidebar = () => {
 
               {/* Divider */}
               <hr className="my-4 md:min-w-full" />
-
+{/* 
               <li className="items-center">
                 <Link
                   className={
@@ -172,7 +172,7 @@ const Sidebar = () => {
                   ></i>{" "}
                   Profile
                 </Link>
-              </li>
+              </li> */}
 
               <li className="items-center">
                 <button

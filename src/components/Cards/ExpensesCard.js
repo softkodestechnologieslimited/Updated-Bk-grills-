@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { format } from 'date-fns'
-import {formatter} from "react-currency-formatter";
+// import {formatter} from "react-currency-formatter";
 
 const ExpensesCard = ({ expenses }) => {
   return (
@@ -53,7 +53,7 @@ const ExpensesCard = ({ expenses }) => {
                     expenses.map((expense, idx) => (
                       <tr key={idx}>
                         <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          <span className="font-bold">{expense.description}</span>
+                          <span className="font-bold">{expense.item}</span>
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           {expense.cost}
@@ -61,10 +61,11 @@ const ExpensesCard = ({ expenses }) => {
 
                         </td>
                         <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          {format(new Date(expense.year, expense.month, expense.day), 'MM/dd/yyyy')}
+                          
+                          {format(new Date(expense.timestamp), 'mm-dd-yyyy')}{/* {format(new Date(expense.year, expense.month, expense.day), 'MM/dd/yyyy')} */}
                         </td>
                         <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          {expense.staff_name}
+                          {expense.staff}
                         </td>
                         {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           {expense.quantity || <span className="font-bold text-xl">

@@ -15,26 +15,29 @@ import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 
 
 const Dashboard = observer(() => {
-  const { staffService, orderService, customerService } = useContext(AppStateContext);
+  const { staffService, orderService, customerService, subscriptionService } = useContext(AppStateContext);
   const { addToast } = useToasts()
   const [staffCount, setStaffCount] = useState('');
   const [ordersCount, setOrdersCount] = useState('');
   const [customersCount, setCustomersCount] = useState('');
   const [salesTotal, setSalesTotal] = useState('');
+  const [subscribersCount,  setSubscribersCount] = useState('')
 
 
   useEffect(() => {
     getStaff();
     getCustomers();
     getOrders();
+    getSubscribers()
 
     // eslint-disable-next-line
-  }, [orderService.recentOrders, staffService.allStaff, customerService.allCustomers]);
+  }, []);
+  // orderService.recentOrders, subscriptionService.subscribers, staffService.allStaff, customerService.allCustomers
 
   const getStaff = async () => {
     try {
       const response = await apiService.getUsers();
-      const { data } = response.data;
+      const { data } = response;
       // console.log("staff", data.length)
       setStaffCount(data.length)
       staffService.setStaff([...data]);
@@ -46,7 +49,21 @@ const Dashboard = observer(() => {
       })
     }
   }
-
+  const getSubscribers = async () => {
+    try {
+      const response = await apiService.getSubscribers()
+      const { data } = response
+      // console.log(data);
+      setSubscribersCount(data.length)
+      subscriptionService.setSubscribers([...data])
+    } catch (error) {
+      const message = apiService.getErrorMessage(error)
+      addToast(message, {
+        appearance: 'error',
+        autoDismiss: true,
+      })
+    }
+  }
   const getCustomers = async () => {
     try {
       const response = await apiService.getCustomers();
@@ -80,13 +97,15 @@ const Dashboard = observer(() => {
     }
   }
 
+  
+
   return (
     <>
       <Sidebar />
       <div className="relative md:ml-64 bg-gray-900">
         <AdminNavbar />
         {/* Header */}
-        <HeaderStats staffCount={staffCount} customersCount={customersCount} ordersCount={ordersCount} salesTotal={formatter.format(salesTotal)} />
+        <HeaderStats staffCount={staffCount} subscribersCount={subscribersCount} customersCount={customersCount} ordersCount={ordersCount} salesTotal={formatter.format(salesTotal) } />
         <div className="px-4 md:px-10 mx-auto w-full h-90 -m-24">
           <div className="flex flex-wrap mt-4">
             <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">

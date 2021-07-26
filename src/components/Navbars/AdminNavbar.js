@@ -29,12 +29,12 @@ const AdminNavbar = () => {
           {/* User */}
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <div className='text-white mr-4 font-bold text-base text-capitalize'>
-              Hello {currentUser.name.split(' ')[0]}
+              Hello Admin
+              {/* Hello {currentUser.name.split(' ')[0]} */}
             </div>
             <UserDropdown />
-            {
-              currentUser.role !== 'waiter' ? (<></>) : (<CartDropdown />)
-            }
+           
+     <CartDropdown />
           </ul>
         </div>
       </nav>

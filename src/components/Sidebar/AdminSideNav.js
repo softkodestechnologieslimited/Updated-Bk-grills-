@@ -27,7 +27,7 @@ const AdminSideNav = () => {
             </Link>
       </li>
 
-      <li className="items-center">
+      {/* <li className="items-center">
         <Link
           className={
             "text-xs uppercase py-3 font-bold block " +
@@ -47,9 +47,9 @@ const AdminSideNav = () => {
           ></i>{" "}
               Menu
             </Link>
-      </li>
+      </li> */}
 
-      {/* <li className="items-center">
+      <li className="items-center">
         <Link
           className={
             "text-xs uppercase py-3 font-bold block " +
@@ -68,6 +68,50 @@ const AdminSideNav = () => {
             }
           ></i>{" "}
               Cart Menu
+            </Link>
+      </li>
+
+      {/* <li className="items-center">
+        <Link
+          className={
+            "text-xs uppercase py-3 font-bold block " +
+            (window.location.href.indexOf("/dashboard/orders") !== -1
+              ? "text-blue-500 hover:text-blue-600"
+              : "text-white hover:text-gray-600")
+          }
+          to="/dashboard/orders"
+        >
+          <i
+            className={
+              "fas fa-table mr-2 text-sm " +
+              (window.location.href.indexOf("/dashboard/orders") !== -1
+                ? "opacity-75"
+                : "text-gray-400")
+            }
+          ></i>{" "}
+              Orders
+            </Link>
+      </li> */}
+
+      {/* <li className="items-center">
+        <Link
+          className={
+            "text-xs uppercase py-3 font-bold block " +
+            (window.location.href.indexOf("/dashboard/customers") !== -1
+              ? "text-blue-500 hover:text-blue-600"
+              : "text-white hover:text-gray-600")
+          }
+          to="/dashboard/customers"
+        >
+          <i
+            className={
+              "fas fa-user-friends mr-2 text-sm " +
+              (window.location.href.indexOf("/dashboard/customers") !== -1
+                ? "opacity-75"
+                : "text-gray-400")
+            }
+          ></i>{" "}
+              Customers
             </Link>
       </li> */}
 
@@ -137,7 +181,7 @@ const AdminSideNav = () => {
             </Link>
       </li>
 
-      <li className="items-center">
+      {/* <li className="items-center">
         <Link
           className={
             "text-xs uppercase py-3 font-bold block " +
@@ -156,6 +200,28 @@ const AdminSideNav = () => {
             }
           ></i>{" "}
               Customers
+            </Link>
+      </li> */}
+
+      <li className="items-center">
+        <Link
+          className={
+            "text-xs uppercase py-3 font-bold block " +
+            (window.location.href.indexOf("/dashboard/subscribers") !== -1
+              ? "text-blue-500 hover:text-blue-600"
+              : "text-white hover:text-gray-600")
+          }
+          to="/dashboard/subscribers"
+        >
+          <i
+            className={
+              "fas fa-user-friends mr-2 text-sm " +
+              (window.location.href.indexOf("/dashboard/subscribers") !== -1
+                ? "opacity-75"
+                : "text-gray-400")
+            }
+          ></i>{" "}
+              Subscribers
             </Link>
       </li>
       <li className="items-center">

@@ -16,25 +16,28 @@ import { uploadImageToCloud } from "../../firebase";
 
 const AddItem = () => {
   const [itemDetails, setItemDetails] = useState({
-    title: "",
+    item: "",
     desc: "",
     category: "",
+    price: '',
+    // status: false,
   });
   const [error, setError] = useState('');
-  const [imageUrl, setImageUrl] = useState("")
+  const [status, setStatus] = useState(false)
+  const [imageUrl, setImageUrl] = useState(null)
   const [isLoading, setIsLoading] = useState(false);
   const { mealService } = useContext(AppStateContext)
   const history = useHistory();
   const { addToast } = useToasts()
 
-  const { title, desc} = itemDetails;
+  const { item, desc, category, price} = itemDetails;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // further validations can be done on the input
-      if (!title || !desc || !imageUrl) {
+      // further validations can be done on the input 
+      if (!item || !desc || !category || !price || !imageUrl) {
         addToast("Fill all fields please", {
           appearance: 'error',
           autoDismiss: true,
@@ -43,8 +46,8 @@ const AddItem = () => {
         return
       }
       setIsLoading(true)
-      const { imageLink, imageId } = await uploadImageToCloud(imageUrl);
-      const response = await apiService.createMeal({ title, desc, image: imageLink, imageId });
+      // const { imageLink, imageId } = await uploadImageToCloud(imageUrl);
+      const response = await apiService.createMeal({ item, desc, category, price, status, imageUrl });
       const { data } = response.data;
 
       mealService.addMeal({ ...data }); // save meal item to the app state
@@ -71,6 +74,7 @@ const AddItem = () => {
 
   const handleChange = (e) => {
     const { value, name } = e.target;
+    console.log(e.target.value);
 
     setItemDetails({ ...itemDetails, [name]: value });
   };
@@ -103,7 +107,7 @@ const AddItem = () => {
                     <Link
                       className="bg-blue-800 custom-btn text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ml-3 ease-linear transition-all duration-150"
                       type="button"
-                      to='/dashboard/menu'
+                      to='/dashboard/stock'
                     >
                       Back
                    </Link>
@@ -114,16 +118,31 @@ const AddItem = () => {
                   <form onSubmit={handleSubmit} className="flex-auto p-5 lg:p-10">
                     <div className="relative w-full mb-3">
                       <label className="block">
-                        <span className="text-gray-700">Title</span>
-                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Title" name='title' value={title}
+                        <span className="text-gray-700">Item</span>
+                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Title" name='item' value={item}
                           onChange={handleChange}
                           required />
                       </label>
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block">
-                        <span className="text-gray-700">desc</span>
-                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="desc" name='desc' value={desc}
+                        <span className="text-gray-700">Quantity</span>
+                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="quantity" name='desc' value={desc}
+                          onChange={handleChange}
+                          required />
+                      </label>
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label className="block">
+                        <span className="text-gray-700">Category</span>
+                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="category" name='category' value={category}
+                          onChange={handleChange}
+                          required />
+                      </label>
+                    </div> <div className="relative w-full mb-3">
+                      <label className="block">
+                        <span className="text-gray-700">Price</span>
+                        <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="price" name='price' value={price}
                           onChange={handleChange}
                           required />
                       </label>

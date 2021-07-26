@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 export class MealService {
   meals = [];
+  mealsPy = []
 
   constructor() {
     makeAutoObservable(this);
@@ -14,6 +15,10 @@ export class MealService {
 
   setMeals(meals) {
     this.meals = [...meals];
+  }
+
+  setMealsPy(meals) {
+    this.mealsPy= [...meals]
   }
 
   addMeal(mealDetails) {

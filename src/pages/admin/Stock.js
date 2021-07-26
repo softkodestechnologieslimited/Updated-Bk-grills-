@@ -4,6 +4,7 @@ import { AppStateContext } from "../../context";
 import apiService from "../../context/apiService";
 import { useToasts } from "react-toast-notifications";
 import Fade from "react-reveal/Fade";
+import { Link } from 'react-router-dom'
 
 // components
 import StockTable from "../../components/Cards/StockTable.js";
@@ -51,8 +52,8 @@ const Stock = observer(() => {
     try {
       setIsLoading(true);
       const response = await apiService.getMeals();
-      const { data } = response.data;
-      // console.log(data);
+      const { data } = response;
+      console.log(data);
       mealService.setMeals([...data]);
       // setStock([...data])
       refreshStock();
@@ -226,6 +227,14 @@ const Stock = observer(() => {
               )}
             </div>
           </div>
+
+          <Link
+                className=" justify-self-end bg-blue-800 custom-btn text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                to="/dashboard/addmeal"
+              >
+                <i className="fas fa-plus mr-2"></i> New
+              </Link>
 
           <div className="flex flex-wrap mt-4">
             <div className="w-full xl:w-8/12 mx-auto mb-12 px-4">

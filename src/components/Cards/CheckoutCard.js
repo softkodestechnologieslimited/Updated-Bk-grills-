@@ -14,8 +14,8 @@ const CheckoutCard = observer(() => {
   const { cartService, authService } = useContext(AppStateContext);
   const [orderDetails, setOrderDetails] = useState(cartService.currentOrder);
   const [isLoading, setIsLoading] = useState(false);
-  const [query, setQuery] = useState("");
-  const [customers, setCustomers] = useState([]);
+  // const [query, setQuery] = useState("");
+  // const [customers, setCustomers] = useState([]);
   const history = useHistory();
   const { addToast } = useToasts();
 
@@ -26,13 +26,15 @@ const CheckoutCard = observer(() => {
     setOrderDetails(cartService.currentOrder); // reset the order details after setting waiter details
   };
 
+  const { meals, status: payment_status, payment_method, waiter_name, waiter_id } = orderDetails;
+
   // get customers when component mounts
-  const getCustomers = async () => {
+  const createOrder = async () => {
     try {
-      const response = await apiService.getCustomers();
+      const response = await apiService.createOrder(orderDetails);
       const { data } = response.data;
-      // console.log(data)
-      setCustomers(data)
+      console.log(data)
+      // setCustomers(data)
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
@@ -45,7 +47,8 @@ const CheckoutCard = observer(() => {
   useEffect(() => {
     setWaiter();
 
-    getCustomers()
+    console.log(cartService.meals);
+    // createOrder()
 
     // eslint-disable-next-line
   }, [])
@@ -55,11 +58,13 @@ const CheckoutCard = observer(() => {
     cartService.deleteItem(id);
   }
 
+  const {data, item} = cartService.meals
+
   // cart items
   const items = cartService.meals.map(meal => (
     <tr key={nanoid()}>
       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-        {meal.title}
+        {meal.item}
       </th>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
         &#8358; {meal.quantity * meal.price}
@@ -73,7 +78,7 @@ const CheckoutCard = observer(() => {
     </tr>
   ))
 
-  const { customer_name, customer_phone, meals, payment_status, payment_method, waiter_name, waiter_id } = orderDetails;
+  
 
   // on change function
   const handleChange = (e) => {
@@ -93,33 +98,33 @@ const CheckoutCard = observer(() => {
   }
 
   // search result
-  let customersFilter = [];
+  // let customersFilter = [];
 
-  let filteredCustomer;
+  // let filteredCustomer;
 
-  const setSearchResult = () => {
-    if (customersFilter.length) {
-      filteredCustomer = customersFilter[0];
-    }
+  // const setSearchResult = () => {
+  //   if (customersFilter.length) {
+  //     filteredCustomer = customersFilter[0];
+  //   }
 
-    if (filteredCustomer) {
-      console.log(filteredCustomer)
-      setOrderDetails({ ...orderDetails, customer_name: filteredCustomer.fullName, customer_phone: filteredCustomer.phoneNumber });
-    }
-  }
+  //   if (filteredCustomer) {
+  //     console.log(filteredCustomer)
+  //     setOrderDetails({ ...orderDetails, customer_name: filteredCustomer.fullName, customer_phone: filteredCustomer.phoneNumber });
+  //   }
+  // }
 
 
   // search filter
-  const onFilterChange = (e) => {
-    if (e.target.name === "search") {
-      setQuery(e.target.value)
-    }
+  // const onFilterChange = (e) => {
+  //   if (e.target.name === "search") {
+  //     setQuery(e.target.value)
+  //   }
 
-    customersFilter = customers.filter((customer) => customer.phoneNumber === e.target.value)
+  //   customersFilter = customers.filter((customer) => customer.phoneNumber === e.target.value)
 
-    setSearchResult(customersFilter)
+  //   setSearchResult(customersFilter)
 
-  }
+  // }
 
 
   // handle submit function
@@ -128,13 +133,13 @@ const CheckoutCard = observer(() => {
 
     try {
       // further validations can be done on the input 
-      if (!customer_name) {
-        addToast("Add a Customer name", {
-          appearance: 'error',
-          autoDismiss: true,
-        })
-        return
-      }
+      // if (!customer_name) {
+      //   addToast("Add a Customer name", {
+      //     appearance: 'error',
+      //     autoDismiss: true,
+      //   })
+      //   return
+      // }
 
       if (payment_status === 'complete' && !payment_method) {
         addToast("Select Payment Method!", {
@@ -145,7 +150,7 @@ const CheckoutCard = observer(() => {
       }
 
       setIsLoading(true)
-      await apiService.createOrder({ customer_name, meals, payment_status, payment_method, waiter_name, waiter_id });
+      await apiService.createOrder({ meals, payment_status, payment_method, waiter_name, waiter_id });
       // const { data } = response.data;
       // console.log(data)
       await cartService.resetCart();
@@ -224,7 +229,7 @@ const CheckoutCard = observer(() => {
                 <hr className="mt-6 border-b-1 border-gray-400" />
 
                 <div className='w-full flex flex-wrap my-6'>
-                  <div className='w-full lg:w-8/12 flex flex-col'>
+                  {/* <div className='w-full lg:w-8/12 flex flex-col'>
                     <input
                       type="text"
                       name="search"
@@ -241,7 +246,7 @@ const CheckoutCard = observer(() => {
                       )
                     }
 
-                  </div>
+                  </div> */}
 
                   <label className="flex items-center justify-end lg:w-4/12 text-gray-800">
                     <input type="checkbox" className="form-checkbox text-green-500" defaultChecked={payment_status === "complete"} onChange={togglePaymentStatus} />
@@ -251,7 +256,7 @@ const CheckoutCard = observer(() => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="flex flex-wrap mt-3 mb-6">
-                  {
+                 {/*  {
                     customersFilter.length && (
                       <>
                         <div className="w-full lg:w-6/12 px-4">
@@ -270,7 +275,7 @@ const CheckoutCard = observer(() => {
                               disabled
                             />
                           </div>
-                        </div>
+                        </div> 
                         <div className="w-full lg:w-6/12 px-4">
                           <div className="relative w-full mb-3">
                             <label
@@ -295,7 +300,7 @@ const CheckoutCard = observer(() => {
                   }
 
 
-                  {/* <div className="w-full lg:w-6/12 px-4">
+                 <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
                         className="block uppercase text-gray-700 text-xs font-bold mb-2"

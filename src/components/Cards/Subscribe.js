@@ -1,11 +1,55 @@
-import React from "react";
-
+import React, { useState, useContext, useEffect } from "react";
+import apiService from "../../context/apiService";
+import { useToasts } from "react-toast-notifications";
+import Button from "../Button";
+import Input from "../../components/Input";
 import "./subscribe.styles.scss";
 
 const Subscribe = () => {
+  const {addToast} = useToasts();
+  const [inputValue, setInputValue] = useState("");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    try {
+      if (!inputValue) {
+        addToast("Please enter a valid email address", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+        return;
+      }
+      const response = apiService.addSubscriber(inputValue)
+      console.log(response.data);
+      addToast("Subscribed", {
+        appearance: 'success',
+        autoDismiss: true,
+      })
+
+    } catch (error) {
+      console.log(error);
+      const message = apiService.getErrorMessage(error);
+      addToast(message, {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    }
+  };
+  useEffect(() => {
+    setInputValue(inputValue);
+  }, [inputValue]);
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setInputValue({ ...inputValue, [name]: value });
+    // console.log(inputValue);
+  };
+
   return (
     <div className="sub-wrapper">
-      <form>
+      <div className="form-wrapper">
         <span>
           <svg
             class="icon"
@@ -35,12 +79,18 @@ const Subscribe = () => {
           <i>No spam, ever. That's a promise.</i>
         </div>
 
-        <div className="btn input form-actions">
-          <input type="text" required placeholder="Your email address"></input>
+        <form onSubmit={handleSubmit} className="form-actions">
+          <Input
+            type="email"
+            name="email"
+            value={inputValue}
+            placeholder="Your email address"
+            onChange={handleChange}
+          ></Input>
 
-          <button>subscribe</button>
-        </div>
-      </form>
+          <Button className="btn-bordered">subscribe</Button>
+        </form>
+      </div>
     </div>
   );
 };

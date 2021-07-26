@@ -55,7 +55,7 @@ function AttendanceCard(props) {
                                 <span className="font-bold">{idx + 1}</span>
                               </td>
                               <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                                {staffs.name}
+                                {staffs.first_name} {staffs.last_name}
                               </td>
                               <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                                 {formatDate(Date.now())}

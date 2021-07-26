@@ -3,8 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
-import Button from '../../components/Button'
-import Input from '../../components/Input'
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 // components
 import FullScreenLoader from "../../components/fullScreenLoader";
@@ -35,18 +35,22 @@ const Login = () => {
       if (!email || !password) return; // further validations can be done on the input
       setIsLoading(true);
       const response = await apiService.login({ email, password });
-      const { data } = response.data;
-      authService.loginUser(data); // save user to the app state and to session storage using the authservice
+      // const { data } = response.data;
+      authService.loginUser(response.data); // save user to the app state and to session storage using the authservice
       addToast("Login Successful", {
         appearance: "success",
         autoDismiss: true,
       });
+      // console.log(response.data);
 
-      if (data.role !== "waiter") {
-        history.push("/dashboard"); // Redirect to dashboard on successful login
-      } else {
-        history.push("/dashboard/cartmenu");
-      }
+      // if (data.role !== "waiter") {
+      //   history.push("/dashboard"); // Redirect to dashboard on successful login
+      // } else {
+      //   history.push("/dashboard/cartmenu");
+      // }
+      // if (response.status === 200) {
+        history.push("/dashboard")
+      // }
     } catch (error) {
       const message = apiService.getErrorMessage(error); // the getErrorMessage is a helper function to get the exact messages from the server
       setError(message);
@@ -133,10 +137,7 @@ const Login = () => {
             <small className="text-red-500 font-bold">{error}</small>
 
             <div className="btn-wrapper">
-              <Button
-                className="btn login-btn"
-                type="submit"
-              >
+              <Button className="btn login-btn" type="submit">
                 Login
               </Button>
             </div>

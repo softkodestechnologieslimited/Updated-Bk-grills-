@@ -26,7 +26,7 @@ const Menu = () => {
     try {
       const response = await apiService.getMeals();
       const { data } = response.data;
-      // console.log(data);
+      console.log(response.data);
       // mealService.setMeals(data);
       mealService.setMeals([...data]);
     } catch (error) {

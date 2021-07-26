@@ -7,11 +7,8 @@ class CartService {
   meals = [];
   waiter_id = "";
   waiter_name = "";
-  customer_name = "";
-  customer_phone = "";
-  customer_id = "";
   payment_method = "";
-  payment_status = "pending";
+  status = "pending";
 
   constructor() {
     makeAutoObservable(this);
@@ -43,13 +40,10 @@ class CartService {
   get currentOrder() { // use this to get the current cart state like so cartService.currentOrder
     return {
       meals: [...this.meals],
-      customer_name: this.customer_name,
-      customer_phone: this.customer_phone,
-      customer_id: this.customer_id,
       waiter_id: this.waiter_id,
       waiter_name: this.waiter_name,
       payment_method: this.payment_method,
-      payment_status: this.payment_status
+      status: this.status
     }
   }
 
@@ -64,11 +58,11 @@ class CartService {
     this.meals = [];
     this.waiter_id = "";
     this.waiter_name = "";
-    this.customer_id = "";
-    this.customer_name = "";
-    this.customer_phone = "";
+    // this.customer_id = "";
+    // this.customer_name = "";
+    // this.customer_phone = "";
     this.payment_method = "";
-    this.payment_status = "pending";
+    this.status = "pending";
 
     this.saveLocalCartState();
   }
@@ -119,14 +113,14 @@ class CartService {
     this.saveLocalCartState();
   }
 
-  addCustomerDetails({ name, phone, id }) {
-    if (!name) return;
+  // addCustomerDetails({ name, phone, id }) {
+  //   if (!name) return;
 
-    this.customer_name = name;
-    this.customer_phone = phone;
-    this.customer_id = id;
-    this.saveLocalCartState();
-  }
+  //   this.customer_name = name;
+  //   this.customer_phone = phone;
+  //   this.customer_id = id;
+  //   this.saveLocalCartState();
+  // }
 
   setWaiter(id, name) {
     this.waiter_name = name;
