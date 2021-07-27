@@ -40,12 +40,12 @@ const HeaderStats = ({ staffCount, customersCount, ordersCount, salesTotal, subs
                   />
                 </div>
                 <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-                <CardStats
+                {/* <CardStats
                     statSubtitle="CUSTOMERS"
                     statTitle={customersCount}
                     statIconName="fas fa-users"
                     statIconColor="bg-pink-500"
-                  /><CardStats
+                  />*/}<CardStats 
                   statSubtitle="SUBSCRIBERS"
                   statTitle={subscribersCount}
                   statIconName="fas fa-users"
