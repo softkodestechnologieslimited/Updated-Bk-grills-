@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { AppStateContext } from "../../context";
+import apiService from "../../context/apiService";
+import Input from "../Input";
+import { useToasts } from "react-toast-notifications";
 
 import FullScreenLoader from "../fullScreenLoader";
 import ModifyStaffDropdown from "../Dropdowns/ModifyStaffDropdown";
@@ -19,9 +22,9 @@ const StaffDetailsCard = () => {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("");
-
-  const params = useParams();
+  const { addToast } = useToasts();
   const history = useHistory();
+  const params = useParams();
   const { id } = params;
 
   const { staffService } = useContext(AppStateContext);
@@ -30,9 +33,9 @@ const StaffDetailsCard = () => {
     if (!staffService.allStaff.length) {
       return history.push("/dashboard/staff");
     }
-    const staff = await staffService.getSingleStaff(id);
-    console.log(staff);
-    setStaffDetails(staff);
+    const staff = await apiService.getSingleStaff(id);
+    // console.log(staff);
+    setStaffDetails(staff.data);
   };
 
   useEffect(() => {
@@ -46,12 +49,35 @@ const StaffDetailsCard = () => {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
+    // setStaffDetails({
+    //   [name]: value,
+    // });
     setStaffDetails((prevDetails) => {
       return {
         ...prevDetails,
         [name]: value,
       };
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await apiService.updateStaffDetails(id, staffDetails);
+      addToast("Staff updated", {
+        appearance: "success",
+        autoDismiss: true,
+      });
+
+      history.push("/dashboard/staff");
+    } catch (error) {
+      addToast(apiService.getErrorMessage(error), {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    }
+    // console.log("submitted");
   };
 
   const closeModal = () => setShowModal(false);
@@ -75,7 +101,7 @@ const StaffDetailsCard = () => {
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
             <h6 className="text-gray-800 text-xl font-bold">
-              Staff Information
+              Edit Staff Information
             </h6>
             <ModifyStaffDropdown
               openModal={openModal}
@@ -84,36 +110,51 @@ const StaffDetailsCard = () => {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form className="flex-auto p-5 lg:p-10">
+          <form onSubmit={handleSubmit} className="flex-auto p-5 lg:p-10">
             <div className="relative w-full mb-3">
-              <span className="text-gray-700">First Name</span>
-              <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
-                {first_name}
-              </p>
+              <label className="text-gray-700">First Name</label>
+              <input
+                value={first_name}
+                name="first_name"
+                onChange={handleChange}
+                className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
+              />
             </div>{" "}
             <div className="relative w-full mb-3">
-              <span className="text-gray-700">Last Name</span>
-              <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
-                {last_name}
-              </p>
+              <label className="text-gray-700">Last Name </label>
+              <input
+                name="last_name"
+                onChange={handleChange}
+                value={last_name}
+                className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
+              />
             </div>
             <div className="relative w-full mb-3">
-              <span className="text-gray-700">Email</span>
-              <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-                {email}
-              </p>
+              <label className="text-gray-700">Email</label>
+              <input
+                name="email"
+                value={email}
+                onChange={handleChange}
+                className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+              />
             </div>
             <div className="relative w-full mb-3">
-              <span className="text-gray-700">Phone</span>
-              <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-                {phone || "-"}
-              </p>
+              <label className="text-gray-700">Phone</label>
+              <input
+                name="phone"
+                value={phone}
+                onChange={handleChange}
+                className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+              />
             </div>{" "}
             <div className="relative w-full mb-3">
-              <span className="text-gray-700">Address</span>
-              <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-                {address || "-"}
-              </p>
+              <label className="text-gray-700">Address</label>
+              <input
+                value={address}
+                name="address"
+                className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+              />
+              {address || "-"}
             </div>
             <div className="relative w-full mb-3">
               <div className="mt-4">
@@ -147,6 +188,7 @@ const StaffDetailsCard = () => {
                       className="form-radio"
                       name="role"
                       value="waiter"
+                      check
                       checked={role === "waiter"}
                       onChange={handleChange}
                     />
@@ -158,11 +200,11 @@ const StaffDetailsCard = () => {
             <div className="text-center mt-8">
               <button
                 className="bg-gray-900 custom-btn text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => {
-                  setType("role");
-                  openModal();
-                }}
+                type="submit"
+                // onClick={() => {
+                //   setType("role");
+                //   openModal();
+                // }}
               >
                 Update Role
               </button>

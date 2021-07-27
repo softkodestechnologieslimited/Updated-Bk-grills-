@@ -4,6 +4,7 @@ const Input = (props) => {
   const [inputType] = useState(props.type);
   const [inputName] = useState(props.name);
   const [className] = useState(props.className);
+  // const [required, setRequired] = useState(true)
   const [inputValue, setInputValue] = useState("");
   const [inputPlaceholder] = useState(props.placeholder);
 
@@ -16,6 +17,7 @@ const Input = (props) => {
     }
   };
 
+
   return (
     <input
       type={inputType}
@@ -24,7 +26,6 @@ const Input = (props) => {
       name={inputName}
       placeholder={inputPlaceholder}
       onChange={handleChange}
-      required
     />
   );
 };

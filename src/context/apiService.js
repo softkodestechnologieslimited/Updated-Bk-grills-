@@ -48,6 +48,10 @@ export class ApiService {
 
   addStaff = async (payload) => this.axiosTwo.post("/staffs", payload);
 
+  getSingleStaff = async (payload) => this.axiosTwo.get(`/staffs/${payload}`);
+
+  updateStaffDetails = async (id, payload) => this.axiosTwo.patch(`/staffs/${id}/`, payload)
+
   // USER
 
   // login = async (payload) => this.axios.post("/auth/login", payload);
@@ -80,11 +84,11 @@ export class ApiService {
   //STOCK new api
   getMeals = async () => this.axiosTwo.get("/items");
 
-  createMeal = async (payload) => this.axiosTwo.post('/items/', payload)
+  createMeal = async (payload) => this.axiosTwo.post("/items/", payload);
 
-  deleteMeal = async (payload) =>
-  this.axiosTwo.delete(`/items/${payload.id}`);
+  getSingleMeal = async (payload) => this.axiosTwo.get(`/items/${payload}`);
 
+  deleteMeal = async (payload) => this.axiosTwo.delete(`/items/${payload.id}`);
 
   // MEALS
 
@@ -93,11 +97,10 @@ export class ApiService {
   // createMeal = async (payload) =>
   //   this.axios.post("/meals", payload, addAuthorizedHeaders());
 
-  updateMeal = async (payload) =>
-    this.axios.put("/meals", payload, addAuthorizedHeaders());
+  // updateMeal = async (payload) =>
+  //   this.axios.put("/meals", payload, addAuthorizedHeaders());
 
-  getSingleMeal = async (payload) =>
-    this.axios.get(`/meals/${payload.id}`, addAuthorizedHeaders());
+  // getSingleMeal = async (payload) => this.axios.get(`/meals/${payload.id}`);
 
   // deleteMeal = async (payload) =>
   //   this.axios.delete(`/meals?id=${payload.id}`, addAuthorizedHeaders());
@@ -138,12 +141,10 @@ export class ApiService {
       addAuthorizedHeaders()
     );
 
-    //ORDERS new api
-    getOrders = async () => this.axiosTwo.get("/orders")
+  //ORDERS new api
+  getOrders = async () => this.axiosTwo.get("/orders");
 
-    createOrder = async (payload) =>
-    this.axiosTwo.post("/order/", payload);
-
+  createOrder = async (payload) => this.axiosTwo.post("/order/", payload);
 
   // ORDERS
 

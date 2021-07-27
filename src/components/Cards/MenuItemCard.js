@@ -34,7 +34,7 @@ const StockItemCard = () => {
       return history.push("/dashboard/stock");
     }
 
-    const meal = await mealService.getSingleMeal(id);
+    const meal = await apiService.getSingleMeal(id);
     console.log(meal);
     console.log(status);
 
@@ -163,10 +163,10 @@ const StockItemCard = () => {
             <form onSubmit={handleSubmit} className="flex-auto p-5 lg:p-10">
               <div className="relative w-full mb-3">
                 <label className="block">
-                  <span className="text-gray-700">Title</span>
+                  <span className="text-gray-700">Item</span>
                   <input
                     className="form-input text-gray-700 mt-1 block w-full my-4 p-3"
-                    placeholder="Title"
+                    placeholder="Item"
                     name="item"
                     value={item}
                     onChange={handleChange}
