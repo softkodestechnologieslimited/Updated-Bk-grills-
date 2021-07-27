@@ -21,7 +21,8 @@ const StockItemCard = () => {
   const { mealService } = useContext(AppStateContext);
 
   const { addToast } = useToasts();
-  const [status, setStatus] = useState(mealService.meals);
+  // const [status, setStatus] = useState(mealService.meals);
+  const [status] = useState(mealService.meals);
   const [isLoading, setIsLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const params = useParams();

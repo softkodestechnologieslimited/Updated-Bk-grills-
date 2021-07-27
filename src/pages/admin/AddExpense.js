@@ -22,8 +22,9 @@ const AddExpense = () => {
     staff: "",
   });
 
-  const { expenseService, authService, staffService } =
-    useContext(AppStateContext);
+  // const { expenseService, authService, staffService } =
+  const { expenseService, staffService } =
+  useContext(AppStateContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const history = useHistory();
@@ -37,8 +38,8 @@ const AddExpense = () => {
 
   // sets staff when component mounts
   const setStaff = () => {
-    const user = authService.currentUser;
-    const { id, name } = user;
+    // const user = authService.currentUser;
+    // const { id, name } = user;
 
     // setItemDetails({ ...itemDetails, staff: name, cost: id });
   };

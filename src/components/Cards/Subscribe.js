@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import apiService from "../../context/apiService";
 import { useToasts } from "react-toast-notifications";
 import Button from "../Button";
@@ -27,6 +27,7 @@ const Subscribe = () => {
         appearance: 'success',
         autoDismiss: true,
       })
+      setInputValue('')
 
     } catch (error) {
       console.log(error);

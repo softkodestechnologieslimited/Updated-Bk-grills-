@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
-import { AppStateContext } from "../../context";
+// import React, { useContext } from "react";
+// import { AppStateContext } from "../../context";
+import React from "react"
 
 // components
 import UserDropdown from "../Dropdowns/UserDropdown.js";
 import CartDropdown from "../Dropdowns/CartDropdown.js";
 
 const AdminNavbar = () => {
-  const { authService } = useContext(AppStateContext)
+  // const { authService } = useContext(AppStateContext)
 
-  const { currentUser } = authService;
+  // const { currentUser } = authService;
 
 
   return (

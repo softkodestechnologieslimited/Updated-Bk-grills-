@@ -29,20 +29,20 @@ const CheckoutCard = observer(() => {
   const { meals, status: payment_status, payment_method, waiter_name, waiter_id } = orderDetails;
 
   // get customers when component mounts
-  const createOrder = async () => {
-    try {
-      const response = await apiService.createOrder(orderDetails);
-      const { data } = response.data;
-      console.log(data)
-      // setCustomers(data)
-    } catch (error) {
-      const message = apiService.getErrorMessage(error);
-      addToast(message, {
-        appearance: 'error',
-        autoDismiss: true,
-      })
-    }
-  }
+  // const createOrder = async () => {
+  //   try {
+  //     const response = await apiService.createOrder(orderDetails);
+  //     const { data } = response.data;
+  //     console.log(data)
+  //     // setCustomers(data)
+  //   } catch (error) {
+  //     const message = apiService.getErrorMessage(error);
+  //     addToast(message, {
+  //       appearance: 'error',
+  //       autoDismiss: true,
+  //     })
+  //   }
+  // }
 
   useEffect(() => {
     setWaiter();
@@ -58,7 +58,7 @@ const CheckoutCard = observer(() => {
     cartService.deleteItem(id);
   }
 
-  const {data, item} = cartService.meals
+  // const {data, item} = cartService.meals
 
   // cart items
   const items = cartService.meals.map(meal => (

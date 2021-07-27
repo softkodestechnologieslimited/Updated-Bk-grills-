@@ -11,7 +11,7 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 import FullScreenLoader from "../../components/fullScreenLoader";
-import { uploadImageToCloud } from "../../firebase";
+// import { uploadImageToCloud } from "../../firebase";
 
 
 const AddItem = () => {
@@ -23,7 +23,8 @@ const AddItem = () => {
     // status: false,
   });
   const [error, setError] = useState('');
-  const [status, setStatus] = useState(false)
+  // const [status, setStatus] = useState(false)
+  const [status] = useState(false)
   const [imageUrl, setImageUrl] = useState(null)
   const [isLoading, setIsLoading] = useState(false);
   const { mealService } = useContext(AppStateContext)
