@@ -92,7 +92,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                         className=
                         "ml-3 font-bold text-gray-700"
                       >
-                        {order.customer_name}
+                        {order.ref_code}
                       </span>
                     </th>
                     <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
@@ -105,11 +105,11 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                     <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       {order.payment_method || "Nil"}
                     </td>
-                    <td className={"border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 " + (currentUser.role === 'waiter' ? "hidden" : "block")}>
+                    {/* <td className={"border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 " + (currentUser.role === 'waiter' ? "hidden" : "block")}>
                       {order.waiter_name}
-                    </td>
+                    </td> */}
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                      &#8358;{order.total}
+                      &#8358;{order.prices}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                       <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} deleted={deleted} />
