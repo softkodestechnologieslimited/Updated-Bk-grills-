@@ -36,11 +36,13 @@ const Orders = observer(() => {
   }, []);
 
   const refreshOrders = () => {
-    if (currentUser.role === "waiter") {
+    if (currentUser.role === "admin") {
       const waiterOrders = orderService.getOrdersByWaiterId(currentUser.id);
       setOrders(waiterOrders.filter((order) => order.deleted !== true));
+
       return;
     }
+      console.log(currentUser.role);
 
     setOrders(
       orderService.recentOrders.filter((order) => order.deleted !== true)
@@ -79,8 +81,8 @@ const Orders = observer(() => {
     if (!query) return order;
 
     return (
-      order.id.toLowerCase().includes(query) ||
-      order.waiter_name.toLowerCase().includes(query)
+      // order.id.toLowerCase().includes(query) ||
+      order.ref_code.toLowerCase().includes(query)
     );
   });
 
@@ -98,12 +100,12 @@ const Orders = observer(() => {
 
   const showDeleted = (e) => {
     if (e.target.checked) {
-      setIsDeleted(true)
+      setIsDeleted(true);
       setOrders(
         orderService.recentOrders.filter((order) => order.deleted === true)
       );
     } else {
-      setIsDeleted(false)
+      setIsDeleted(false);
       refreshOrders();
     }
   };
@@ -123,7 +125,7 @@ const Orders = observer(() => {
                   name="search"
                   value={query}
                   className="form-input text-gray-700 block w-full p-5 rounded-lg search-input"
-                  placeholder="Search by Order Id or Waiter Name"
+                  placeholder="Search By Staff Name"
                   onChange={onFilterChange}
                 />
               </form>
@@ -148,7 +150,11 @@ const Orders = observer(() => {
             <div className="w-full mx-auto mb-12 px-4">
               {currentOrders.length !== 0 ? (
                 <Fade left>
-                  <OrdersTable orders={currentOrders} refresh={refreshOrders} deleted={deleted} />
+                  <OrdersTable
+                    orders={currentOrders}
+                    refresh={refreshOrders}
+                    deleted={deleted}
+                  />
                 </Fade>
               ) : (
                 <div className="w-full flex justify-center">
