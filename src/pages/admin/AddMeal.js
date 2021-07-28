@@ -24,7 +24,7 @@ const AddItem = () => {
   });
   const [error, setError] = useState('');
   // const [status, setStatus] = useState(false)
-  const [status] = useState(false)
+  const [status] = useState(true)
   const [imageUrl, setImageUrl] = useState(null)
   const [isLoading, setIsLoading] = useState(false);
   const { mealService } = useContext(AppStateContext)
@@ -116,7 +116,7 @@ const AddItem = () => {
                 </div>
 
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg bg-gray-300">
-                  <form onSubmit={handleSubmit} className="flex-auto p-5 lg:p-10">
+                  <form onSubmit={handleSubmit} className="flex-auto p-5 lg:p-10" encType='multipart/form-data'>
                     <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Item</span>

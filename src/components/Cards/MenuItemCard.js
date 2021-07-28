@@ -15,16 +15,17 @@ const StockItemCard = () => {
     category: "",
     price: "",
     addQuantity: "",
-    // inStock: false
+    status: '',
+    image: null
   });
 
   const { mealService } = useContext(AppStateContext);
 
   const { addToast } = useToasts();
   // const [status, setStatus] = useState(mealService.meals);
-  const [status] = useState(mealService.meals);
+  // const [status, setStatus] = useState(meal.data.status);
   const [isLoading, setIsLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
   const params = useParams();
   const history = useHistory();
   const { id } = params;
@@ -35,12 +36,12 @@ const StockItemCard = () => {
     }
 
     const meal = await apiService.getSingleMeal(id);
-    console.log(meal);
-    console.log(status);
+    console.log(meal.data);
+    // console.log(status);
 
-    const { item, desc, category, price, quantity, image, imageId } = meal;
-    setItemDetails({ item, desc, category, price, quantity, inStock, imageId });
-    setImageUrl(image);
+    // const { item, desc, category, price, status, image } = meal;
+    setItemDetails( meal.data);
+    // setImageUrl(image);
   };
 
   useEffect(() => {
@@ -53,11 +54,13 @@ const StockItemCard = () => {
     desc,
     category,
     price,
-    quantity,
     addQuantity,
-    inStock,
-    imageId,
+    status,
+    image,
   } = itemDetails;
+
+  let newQuantity;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,12 +77,11 @@ const StockItemCard = () => {
       }
       setIsLoading(true);
 
-      let newQuantity;
 
-      if (quantity === null) {
+      if (desc === null) {
         newQuantity = parseInt(addQuantity);
       } else {
-        newQuantity = parseInt(quantity) + parseInt(addQuantity);
+        newQuantity = parseInt(desc) + parseInt(addQuantity);
       }
 
       // console.log(newQuantity);
@@ -87,17 +89,15 @@ const StockItemCard = () => {
       const response = await apiService.updateMeal({
         id,
         item,
-        desc,
         category,
         price,
-        quantity: newQuantity,
-        inStock,
-        imageUrl,
-        imageId,
+        desc: newQuantity,
+        status,
+        image
       });
 
       const { data } = response.data;
-      // console.log(data)
+      console.log(data)
       mealService.updateMeal(data);
       addToast("Meal updated successfully", {
         appearance: "success",
@@ -110,7 +110,7 @@ const StockItemCard = () => {
       addToast(message, {
         appearance: "error",
         autoDismiss: true,
-      });
+    });
       setIsLoading(false);
     }
   };
@@ -118,20 +118,25 @@ const StockItemCard = () => {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    setItemDetails((prevDetails) => {
-      return {
-        ...prevDetails,
-        [name]: value,
-      };
-    });
+    // setItemDetails((prevDetails) => {
+    //   return {
+    //     ...prevDetails,
+    //     [name]: value,
+    //   };
+    // });
+
+    setItemDetails({[name]: value})
+    console.log(value);
+    console.log(itemDetails);
   };
 
   const handleCheck = () => {
     setItemDetails((prevDetails) => {
       const newState = {
         ...prevDetails,
-        inStock: !prevDetails.inStock,
+        status: !prevDetails.status,
       };
+        console.log(status);
 
       return newState;
     });
@@ -176,7 +181,7 @@ const StockItemCard = () => {
               </div>
               <div className="relative w-full mb-3">
                 <label className="block">
-                  <span className="text-gray-700">Description</span>
+                  <span className="text-gray-700">Quantity</span>
                   <input
                     className="form-input text-gray-700 mt-1 block w-full my-4 p-3"
                     placeholder="Description"
@@ -190,7 +195,7 @@ const StockItemCard = () => {
               <div className="relative w-full mb-3">
                 <label className="block">
                   <span className="text-gray-700">Image</span>
-                  {imageUrl ? <MealImage src={imageUrl} /> : ""}
+                  {image ? <MealImage src={image} /> : "no image set"}
                 </label>
               </div>
               <div className="relative w-full mb-3">
@@ -238,10 +243,20 @@ const StockItemCard = () => {
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
-                    checked={inStock || ""}
+                    checked={status === true}
                     onChange={handleCheck}
                   />
-                  <span className="ml-2 text-gray-700">Instock</span>
+                  <span className="ml-2 text-gray-700">In stock</span>
+                </label>
+              </div>   <div className="flex mt-6">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox text-green-500"
+                    checked={status === false}
+                    onChange={handleCheck}
+                  />
+                  <span className="ml-2 text-gray-700">Out of stock</span>
                 </label>
               </div>
               <div className="text-center mt-8">

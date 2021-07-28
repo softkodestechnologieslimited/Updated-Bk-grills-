@@ -9,7 +9,7 @@ import Fade from 'react-reveal/Fade';
 import FullScreenLoader from "../fullScreenLoader";
 
 const OrderCard = () => {
-  const [orderDetails, setOrderDetails] = useState({ customer_name: "", meals: [], payment_method: "", payment_status: "", total: "", waiter_name: "", status: '' });
+  const [orderDetails, setOrderDetails] = useState({  meals: [], payment_method: "", payment_status: "", total: "", waiter_name: "", status: '' });
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const history = useHistory();
@@ -25,8 +25,8 @@ const OrderCard = () => {
     try {
       setIsLoading(true)
       const order = await orderService.getSingleOrder(id)
-      const { customer_name, meals, payment_method, payment_status, total, waiter_name, status } = order
-      setOrderDetails({ customer_name, meals, payment_method, payment_status, total, waiter_name, status })
+      const { meals, payment_method, payment_status, total, waiter_name, status } = order
+      setOrderDetails({ meals, payment_method, payment_status, total, waiter_name, status })
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
@@ -48,7 +48,7 @@ const OrderCard = () => {
     // eslint-disable-next-line
   }, []);
 
-  const { customer_name, meals, payment_method, payment_status, total, waiter_name, status } = orderDetails
+  const {  meals, payment_method, payment_status, total, waiter_name, status } = orderDetails
 
   const updateOrder = async () => {
 
@@ -147,7 +147,7 @@ const OrderCard = () => {
                   meals.map((meal, idx) => (
                     <tr key={idx}>
                       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                        {meal.title}
+                        {meal.items}
                       </th>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                         {meal.quantity}
@@ -185,7 +185,7 @@ const OrderCard = () => {
                   </span>
                   <p
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
-                    {customer_name}
+                    name
                   </p>
                 </div>
               </div>

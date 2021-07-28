@@ -142,7 +142,7 @@ export class ApiService {
     );
 
   //ORDERS new api
-  getOrders = async () => this.axiosTwo.get("/orders");
+  getOrders = async () => this.axiosTwo.get("/order");
 
   createOrder = async (payload) => this.axiosTwo.post("/order/", payload);
 

@@ -50,7 +50,7 @@ class CartService {
   get total() {
     let total = 0;
     const copy = [...this.meals];
-    copy.forEach(item => total += (item.quantity * item.price));
+    copy.forEach(item => total += (parseInt(item.quantity) * parseInt(item.price)));
     return total;
   }
 

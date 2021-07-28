@@ -15,18 +15,18 @@ import FooterAdmin from "../../components/Footers/FooterAdmin.js";
 
 
 const Dashboard = observer(() => {
-  const { staffService, orderService, customerService, subscriptionService } = useContext(AppStateContext);
+  const { staffService, orderService, subscriptionService } = useContext(AppStateContext);
   const { addToast } = useToasts()
   const [staffCount, setStaffCount] = useState('');
   const [ordersCount, setOrdersCount] = useState('');
-  const [customersCount, setCustomersCount] = useState('');
+  // const [customersCount, setCustomersCount] = useState('');
   const [salesTotal, setSalesTotal] = useState('');
   const [subscribersCount,  setSubscribersCount] = useState('')
 
 
   useEffect(() => {
     getStaff();
-    getCustomers();
+    // getCustomers();
     getOrders();
     getSubscribers()
 
@@ -64,28 +64,28 @@ const Dashboard = observer(() => {
       })
     }
   }
-  const getCustomers = async () => {
-    try {
-      const response = await apiService.getCustomers();
-      const { data } = response.data;
-      // console.log("customers", data.length)
-      setCustomersCount(data.length)
-      customerService.setCustomers([...data]);
-    } catch (error) {
-      const message = apiService.getErrorMessage(error);
-      addToast(message, {
-        appearance: 'error',
-        autoDismiss: true,
-      })
-    }
-  }
+  // const getCustomers = async () => {
+  //   try {
+  //     const response = await apiService.getCustomers();
+  //     const { data } = response.data;
+  //     // console.log("customers", data.length)
+  //     setCustomersCount(data.length)
+  //     customerService.setCustomers([...data]);
+  //   } catch (error) {
+  //     const message = apiService.getErrorMessage(error);
+  //     addToast(message, {
+  //       appearance: 'error',
+  //       autoDismiss: true,
+  //     })
+  //   }
+  // }
 
   const getOrders = async () => {
     try {
       const response = await apiService.getOrders();
-      const { data } = response.data;
+      const { data } = response;
       setOrdersCount(data.length)
-      const orderTotal = data.map(order => order.total)
+      const orderTotal = data.map(order => parseInt(order.total))
       setSalesTotal(orderTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0))
       orderService.setRecentOrders([...data]);
     } catch (error) {
@@ -105,7 +105,7 @@ const Dashboard = observer(() => {
       <div className="relative md:ml-64 bg-gray-900">
         <AdminNavbar />
         {/* Header */}
-        <HeaderStats staffCount={staffCount} subscribersCount={subscribersCount} customersCount={customersCount} ordersCount={ordersCount} salesTotal={formatter.format(salesTotal) } />
+        <HeaderStats staffCount={staffCount} subscribersCount={subscribersCount} ordersCount={ordersCount} salesTotal={formatter.format(salesTotal) } />
         <div className="px-4 md:px-10 mx-auto w-full h-90 -m-24">
           <div className="flex flex-wrap mt-4">
             <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">

@@ -51,7 +51,7 @@ const Orders = observer(() => {
     try {
       setIsLoading(true);
       const response = await apiService.getOrders();
-      const { data } = response.data;
+      const { data } = response;
       console.log(data);
       orderService.setRecentOrders([...data]);
 

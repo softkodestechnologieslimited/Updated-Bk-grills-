@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { useToasts } from 'react-toast-notifications'
+import { useToasts } from "react-toast-notifications";
 // import { Hint } from 'react-autocomplete-hint';
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
@@ -11,7 +11,8 @@ import FullScreenLoader from "../fullScreenLoader";
 import cartSvg from "../../assets/img/emptycart.svg";
 
 const CheckoutCard = observer(() => {
-  const { cartService, authService } = useContext(AppStateContext);
+  const { cartService, authService, staffService } =
+    useContext(AppStateContext);
   const [orderDetails, setOrderDetails] = useState(cartService.currentOrder);
   const [isLoading, setIsLoading] = useState(false);
   // const [query, setQuery] = useState("");
@@ -26,7 +27,13 @@ const CheckoutCard = observer(() => {
     setOrderDetails(cartService.currentOrder); // reset the order details after setting waiter details
   };
 
-  const { meals, status: payment_status, payment_method, waiter_name, waiter_id } = orderDetails;
+  const {
+    // meals,
+    payment_status,
+    payment_method,
+    ref_code,
+    // waiter_id,
+  } = orderDetails;
 
   // get customers when component mounts
   // const createOrder = async () => {
@@ -46,22 +53,23 @@ const CheckoutCard = observer(() => {
 
   useEffect(() => {
     setWaiter();
+    getStaff();
 
     console.log(cartService.meals);
     // createOrder()
 
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   // delete item from cart
   const deleteFromCart = (id) => {
     cartService.deleteItem(id);
-  }
+  };
 
   // const {data, item} = cartService.meals
 
   // cart items
-  const items = cartService.meals.map(meal => (
+  const cartitems = cartService.meals.map((meal) => (
     <tr key={nanoid()}>
       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
         {meal.item}
@@ -73,66 +81,86 @@ const CheckoutCard = observer(() => {
         {meal.quantity}
       </td>
       <td className="border-t-0 px-6 text-red-500 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 cursor-pointer">
-        <i className="fas fa-trash mr-4" onClick={() => deleteFromCart(meal.id)}></i>
+        <i
+          className="fas fa-trash mr-4"
+          onClick={() => deleteFromCart(meal.id)}
+        ></i>
       </td>
     </tr>
-  ))
+  ));
 
-  
+  const orders = cartService.meals;
+
+  const { items, desc, category, prices, status } = {
+    items: orders.map((item) => item.item).toString(),
+    desc: orders.map((desc) => parseInt(desc.desc)).toString(),
+    category: orders.map((category) => category.category).toString(),
+    prices: cartService.total,
+    // quantity: orders.map((quantity) => quantity.quantity).toString(),
+    status: orders.map((status) => status.status),
+  };
 
   // on change function
   const handleChange = (e) => {
     const { value, name } = e.target;
 
     setOrderDetails({ ...orderDetails, [name]: value });
+
+    // console.log(prices.reduce((a, b) => a + b));
+    console.log(cartService.total);
+    console.log(items, desc, category, prices, status);
   };
 
   // payment toggle
   const togglePaymentStatus = () => {
     const status = payment_status === "pending" ? "complete" : "pending";
     if (status === "pending") {
-      setOrderDetails({ ...orderDetails, payment_status: status, payment_method: '' });
+      setOrderDetails({
+        ...orderDetails,
+        payment_status: status,
+        payment_method: "",
+      });
+      console.log("pending", payment_method);
     } else {
+      console.log("else");
       setOrderDetails({ ...orderDetails, payment_status: status });
     }
-  }
+    console.log("pay", payment_method);
+  };
 
-  // search result
-  // let customersFilter = [];
+  const getStaff = async () => {
+    try {
+      setIsLoading(true);
+      const response = await apiService.getUsers();
+      const { data } = response;
+      staffService.setStaff([...data]);
+      console.log(data);
+      // refreshStaff()
+    } catch (error) {
+      const message = apiService.getErrorMessage(error);
+      addToast(message, {
+        appearance: "error",
+        autoDismiss: true,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  // let filteredCustomer;
+  const dropdownData = staffService.allStaff;
 
-  // const setSearchResult = () => {
-  //   if (customersFilter.length) {
-  //     filteredCustomer = customersFilter[0];
-  //   }
-
-  //   if (filteredCustomer) {
-  //     console.log(filteredCustomer)
-  //     setOrderDetails({ ...orderDetails, customer_name: filteredCustomer.fullName, customer_phone: filteredCustomer.phoneNumber });
-  //   }
-  // }
-
-
-  // search filter
-  // const onFilterChange = (e) => {
-  //   if (e.target.name === "search") {
-  //     setQuery(e.target.value)
-  //   }
-
-  //   customersFilter = customers.filter((customer) => customer.phoneNumber === e.target.value)
-
-  //   setSearchResult(customersFilter)
-
-  // }
-
+  let options = dropdownData.map((data) => (
+    <option key={data.id} value={data.first_name + " " + data.last_name}>
+      {data.first_name} {data.last_name}
+    </option>
+  ));
 
   // handle submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // further validations can be done on the input 
+      // further validations can be done on the input
       // if (!customer_name) {
       //   addToast("Add a Customer name", {
       //     appearance: 'error',
@@ -141,35 +169,58 @@ const CheckoutCard = observer(() => {
       //   return
       // }
 
-      if (payment_status === 'complete' && !payment_method) {
+      if (payment_status === "complete" && !payment_method) {
         addToast("Select Payment Method!", {
-          appearance: 'error',
+          appearance: "error",
           autoDismiss: true,
-        })
-        return
+        });
+        return;
       }
 
-      setIsLoading(true)
-      await apiService.createOrder({ meals, payment_status, payment_method, waiter_name, waiter_id });
+      setIsLoading(true);
+      await apiService.createOrder({
+        items,
+        quantity: desc,
+        category,
+        prices,
+        // status,
+        payment_status,
+        payment_method,
+        ref_code,
+        // waiter_name,
+        // waiter_id,
+      });
+
+      // ;await apiService.createOrder({
+      //   items,
+      //   quantity: desc,
+      //   category,
+      //   prices,
+      //   status,
+      //   payment_status,
+      //   payment_method,
+      //   ref_code,
+      //   // waiter_name,
+      //   // waiter_id,
+      // });
       // const { data } = response.data;
       // console.log(data)
       await cartService.resetCart();
       addToast("Order successful", {
-        appearance: 'success',
+        appearance: "success",
         autoDismiss: true,
-      })
+      });
 
-      history.push('/dashboard/menu'); // Redirect to menu on success 
+      history.push("/dashboard"); // Redirect to menu on success
     } catch (error) {
       const message = apiService.getErrorMessage(error); // the getErrorMessage is a helper function to get the exact messages from the server
       addToast(message, {
-        appearance: 'error',
+        appearance: "error",
         autoDismiss: true,
-      })
-      setIsLoading(false)
+      });
+      setIsLoading(false);
     }
   };
-
 
   return (
     <>
@@ -181,55 +232,54 @@ const CheckoutCard = observer(() => {
             <Link
               className="bg-blue-800 custom-btn text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ml-3 ease-linear transition-all duration-150"
               type="button"
-              to='/dashboard/cartmenu'
+              to="/dashboard/cartmenu"
             >
               Back
-          </Link>
+            </Link>
           </div>
         </div>
         <div className="flex-auto px-2 lg:px-10 py-10">
-          {
-            cartService.meals.length !== 0 ? (
-              <>
-                <h6 className="text-gray-500 text-sm mb-6 ml-2 lg:ml-0 font-bold uppercase">
-                  Order Information
+          {cartService.meals.length !== 0 ? (
+            <>
+              <h6 className="text-gray-500 text-sm mb-6 ml-2 lg:ml-0 font-bold uppercase">
+                Order Information
               </h6>
-                <div className="overflow-x-auto overflow-y-auto">
-                  <table className="items-center w-full bg-transparent border-collapse">
-                    <thead className="thead-light px-6 py-6 rounded-t bg-white">
-                      <tr>
-                        <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Item
-                     </th>
-                        <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">Price</th>
-                        <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Quantity
-                    </th>
-                        <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"></th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-gray-800">
-                      {items}
-                      <tr>
-                        <th className="border-t-0 font-semibold uppercase bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          Total
+              <div className="overflow-x-auto overflow-y-auto">
+                <table className="items-center w-full bg-transparent border-collapse">
+                  <thead className="thead-light px-6 py-6 rounded-t bg-white">
+                    <tr>
+                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                        Item
                       </th>
-                        <td className="border-t-0 font-semibold bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          &#8358; {cartService.total}
-                        </td>
-                        <td className="border-t-0 bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                        </td>
-                        <td className="border-t-0 bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                        Price
+                      </th>
+                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                        Quantity
+                      </th>
+                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-800">
+                    {cartitems}
+                    <tr>
+                      <th className="border-t-0 font-semibold uppercase bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+                        Total
+                      </th>
+                      <td className="border-t-0 font-semibold bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                        &#8358; {cartService.total}
+                      </td>
+                      <td className="border-t-0 bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4"></td>
+                      <td className="border-t-0 bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-                <hr className="mt-6 border-b-1 border-gray-400" />
+              <hr className="mt-6 border-b-1 border-gray-400" />
 
-                <div className='w-full flex flex-wrap my-6'>
-                  {/* <div className='w-full lg:w-8/12 flex flex-col'>
+              <div className="w-full flex flex-wrap my-6">
+                {/* <div className='w-full lg:w-8/12 flex flex-col'>
                     <input
                       type="text"
                       name="search"
@@ -248,15 +298,92 @@ const CheckoutCard = observer(() => {
 
                   </div> */}
 
-                  <label className="flex items-center justify-end lg:w-4/12 text-gray-800">
-                    <input type="checkbox" className="form-checkbox text-green-500" defaultChecked={payment_status === "complete"} onChange={togglePaymentStatus} />
-                    <span className="ml-2 hidden md:block">Mark as</span>
-                    <span className="ml-2">Paid</span>
+                <div className="relative w-full mb-3  px-6">
+                  <label className="block">
+                    <span className="text-gray-700">Select Staff</span>
                   </label>
+                  <select
+                    onChange={handleChange}
+                    name="ref_code"
+                    className="text-red-500 font-bold"
+                  >
+                    <option>Staff</option>
+                    {options}
+                  </select>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-wrap mt-3 mb-6">
-                 {/*  {
+                <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox text-green-500"
+                    defaultChecked={payment_status === "complete"}
+                    onChange={togglePaymentStatus}
+                  />
+                  <span className="ml-2 hidden md:block">Mark as</span>
+                  <span className="ml-2">Paid</span>
+                </label>
+              </div>
+
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-wrap mt-3 mb-6"
+              >
+                {payment_status === "pending" && (
+                  <div className="w-full lg:w-6/12 px-">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="payment method"
+                      >
+                        Payment Method
+                      </label>
+                      <select
+                        className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3"
+                        onChange={handleChange}
+                        name="payment_method"
+                        value={payment_method}
+                      >
+                        <option value="">Select Payment Method</option>
+                        <option value="cash">Cash</option>
+                        <option value="pos">POS</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                <div className="w-full text-center flex justify-center items-center py-6">
+                  <button
+                    className={
+                      (payment_status === "pending"
+                        ? "bg-gray-700"
+                        : "bg-blue-500") +
+                      " text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex items-center"
+                    }
+                    type="submit"
+                    // disabled={payment_status === "pending"}
+                  >
+                    <i className="fas fa-clipboard-check mr-4"></i>
+                    Confirm Order
+                  </button>
+                </div>
+              </form>
+            </>
+          ) : (
+            <div className="flex justify-center items-center flex-col">
+              <p className="py-5 px-6 font-bold text-red-500">
+                Oops, add items to your cart!
+              </p>
+
+              <img
+                src={cartSvg}
+                alt="empty cart"
+                className="w-1/2 object-fit"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+      {/*  {
                     customersFilter.length && (
                       <>
                         <div className="w-full lg:w-6/12 px-4">
@@ -329,55 +456,37 @@ const CheckoutCard = observer(() => {
                         )
                       }
                     </div>
-                  </div> */}
+                  </div> 
 
-                  {payment_status === "complete" && (
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                          htmlFor='payment method'
-                        >
-                          Payment Method
-                     </label>
-                        <select className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3" onChange={handleChange} name='payment_method' value={payment_method}>
-                          <option value=''
-                          >Select Payment Method</option>
-                          <option value='cash'
-                          >Cash</option>
-                          <option value='pos'
-                          >POS</option>
-                        </select>
-                      </div>
-                    </div>
-                  )}
+// search result
+  // let customersFilter = [];
 
-                  <div className="w-full text-center flex justify-between items-center px-6 py-6">
-                    <button
-                      className={(payment_status === "pending" ? "bg-gray-700" : "bg-blue-500") + " text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex items-center"}
-                      type="submit"
-                    // disabled={payment_status === "pending"}
-                    >
-                      <i className="fas fa-clipboard-check mr-4"></i>
-                    Confirm Order
-                  </button>
-                  </div>
-                </form>
-              </>
-            ) :
-              (
-                <div className="flex justify-center items-center flex-col">
-                  <p className="py-5 px-6 font-bold text-red-500">Oops, add items to your cart!</p>
+  // let filteredCustomer;
 
-                  <img src={cartSvg} alt="empty cart" className='w-1/2 object-fit' />
+  // const setSearchResult = () => {
+  //   if (customersFilter.length) {
+  //     filteredCustomer = customersFilter[0];
+  //   }
 
-                </div>
-              )
-          }
-        </div>
-      </div>
+  //   if (filteredCustomer) {
+  //     console.log(filteredCustomer)
+  //     setOrderDetails({ ...orderDetails, customer_name: filteredCustomer.fullName, customer_phone: filteredCustomer.phoneNumber });
+  //   }
+  // }
+
+  // search filter
+  // const onFilterChange = (e) => {
+  //   if (e.target.name === "search") {
+  //     setQuery(e.target.value)
+  //   }
+
+  //   customersFilter = customers.filter((customer) => customer.phoneNumber === e.target.value)
+
+  //   setSearchResult(customersFilter)
+
+  // }*/}
     </>
-  )
-})
+  );
+});
 
-export default CheckoutCard
+export default CheckoutCard;
