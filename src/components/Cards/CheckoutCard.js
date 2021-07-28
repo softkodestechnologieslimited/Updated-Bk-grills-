@@ -91,14 +91,15 @@ const CheckoutCard = observer(() => {
 
   const orders = cartService.meals;
 
-  const { items, desc, category, prices, status } = {
+  const { items, desc, category, prices } = {
     items: orders.map((item) => item.item).toString(),
-    desc: orders.map((desc) => parseInt(desc.desc)).toString(),
+    desc: orders.map((quantity) => quantity.quantity),
     category: orders.map((category) => category.category).toString(),
-    prices: cartService.total,
-    // quantity: orders.map((quantity) => quantity.quantity).toString(),
+    prices: parseInt(cartService.total),
     status: orders.map((status) => status.status),
   };
+
+  const quantity = desc.reduce((a, b) => a + b, 0)
 
   // on change function
   const handleChange = (e) => {
@@ -108,7 +109,7 @@ const CheckoutCard = observer(() => {
 
     // console.log(prices.reduce((a, b) => a + b));
     console.log(cartService.total);
-    console.log(items, desc, category, prices, status);
+    console.log(desc.reduce((a, b) => a + b), []);
   };
 
   // payment toggle
@@ -180,7 +181,7 @@ const CheckoutCard = observer(() => {
       setIsLoading(true);
       await apiService.createOrder({
         items,
-        quantity: desc,
+        quantity: quantity,
         category,
         prices,
         // status,
