@@ -18,7 +18,7 @@ const DrinksMenuItems = ({ menuItems }) => {
                 <div className="menu-items-pad">
                   <div className="menu">
                     <div className="menu-img">
-                      <img src={img} alt="menu item" title="menu-item" />
+                      <img src={menuItems.picture ? menuItems.piture : img} alt="menu item" title="menu-item" />
                     </div>
 
                     <div className="menu-text">
