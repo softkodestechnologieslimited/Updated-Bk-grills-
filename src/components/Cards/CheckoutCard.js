@@ -173,8 +173,8 @@ const CheckoutCard = observer(() => {
       //   return
       // }
 
-      if (payment_status === true && !payment_method) {
-        addToast("Select Payment Method!", {
+      if (!staff) {
+        addToast("Select staff", {
           appearance: "error",
           autoDismiss: true,
         });
@@ -303,7 +303,7 @@ const CheckoutCard = observer(() => {
                   </div> */}
                 <div className="relative w-full mb-3  px-6">
                   <label className="block">
-                    <span className="text-gray-700">Select Staff</span>
+                    <span className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3">Select Staff</span>
                   </label>
                   <select
                       required
@@ -318,7 +318,6 @@ const CheckoutCard = observer(() => {
                 <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
                   <input
                     type="radio"
-                      required
                       name="paymentstatus"
                     className="form-checkbox text-green-500"
                     value={payment_status}
@@ -331,7 +330,6 @@ const CheckoutCard = observer(() => {
                 <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
                   <input
                     type="radio"
-                      required
                       name="paymentstatus"
                     value={payment_status}
                     className="form-checkbox text-green-500"
@@ -361,7 +359,6 @@ const CheckoutCard = observer(() => {
                       onChange={handleChange}
                       name="payment_method"
                       value={payment_method}
-                      required
                     >
                       <option value="">Select Payment Method</option>
                       <option value="cash">Cash</option>
