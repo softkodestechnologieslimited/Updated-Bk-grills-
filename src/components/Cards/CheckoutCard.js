@@ -117,14 +117,14 @@ const CheckoutCard = observer(() => {
 
   // payment toggle
   const togglePaymentStatus = () => {
-    const status = payment_status === true ? true : false;
+    const status = payment_status === 'true' ? true : false;
     if (status === "pending") {
       setOrderDetails({
         ...orderDetails,
         payment_status: status,
         payment_method: "",
       });
-      console.log("pending", payment_method);
+      console.log(payment_status);
     } else {
       console.log("else");
       setOrderDetails({ ...orderDetails, payment_status: status });
@@ -322,7 +322,7 @@ const CheckoutCard = observer(() => {
                       name="paymentstatus"
                     className="form-checkbox text-green-500"
                     value={payment_status}
-                    defaultChecked={payment_status === true}
+                    defaultChecked={payment_status === 'true'}
                     onChange={togglePaymentStatus}
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>
@@ -335,7 +335,7 @@ const CheckoutCard = observer(() => {
                       name="paymentstatus"
                     value={payment_status}
                     className="form-checkbox text-green-500"
-                    defaultChecked={payment_status === false}
+                    defaultChecked={payment_status === 'false'}
                     onChange={togglePaymentStatus}
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>
