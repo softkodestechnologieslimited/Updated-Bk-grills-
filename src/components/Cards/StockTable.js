@@ -73,13 +73,13 @@ const StockTable = ({
                     <i
                       className={
                         "fas fa-circle mr-2 " +
-                        (meal.status  !== true
+                        (meal.status  === true
                           ? "text-green-500"
                           : "text-yellow-500")
                       }
                     ></i>
 
-                    {meal.status  !== true  
+                    {meal.status  === true  
                       ? "Available"
                       : "low in Stock"}
                   </td>

@@ -92,14 +92,14 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                         className=
                         "ml-3 font-bold text-gray-700"
                       >
-                        {order.ref_code}
+                        {order.staff}
                       </span>
                     </th>
                     <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       <i className={"fas fa-circle mr-2 " + (order.status === "completed" ? "text-green-500" : "text-orange-500")}></i> {order.status}
                     </td>
                     <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                      <i className={"fas fa-circle mr-2 " + (order.payment_status === "complete" ? "text-green-500" : "text-orange-500")}></i>
+                      <i className={"fas fa-circle mr-2 " + (order.payment_status === true ? "text-green-500" : "text-orange-500")}></i>
                       {order.payment_status}
                     </td>
                     <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">

@@ -85,7 +85,7 @@ const Dashboard = observer(() => {
       const response = await apiService.getOrders();
       const { data } = response;
       setOrdersCount(data.length)
-      const orderTotal = data.map(order => parseInt(order.total))
+      const orderTotal = data.map(order => parseInt(order.prices))
       setSalesTotal(orderTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0))
       orderService.setRecentOrders([...data]);
     } catch (error) {
@@ -105,7 +105,7 @@ const Dashboard = observer(() => {
       <div className="relative md:ml-64 bg-gray-900">
         <AdminNavbar />
         {/* Header */}
-        <HeaderStats staffCount={staffCount} subscribersCount={subscribersCount} ordersCount={ordersCount} salesTotal={formatter.format(salesTotal) } />
+        <HeaderStats staffCount={staffCount} subscribersCount={subscribersCount} ordersCount={ordersCount} salesTotal={formatter.format(parseInt(salesTotal)) } />
         <div className="px-4 md:px-10 mx-auto w-full h-90 -m-24">
           <div className="flex flex-wrap mt-4">
             <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">

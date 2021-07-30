@@ -31,7 +31,7 @@ const CheckoutCard = observer(() => {
     // meals,
     payment_status,
     payment_method,
-    ref_code,
+    staff,
     // waiter_id,
   } = orderDetails;
 
@@ -99,7 +99,7 @@ const CheckoutCard = observer(() => {
     status: orders.map((status) => status.status),
   };
 
-  const quantity = desc.reduce((a, b) => a + b, 0)
+  const quantity = desc.reduce((a, b) => a + b, 0);
 
   // on change function
   const handleChange = (e) => {
@@ -108,13 +108,16 @@ const CheckoutCard = observer(() => {
     setOrderDetails({ ...orderDetails, [name]: value });
 
     // console.log(prices.reduce((a, b) => a + b));
-    console.log(cartService.total);
-    console.log(desc.reduce((a, b) => a + b), []);
+    console.log(payment_status);
+    // console.log(
+    //   desc.reduce((a, b) => a + b),
+    //   []
+    // );
   };
 
   // payment toggle
   const togglePaymentStatus = () => {
-    const status = payment_status === "pending" ? "complete" : "pending";
+    const status = payment_status === true ? true : false;
     if (status === "pending") {
       setOrderDetails({
         ...orderDetails,
@@ -170,7 +173,7 @@ const CheckoutCard = observer(() => {
       //   return
       // }
 
-      if (payment_status === "complete" && !payment_method) {
+      if (payment_status === true && !payment_method) {
         addToast("Select Payment Method!", {
           appearance: "error",
           autoDismiss: true,
@@ -187,7 +190,7 @@ const CheckoutCard = observer(() => {
         // status,
         payment_status,
         payment_method,
-        ref_code,
+        staff,
         // waiter_name,
         // waiter_id,
       });
@@ -200,7 +203,7 @@ const CheckoutCard = observer(() => {
       //   status,
       //   payment_status,
       //   payment_method,
-      //   ref_code,
+      //   staff,
       //   // waiter_name,
       //   // waiter_id,
       // });
@@ -298,30 +301,45 @@ const CheckoutCard = observer(() => {
                     }
 
                   </div> */}
-
                 <div className="relative w-full mb-3  px-6">
                   <label className="block">
                     <span className="text-gray-700">Select Staff</span>
                   </label>
                   <select
-                    onChange={handleChange}
-                    name="ref_code"
+                      required
+                      onChange={handleChange}
+                    name="staff"
                     className="text-red-500 font-bold"
                   >
                     <option>Staff</option>
                     {options}
                   </select>
                 </div>
-
                 <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
                   <input
-                    type="checkbox"
+                    type="radio"
+                      required
+                      name="paymentstatus"
                     className="form-checkbox text-green-500"
-                    defaultChecked={payment_status === "complete"}
+                    value={payment_status}
+                    defaultChecked={payment_status === true}
                     onChange={togglePaymentStatus}
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>
                   <span className="ml-2">Paid</span>
+                </label>{" "}
+                <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
+                  <input
+                    type="radio"
+                      required
+                      name="paymentstatus"
+                    value={payment_status}
+                    className="form-checkbox text-green-500"
+                    defaultChecked={payment_status === false}
+                    onChange={togglePaymentStatus}
+                  />
+                  <span className="ml-2 hidden md:block">Mark as</span>
+                  <span className="ml-2">Unpaid</span>
                 </label>
               </div>
 
@@ -329,29 +347,28 @@ const CheckoutCard = observer(() => {
                 onSubmit={handleSubmit}
                 className="flex flex-wrap mt-3 mb-6"
               >
-                {payment_status === "pending" && (
-                  <div className="w-full lg:w-6/12 px-">
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                        htmlFor="payment method"
-                      >
-                        Payment Method
-                      </label>
-                      <select
-                        className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3"
-                        onChange={handleChange}
-                        name="payment_method"
-                        value={payment_method}
-                      >
-                        <option value="">Select Payment Method</option>
-                        <option value="cash">Cash</option>
-                        <option value="pos">POS</option>
-                      </select>
-                    </div>
+                {/* {payment_status === "pending" && ( */}
+                <div className="w-full lg:w-6/12 px-">
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="payment method"
+                    >
+                      Payment Method
+                    </label>
+                    <select
+                      className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3"
+                      onChange={handleChange}
+                      name="payment_method"
+                      value={payment_method}
+                      required
+                    >
+                      <option value="">Select Payment Method</option>
+                      <option value="cash">Cash</option>
+                      <option value="pos">POS</option>
+                    </select>
                   </div>
-                )}
-
+                </div>
                 <div className="w-full text-center flex justify-center items-center py-6">
                   <button
                     className={

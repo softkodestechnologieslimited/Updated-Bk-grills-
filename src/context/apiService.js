@@ -46,7 +46,7 @@ export class ApiService {
 
   getUsers = async () => this.axiosTwo.get("/staffs");
 
-  addStaff = async (payload) => this.axiosTwo.post("/staffs", payload);
+  addStaff = async (payload) => this.axiosTwo.post("/staffs/", payload);
 
   getSingleStaff = async (payload) => this.axiosTwo.get(`/staffs/${payload}`);
 
@@ -146,6 +146,10 @@ export class ApiService {
 
   createOrder = async (payload) => this.axiosTwo.post("/order/", payload);
 
+  getSingleOrder = async (payload) => this.axiosTwo.get(`/order/${payload}`)
+
+  // updateOrder = async (payload) =>  this.axiosTwo.post("")
+
   // ORDERS
 
   // getOrders = async () => this.axios.get("/orders", addAuthorizedHeaders());
@@ -153,11 +157,11 @@ export class ApiService {
   // createOrder = async (payload) =>
   //   this.axios.post("/orders", payload, addAuthorizedHeaders());
 
-  getSingleOrder = async (payload) =>
-    this.axios.get(`/orders/${payload.id}`, addAuthorizedHeaders());
+  // getSingleOrder = async (payload) =>
+  //   this.axios.get(`/orders/${payload.id}`, addAuthorizedHeaders());
 
-  updateOrder = async (payload) =>
-    this.axios.put(`/orders/${payload.id}`, payload, addAuthorizedHeaders());
+  // updateOrder = async (payload) =>
+  //   this.axios.put(`/orders/${payload.id}`, payload, addAuthorizedHeaders());
 
   deleteOrder = async (payload) =>
     this.axios.delete(`/orders/${payload.id}`, addAuthorizedHeaders());
