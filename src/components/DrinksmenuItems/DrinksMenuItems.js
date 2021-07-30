@@ -25,16 +25,15 @@ const DrinksMenuItems = ({ menuItems }) => {
                       <span>
                         <h1>{menuItems.title}</h1>
 
-                        <p>{menuItems.desc}</p>
+                        <p>{menuItems.price}</p>
                       </span>
 
                       <span>
                         <p>
-                          Lorem ipsum is a dummy text generated as a placeholder
-                          text
+                         {menuItems.desc}
                         </p>
 
-                        <p>garlic, vegetable, bread</p>
+                        {/* <p>garlic, vegetable, bread</p> */}
                       </span>
                     </div>
                   </div>
