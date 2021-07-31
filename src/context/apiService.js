@@ -88,6 +88,8 @@ export class ApiService {
 
   getSingleMeal = async (payload) => this.axiosTwo.get(`/items/${payload}`);
 
+  updateMeal = async (id, payload) => this.axiosTwo.patch(`/items/${id}/`, payload)
+
   deleteMeal = async (payload) => this.axiosTwo.delete(`/items/${payload.id}`);
 
   // MEALS
@@ -148,7 +150,7 @@ export class ApiService {
 
   getSingleOrder = async (payload) => this.axiosTwo.get(`/order/${payload}`)
 
-  // updateOrder = async (payload) =>  this.axiosTwo.post("")
+  updateOrder = async (id, payload) =>  this.axiosTwo.patch(`/order/${id}/`, payload)
 
   // ORDERS
 

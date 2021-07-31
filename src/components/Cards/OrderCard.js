@@ -9,7 +9,7 @@ import FullScreenLoader from "../fullScreenLoader";
 
 const OrderCard = () => {
   // const [orderDetails, setOrderDetails] = useState({  meals: [], payment_method: "", payment_status: "", prices: "", waiter_name: "", status: '' });
-  const [orderDetails, setOrderDetails] = useState({});
+  const [orderDetails, setOrderDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const history = useHistory();
@@ -24,26 +24,20 @@ const OrderCard = () => {
   const getOrder = async () => {
     try {
       setIsLoading(true);
-      const order = await apiService.getSingleOrder(id);
-      console.log(order);
-      const {
-        items,
-        quantity,
-        payment_method,
-        payment_status,
-        prices,
-        staff,
-        status,
-      } = order;
-      setOrderDetails({
-        items,
-        quantity,
-        payment_method,
-        payment_status,
-        prices,
-        staff,
-        status,
-      });
+      const { data } = await apiService.getSingleOrder(id);
+      console.log(data);
+      // const {
+      //   items,
+      // ordered,
+      //   quantity,
+      //   payment_method,
+      //   payment_status,
+      //   prices,
+      //   staff,
+      //   status,
+      // ref_code
+      // } = data;
+      setOrderDetails(data);
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
@@ -66,12 +60,14 @@ const OrderCard = () => {
 
   const {
     items,
+    ordered,
     quantity,
     payment_method,
     payment_status,
     prices,
     staff,
     status,
+    ref_code
   } = orderDetails;
 
   const updateOrder = async () => {
@@ -84,12 +80,12 @@ const OrderCard = () => {
     }
 
     try {
-      const update = {
-        id,
-        ...orderDetails,
-      };
+      // const update = {
+      //   id,
+      //   ...orderDetails,
+      // };
 
-      const { data } = await apiService.updateOrder(update);
+      const { data } = await apiService.updateOrder(id, orderDetails);
       const updatedOrder = data.data;
 
       orderService.updateOrder(updatedOrder);
@@ -171,22 +167,23 @@ const OrderCard = () => {
                   </th>
                 </tr>
               </thead>
+
+         
               <tbody className="text-gray-800">
-                {/* {meals &&
-                  meals.map((meal, idx) => (
+                {/* {orderDetails &&
+                  orderDetails.map((meal, idx) => (
                     <tr key={idx}>
                       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                         {meal.items}
-                      </th>
+                      </th>o
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                         {meal.quantity}
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                        &#8358;{meal.price}
+                        &#8358;{meal.prices}
                       </td>
                     </tr>
-                  ))
-                }     */}
+                  ))} */}
 
                 {/* {meals &&
                   meals.map((meal, idx) => (    ))
@@ -202,6 +199,9 @@ const OrderCard = () => {
                     &#8358;{prices}
                   </td>
                 </tr>
+                <p className="px-3 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                TOTAL: {ref_code}
+              </p>
 
                 {/* <tr>
                   <th className="border-t-0 font-semibold uppercase bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
@@ -238,7 +238,10 @@ const OrderCard = () => {
                   <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
                     Staff Name
                   </span>
-                  <input value={staff} className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize" />
+                  <input
+                    value={staff}
+                    className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
+                  />
                   {/* </p> */}
                 </div>
               </div>
@@ -260,13 +263,13 @@ const OrderCard = () => {
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
+                <div className="relative w-full ">
                   <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
                     Payment Status
                   </span>
-                  <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
+                  {/* <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
                     {payment_status}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
@@ -289,7 +292,7 @@ const OrderCard = () => {
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
-                    checked={status === true}
+                    checked={ordered === true}
                     onChange={toggleOrderStatus}
                   />
                   <span className="ml-2 hidden md:block">Order</span>

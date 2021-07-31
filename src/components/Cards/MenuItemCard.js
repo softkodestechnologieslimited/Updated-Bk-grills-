@@ -10,13 +10,7 @@ import FullScreenLoader from "../fullScreenLoader";
 
 const StockItemCard = () => {
   const [itemDetails, setItemDetails] = useState({
-    item: "",
-    desc: "",
-    category: "",
-    price: "",
-    addQuantity: "",
-    status: '',
-    image: null
+ 
   });
 
   const { mealService } = useContext(AppStateContext);
@@ -40,7 +34,7 @@ const StockItemCard = () => {
     // console.log(status);
 
     // const { item, desc, category, price, status, image } = meal;
-    setItemDetails( meal.data);
+    setItemDetails(meal.data);
     // setImageUrl(image);
   };
 
@@ -49,34 +43,26 @@ const StockItemCard = () => {
     // eslint-disable-next-line
   }, []);
 
-  const {
-    item,
-    desc,
-    category,
-    price,
-    addQuantity,
-    status,
-    image,
-  } = itemDetails;
+  const { item, desc, category, price, addQuantity, status, image } =
+    itemDetails;
 
+    //eslint-disable-next-line
   let newQuantity;
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // further validations can be done on the input
-      if (!item || !category || !price || !desc) {
-        addToast("Fill all fields please", {
-          appearance: "error",
-          autoDismiss: true,
-        });
+      // if (!item || !category || !price || !desc) {
+      //   addToast("Fill all fields please", {
+      //     appearance: "error",
+      //     autoDismiss: true,
+      //   });
 
-        return;
-      }
+      //   return;
+      // }
       setIsLoading(true);
-
 
       if (desc === null) {
         newQuantity = parseInt(addQuantity);
@@ -86,18 +72,13 @@ const StockItemCard = () => {
 
       // console.log(newQuantity);
 
-      const response = await apiService.updateMeal({
+      const response = await apiService.updateMeal(
         id,
-        item,
-        category,
-        price,
-        desc: newQuantity,
-        status,
-        image
-      });
+        itemDetails
+      );
 
       const { data } = response.data;
-      console.log(data)
+      console.log(data);
       mealService.updateMeal(data);
       addToast("Meal updated successfully", {
         appearance: "success",
@@ -110,7 +91,7 @@ const StockItemCard = () => {
       addToast(message, {
         appearance: "error",
         autoDismiss: true,
-    });
+      });
       setIsLoading(false);
     }
   };
@@ -125,7 +106,7 @@ const StockItemCard = () => {
     //   };
     // });
 
-    setItemDetails({[name]: value})
+    setItemDetails({ [name]: value });
     console.log(value);
     console.log(itemDetails);
   };
@@ -136,7 +117,7 @@ const StockItemCard = () => {
         ...prevDetails,
         status: !prevDetails.status,
       };
-        console.log(status);
+      console.log(status);
 
       return newState;
     });
@@ -248,7 +229,8 @@ const StockItemCard = () => {
                   />
                   <span className="ml-2 text-gray-700">In stock</span>
                 </label>
-              </div>   <div className="flex mt-6">
+              </div>{" "}
+              <div className="flex mt-6">
                 <label className="flex items-center">
                   <input
                     type="checkbox"

@@ -81,7 +81,7 @@ const StockTable = ({
 
                     {meal.status  === true  
                       ? "Available"
-                      : "low in Stock"}
+                      : "Out of Stock"}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                     {/* {meal.quantity || ( */}

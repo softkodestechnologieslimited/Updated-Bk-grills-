@@ -29,20 +29,17 @@ const AddExpense = () => {
   const [error, setError] = useState("");
   const history = useHistory();
   const { addToast } = useToasts();
-
-  // const dropdownData = staffService.allStaff;
-
   const { item, cost, staff } = itemDetails;
 
   const desc = moment(startDate).format("MMMM DD YYYY");
 
   // sets staff when component mounts
-  const setStaff = () => {
-    // const user = authService.currentUser;
-    // const { id, name } = user;
+  // const setStaff = () => {
+  //   // const user = authService.currentUser;
+  //   // const { id, name } = user;
 
-    // setItemDetails({ ...itemDetails, staff: name, cost: id });
-  };
+  //   // setItemDetails({ ...itemDetails, staff: name, cost: id });
+  // };
 
   const getStaff = async () => {
     const {data} = await apiService.getUsers()
@@ -54,7 +51,7 @@ const AddExpense = () => {
   const dropdownData = staffService.allStaff
 
   useEffect(() => {
-    setStaff();
+    // setStaff();
     getStaff()
 
     // eslint-disable-next-line
@@ -181,7 +178,8 @@ const AddExpense = () => {
                       <label className="block">
                         <span className="text-gray-700">Select Staff</span>
                       </label>
-                      <select onChange={handleChange} name="staff" className="text-red-500 font-bold">
+                      <select onChange={handleChange} name="staff" className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3">
+                        <option>Select Staff</option>
                         {options}
                       </select>
                     </div>

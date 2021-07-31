@@ -29,7 +29,7 @@ const CheckoutCard = observer(() => {
 
   const {
     // meals,
-    payment_status,
+    payment_status = false,
     payment_method,
     staff,
     // waiter_id,
@@ -75,10 +75,13 @@ const CheckoutCard = observer(() => {
         {meal.item}
       </th>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-        &#8358; {meal.quantity * meal.price}
+        &#8358; {meal.price}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
         {meal.quantity}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+        &#8358; {meal.quantity * meal.price}
       </td>
       <td className="border-t-0 px-6 text-red-500 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 cursor-pointer">
         <i
@@ -91,45 +94,56 @@ const CheckoutCard = observer(() => {
 
   const orders = cartService.meals;
 
-  const { items, desc, category, prices } = {
+  const { items, desc, category, prices, ref_code } = {
     items: orders.map((item) => item.item).toString(),
-    desc: orders.map((quantity) => quantity.quantity),
+    desc: orders.map((quantity) => quantity.quantity).toString(),
     category: orders.map((category) => category.category).toString(),
-    prices: parseInt(cartService.total),
-    status: orders.map((status) => status.status),
+    prices: orders.map((prices) => prices.price).toString(),
+    ref_code: parseInt(cartService.total)
   };
 
-  const quantity = desc.reduce((a, b) => a + b, 0);
+  const quantity = desc;
 
   // on change function
   const handleChange = (e) => {
     const { value, name } = e.target;
 
     setOrderDetails({ ...orderDetails, [name]: value });
-
-    // console.log(prices.reduce((a, b) => a + b));
-    console.log(payment_status);
-    // console.log(
-    //   desc.reduce((a, b) => a + b),
-    //   []
-    // );
+    console.log(ref_code);
   };
 
   // payment toggle
   const togglePaymentStatus = () => {
-    const status = payment_status === 'true' ? true : false;
-    if (status === "pending") {
+    const status = payment_status === "true" ? false : true;
+    if (status === true) {
       setOrderDetails({
         ...orderDetails,
         payment_status: status,
         payment_method: "",
       });
-      console.log(payment_status);
+      console.log(
+        items,
+        quantity,
+        category,
+        prices,
+        payment_status,
+        payment_method,
+        staff
+      );
     } else {
-      console.log("else");
+      console.log(
+        items,
+        quantity,
+        category,
+        prices,
+        payment_status,
+        payment_method,
+        staff,
+        ref_code
+      );
       setOrderDetails({ ...orderDetails, payment_status: status });
     }
-    console.log("pay", payment_method);
+    console.log(payment_method);
   };
 
   const getStaff = async () => {
@@ -187,12 +201,10 @@ const CheckoutCard = observer(() => {
         quantity: quantity,
         category,
         prices,
-        // status,
         payment_status,
         payment_method,
         staff,
-        // waiter_name,
-        // waiter_id,
+        ref_code
       });
 
       // ;await apiService.createOrder({
@@ -261,7 +273,9 @@ const CheckoutCard = observer(() => {
                       <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                         Quantity
                       </th>
-                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"></th>
+                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                        SUBTOTAL
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="text-gray-800">
@@ -303,13 +317,15 @@ const CheckoutCard = observer(() => {
                   </div> */}
                 <div className="relative w-full mb-3  px-6">
                   <label className="block">
-                    <span className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3">Select Staff</span>
+                    <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                      Select Staff
+                    </span>
                   </label>
                   <select
-                      required
-                      onChange={handleChange}
+                    required
+                    onChange={handleChange}
                     name="staff"
-                    className="text-red-500 font-bold"
+                    className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3"
                   >
                     <option>Staff</option>
                     {options}
@@ -317,17 +333,17 @@ const CheckoutCard = observer(() => {
                 </div>
                 <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
                   <input
-                    type="radio"
-                      name="paymentstatus"
+                    type="checkbox"
+                    name="payment_status"
                     className="form-checkbox text-green-500"
                     value={payment_status}
-                    defaultChecked={payment_status === 'true'}
+                    Checked={payment_status === "true"}
                     onChange={togglePaymentStatus}
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>
                   <span className="ml-2">Paid</span>
                 </label>{" "}
-                <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
+                {/* <label className="flex items-center justify-end lg:w-4/12 text-gray-800 px-6 py-5">
                   <input
                     type="radio"
                       name="paymentstatus"
@@ -338,12 +354,12 @@ const CheckoutCard = observer(() => {
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>
                   <span className="ml-2">Unpaid</span>
-                </label>
+                </label> */}
               </div>
 
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-wrap mt-3 mb-6"
+                className="flex flex-wrap mt-3 mb-6 px-6"
               >
                 {/* {payment_status === "pending" && ( */}
                 <div className="w-full lg:w-6/12 px-">

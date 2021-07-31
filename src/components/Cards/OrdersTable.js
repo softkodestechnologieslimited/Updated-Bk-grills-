@@ -61,7 +61,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                 </th>
                 <th
                   className=
-                  "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200"
+                  "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-center bg-gray-100 text-gray-600 border-gray-200"
                 >
                   Payment Method
                 </th>
@@ -95,21 +95,21 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                         {order.staff}
                       </span>
                     </th>
-                    <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                    <td className="border-t-0 px-6 text-center text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       <i className={"fas fa-circle mr-2 " + (order.status === "completed" ? "text-green-500" : "text-orange-500")}></i> {order.status}
                     </td>
-                    <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                    <td className="border-t-0 px-6 text-center text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       <i className={"fas fa-circle mr-2 " + (order.payment_status === true ? "text-green-500" : "text-orange-500")}></i>
                       {order.payment_status}
                     </td>
-                    <td className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                    <td className="border-t-0 px-6 text-center text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       {order.payment_method || "Nil"}
                     </td>
                     {/* <td className={"border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 " + (currentUser.role === 'waiter' ? "hidden" : "block")}>
                       {order.waiter_name}
                     </td> */}
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                      &#8358;{order.prices}
+                      &#8358;{order.ref_code}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                       <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} deleted={deleted} />
