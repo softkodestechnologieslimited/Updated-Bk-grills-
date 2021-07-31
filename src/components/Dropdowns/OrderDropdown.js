@@ -11,12 +11,15 @@ import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
 import Jump from "react-reveal/Jump";
+import { useReactToPrint } from 'react-to-print';
+
 
 const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
   const node = useRef();
 
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
+  const printComponent = useRef()
   const btnDropdownRef = createRef();
   const popoverDropdownRef = createRef();
   const openDropdownPopover = () => {
@@ -97,6 +100,10 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
       });
     }
   };
+
+  // const handlePrint = async() => {
+  //   const print = await 
+  // }
 
   return (
     <div ref={node}>

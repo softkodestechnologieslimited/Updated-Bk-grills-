@@ -96,7 +96,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                       </span>
                     </th>
                     <td className="border-t-0 px-6 text-center text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                      <i className={"fas fa-circle mr-2 " + (order.status === "completed" ? "text-green-500" : "text-orange-500")}></i> {order.status}
+                      <i className={"fas fa-circle mr-2 " + (order.ordered === true ? "text-green-500" : "text-orange-500")}></i> {order.status}
                     </td>
                     <td className="border-t-0 px-6 text-center text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                       <i className={"fas fa-circle mr-2 " + (order.payment_status === true ? "text-green-500" : "text-orange-500")}></i>

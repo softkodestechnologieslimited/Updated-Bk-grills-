@@ -29,7 +29,7 @@ const CheckoutCard = observer(() => {
 
   const {
     // meals,
-    payment_status = false,
+    payment_status = null,
     payment_method,
     staff,
     // waiter_id,
@@ -71,9 +71,9 @@ const CheckoutCard = observer(() => {
   // cart items
   const cartitems = cartService.meals.map((meal) => (
     <tr key={nanoid()}>
-      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
         {meal.item}
-      </th>
+      </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
         &#8358; {meal.price}
       </td>
@@ -114,7 +114,7 @@ const CheckoutCard = observer(() => {
 
   // payment toggle
   const togglePaymentStatus = () => {
-    const status = payment_status === "true" ? false : true;
+    const status = payment_status === false ? true : false;
     if (status === true) {
       setOrderDetails({
         ...orderDetails,
@@ -276,6 +276,7 @@ const CheckoutCard = observer(() => {
                       <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                         SUBTOTAL
                       </th>
+                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-center">Delete</th>
                     </tr>
                   </thead>
                   <tbody className="text-gray-800">
@@ -337,7 +338,7 @@ const CheckoutCard = observer(() => {
                     name="payment_status"
                     className="form-checkbox text-green-500"
                     value={payment_status}
-                    Checked={payment_status === "true"}
+                    Checked={payment_status === true }
                     onChange={togglePaymentStatus}
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>

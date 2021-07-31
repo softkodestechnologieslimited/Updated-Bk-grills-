@@ -112,11 +112,11 @@ const OrderCard = () => {
     const { value, name } = e.target;
 
     setOrderDetails({ ...orderDetails, [name]: value });
-    console.log(items);
+    console.log(payment_status, ordered);
   };
 
   const togglePaymentStatus = () => {
-    const status = payment_status === "pending" ? "complete" : "pending";
+    const status = payment_status === false ?  true : false;
     const method = status === "pending" ? "" : payment_method;
 
     setOrderDetails({
@@ -127,8 +127,8 @@ const OrderCard = () => {
   };
 
   const toggleOrderStatus = () => {
-    const orderStatus = status === "pending" ? "completed" : "pending";
-    setOrderDetails({ ...orderDetails, status: orderStatus });
+    const orderStatus = ordered === false ? true : false;
+    setOrderDetails({ ...orderDetails, ordered: orderStatus });
   };
 
   return (
@@ -240,6 +240,8 @@ const OrderCard = () => {
                   </span>
                   <input
                     value={staff}
+                    name='staff'
+                    onChange={handleChange}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
                   />
                   {/* </p> */}
