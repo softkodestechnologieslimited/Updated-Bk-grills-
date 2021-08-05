@@ -29,9 +29,9 @@ const CheckoutCard = observer(() => {
 
   const {
     // meals,
-    payment_status = null,
-    payment_method,
-    staff,
+    payment_status = false,
+    payment_method ,
+    staff = '',
     // waiter_id,
   } = orderDetails;
 
@@ -119,7 +119,7 @@ const CheckoutCard = observer(() => {
       setOrderDetails({
         ...orderDetails,
         payment_status: status,
-        payment_method: "",
+        payment_method,
       });
       console.log(
         items,
@@ -380,13 +380,14 @@ const CheckoutCard = observer(() => {
                       <option value="">Select Payment Method</option>
                       <option value="cash">Cash</option>
                       <option value="pos">POS</option>
+                      <option  value="pending">Pending</option>
                     </select>
                   </div>
                 </div>
                 <div className="w-full text-center flex justify-center items-center py-6">
                   <button
                     className={
-                      (payment_status === "pending"
+                      (staff === ''
                         ? "bg-gray-700"
                         : "bg-blue-500") +
                       " text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex items-center"

@@ -112,7 +112,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                       &#8358;{order.ref_code}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                      <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.status} deleted={deleted} />
+                      <OrderDropdown refresh={refresh} id={order.id} orderStatus={order.ordered} deleted={deleted} />
                     </td>
                   </tr>
                 ))

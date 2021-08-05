@@ -70,16 +70,11 @@ const StockItemCard = () => {
         newQuantity = parseInt(desc) + parseInt(addQuantity);
       }
 
-      // console.log(newQuantity);
-
-      const response = await apiService.updateMeal(
+      await apiService.updateMeal(
         id,
         itemDetails
       );
 
-      const { data } = response.data;
-      console.log(data);
-      mealService.updateMeal(data);
       addToast("Meal updated successfully", {
         appearance: "success",
         autoDismiss: true,
@@ -224,7 +219,7 @@ const StockItemCard = () => {
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
-                    checked={status === true}
+                    checked={status}
                     onChange={handleCheck}
                   />
                   <span className="ml-2 text-gray-700">In stock</span>
@@ -235,7 +230,7 @@ const StockItemCard = () => {
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
-                    checked={status === false}
+                    checked={!status}
                     onChange={handleCheck}
                   />
                   <span className="ml-2 text-gray-700">Out of stock</span>

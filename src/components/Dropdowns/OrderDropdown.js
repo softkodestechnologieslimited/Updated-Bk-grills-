@@ -11,7 +11,7 @@ import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
 import Jump from "react-reveal/Jump";
-import { useReactToPrint } from 'react-to-print';
+// import { useReactToPrint } from 'react-to-print';
 
 
 const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
@@ -19,7 +19,7 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
 
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
-  const printComponent = useRef()
+  // const printComponent = useRef()
   const btnDropdownRef = createRef();
   const popoverDropdownRef = createRef();
   const openDropdownPopover = () => {
@@ -152,7 +152,7 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
                 Process Order
               </Link>
             </Jump>
-            {orderStatus === "completed" && (
+            {orderStatus === true && (
               <Jump>
                 <Link
                   to={`/dashboard/orders/print/${id}`}

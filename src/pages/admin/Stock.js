@@ -85,30 +85,30 @@ const Stock = observer(() => {
       return stockItem.category === category;
     }
     if (!query && status) {
-      return stockItem.instock === status;
+      return stockItem.status === status;
       // return stockItem.status === status; // future change
     }
 
     if (query && !category && !status) {
-      return stockItem.title.toLowerCase().includes(query);
+      return stockItem.item.toLowerCase().includes(query);
     }
 
     if (query && category) {
       return (
-        stockItem.title.toLowerCase().includes(query) &&
+        stockItem.item.toLowerCase().includes(query) &&
         stockItem.category === category
       );
     }
     if (query && status) {
       return (
-        stockItem.title.toLowerCase().includes(query) &&
-        stockItem.instock === status
+        stockItem.item.toLowerCase().includes(query) &&
+        stockItem.status === status
       );
     }
     if (query && status && category) {
       return (
-        stockItem.title.toLowerCase().includes(query) &&
-        stockItem.instock === status &&
+        stockItem.item.toLowerCase().includes(query) &&
+        stockItem.status === status &&
         stockItem.category === category
       );
     }
