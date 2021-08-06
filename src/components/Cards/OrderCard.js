@@ -146,6 +146,20 @@ const OrderCard = () => {
 
   const toggleEditOrder = () => {
     setEditOrder(!editOrder);
+    itemsTotal();
+  };
+
+  const itemsTotal = () => {
+    let total = 0;
+    const quantity = orderDetails.quantity.split(",");
+
+    quantity.forEach((quantity, index) => {
+      const prices = orderDetails.prices.split(",")[index];
+      console.log((total += quantity * prices));
+    });
+    // console.log(total);
+    setOrderDetails({ ...orderDetails, ref_code: total });
+    return total;
   };
 
   return (
@@ -171,7 +185,7 @@ const OrderCard = () => {
               {editOrder ? (
                 <span className="px-3 text-lg align-middle  py-3 text-xs text-green-500 uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                   <i
-                    onClick={toggleEditOrder}
+                    onClick={() => toggleEditOrder()}
                     className="fas fa-check cursor-pointer text-green"
                   ></i>
                 </span>
@@ -198,8 +212,8 @@ const OrderCard = () => {
                     Price &#8358;
                   </th>
                 </tr>
-              </thead> 
-              
+              </thead>
+
               <tbody>
                 {editOrder ? (
                   <>
@@ -226,6 +240,18 @@ const OrderCard = () => {
                               className="w-2/6 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
                               name="quantity"
                               value={orderDetails.quantity}
+                              onChange={handleChange}
+                            />
+                          </p>
+
+                          <p className="py-5">
+                            <label className="text-black font-semibold text-xl my-15">
+                              Prices
+                            </label>
+                            <input
+                              className="w-2/6 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
+                              name="prices"
+                              value={orderDetails.prices}
                               onChange={handleChange}
                             />
                           </p>
@@ -293,7 +319,7 @@ const OrderCard = () => {
                 )}
 
                 <tr className="py-5 text-black flex-auto border-t-0 font-semibold px-2 align-middle border-l-0 border-r-0 text-m whitespace-no-wrap py-4">
-                  TOTAL: &#8358; {ref_code}
+                  TOTAL: &#8358;{ref_code}
                 </tr>
               </tbody>
             </table>
@@ -327,9 +353,10 @@ const OrderCard = () => {
                     value={payment_method}
                   >
                     <option value="">Select Payment Method</option>
+                    <option value="pending">Pending</option>
                     <option value="cash">Cash</option>
                     <option value="pos">POS</option>
-                    <option value="pending">Pending</option>
+                    <option value="transfer">Transfer</option>
                   </select>
                 </div>
               </div>

@@ -55,7 +55,7 @@ const CheckoutCard = observer(() => {
     setWaiter();
     getStaff();
 
-    console.log(cartService.meals);
+    // console.log(cartService.meals);
     // createOrder()
 
     // eslint-disable-next-line
@@ -109,7 +109,7 @@ const CheckoutCard = observer(() => {
     const { value, name } = e.target;
 
     setOrderDetails({ ...orderDetails, [name]: value });
-    console.log(ref_code);
+    // console.log(ref_code);
   };
 
   // payment toggle
@@ -121,29 +121,29 @@ const CheckoutCard = observer(() => {
         payment_status: status,
         payment_method,
       });
-      console.log(
-        items,
-        quantity,
-        category,
-        prices,
-        payment_status,
-        payment_method,
-        staff
-      );
+      // console.log(
+      //   items,
+      //   quantity,
+      //   category,
+      //   prices,
+      //   payment_status,
+      //   payment_method,
+      //   staff
+      // );
     } else {
-      console.log(
-        items,
-        quantity,
-        category,
-        prices,
-        payment_status,
-        payment_method,
-        staff,
-        ref_code
-      );
+      // console.log(
+      //   items,
+      //   quantity,
+      //   category,
+      //   prices,
+      //   payment_status,
+      //   payment_method,
+      //   staff,
+      //   ref_code
+      // );
       setOrderDetails({ ...orderDetails, payment_status: status });
     }
-    console.log(payment_method);
+    // console.log(payment_method);
   };
 
   const getStaff = async () => {
@@ -152,7 +152,7 @@ const CheckoutCard = observer(() => {
       const response = await apiService.getUsers();
       const { data } = response;
       staffService.setStaff([...data]);
-      console.log(data);
+      // console.log(data);
       // refreshStaff()
     } catch (error) {
       const message = apiService.getErrorMessage(error);
@@ -338,7 +338,7 @@ const CheckoutCard = observer(() => {
                     name="payment_status"
                     className="form-checkbox text-green-500"
                     value={payment_status}
-                    Checked={payment_status === true }
+                    checked={payment_status === true }
                     onChange={togglePaymentStatus}
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>
@@ -378,9 +378,10 @@ const CheckoutCard = observer(() => {
                       value={payment_method}
                     >
                       <option value="">Select Payment Method</option>
-                      <option value="cash">Cash</option>
-                      <option value="pos">POS</option>
                       <option  value="pending">Pending</option>
+                      <option  value="cash">Cash</option>
+                      <option value="pos">POS</option>
+                      <option value="transfer">Transfer</option>
                     </select>
                   </div>
                 </div>

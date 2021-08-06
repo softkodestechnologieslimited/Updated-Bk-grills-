@@ -22,25 +22,9 @@ const ReceiptCard = () => {
   const getOrder = async () => {
     try {
       setIsLoading(true);
-      const order = await orderService.getSingleOrder(id);
-    //   const 
-    //    { items,
-    //     payment_method,
-    //     payment_status,
-    //     ref_code,
-    //     staff,
-    //     prices,
-    //     status,
-    //  } = order;
-      setOrderDetails({
-        items,
-        payment_method,
-        payment_status,
-        ref_code,
-        staff,
-        prices,
-      });
-      console.log(order);
+      const { data } = await apiService.getSingleOrder(id);
+      console.log(data);
+      setOrderDetails(data);
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
@@ -61,7 +45,7 @@ const ReceiptCard = () => {
     // eslint-disable-next-line
   }, []);
 
-  const { items, payment_method, payment_status,  staff, prices,ref_code} =
+  const {  payment_method, payment_status,  staff, ref_code} =
     orderDetails;
 
   return (
@@ -104,30 +88,53 @@ const ReceiptCard = () => {
               </tr>
             </thead>
             <tbody className="text-gray-800">
-              {orderDetails &&
-                [orderDetails].map((meal, idx) => (
-                  <tr key={idx}>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                      {meal.items}
+            <tr className="" valign="top">
+                    <td className="flex-auto text-center text-black">
+                      <>
+                        {[orderDetails.items]
+                          .join()
+                          .split(",")
+                          .map((items, idx) => (
+                            <ul className="flex-1" key={idx}>
+                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
+                                {items}
+                              </li>
+                            </ul>
+                          ))}
+                      </>
                     </td>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                      {meal.quantity}
+                    <td className="text-black flex-auto text-center">
+                      <>
+                        {[orderDetails.quantity]
+                          .join()
+                          .split(",")
+                          .map((quantity, idx) => (
+                            <ul className="flex-1" key={idx}>
+                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
+                                {quantity}
+                              </li>
+                            </ul>
+                          ))}
+                      </>
                     </td>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                      &#8358;{meal.prices}
+                    <td className="text-black  flex-auto text-center">
+                      <>
+                        {[orderDetails.prices]
+                          .join()
+                          .split(",")
+                          .map((prices, idx) => (
+                            <ul className="" key={idx}>
+                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
+                                {prices}
+                              </li>
+                            </ul>
+                          ))}
+                      </>
                     </td>
                   </tr>
-                ))}
-
-              <tr>
-                <th className="border-t-0 font-semibold uppercase bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                  Total
-                </th>
-                <td className="border-t-0 bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4"></td>
-                <td className="border-t-0 font-semibold bg-gray-100 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                  &#8358;{ref_code} 
-                </td>
-              </tr>
+                  <tr className="py-5 text-black flex-auto border-t-0 font-semibold px-2 align-middle border-l-0 border-r-0 text-m whitespace-no-wrap py-4">
+                  TOTAL: &#8358;{ref_code}
+                </tr>
             </tbody>
           </table>
 
@@ -147,7 +154,7 @@ const ReceiptCard = () => {
             <div className="w-full lg:w-6/12 px-4">
               <div className="relative w-full mb-3">
                 <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
-                  Waiter Name
+                  Staff Name
                 </span>
                 <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
                   {staff}
@@ -170,7 +177,9 @@ const ReceiptCard = () => {
                   Payment Status
                 </span>
                 <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
-                  {payment_status}
+                  {
+                    payment_status === true ? <p>paid</p> : <p>unpaid</p>
+                  }
                 </p>
               </div>
             </div>

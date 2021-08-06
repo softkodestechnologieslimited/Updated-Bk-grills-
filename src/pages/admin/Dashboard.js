@@ -85,7 +85,8 @@ const Dashboard = observer(() => {
       const response = await apiService.getOrders();
       const { data } = response;
       setOrdersCount(data.length)
-      const orderTotal = data.map(order => parseInt(order.prices))
+      const orderTotal = data.map(order => parseInt(order.ref_code))
+      console.log(data);
       setSalesTotal(orderTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0))
       orderService.setRecentOrders([...data]);
     } catch (error) {
