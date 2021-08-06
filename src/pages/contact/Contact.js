@@ -15,7 +15,15 @@ const Contact = () => {
 
   const [inputValue, setInputValue] = useState('')
 
-  const Contactmap = ({ text }) => <p>{text}</p>;
+  const Contactmap = ({ location, zoomLevel }) => <div></div>;
+
+  const location = {
+    lat: 5.58987436360215,
+    lng: 5.836546005994979,
+    address: 'Chateau Le Roi',
+    zoomLevel: 21,
+    // lat: 5.58987436360215, 5.836546005994979
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -41,8 +49,15 @@ const Contact = () => {
           </p>
           <div className="map">
 
-         <GoogleMapReact>
-         <Contactmap text="MAP"></Contactmap>
+         <GoogleMapReact
+         bootstrapURLKeys={{ key: 'AIzaSyB32jmC-fiJc1ep6r1FokJzi_96Gy6WM_w' }}
+         defaultCenter={location}
+         defaultZoom={location.zoomLevel}>
+         <Contactmap
+         lat={location.lat}
+         lng={location.lng}
+         text={location.address}
+         ></Contactmap>
          </GoogleMapReact>
           </div>
           <p>

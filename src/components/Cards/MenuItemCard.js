@@ -9,15 +9,13 @@ import Fade from "react-reveal/Fade";
 import FullScreenLoader from "../fullScreenLoader";
 
 const StockItemCard = () => {
-  const [itemDetails, setItemDetails] = useState({
- 
-  });
+  const [itemDetails, setItemDetails] = useState({});
 
   const { mealService } = useContext(AppStateContext);
 
   const { addToast } = useToasts();
   // const [status, setStatus] = useState(mealService.meals);
-  // const [status, setStatus] = useState(meal.data.status);
+  // const [imageUrl, setImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   // const [imageUrl, setImageUrl] = useState("");
   const params = useParams();
@@ -43,10 +41,10 @@ const StockItemCard = () => {
     // eslint-disable-next-line
   }, []);
 
-  const { item, desc, category, price, addQuantity, status, image } =
+  const { item, desc, category, price,  status, image } =
     itemDetails;
 
-    //eslint-disable-next-line
+  //eslint-disable-next-line
   let newQuantity;
 
   const handleSubmit = async (e) => {
@@ -64,16 +62,13 @@ const StockItemCard = () => {
       // }
       setIsLoading(true);
 
-      if (desc === null) {
-        newQuantity = parseInt(addQuantity);
-      } else {
-        newQuantity = parseInt(desc) + parseInt(addQuantity);
-      }
+      // if (desc === null) {
+      //   newQuantity = parseInt(addQuantity);
+      // } else {
+      //   newQuantity = parseInt(desc) + parseInt(addQuantity);
+      // }
 
-      await apiService.updateMeal(
-        id,
-        itemDetails
-      );
+      await apiService.updateMeal(id, itemDetails);
 
       addToast("Meal updated successfully", {
         appearance: "success",
@@ -118,6 +113,17 @@ const StockItemCard = () => {
     });
   };
 
+  const handleImageInput = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = () =>
+      setItemDetails({ ...itemDetails, image: reader.result });
+
+    reader.readAsDataURL(file);
+  };
   return (
     <>
       {isLoading ? <FullScreenLoader /> : <></>}
@@ -160,7 +166,7 @@ const StockItemCard = () => {
                   <span className="text-gray-700">Quantity</span>
                   <input
                     className="form-input text-gray-700 mt-1 block w-full my-4 p-3"
-                    placeholder="Description"
+                    placeholder="Quantity"
                     name="desc"
                     value={desc}
                     onChange={handleChange}
@@ -170,8 +176,18 @@ const StockItemCard = () => {
               </div>
               <div className="relative w-full mb-3">
                 <label className="block">
-                  <span className="text-gray-700">Image</span>
+                  <span className="text-black-700">Image</span>
                   {image ? <MealImage src={image} /> : "no image set"}
+                </label>
+              </div>
+              <div className="relative w-full mb-3">
+                <label className="block">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageInput}
+                    className="form-input text-gray-700 mt-1 block w-full my-4 py-3"
+                  />
                 </label>
               </div>
               <div className="relative w-full mb-3">
@@ -184,12 +200,12 @@ const StockItemCard = () => {
                     value={category}
                   >
                     <option value="">Select Category</option>
-                    <option value="food">Food</option>
-                    <option value="drinks">Drinks</option>
+                    <option name="food" value="food">Food</option>
+                    <option name="drinks" value="drinks">Drinks</option>
                   </select>
                 </label>
               </div>
-              <div className="relative w-full mb-3">
+              {/* <div className="relative w-full mb-3">
                 <label className="block">
                   <span className="text-gray-700">Add Quantity</span>
                   <input
@@ -200,7 +216,7 @@ const StockItemCard = () => {
                     onChange={handleChange}
                   />
                 </label>
-              </div>
+              </div> */}
               <div className="relative w-full mb-3">
                 <label className="block">
                   <span className="text-gray-700">Price</span>
