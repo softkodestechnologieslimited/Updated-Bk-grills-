@@ -33,6 +33,7 @@ const StockItemCard = () => {
 
     // const { item, desc, category, price, status, image } = meal;
     setItemDetails(meal.data);
+    // console.log(meal.data);
     // setImageUrl(image);
   };
 
@@ -41,8 +42,7 @@ const StockItemCard = () => {
     // eslint-disable-next-line
   }, []);
 
-  const { item, desc, category, price,  status, image } =
-    itemDetails;
+  const { item, desc, category, price, status, image } = itemDetails;
 
   //eslint-disable-next-line
   let newQuantity;
@@ -51,24 +51,8 @@ const StockItemCard = () => {
     e.preventDefault();
 
     try {
-      // further validations can be done on the input
-      // if (!item || !category || !price || !desc) {
-      //   addToast("Fill all fields please", {
-      //     appearance: "error",
-      //     autoDismiss: true,
-      //   });
-
-      //   return;
-      // }
-      setIsLoading(true);
-
-      // if (desc === null) {
-      //   newQuantity = parseInt(addQuantity);
-      // } else {
-      //   newQuantity = parseInt(desc) + parseInt(addQuantity);
-      // }
-
       await apiService.updateMeal(id, itemDetails);
+      setIsLoading(true);
 
       addToast("Meal updated successfully", {
         appearance: "success",
@@ -88,19 +72,17 @@ const StockItemCard = () => {
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-
-    // setItemDetails((prevDetails) => {
-    //   return {
-    //     ...prevDetails,
-    //     [name]: value,
-    //   };
-    // });
+    // handleImage()
 
     setItemDetails({ [name]: value });
     console.log(value);
     console.log(itemDetails);
   };
-
+  useEffect(() => {
+    handleImage()
+    console.log("image");
+    //eslint-disable-next-line
+  });
   const handleCheck = () => {
     setItemDetails((prevDetails) => {
       const newState = {
@@ -113,9 +95,15 @@ const StockItemCard = () => {
     });
   };
 
+  const handleImage = () => {
+    if (image) {
+      const { image, ...newItemDetails } = itemDetails;
+      setItemDetails(newItemDetails);
+    } else {console.log('immmm');}
+  };
+
   const handleImageInput = (e) => {
     const file = e.target.files[0];
-    if (!file) return;
 
     const reader = new FileReader();
 
@@ -185,6 +173,7 @@ const StockItemCard = () => {
                   <input
                     type="file"
                     accept="image/*"
+                    onClick={handleImage}
                     onChange={handleImageInput}
                     className="form-input text-gray-700 mt-1 block w-full my-4 py-3"
                   />
@@ -200,8 +189,12 @@ const StockItemCard = () => {
                     value={category}
                   >
                     <option value="">Select Category</option>
-                    <option name="food" value="food">Food</option>
-                    <option name="drinks" value="drinks">Drinks</option>
+                    <option name="food" value="food">
+                      Food
+                    </option>
+                    <option name="drinks" value="drinks">
+                      Drinks
+                    </option>
                   </select>
                 </label>
               </div>
@@ -254,6 +247,7 @@ const StockItemCard = () => {
               </div>
               <div className="text-center mt-8">
                 <button
+                  onClick={handleImage}
                   className="bg-gray-900 custom-btn text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="submit"
                 >
