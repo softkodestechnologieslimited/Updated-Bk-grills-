@@ -19,9 +19,9 @@ const HeaderStats = ({
     setShowModal((prev) => (prev = true));
   };
 
-  const closeModal = () => {
-    setShowModal((prev) => (prev = false));
-  };
+  // const closeModal = () => {
+  //   setShowModal((prev) => (prev = false));
+  // };
 
   return (
     <>
