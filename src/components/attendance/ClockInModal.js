@@ -70,8 +70,8 @@ const ClockInModal = (props) => {
 
   const setAttendance = async () => {
     try {
-      const response = await apiService.setAttendance(attendancePayload);
-      const { data } = response;
+       await apiService.setAttendance(attendancePayload);
+      // const { data } = response;
       // console.log(data);
       addToast("Clockin Success", {
         appearance: "success",

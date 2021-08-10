@@ -67,7 +67,7 @@ const OrderCard = () => {
     // quantity,
     // prices,
     ordered,
-    ordered_date,
+    // ordered_date,
     payment_method,
     payment_status,
     staff,
