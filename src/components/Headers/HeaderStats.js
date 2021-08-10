@@ -1,11 +1,27 @@
-import React from "react";
-import Fade from 'react-reveal/Fade';
+import React, { useState } from "react";
+import Fade from "react-reveal/Fade";
 
 // components
 import CardStats from "../Cards/CardStats.js";
+import FilteredSalesCard from "../../components/Cards/FilteredSalesCard";
 
+const HeaderStats = ({
+  staffCount,
+  customersCount,
+  ordersCount,
+  salesTotal,
+  subscribersCount,
+}) => {
+  const [showModal, setShowModal] = useState(false);
 
-const HeaderStats = ({ staffCount, customersCount, ordersCount, salesTotal, subscribersCount }) => {
+  const handleShowModal = () => {
+    setShowModal((prev) => (prev = true));
+  };
+
+  const closeModal = () => {
+    setShowModal((prev) => (prev = false));
+  };
+
   return (
     <>
       {/* Header */}
@@ -15,7 +31,10 @@ const HeaderStats = ({ staffCount, customersCount, ordersCount, salesTotal, subs
             {/* Card stats */}
             <Fade left cascade>
               <div className="flex flex-wrap">
-                <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                <div
+                  onClick={handleShowModal}
+                  className="w-full lg:w-6/12 xl:w-3/12 px-4 cursor-pointer"
+                >
                   <CardStats
                     statSubtitle="SALES"
                     statTitle={salesTotal}
@@ -40,25 +59,33 @@ const HeaderStats = ({ staffCount, customersCount, ordersCount, salesTotal, subs
                   />
                 </div>
                 <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-                {/* <CardStats
+                  {/* <CardStats
                     statSubtitle="CUSTOMERS"
                     statTitle={customersCount}
                     statIconName="fas fa-users"
                     statIconColor="bg-pink-500"
-                  />*/}<CardStats 
-                  statSubtitle="SUBSCRIBERS"
-                  statTitle={subscribersCount}
-                  statIconName="fas fa-users"
-                  statIconColor="bg-pink-500"
-                />
+                  />*/}
+                  <CardStats
+                    statSubtitle="SUBSCRIBERS"
+                    statTitle={subscribersCount}
+                    statIconName="fas fa-users"
+                    statIconColor="bg-pink-500"
+                  />
+
+
                 </div>
               </div>
             </Fade>
           </div>
         </div>
+        {showModal && (
+          <Fade>
+            <FilteredSalesCard closeModal={closeModal} />
+          </Fade>
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default HeaderStats
+export default HeaderStats;

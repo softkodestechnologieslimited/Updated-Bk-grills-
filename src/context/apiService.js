@@ -52,6 +52,10 @@ export class ApiService {
 
   updateStaffDetails = async (id, payload) => this.axiosTwo.patch(`/staffs/${id}/`, payload)
 
+  getAttendance = async () => this.axiosTwo.get("/attendance")
+
+  setAttendance = async (payload) => this.axiosTwo.post("/attendance/", payload)
+
   // USER
 
   // login = async (payload) => this.axios.post("/auth/login", payload);

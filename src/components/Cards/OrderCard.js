@@ -19,7 +19,7 @@ const OrderCard = () => {
     payment_method: "",
     payment_status: null,
     prices: "",
-    ordered_date: "",
+    ordered_date: null,
     staff: "",
     status: null,
     ref_code: "",
@@ -67,7 +67,7 @@ const OrderCard = () => {
     // quantity,
     // prices,
     ordered,
-    // ordered_date,
+    ordered_date,
     payment_method,
     payment_status,
     staff,
@@ -116,7 +116,7 @@ const OrderCard = () => {
     const { value, name } = e.target;
 
     setOrderDetails({ ...orderDetails, [name]: value });
-    console.log([orderDetails.items].join().split(","), newDate(new Date()));
+    console.log(orderDetails);
   };
 
   const togglePaymentStatus = () => {
@@ -130,15 +130,12 @@ const OrderCard = () => {
     });
   };
   const orderedDate = () => {
-    const newDate = new Date();
-    const date = ordered === true ? newDate : " ";
+    const date = !ordered ? newDate(new Date()) : null;
     setOrderDetails({ ...orderDetails, ordered_date: date });
-    // setOrderDetails({ ...orderDetails, ordered_date: "" });
-    console.log(date);
+    console.log(orderDetails.ordered_date, date);
   };
   const toggleOrderStatus = () => {
     const orderStatus = ordered === false ? true : false;
-    orderedDate();
     setOrderDetails({ ...orderDetails, ordered: orderStatus });
   };
 
@@ -389,6 +386,7 @@ const OrderCard = () => {
                     className="form-checkbox text-green-500"
                     checked={ordered === true}
                     onChange={toggleOrderStatus}
+                    onClick={orderedDate}
                   />
                   <span className="ml-2 hidden md:block">Order</span>
                   <span className="ml-2">Completed</span>

@@ -201,7 +201,7 @@ const AdminSideNav = () => {
           ></i>{" "}
               Customers
             </Link>
-      </li> */}
+      </li> 
 
       <li className="items-center">
         <Link
@@ -223,8 +223,8 @@ const AdminSideNav = () => {
           ></i>{" "}
               Subscribers
             </Link>
-      </li>
-      <li className="items-center">
+      </li>*/}
+      {/* <li className="items-center">
         <Link
           className={
             "text-xs uppercase py-3 font-bold block " +
@@ -244,7 +244,7 @@ const AdminSideNav = () => {
           ></i>{" "}
               Staff
             </Link>
-      </li>
+      </li> */}
 
       {/* Divider */}
       <hr className="my-4 md:min-w-full" />
@@ -270,7 +270,7 @@ const AdminSideNav = () => {
               Stock
             </Link>
       </li>
-      <li className="items-center">
+     {/*   <li className="items-center">
         <Link
           className={
             "text-xs uppercase py-3 font-bold block " +
@@ -291,7 +291,7 @@ const AdminSideNav = () => {
               Expenses
             </Link>
       </li>
-      <li className="items-center">
+     <li className="items-center">
         <Link
           className={
             "text-xs uppercase py-3 font-bold block " +
@@ -311,7 +311,7 @@ const AdminSideNav = () => {
           ></i>{" "}
               Sales Report
             </Link>
-      </li>
+      </li> */}
     </>
   )
 }
