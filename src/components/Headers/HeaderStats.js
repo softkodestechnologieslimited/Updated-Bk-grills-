@@ -3,7 +3,7 @@ import Fade from "react-reveal/Fade";
 
 // components
 import CardStats from "../Cards/CardStats.js";
-import FilteredSalesCard from "../../components/Cards/FilteredSalesCard";
+import FilteredSalesCard from ".././Cards/FilteredSalesCard";
 
 const HeaderStats = ({
   staffCount,
@@ -27,6 +27,11 @@ const HeaderStats = ({
       {/* Header */}
       <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12 md:mt-0 mt-32">
         <div className="px-4 md:px-10 mx-auto w-full">
+        {showModal && (
+          <Fade>
+            <FilteredSalesCard closeModal={closeModal} />
+          </Fade>
+        )}
           <div>
             {/* Card stats */}
             <Fade left cascade>
@@ -78,11 +83,7 @@ const HeaderStats = ({
             </Fade>
           </div>
         </div>
-        {showModal && (
-          <Fade>
-            <FilteredSalesCard closeModal={closeModal} />
-          </Fade>
-        )}
+       
       </div>
     </>
   );
