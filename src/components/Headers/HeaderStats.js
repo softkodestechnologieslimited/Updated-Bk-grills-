@@ -3,7 +3,8 @@ import Fade from "react-reveal/Fade";
 
 // components
 import CardStats from "../Cards/CardStats.js";
-import FilteredSalesCard from ".././Cards/FilteredSalesCard";
+// import FilteredSalesCard from "../Cards/FilteredSalesCard.js"
+
 
 const HeaderStats = ({
   staffCount,
@@ -29,7 +30,7 @@ const HeaderStats = ({
         <div className="px-4 md:px-10 mx-auto w-full">
         {showModal && (
           <Fade>
-            <FilteredSalesCard closeModal={closeModal} />
+            {/* <FilteredSalesCard closeModal={closeModal} /> */}
           </Fade>
         )}
           <div>
