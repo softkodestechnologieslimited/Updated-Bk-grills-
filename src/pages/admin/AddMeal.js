@@ -81,7 +81,7 @@ const AddItem = () => {
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    console.log(imageUrl);
+    console.log(category);
 
     setItemDetails({ ...itemDetails, [name]: value });
   };
@@ -124,7 +124,7 @@ const AddItem = () => {
 
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg bg-gray-300">
                   <form
-                  encType="multipart/form-data"
+                    encType="multipart/form-data"
                     onSubmit={handleSubmit}
                     className="flex-auto p-5 lg:p-10"
                   >
@@ -155,18 +155,21 @@ const AddItem = () => {
                       </label>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label className="block">
-                        <span className="text-gray-700">Category</span>
-                        <input
-                          className="form-input text-gray-700 mt-1 block w-full my-4 p-3"
-                          placeholder="category"
+                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                        <span className="text-gray-700">Select Category</span>
+                        <select
+                          className="form-select block w-full my-4 p-3"
+                          onChange={handleChange}
                           name="category"
                           value={category}
-                          onChange={handleChange}
                           required
-                        />
+                        >
+                          <option value="">Select Category</option>
+                          <option value="food">Food</option>
+                          <option value="drinks">Drinks</option>
+                        </select>
                       </label>
-                    </div>{" "}
+                    </div>
                     <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Price</span>
@@ -192,20 +195,8 @@ const AddItem = () => {
                         />
                       </label>
                     </div>
-                    {/* <div className="relative w-full mb-3">
-                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
-                        <span className="text-gray-700">Select Category</span>
-                        <select className="form-select block w-full my-4 p-3" onChange={handleChange} name='category' value={category} required>
-                          <option value=''
-                          >Select Category</option>
-                          <option value='food'
-                          >Food</option>
-                          <option value='drinks'
-                          >Drinks</option>
-                        </select>
-                      </label>
-                    </div>
-                    <div className="relative w-full mb-3">
+                    
+                    {/*     <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Quantity</span>
                         <input className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Quantity" name='quantity' value={quantity}
