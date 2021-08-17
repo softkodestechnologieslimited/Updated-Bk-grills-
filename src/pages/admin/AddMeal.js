@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
@@ -23,7 +23,7 @@ const AddItem = () => {
   });
   const [error, setError] = useState("");
   // const [status, setStatus] = useState(false)
-  const [status] = useState(true);
+  const [status, setStatus] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { mealService } = useContext(AppStateContext);
@@ -31,6 +31,14 @@ const AddItem = () => {
   const { addToast } = useToasts();
 
   const { item, desc, category, price } = itemDetails;
+
+  useEffect(() => {
+    if (desc > 0) {
+      setStatus(true)
+      console.log(status);
+    }
+    // eslint-disable-next-line
+  }, [desc])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

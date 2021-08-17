@@ -84,7 +84,6 @@ const CartMenu = observer(() => {
     } else if (e.target.name === "category") {
       setCategory(e.target.value.toLowerCase());
     }
-    console.log(currentMeals, meals);
 
     setCurrentPage(1);
   };

@@ -4,7 +4,7 @@ import { AppStateContext } from "../../context";
 import apiService from "../../context/apiService";
 import { useToasts } from "react-toast-notifications";
 import Fade from "react-reveal/Fade";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 // components
 import StockTable from "../../components/Cards/StockTable.js";
@@ -84,8 +84,17 @@ const Stock = observer(() => {
     if (!query && category) {
       return stockItem.category === category;
     }
-    if (!query && status) {
-      return stockItem.status === status;
+    if (!query && status === "available") {
+      return stockItem.desc >= 10;
+      // return stockItem.status === status; // future change
+    }
+    if (!query && status === "low in stock") {
+      return stockItem.desc >= 1 && stockItem.desc < 10;
+
+      // return stockItem.status === status; // future change
+    }
+    if (!query && status === "out of stock") {
+      return stockItem.status === false;
       // return stockItem.status === status; // future change
     }
 
@@ -99,16 +108,43 @@ const Stock = observer(() => {
         stockItem.category === category
       );
     }
-    if (query && status) {
+    if (query && status === "available") {
       return (
-        stockItem.item.toLowerCase().includes(query) &&
-        stockItem.status === status
+        stockItem.item.toLowerCase().includes(query) && stockItem.desc >= 10
       );
     }
-    if (query && status && category) {
+    if (query && status === "low in stock") {
       return (
         stockItem.item.toLowerCase().includes(query) &&
-        stockItem.status === status &&
+        stockItem.desc >= 1 &&
+        stockItem.desc < 10
+      );
+    }
+    if (query && status === "out of stock") {
+      return (
+        stockItem.item.toLowerCase().includes(query) &&
+        stockItem.status === false
+      );
+    }
+    if (query && status === "available" && category) {
+      return (
+        stockItem.item.toLowerCase().includes(query) &&
+        stockItem.desc >= 10 &&
+        stockItem.category === category
+      );
+    }
+    if (query && status === "low in stock" && category) {
+      return (
+        stockItem.item.toLowerCase().includes(query) &&
+        stockItem.desc >= 1 &&
+        stockItem.desc < 10 &&
+        stockItem.category === category
+      );
+    }
+    if (query && status === "out of stock" && category) {
+      return (
+        stockItem.item.toLowerCase().includes(query) &&
+        stockItem.status === false &&
         stockItem.category === category
       );
     }
@@ -206,8 +242,8 @@ const Stock = observer(() => {
                     Status
                   </option>
                   <option value="available">Available</option>
-                  <option value="low">Low Instock</option>
-                  <option value="out">Out Of Stock</option>
+                  <option value="low in stock">Low In stock</option>
+                  <option value="out of stock">Out Of Stock</option>
                 </select>
               </div>
 
@@ -229,12 +265,12 @@ const Stock = observer(() => {
           </div>
 
           <Link
-                className=" justify-self-end bg-blue-800 custom-btn text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                to="/dashboard/addmeal"
-              >
-                <i className="fas fa-plus mr-2"></i> New
-              </Link>
+            className=" justify-self-end bg-blue-800 custom-btn text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            to="/dashboard/addmeal"
+          >
+            <i className="fas fa-plus mr-2"></i> New
+          </Link>
 
           <div className="flex flex-wrap mt-4">
             <div className="w-full xl:w-8/12 mx-auto mb-12 px-4">

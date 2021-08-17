@@ -9,7 +9,14 @@ import Fade from "react-reveal/Fade";
 import FullScreenLoader from "../fullScreenLoader";
 
 const StockItemCard = () => {
-  const [itemDetails, setItemDetails] = useState({});
+  const [itemDetails, setItemDetails] = useState({
+    item: '',
+    desc: '',
+    category: '',
+    price: '',
+    status: null,
+    image: '',
+  });
 
   const { mealService } = useContext(AppStateContext);
 
@@ -72,17 +79,15 @@ const StockItemCard = () => {
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    // handleImage()
 
     setItemDetails({ [name]: value });
-    console.log(value);
-    console.log(itemDetails);
+    // console.log(itemDetails);console.log(status);
   };
   useEffect(() => {
-    handleImage()
-    console.log("image");
+    handleImage();
+    // console.log("image");
     //eslint-disable-next-line
-  });
+  }, []);
   const handleCheck = () => {
     setItemDetails((prevDetails) => {
       const newState = {
@@ -99,7 +104,7 @@ const StockItemCard = () => {
     if (image) {
       const { image, ...newItemDetails } = itemDetails;
       setItemDetails(newItemDetails);
-    } else {console.log('immmm');}
+    }
   };
 
   const handleImageInput = (e) => {
@@ -173,7 +178,7 @@ const StockItemCard = () => {
                   <input
                     type="file"
                     accept="image/*"
-                    onClick={handleImage}
+                    // onClick={handleImage}
                     onChange={handleImageInput}
                     className="form-input text-gray-700 mt-1 block w-full my-4 py-3"
                   />
@@ -224,22 +229,24 @@ const StockItemCard = () => {
                 </label>
               </div>
               <div className="flex mt-6">
-                <label className="flex items-center">
+                <label for='status' className="flex items-center">
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
                     checked={status}
+                    name='status'
                     onChange={handleCheck}
                   />
                   <span className="ml-2 text-gray-700">In stock</span>
                 </label>
               </div>{" "}
               <div className="flex mt-6">
-                <label className="flex items-center">
+                <label for='status' className="flex items-center">
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
-                    checked={!status}
+                    checked={status === false}
+                    name='status'
                     onChange={handleCheck}
                   />
                   <span className="ml-2 text-gray-700">Out of stock</span>

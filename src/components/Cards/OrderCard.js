@@ -9,13 +9,15 @@ import FullScreenLoader from "../fullScreenLoader";
 
 const OrderCard = () => {
   const newDate = (date) => date.toISOString().slice(0, 10);
+  const params = useParams();
+  const { id } = params;
 
   // const [orderedDate, setOrderedDate] = useState("")
   let [editOrder, setEditOrder] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     items: "",
     ordered: null,
-    quantity: "",
+    quantity:false,
     payment_method: "",
     payment_status: null,
     prices: "",
@@ -26,9 +28,7 @@ const OrderCard = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const params = useParams();
   const history = useHistory();
-  const { id } = params;
   const { orderService } = useContext(AppStateContext);
   // const { orderService, authService } = useContext(AppStateContext)
   const { addToast } = useToasts();
@@ -72,6 +72,7 @@ const OrderCard = () => {
     payment_status,
     staff,
     ref_code,
+    // item_ids,
   } = orderDetails;
 
   const updateOrder = async (e) => {
@@ -115,8 +116,8 @@ const OrderCard = () => {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    setOrderDetails({ ...orderDetails, [name]: value });
-    console.log(orderDetails);
+    setOrderDetails({ ...orderDetails, [name]: value });    console.log(orderDetails);
+
   };
 
   const togglePaymentStatus = () => {
@@ -128,15 +129,19 @@ const OrderCard = () => {
       payment_status: status,
       payment_method: method,
     });
+
+    console.log(status);
   };
   const orderedDate = () => {
-    const date = !ordered ? newDate(new Date()) : null;
-    setOrderDetails({ ...orderDetails, ordered_date: date });
-    console.log(orderDetails.ordered_date, date);
+    // setOrderDetails({ ...orderDetails, ordered_date: date });
+    console.log(orderDetails.ordered_date);
   };
   const toggleOrderStatus = () => {
     const orderStatus = ordered === false ? true : false;
-    setOrderDetails({ ...orderDetails, ordered: orderStatus });
+    const date = orderStatus ? newDate(new Date()) : null;
+
+    setOrderDetails({ ...orderDetails, ordered: orderStatus, item_ids: id, ordered_date: date });
+    console.log(orderDetails);
   };
 
   // const editOrder = false
@@ -384,7 +389,7 @@ const OrderCard = () => {
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
-                    checked={ordered === true}
+                    checked={ordered}
                     onChange={toggleOrderStatus}
                     onClick={orderedDate}
                   />

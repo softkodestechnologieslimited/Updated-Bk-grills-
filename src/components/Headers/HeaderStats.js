@@ -1,23 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Fade from "react-reveal/Fade";
 
 // components
 import CardStats from "../Cards/CardStats.js";
-// import FilteredSalesCard from "../Cards/FilteredSalesCard.js"
-
+// import FilteredSalesCard from "../Cards/FilteredSalesCard.js";
 
 const HeaderStats = ({
   staffCount,
-  customersCount,
+  handleShowModal,
   ordersCount,
   salesTotal,
   subscribersCount,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
-  const handleShowModal = () => {
-    setShowModal((prev) => (prev = true));
-  };
+  // const handleShowModal = () => {
+  //   setShowModal((prev) => (prev = true));
+  // };
 
   // const closeModal = () => {
   //   setShowModal((prev) => (prev = false));
@@ -26,14 +25,12 @@ const HeaderStats = ({
   return (
     <>
       {/* Header */}
+
       <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12 md:mt-0 mt-32">
         <div className="px-4 md:px-10 mx-auto w-full">
-        {showModal && (
-          <Fade>
-            {/* <FilteredSalesCard closeModal={closeModal} /> */}
-          </Fade>
-        )}
-          <div>
+        
+          <div> 
+  
             {/* Card stats */}
             <Fade left cascade>
               <div className="flex flex-wrap">
@@ -77,14 +74,11 @@ const HeaderStats = ({
                     statIconName="fas fa-users"
                     statIconColor="bg-pink-500"
                   />
-
-
                 </div>
               </div>
             </Fade>
           </div>
         </div>
-       
       </div>
     </>
   );

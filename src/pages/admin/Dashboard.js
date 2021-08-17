@@ -2,8 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { AppStateContext } from "../../context";
 import apiService from "../../context/apiService";
-import { useToasts } from 'react-toast-notifications'
-import { formatter } from '../../utils'
+import { useToasts } from "react-toast-notifications";
+import { formatter } from "../../utils";
+// import Fade from "react-reveal/Fade";
 
 // components
 import CardBarChart from "../../components/Cards/CardBarChart.js";
@@ -12,23 +13,36 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import HeaderStats from "../../components/Headers/HeaderStats.js";
 import FooterAdmin from "../../components/Footers/FooterAdmin.js";
-
+import FilteredSalesCard from "../../components/Cards/FilteredSalesCard.js";
 
 const Dashboard = observer(() => {
-  const { staffService, orderService, subscriptionService } = useContext(AppStateContext);
-  const { addToast } = useToasts()
-  const [staffCount, setStaffCount] = useState('');
-  const [ordersCount, setOrdersCount] = useState('');
+  const { staffService, orderService, subscriptionService } =
+    useContext(AppStateContext);
+  const { addToast } = useToasts();
+  const [staffCount, setStaffCount] = useState("");
+  const [pendingSales, setPendingSales] = useState("");
+  const [cashSales, setCashSales] = useState("");
+  const [posSales, setPosSales] = useState("");
+  const [transferSales, setTransferSales] = useState("");
+  const [ordersCount, setOrdersCount] = useState("");
   // const [customersCount, setCustomersCount] = useState('');
-  const [salesTotal, setSalesTotal] = useState('');
-  const [subscribersCount,  setSubscribersCount] = useState('')
+  const [salesTotal, setSalesTotal] = useState("");
+  const [subscribersCount, setSubscribersCount] = useState("");
 
+  const [showModal, setShowModal] = useState(false);
 
+  const handleShowModal = () => {
+    setShowModal((prev) => (prev = true));
+  };
+
+  const closeModal = () => {
+    setShowModal((prev) => (prev = false));
+  };
   useEffect(() => {
     getStaff();
     // getCustomers();
     getOrders();
-    getSubscribers()
+    getSubscribers();
 
     // eslint-disable-next-line
   }, []);
@@ -39,44 +53,37 @@ const Dashboard = observer(() => {
       const response = await apiService.getUsers();
       const { data } = response;
       // console.log("staff", data.length)
-      setStaffCount(data.length)
+      setStaffCount(data.length);
       staffService.setStaff([...data]);
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
-        appearance: 'error',
+        appearance: "error",
         autoDismiss: true,
-      })
+      });
     }
-  }
+  };
   const getSubscribers = async () => {
     try {
-      const response = await apiService.getSubscribers()
-      const { data } = response
+      const response = await apiService.getSubscribers();
+      const { data } = response;
       // console.log(data);
-      setSubscribersCount(data.length)
-      subscriptionService.setSubscribers([...data])
+      setSubscribersCount(data.length);
+      subscriptionService.setSubscribers([...data]);
     } catch (error) {
-      const message = apiService.getErrorMessage(error)
+      const message = apiService.getErrorMessage(error);
       addToast(message, {
-        appearance: 'error',
+        appearance: "error",
         autoDismiss: true,
-      })
+      });
     }
-  }
-  // const getCustomers = async () => {
+  };
+
+  // const getUsertype = async () => {
   //   try {
-  //     const response = await apiService.getCustomers();
-  //     const { data } = response.data;
-  //     // console.log("customers", data.length)
-  //     setCustomersCount(data.length)
-  //     customerService.setCustomers([...data]);
-  //   } catch (error) {
-  //     const message = apiService.getErrorMessage(error);
-  //     addToast(message, {
-  //       appearance: 'error',
-  //       autoDismiss: true,
-  //     })
+
+  //   } catch {
+
   //   }
   // }
 
@@ -84,21 +91,28 @@ const Dashboard = observer(() => {
     try {
       const response = await apiService.getOrders();
       const { data } = response;
-      setOrdersCount(data.length)
-      const orderTotal = data.map(order => parseInt(order.ref_code))
-      console.log(data);
-      setSalesTotal(orderTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0))
+      setOrdersCount(data.length);
+      setPendingSales(data.filter((data) => data.payment_method === "pending"))
+      setCashSales(data.filter((data) => data.payment_method === "cash"))
+      setPosSales(data.filter((data) => data.payment_method === "pos"))
+      setTransferSales(data.filter((data) => data.payment_method === "transfer"))
+      const orderTotal = data.map((order) => parseInt(order.ref_code));
+      console.log(data, pendingSales);
+      setSalesTotal(
+        orderTotal.reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+          0
+        )
+      );
       orderService.setRecentOrders([...data]);
     } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
-        appearance: 'error',
+        appearance: "error",
         autoDismiss: true,
-      })
+      });
     }
-  }
-
-  
+  };
 
   return (
     <>
@@ -106,7 +120,22 @@ const Dashboard = observer(() => {
       <div className="relative md:ml-64 bg-gray-900">
         <AdminNavbar />
         {/* Header */}
-        <HeaderStats staffCount={staffCount} subscribersCount={subscribersCount} ordersCount={ordersCount} salesTotal={formatter.format(parseInt(salesTotal)) } />
+        {showModal && (
+          <FilteredSalesCard
+            closeModal={closeModal}
+            pendingSales={pendingSales}
+            cashSales={cashSales}
+            posSales={posSales}
+            transferSales={transferSales}
+          />
+        )}
+        <HeaderStats
+          handleShowModal={handleShowModal}
+          staffCount={staffCount}
+          subscribersCount={subscribersCount}
+          ordersCount={ordersCount}
+          salesTotal={formatter.format(parseInt(salesTotal))}
+        />
         <div className="px-4 md:px-10 mx-auto w-full h-90 -m-24">
           <div className="flex flex-wrap mt-4">
             <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
@@ -120,7 +149,7 @@ const Dashboard = observer(() => {
         <FooterAdmin />
       </div>
     </>
-  )
-})
+  );
+});
 
-export default Dashboard
+export default Dashboard;

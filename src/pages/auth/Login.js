@@ -36,7 +36,8 @@ const Login = () => {
       setIsLoading(true);
       const response = await apiService.login({ email, password });
       // const { data } = response.data;
-      authService.loginUser(response.data); // save user to the app state and to session storage using the authservice
+      authService.loginUser(response.data); // save user token to the app state and to session storage using the authservice
+      // authService.saveUsertype(response)
       addToast("Login Successful", {
         appearance: "success",
         autoDismiss: true,

@@ -62,30 +62,58 @@ const StockTable = ({
               {meals.map((meal, idx) => (
                 <tr key={idx}>
                   <th className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                    <span className="font-bold text-gray-700">
-                      {meal.item}
-                    </span>
+                    <span className="font-bold text-gray-700">{meal.item}</span>
                   </th>
                   <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                     {meal.category}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                    <i
+                    {(() => {
+                      if (meal.status === true && meal.desc >= 10) {
+                        return (
+                          <i className="fas fa-circle mr-2 text-green-500"></i>
+                        );
+                      } else if (meal.status === true && meal.desc <= 10) {
+                        return (
+                          <i className="fas fa-circle mr-2 text-orange-500"></i>
+                        );
+                      } else {
+                        return (
+                          <i className="fas fa-circle mr-2"></i> 
+                        );
+                      }
+                    })()}
+
+                    {/* <i
                       className={
                         "fas fa-circle mr-2 " +
-                        (meal.status  === true
+                        (meal.status === true
                           ? "text-green-500"
                           : "text-yellow-500")
                       }
-                    ></i>
+                    ></i> */}
 
-                    {meal.status  === true  
-                      ? "Available"
-                      : "Out of Stock"}
+                    {(() => {
+                      if (meal.status === true && meal.desc >= 10) {
+                        return (
+                          "Available"
+                        );
+                      } else if (meal.status === true && meal.desc <= 10) {
+                        return (
+                          "Low in Stock"
+                        );
+                      } else {
+                        return (
+                          "Out of Stock"
+                        );
+                      }
+                    })()}
+
+                    {/* {meal.status === true ? "Available" : "Out of Stock"} */}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                     {/* {meal.quantity || ( */}
-                      <span className="">{meal.desc}</span>
+                    <span className="">{meal.desc}</span>
                     {/* )} */}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
