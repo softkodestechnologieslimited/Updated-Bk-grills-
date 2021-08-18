@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
+import { AppStateContext } from "../../context";
 
 const AdminSideNav = () => {
+  const { authService } = useContext(AppStateContext);
+
+  const { currentUser } = authService;
+
   return (
     <>
       <li className="items-center">
@@ -23,8 +27,8 @@ const AdminSideNav = () => {
                 : "text-gray-400")
             }
           ></i>{" "}
-              Dashboard
-            </Link>
+          Dashboard
+        </Link>
       </li>
 
       {/* <li className="items-center">
@@ -67,8 +71,8 @@ const AdminSideNav = () => {
                 : "text-gray-400")
             }
           ></i>{" "}
-              Cart Menu
-            </Link>
+          Cart Menu
+        </Link>
       </li>
 
       {/* <li className="items-center">
@@ -133,8 +137,8 @@ const AdminSideNav = () => {
                 : "text-gray-400")
             }
           ></i>{" "}
-              Orders
-            </Link>
+          Orders
+        </Link>
       </li>
 
       <li className="items-center">
@@ -155,8 +159,8 @@ const AdminSideNav = () => {
                 : "text-gray-400")
             }
           ></i>{" "}
-              Attendance
-            </Link>
+          Attendance
+        </Link>
       </li>
 
       <li className="items-center">
@@ -177,8 +181,8 @@ const AdminSideNav = () => {
                 : "text-gray-400")
             }
           ></i>{" "}
-              Swimming Ticket
-            </Link>
+          Swimming Ticket
+        </Link>
       </li>
 
       {/* <li className="items-center">
@@ -266,54 +270,64 @@ const AdminSideNav = () => {
                 ? "opacity-75"
                 : "text-gray-400")
             }
-          ></i>{" "}
-              Stock
-            </Link>
+          ></i>
+          Stock
+        </Link>
       </li>
-     {/*   <li className="items-center">
-        <Link
-          className={
-            "text-xs uppercase py-3 font-bold block " +
-            (window.location.href.indexOf("/dashboard/expenses") !== -1
-              ? "text-blue-500 hover:text-blue-600"
-              : "text-white hover:text-gray-600")
-          }
-          to="/dashboard/expenses"
-        >
-          <i
-            className={
-              "fas fa-comments-dollar mr-2 text-sm " +
-              (window.location.href.indexOf("/dashboard/expenses") !== -1
-                ? "opacity-75"
-                : "text-gray-400")
-            }
-          ></i>{" "}
-              Expenses
-            </Link>
-      </li>
-     <li className="items-center">
-        <Link
-          className={
-            "text-xs uppercase py-3 font-bold block " +
-            (window.location.href.indexOf("/dashboard/sales") !== -1
-              ? "text-blue-500 hover:text-blue-600"
-              : "text-white hover:text-gray-600")
-          }
-          to="/dashboard/sales"
-        >
-          <i
-            className={
-              "fas fa-balance-scale mr-2 text-sm " +
-              (window.location.href.indexOf("/dashboard/sales") !== -1
-                ? "opacity-75"
-                : "text-gray-400")
-            }
-          ></i>{" "}
-              Sales Report
-            </Link>
-      </li> */}
-    </>
-  )
-}
 
-export default AdminSideNav
+      {currentUser.user_type === "admin" ? (
+        <li className="items-center">
+          <Link
+            className={
+              "text-xs uppercase py-3 font-bold block " +
+              (window.location.href.indexOf("/dashboard/expenses") !== -1
+                ? "text-blue-500 hover:text-blue-600"
+                : "text-white hover:text-gray-600")
+            }
+            to="/dashboard/expenses"
+          >
+            <i
+              className={
+                "fas fa-comments-dollar mr-2 text-sm " +
+                (window.location.href.indexOf("/dashboard/expenses") !== -1
+                  ? "opacity-75"
+                  : "text-gray-400")
+              }
+            ></i>
+            Expenses
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
+
+      {currentUser.user_type === "admin" ? (
+        <li className="items-center">
+          <Link
+            className={
+              "text-xs uppercase py-3 font-bold block " +
+              (window.location.href.indexOf("/dashboard/sales") !== -1
+                ? "text-blue-500 hover:text-blue-600"
+                : "text-white hover:text-gray-600")
+            }
+            to="/dashboard/sales"
+          >
+            <i
+              className={
+                "fas fa-balance-scale mr-2 text-sm " +
+                (window.location.href.indexOf("/dashboard/sales") !== -1
+                  ? "opacity-75"
+                  : "text-gray-400")
+              }
+            ></i>
+            Sales Report
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
+    </>
+  );
+};
+
+export default AdminSideNav;

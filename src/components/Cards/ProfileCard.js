@@ -6,7 +6,7 @@ import Fade from 'react-reveal/Fade';
 
 const ProfileCard = () => {
   const { authService } = useContext(AppStateContext);
-  const { name, role, email, phone } = authService.currentUser
+  const { first_name, last_name, user_type, email, phone_number } = authService.currentUser
 
   return (
     <>
@@ -34,7 +34,7 @@ const ProfileCard = () => {
                   </span>
                   <p
                     className="px-3 py-3 text-capitalize placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-                    {name}
+                    {first_name} {last_name}
                   </p>
                 </div>
               </div>
@@ -60,7 +60,7 @@ const ProfileCard = () => {
                   </span>
                   <p
                     className="px-3 py-3 text-capitalize placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-                    {role}
+                    {user_type}
                   </p>
                 </div>
               </div>
@@ -73,7 +73,7 @@ const ProfileCard = () => {
                   </span>
                   <p
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-                    {phone || <span className="font-bold text-xl">-</span>}
+                    {phone_number || <span className="font-bold text-xl">-</span>}
                   </p>
                 </div>
               </div>

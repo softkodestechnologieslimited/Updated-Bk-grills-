@@ -26,7 +26,16 @@ export class AuthService {
     this.currentUser = userInfo;
     sessionStorage.setItem(StorageKeys.USER, JSON.stringify(userInfo));
     sessionStorage.setItem(StorageKeys.TOKEN, token || userInfo.token);
+    // console.log(token);
     delete this.currentUser.token;
+  }
+
+  getUserData(userInfo) {
+    if (!this.isLoggedIn) return
+
+    this.currentUser = userInfo
+    sessionStorage.setItem(StorageKeys.USER, JSON.stringify(userInfo));
+    console.log(userInfo);
   }
 
   logoutUser() {

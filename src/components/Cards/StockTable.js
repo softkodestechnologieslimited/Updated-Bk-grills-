@@ -1,4 +1,5 @@
-import React from "react";
+import { AppStateContext } from "context/index.js";
+import React, { useContext } from "react";
 
 // components
 import StockmenuDropdown from "../Dropdowns/StockmenuDropdown.js";
@@ -11,6 +12,9 @@ const StockTable = ({
   deleted,
   threshold,
 }) => {
+  const { authService } = useContext(AppStateContext);
+
+  const { currentUser } = authService;
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white text-gray-800">
@@ -53,9 +57,13 @@ const StockTable = ({
                 <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200">
                   Price
                 </th>
-                <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200">
-                  Action
-                </th>
+                {currentUser.user_type === "admin" ? (
+                  <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200">
+                    Action
+                  </th>
+                ) : (
+                  ""
+                )}
               </tr>
             </thead>
             <tbody>
@@ -78,9 +86,7 @@ const StockTable = ({
                           <i className="fas fa-circle mr-2 text-orange-500"></i>
                         );
                       } else {
-                        return (
-                          <i className="fas fa-circle mr-2"></i> 
-                        );
+                        return <i className="fas fa-circle mr-2"></i>;
                       }
                     })()}
 
@@ -95,17 +101,11 @@ const StockTable = ({
 
                     {(() => {
                       if (meal.status === true && meal.desc >= 10) {
-                        return (
-                          "Available"
-                        );
+                        return "Available";
                       } else if (meal.status === true && meal.desc <= 10) {
-                        return (
-                          "Low in Stock"
-                        );
+                        return "Low in Stock";
                       } else {
-                        return (
-                          "Out of Stock"
-                        );
+                        return "Out of Stock";
                       }
                     })()}
 
@@ -119,13 +119,17 @@ const StockTable = ({
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                     &#8358;{meal.price}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                    <StockmenuDropdown
-                      id={meal.id}
-                      refresh={refresh}
-                      deleted={deleted}
-                    />
-                  </td>
+                  {currentUser.user_type === "admin" ? (
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+                      <StockmenuDropdown
+                        id={meal.id}
+                        refresh={refresh}
+                        deleted={deleted}
+                      />
+                    </td>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               ))}
             </tbody>

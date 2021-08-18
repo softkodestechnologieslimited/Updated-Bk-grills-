@@ -4,7 +4,7 @@ import { createPopper } from "@popperjs/core";
 import { AppStateContext } from "../../context";
 import { useToasts } from 'react-toast-notifications'
 
-import userImg from "../../assets/img/team-1-800x800.jpg";
+import userImg from "../../assets/img/profile.png";
 
 
 const UserDropdown = () => {

@@ -18,16 +18,17 @@ const EditProfile = () => {
   // const { email } = authService.currentUser;
 
   const [profileDetails, setProfileDetails] = useState({
-    name: authService.currentUser.name,
+    first_name: authService.currentUser.first_name,
+    last_name: authService.currentUser.last_name,
     email: authService.currentUser.email,
-    phone: authService.currentUser.phone,
+    phone_number: authService.currentUser.phone_number,
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { addToast } = useToasts()
 
-  const { name, phone, email } = profileDetails;
+  const { first_name, last_name, phone_number, email } = profileDetails;
 
 
   const handleSubmit = async (e) => {
@@ -35,7 +36,7 @@ const EditProfile = () => {
 
     try {
       // further validations can be done on the input 
-      if (!email || !name || !phone) {
+      if (!email || !first_name || !phone_number) {
         addToast("Fill all fields please", {
           appearance: 'error',
           autoDismiss: true,
@@ -46,8 +47,9 @@ const EditProfile = () => {
 
       setIsLoading(true)
 
-      await apiService.editUser({ email, name, phone });
-      // const { data } = response.data;
+      const response = await apiService.updateUserDetails({ email, first_name, last_name, phone_number });
+      // console.log(response.data);
+      authService.getUserData(response.data)
       addToast("Profile update successful", {
         appearance: 'success',
         autoDismiss: true,
@@ -109,8 +111,16 @@ const EditProfile = () => {
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block">
-                        <span className="text-gray-700">Full Name</span>
-                        <input type='text' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Full Name" name='name' value={name}
+                        <span className="text-gray-700">First Name</span>
+                        <input type='text' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Full Name" name='first_name' value={first_name}
+                          onChange={handleChange}
+                          required />
+                      </label>
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label className="block">
+                        <span className="text-gray-700">Last Name</span>
+                        <input type='text' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Last Name" name='last_name' value={last_name}
                           onChange={handleChange}
                           required />
                       </label>
@@ -118,7 +128,7 @@ const EditProfile = () => {
                     <div className="relative w-full mb-3">
                       <label className="block">
                         <span className="text-gray-700">Phone</span>
-                        <input type='number' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Phone" name='phone' value={phone}
+                        <input type='number' className="form-input text-gray-700 mt-1 block w-full my-4 p-3" placeholder="Phone" name='phone_number' value={phone_number}
                           onChange={handleChange}
                           required />
                       </label>

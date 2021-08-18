@@ -35,6 +35,7 @@ const Sidebar = () => {
     });
     history.push("/login");
   };
+  
 
   return (
     <>
@@ -50,7 +51,7 @@ const Sidebar = () => {
           </button>
 
           {/* Brand */}
-          {currentUser.role !== 'waiter' ? (<Link
+          {currentUser.user_type !== 'waiter' ? (<Link
             className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-0 px-0"
             to="/dashboard"
           >
@@ -66,7 +67,7 @@ const Sidebar = () => {
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
             <li className="inline-block relative">
-              {currentUser.role !== "waiter" ? (
+              {currentUser.user_type !== "waiter" ? (
                 <UserDropdown />
               ) : (
                 <CartDropdown />
@@ -84,7 +85,7 @@ const Sidebar = () => {
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-gray-300">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  {currentUser.role !== "waiter" ? (
+                  {currentUser.user_type !== "waiter" ? (
                     <Link
                       className="md:block text-left md:pb-2 text-white mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
                       to="/dashboard"
@@ -119,13 +120,13 @@ const Sidebar = () => {
 
             {/* Navigation */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              {currentUser.role !== "waiter" ? (
+              {currentUser.user_type !== "waiter" ? (
                 <AdminSideNav />
               ) : (
                 <StaffSideNav />
               )}
 
-              {currentUser.role === "superAdmin" && (
+              {currentUser.user_type === "superAdmin" && (
                 <li className="items-center">
                   <Link
                     className={

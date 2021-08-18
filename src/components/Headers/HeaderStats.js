@@ -68,12 +68,12 @@ const HeaderStats = ({
                     statIconName="fas fa-users"
                     statIconColor="bg-pink-500"
                   />*/}
-                  <CardStats
+                  {/* <CardStats
                     statSubtitle="SUBSCRIBERS"
                     statTitle={subscribersCount}
                     statIconName="fas fa-users"
                     statIconColor="bg-pink-500"
-                  />
+                  /> */}
                 </div>
               </div>
             </Fade>

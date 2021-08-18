@@ -13,7 +13,7 @@ const FilteredSalesCard = ({
   return (
     <>
       {/* <Fade> */}
-      <div  className="body">
+      <div className="body">
         <span>
           <h1>SALES REPORT</h1>
           <p onClick={closeModal}>close</p>
@@ -22,33 +22,58 @@ const FilteredSalesCard = ({
         <div className="body-flex">
           <div>
             <h2>Pending Sales</h2>
-            {pendingSales.map((sales, idx) => (
-              <div key={idx}>
-                <p>{sales.items}</p>
-                <p>{sales.prices}</p>
-              </div>
-            ))}
+            {pendingSales.length ? (
+              pendingSales.map((sales, idx) => (
+                <div key={idx}>
+                  <p>{sales.items}</p>
+                  <p>{sales.prices}</p>
+                </div>
+              ))
+            ) : (
+              <p>No sales </p>
+            )}
           </div>
 
           <div>
             <h2>Cash Sales</h2>
-            {cashSales.map((sales, idx) => (
-              <div key={idx}> {sales.items}</div>
-            ))}
+            {cashSales.length ? (
+              cashSales.map((sales, idx) => (
+                <div key={idx}>
+                  <p>{sales.items}</p>
+                  <p>{sales.prices}</p>
+                </div>
+              ))
+            ) : (
+              <p>No sales </p>
+            )}
           </div>
 
           <div>
             <h2>POS Sales</h2>
-            {posSales.map((sales, idx) => (
-              <div key={idx}>{sales.items}</div>
-            ))}
+            {posSales.length ? (
+              posSales.map((sales, idx) => (
+                <div key={idx}>
+                  <p>{sales.items}</p>
+                  <p>{sales.prices}</p>
+                </div>
+              ))
+            ) : (
+              <p>No sales </p>
+            )}
           </div>
 
           <div>
             <h2>Transfer Sales</h2>
-            {transferSales.map((sales, idx) => (
-              <div key={idx}>{sales.items}</div>
-            ))}
+            {transferSales.length ? (
+              transferSales.map((sales, idx) => (
+                <div key={idx}>
+                  <p>{sales.items}</p>
+                  <p>{sales.prices}</p>
+                </div>
+              ))
+            ) : (
+              <p>No sales </p>
+            )}
           </div>
         </div>
       </div>

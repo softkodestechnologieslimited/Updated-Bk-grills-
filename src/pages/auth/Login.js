@@ -42,6 +42,12 @@ const Login = () => {
         appearance: "success",
         autoDismiss: true,
       });
+
+      if (response) {
+        const response = await apiService.getUserDetails()
+        authService.getUserData(response.data)
+        console.log(response.data);
+      }
       // console.log(response.data);
 
       // if (data.role !== "waiter") {

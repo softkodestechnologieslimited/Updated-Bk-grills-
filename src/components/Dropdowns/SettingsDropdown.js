@@ -80,7 +80,7 @@ const SettingsDropdown = () => {
             <i className="fas fa-edit mr-4"></i>
           Edit Profile
         </Link>
-          <Link
+          {/* <Link
             href="#pablo"
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
@@ -89,7 +89,7 @@ const SettingsDropdown = () => {
           >
             <i className="fas fa-edit mr-4"></i>
           Change Password
-        </Link>
+        </Link> */}
         </Jump>
       </div>
     </div>

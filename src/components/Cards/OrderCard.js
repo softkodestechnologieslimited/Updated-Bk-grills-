@@ -92,7 +92,6 @@ const OrderCard = () => {
       }
       await apiService.updateOrder(id, orderDetails);
       // const updatedOrder = data.data;
-
       // orderService.updateOrder(updatedOrder);
 
       history.push("/dashboard/orders");
@@ -140,7 +139,7 @@ const OrderCard = () => {
     const orderStatus = ordered === false ? true : false;
     const date = orderStatus ? newDate(new Date()) : null;
 
-    setOrderDetails({ ...orderDetails, ordered: orderStatus, item_ids: id, ordered_date: date });
+    setOrderDetails({ ...orderDetails, ordered: orderStatus, ordered_date: date });
     console.log(orderDetails);
   };
 

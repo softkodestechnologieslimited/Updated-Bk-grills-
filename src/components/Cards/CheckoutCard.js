@@ -94,7 +94,8 @@ const CheckoutCard = observer(() => {
 
   const orders = cartService.meals;
 
-  const { items, desc, category, prices, ref_code } = {
+  const { item_ids, items, desc, category, prices, ref_code } = {
+    item_ids: orders.map((item) => item.id).toString(),
     items: orders.map((item) => item.item).toString(),
     desc: orders.map((quantity) => quantity.quantity).toString(),
     category: orders.map((category) => category.category).toString(),
@@ -109,7 +110,7 @@ const CheckoutCard = observer(() => {
     const { value, name } = e.target;
 
     setOrderDetails({ ...orderDetails, [name]: value });
-    // console.log(ref_code);
+    console.log(item_ids);
   };
 
   // payment toggle
@@ -197,6 +198,7 @@ const CheckoutCard = observer(() => {
 
       setIsLoading(true);
       await apiService.createOrder({
+        item_ids,
         items,
         quantity: quantity,
         category,

@@ -42,10 +42,6 @@ const AdminMenuItem = observer(({ meal }) => {
           autoDismiss: true,
           autoDismissTimeout: 2000,
         });
-        console.log( meal.desc, cartItem);
-        if (itemInCart.quantity >= meal.desc) {
-          console.log('great');
-        }
   };
 
   const reduceQuantity = () => {
@@ -64,7 +60,6 @@ const AdminMenuItem = observer(({ meal }) => {
           autoDismiss: true,
           autoDismissTimeout: 2000,
         });
-        console.log(meal.desc, cartItem);
   };
 
   return (
@@ -110,7 +105,7 @@ const AdminMenuItem = observer(({ meal }) => {
               <span className="text-gray-800 px-4 font-bold">
                 {quantityInCart()}
               </span>
-              {cartItem  > meal.desc? (
+              {cartItem  === parseInt(meal.desc)? (
                 <button
                 className="text-black-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"

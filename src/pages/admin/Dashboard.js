@@ -92,11 +92,11 @@ const Dashboard = observer(() => {
       const response = await apiService.getOrders();
       const { data } = response;
       setOrdersCount(data.length);
-      setPendingSales(data.filter((data) => data.payment_method === "pending"))
-      setCashSales(data.filter((data) => data.payment_method === "cash"))
-      setPosSales(data.filter((data) => data.payment_method === "pos"))
-      setTransferSales(data.filter((data) => data.payment_method === "transfer"))
-      const orderTotal = data.map((order) => parseInt(order.ref_code));
+      setPendingSales(orderService.recentOrders.filter((data) => data.payment_method === "pending"))
+      setCashSales(orderService.recentOrders.filter((data) => data.payment_method === "cash"))
+      setPosSales(orderService.recentOrders.filter((data) => data.payment_method === "pos"))
+      setTransferSales(orderService.recentOrders.filter((data) => data.payment_method === "transfer"))
+      const orderTotal = orderService.recentOrders.map((order) => parseInt(order.ref_code));
       console.log(data, pendingSales);
       setSalesTotal(
         orderTotal.reduce(

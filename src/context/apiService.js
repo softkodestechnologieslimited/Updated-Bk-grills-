@@ -24,7 +24,7 @@ const addAuthorizedHeaders = () => {
 
   return {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "token " + token,
     },
   };
 };
@@ -46,6 +46,10 @@ export class ApiService {
 
   getUsers = async () => this.axiosTwo.get("/staffs");
 
+  getUserDetails = async () => this.axiosTwo.get("/user/profile", addAuthorizedHeaders())
+
+  updateUserDetails = async (payload) => this.axiosTwo.patch('/user/profile/', payload, addAuthorizedHeaders())
+
   addStaff = async (payload) => this.axiosTwo.post("/staffs/", payload);
 
   getSingleStaff = async (payload) => this.axiosTwo.get(`/staffs/${payload}`);
@@ -65,8 +69,8 @@ export class ApiService {
   // createUser = async (payload) =>
   //   this.axios.post("/auth/create", payload, addAuthorizedHeaders());
 
-  editUser = async (payload) =>
-    this.axios.put("/users", payload, addAuthorizedHeaders()); // for editing profile details
+  // editUser = async (payload) =>
+  //   this.axios.put("/users", payload, addAuthorizedHeaders()); // for editing profile details
 
   changePassword = async (payload) =>
     this.axios.post("/auth/change-password", payload, addAuthorizedHeaders());
