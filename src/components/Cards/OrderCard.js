@@ -8,7 +8,7 @@ import Fade from "react-reveal/Fade";
 import FullScreenLoader from "../fullScreenLoader";
 
 const OrderCard = () => {
-  const newDate = (date) => date.toISOString().slice(0, 10);
+  // const newDate = (date) => date.toISOString().slice(0, 10);
   const params = useParams();
   const { id } = params;
 
@@ -67,7 +67,7 @@ const OrderCard = () => {
     // quantity,
     // prices,
     ordered,
-    // ordered_date,
+    ordered_date,
     payment_method,
     payment_status,
     staff,
@@ -131,16 +131,21 @@ const OrderCard = () => {
 
     console.log(status);
   };
-  const orderedDate = () => {
-    // setOrderDetails({ ...orderDetails, ordered_date: date });
-    console.log(orderDetails.ordered_date);
-  };
+  // const orderedDate = () => {
+  //   // setOrderDetails({ ...orderDetails, ordered_date: date });
+  //   console.log(orderDetails.ordered_date);
+  // };
+  let disabled = false
+
   const toggleOrderStatus = () => {
     const orderStatus = ordered === false ? true : false;
-    const date = orderStatus ? newDate(new Date()) : null;
+    if (ordered_date !== null) {
+      disabled = true
+    }
+    // const date = orderStatus ? newDate(new Date()) : null;
 
-    setOrderDetails({ ...orderDetails, ordered: orderStatus, ordered_date: date });
-    console.log(orderDetails);
+    setOrderDetails({ ...orderDetails, ordered: orderStatus});
+    console.log(orderStatus, ordered_date);
   };
 
   // const editOrder = false
@@ -388,9 +393,10 @@ const OrderCard = () => {
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
-                    checked={ordered}
+                    checked={ordered === true}
                     onChange={toggleOrderStatus}
-                    onClick={orderedDate}
+                    disabled={disabled}
+                    // onClick={orderedDate}
                   />
                   <span className="ml-2 hidden md:block">Order</span>
                   <span className="ml-2">Completed</span>
