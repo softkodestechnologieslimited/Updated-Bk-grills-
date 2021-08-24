@@ -1,7 +1,7 @@
 export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'NGN',
-  currencyDisplay: "narrowSymbol",
+ // currencyDisplay: "narrowSymbol",
   
 
   // These options are needed to round to whole numbers if that's what you want.
