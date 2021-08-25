@@ -46,11 +46,11 @@ const Login = () => {
         autoDismiss: true,
       });
 
-      if (response.status === 200 ) {
-        const response = await apiService.getUserDetails()
-        authService.getUserData(response.data)
+      //if (response.status === 200 ) {
+        const res = await apiService.getUserDetails()
+        authService.getUserData(res.data)
          console.log(response.data);
-       }
+       //}
       // console.log(response.data);
 
       // if (data.role !== "waiter") {
