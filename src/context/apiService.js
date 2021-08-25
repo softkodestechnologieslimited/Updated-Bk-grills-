@@ -24,7 +24,7 @@ const addAuthorizedHeaders = () => {
 
   return {
     headers: {
-      "Authorization": "Token" + token,
+      "Authorization": "Token " + token,
     },
   };
 };
