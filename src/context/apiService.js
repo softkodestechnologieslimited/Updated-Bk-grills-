@@ -1,5 +1,5 @@
 import axios from "axios";
-//import { StorageKeys } from "../constants";
+import { StorageKeys } from "../constants";
 
 const axiosInstance = axios.create({
   baseURL: "https://big-k-grills-backend-api.herokuapp.com/api/v1",
@@ -18,13 +18,13 @@ const axiosSecondInstance = axios.create({
 });
 
 const addAuthorizedHeaders = () => {
-  //const token = sessionStorage.getItem(StorageKeys.TOKEN) || "";
+  const token = sessionStorage.getItem(StorageKeys.TOKEN) || "";
 
-  //if (!token) return {};
+  if (!token) return {};
 
   return {
     headers: {
-      "Authorization": "Token 7eeb7b15dedd3d8fc46daaf3b49779009f645c5a",
+      "Authorization": "Token" + token,
     },
   };
 };
