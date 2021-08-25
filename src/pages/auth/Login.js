@@ -34,7 +34,7 @@ const Login = () => {
   const getUserDetails = async () => {
             const res = await apiService.getUserDetails()
         authService.getUserData(res.data)
-         console.log(response.data);
+         console.log(res.data);
   }
 
   const handleSubmit = async (e) => {
