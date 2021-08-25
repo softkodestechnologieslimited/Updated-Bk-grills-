@@ -30,6 +30,12 @@ const Login = () => {
   const { addToast } = useToasts();
 
   const { email, password } = userCredentials;
+  
+  const getUserDetails = async () => {
+            const res = await apiService.getUserDetails()
+        authService.getUserData(res.data)
+         console.log(response.data);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,11 +51,12 @@ const Login = () => {
         appearance: "success",
         autoDismiss: true,
       });
+      getUserDetails()
 
       //if (response.status === 200 ) {
-        const res = await apiService.getUserDetails()
-        authService.getUserData(res.data)
-         console.log(response.data);
+//         const res = await apiService.getUserDetails()
+//         authService.getUserData(res.data)
+//          console.log(response.data);
        //}
       // console.log(response.data);
 
