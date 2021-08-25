@@ -5,7 +5,7 @@ import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { StorageKeys } from '../../constants'
+// import { StorageKeys } from '../../constants'
 
 // components
 import FullScreenLoader from "../../components/fullScreenLoader";
@@ -21,7 +21,7 @@ const Login = () => {
     password: "",
   };
   
-  const savedToken = sessionStorage.getItem(StorageKeys.TOKEN);
+  // const savedToken = sessionStorage.getItem(StorageKeys.TOKEN);
 
   const [userCredentials, setCredentials] = useState(emptyCredentials);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,11 +46,11 @@ const Login = () => {
         autoDismiss: true,
       });
 
-      if (savedToken) {
+      if (response.status === 200 ) {
         const response = await apiService.getUserDetails()
         authService.getUserData(response.data)
-        console.log(response.data);
-      }
+         console.log(response.data);
+       }
       // console.log(response.data);
 
       // if (data.role !== "waiter") {
