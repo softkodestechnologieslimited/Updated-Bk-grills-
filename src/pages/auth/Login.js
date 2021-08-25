@@ -5,7 +5,7 @@ import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { StorageKeys } from '../constants'
+import { StorageKeys } from '../../constants'
 
 // components
 import FullScreenLoader from "../../components/fullScreenLoader";
