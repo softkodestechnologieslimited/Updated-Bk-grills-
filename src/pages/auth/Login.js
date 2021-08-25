@@ -43,7 +43,7 @@ const Login = () => {
         autoDismiss: true,
       });
 
-      if (response) {
+      if (response == 'token') {
         const response = await apiService.getUserDetails()
         authService.getUserData(response.data)
         console.log(response.data);
