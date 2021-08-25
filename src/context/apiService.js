@@ -24,7 +24,7 @@ const addAuthorizedHeaders = () => {
 
   return {
     headers: {
-      Authorization: "Token 7eeb7b15dedd3d8fc46daaf3b49779009f645c5a",
+      "Authorization": "Token 7eeb7b15dedd3d8fc46daaf3b49779009f645c5a",
     },
   };
 };
