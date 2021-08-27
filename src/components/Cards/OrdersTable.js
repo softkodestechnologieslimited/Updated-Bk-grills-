@@ -8,6 +8,12 @@ const OrderTable = ({ orders, refresh, deleted }) => {
   const { authService } = useContext(AppStateContext);
   const { currentUser } = authService;
 
+  const sortedOrders = orders.sort((a, b) => {
+    const dateA = new Date(a.start_date);
+    const dateB = new Date(b.start_date);
+    return dateB - dateA;
+  });
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white text-gray-800">
@@ -57,7 +63,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order, idx) => (
+              {sortedOrders.map((order, idx) => (
                 <tr key={idx}>
                   <th className="border-t-0 px-6 align-middle text-capitalize border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                     <span className="ml-3 font-bold text-gray-700">

@@ -160,7 +160,7 @@ const StaffDetailsCard = () => {
               <div className="mt-4">
                 <span className="text-gray-700">Role</span>
                 <div className="mt-2">
-                  <label className="block items-center">
+                  {/* <label className="block items-center">
                     <input
                       type="radio"
                       className="form-radio"
@@ -181,7 +181,7 @@ const StaffDetailsCard = () => {
                       onChange={handleChange}
                     />
                     <span className="ml-2 text-gray-700">Admin</span>
-                  </label>
+                  </label> */}
                   <label className="block items-center">
                     <input
                       type="radio"

@@ -228,27 +228,31 @@ const AdminSideNav = () => {
               Subscribers
             </Link>
       </li>*/}
-      {/* <li className="items-center">
-        <Link
-          className={
-            "text-xs uppercase py-3 font-bold block " +
-            (window.location.href.indexOf("/dashboard/staff") !== -1
-              ? "text-blue-500 hover:text-blue-600"
-              : "text-white hover:text-gray-600")
-          }
-          to="/dashboard/staff"
-        >
-          <i
+      {currentUser.user_type === "admin" ? (
+        <li className="items-center">
+          <Link
             className={
-              "fas fa-user-tag mr-2 text-sm " +
+              "text-xs uppercase py-3 font-bold block " +
               (window.location.href.indexOf("/dashboard/staff") !== -1
-                ? "opacity-75"
-                : "text-gray-400")
+                ? "text-blue-500 hover:text-blue-600"
+                : "text-white hover:text-gray-600")
             }
-          ></i>{" "}
-              Staff
-            </Link>
-      </li> */}
+            to="/dashboard/staff"
+          >
+            <i
+              className={
+                "fas fa-user-tag mr-2 text-sm " +
+                (window.location.href.indexOf("/dashboard/staff") !== -1
+                  ? "opacity-75"
+                  : "text-gray-400")
+              }
+            ></i>{" "}
+            Staff
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
 
       {/* Divider */}
       <hr className="my-4 md:min-w-full" />

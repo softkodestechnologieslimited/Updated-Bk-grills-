@@ -65,7 +65,7 @@ const ReceiptCard = () => {
           </div>
         </div>
         <div className="flex-auto px-2 lg:px-10 py-10 pt-0" ref={receiptRef}>
-          <div className="my-6 w-full">
+          <div className="my-6 w-6/12 mx-auto">
             <img src={logo} alt="logo" className="mx-auto" />
           </div>
 
@@ -73,7 +73,7 @@ const ReceiptCard = () => {
             Order Information
           </h6>
 
-          <table className="itemss-center w-full bg-transparent border-collapse">
+          <table className="items-center w-full bg-transparent border-collapse">
             <thead className="thead-light">
               <tr>
                 <th className="px-3 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
@@ -189,7 +189,7 @@ const ReceiptCard = () => {
                   Date
                 </span>
                 <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
-                  {format(new Date(), "MM/dd/yyyy")}
+                  {format(new Date(), "MM/dd/yyyy 'at' h:mm a")}
                 </p>
               </div>
             </div>
