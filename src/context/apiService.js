@@ -24,7 +24,7 @@ const addAuthorizedHeaders = () => {
 
   return {
     headers: {
-      Authorization: "token " + token,
+      "Authorization": "Token " + token,
     },
   };
 };
@@ -46,7 +46,7 @@ export class ApiService {
 
   getUsers = async () => this.axiosTwo.get("/staffs");
 
-  getUserDetails = async () => this.axiosTwo.get("/user/profile", addAuthorizedHeaders())
+  getUserDetails = async () => this.axiosTwo.get("/user/profile/", addAuthorizedHeaders())
 
   updateUserDetails = async (payload) => this.axiosTwo.patch('/user/profile/', payload, addAuthorizedHeaders())
 
