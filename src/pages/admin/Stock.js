@@ -264,13 +264,17 @@ const Stock = observer(() => {
             </div>
           </div>
 
-          <Link
-            className=" justify-self-end bg-blue-800 custom-btn text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button"
-            to="/dashboard/addmeal"
-          >
-            <i className="fas fa-plus mr-2"></i> New
-          </Link>
+          {currentUser.user_type === "admin" ? (
+            <Link
+              className=" justify-self-end bg-blue-800 custom-btn text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              to="/dashboard/addmeal"
+            >
+              <i className="fas fa-plus mr-2"></i> New
+            </Link>
+          ) : (
+            ""
+          )}
 
           <div className="flex flex-wrap mt-4">
             <div className="w-full xl:w-8/12 mx-auto mb-12 px-4">

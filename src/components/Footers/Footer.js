@@ -41,31 +41,31 @@ const Footer = () => {
               <ul>
                 <li>
                   <p> Monday</p>
-                  <span> 12:00pm - 11:00 pm</span>
+                  <span> 12:00pm - 10:00 pm</span>
                 </li>
                 <li>
                   <p> Tuesday</p>
-                  <span> 12:00pm - 11:00 pm</span>
+                  <span>10:00am - 10:00 pm</span>
                 </li>
                 <li>
                   <p> Wednesday</p>
-                  <span> 12:00pm - 11:00 pm</span>
+                  <span>10:00am - 10:00 pm</span>
                 </li>
                 <li>
                   <p> Thursday</p>
-                  <span> 12:00pm - 11:00 pm</span>
+                  <span>10:00am - 10:00 pm</span>
                 </li>
                 <li>
                   <p>Friday</p>
-                  <span> 12:00pm - 11:00 pm</span>
+                  <span>10:00am - 10:00 pm</span>
                 </li>
                 <li>
                   <p> Saturday </p>
-                  <span> 12:00pm - 11:00 pm</span>
+                  <span>10:00am - 10:00 pm</span>
                 </li>
                 <li>
                   <p>Sunday </p>
-                  <span> closed </span>
+                  <span> 12:00pm - 10:00pm </span>
                 </li>
               </ul>
             </div>

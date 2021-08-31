@@ -103,7 +103,7 @@ const HomepageCards = () => {
                 </div>
 
                 <div className="span">
-                  <span>+234(0) 0123456789 </span>
+                  <span>+234(0) 813 169 3988 </span>
                 </div>
               </div>
 
