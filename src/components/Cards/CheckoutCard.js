@@ -69,6 +69,12 @@ const CheckoutCard = observer(() => {
   // const {data, item} = cartService.meals
 
   // cart items
+  cartService.meals.forEach((meal) => {
+    meal.price = meal.price.replace(',','');
+    // meal.quantity = meal.quantity.replace(',','')
+  })
+
+
   const cartitems = cartService.meals.map((meal) => (
     <tr key={nanoid()}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
