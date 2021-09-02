@@ -53,7 +53,8 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200 " + (currentUser.role === 'waiter' ? "hidden" : "block")}
                 >
                   Waiter Name
-                </th> */}
+                </th>
+                 */}
                 <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left bg-gray-100 text-gray-600 border-gray-200">
                   Amount
                 </th>
