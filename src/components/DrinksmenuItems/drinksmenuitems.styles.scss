@@ -20,4 +20,66 @@
       font-size: 16px;
     }
   }
+
+  .orderModal {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 70vh;
+    overflow-y: scroll;
+    padding: 40px 20px;
+    transform: translate(-50%, -50%);
+    background: #302d32;
+    z-index: 99999;
+
+    h2 {
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      padding-bottom: 20px;
+    }
+
+    .table_no {
+      padding: 50px 20px;
+    }
+
+    label {
+      display: block;
+      padding-bottom: 10px;
+    }
+    input {
+      background: white;
+      border: none;
+      outline: 0;
+      color: black;
+      padding: 5px;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    .submit {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 50px;
+
+      p {
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      button {
+        margin: unset;
+        padding: 10px 20px;
+      }
+    }
+  }
 }

@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import "./drinksmenuitems.styles.scss";
 // import img from "../../assets/img/team-3-800x800.jpg";
 import { useToasts } from "react-toast-notifications";
+import { nanoid } from "nanoid";
 import AdminMenuItem from "../../components/MenuItem/AdminMenuItem.js";
 import FullScreenLoader from "../../components/fullScreenLoader";
 import Pagination from "../../components/Pagination/Pagination";
 import apiService from "context/apiService";
 import { AppStateContext } from "../../context";
-
 
 // import { Link } from "react-router-dom";
 
@@ -17,11 +17,11 @@ const DrinksMenuItems = ({ menuItems }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [meals, setMeals] = useState([]);
   const [category, setCategory] = useState("");
+  const [orderModal, setOrderModal] = useState(false);
   const [mealsPerPage] = useState(10);
   const { addToast } = useToasts();
 
   const { cartService } = useContext(AppStateContext);
-
 
   const getMeals = async () => {
     try {
@@ -39,7 +39,13 @@ const DrinksMenuItems = ({ menuItems }) => {
       setIsLoading(false);
     }
   };
-  // const filteredMeals = meals.filter((meal) => meal.status === true);
+  const handleShowModal = () => {
+    setOrderModal((prev) => (prev = true));
+  };
+
+  const closeOrderModal = () => {
+    setOrderModal((prev) => (prev = false));
+  };
 
   const filteredMeals = meals.filter((meal) => {
     if (!query && category) {
@@ -78,6 +84,41 @@ const DrinksMenuItems = ({ menuItems }) => {
   const indexOfFirstMeal = indexOfLastMeal - mealsPerPage;
   const currentMeals = filteredMeals.slice(indexOfFirstMeal, indexOfLastMeal);
   const isLastPage = indexOfLastMeal >= filteredMeals.length;
+
+  const deleteFromCart = (id) => {
+    cartService.deleteItem(id);
+  };
+
+  // const {data, item} = cartService.meals
+
+  // cart items
+  cartService.meals.forEach((meal) => {
+    meal.price = meal.price.replace(",", "");
+    // meal.quantity = meal.quantity.replace(',','')
+  });
+
+  const cartitems = cartService.meals.map((meal) => (
+    <tr className="justify-center" key={nanoid()}>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+        {meal.item}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+        &#8358; {meal.price}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+        {meal.quantity}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+        &#8358; {meal.quantity * meal.price}
+      </td>
+      <td className="border-t-0 px-6 text-red-500 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 cursor-pointer">
+        <i
+          className="fas fa-trash mr-4"
+          onClick={() => deleteFromCart(meal.id)}
+        ></i>
+      </td>
+    </tr>
+  ));
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -169,9 +210,30 @@ const DrinksMenuItems = ({ menuItems }) => {
             ""
           )}
         </div>
-        <div className={(cartService.meals.length >= 1 ? "tooltip" : '')}>
+        <div
+          onClick={handleShowModal}
+          className={"" + cartService.meals.length >= 1 ? "tooltip" : ""}
+        >
           <p>{cartService.meals.length}</p>
         </div>
+
+        {orderModal === true ? (
+          <form className="orderModal">
+            <h2>Order Menu</h2>
+            {cartitems}
+
+            <div className="table_no">
+              <label for="table_no">Table Number</label>
+              <input type="number" name="table_no" required />
+            </div>
+            <div className="submit">
+              <p onClick={closeOrderModal}>close</p>
+              <button className="btn btn-bordered">order</button>
+            </div>
+          </form>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );

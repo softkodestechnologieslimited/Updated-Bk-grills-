@@ -30,8 +30,8 @@ const CheckoutCard = observer(() => {
   const {
     // meals,
     payment_status = false,
-    payment_method ,
-    staff = '',
+    payment_method,
+    staff = "",
     // waiter_id,
   } = orderDetails;
 
@@ -70,10 +70,9 @@ const CheckoutCard = observer(() => {
 
   // cart items
   cartService.meals.forEach((meal) => {
-    meal.price = meal.price.replace(',','');
+    meal.price = meal.price.replace(",", "");
     // meal.quantity = meal.quantity.replace(',','')
-  })
-
+  });
 
   const cartitems = cartService.meals.map((meal) => (
     <tr key={nanoid()}>
@@ -106,7 +105,7 @@ const CheckoutCard = observer(() => {
     desc: orders.map((quantity) => quantity.quantity).toString(),
     category: orders.map((category) => category.category).toString(),
     prices: orders.map((prices) => prices.price).toString(),
-    ref_code: parseInt(cartService.total)
+    ref_code: parseInt(cartService.total),
   };
 
   const quantity = desc;
@@ -212,7 +211,7 @@ const CheckoutCard = observer(() => {
         payment_status,
         payment_method,
         staff,
-        ref_code
+        ref_code,
       });
 
       // ;await apiService.createOrder({
@@ -284,7 +283,9 @@ const CheckoutCard = observer(() => {
                       <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                         SUBTOTAL
                       </th>
-                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-center">Delete</th>
+                      <th className="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-center">
+                        Delete
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="text-gray-800">
@@ -346,7 +347,7 @@ const CheckoutCard = observer(() => {
                     name="payment_status"
                     className="form-checkbox text-green-500"
                     value={payment_status}
-                    checked={payment_status === true }
+                    checked={payment_status === true}
                     onChange={togglePaymentStatus}
                   />
                   <span className="ml-2 hidden md:block">Mark as</span>
@@ -386,8 +387,8 @@ const CheckoutCard = observer(() => {
                       value={payment_method}
                     >
                       <option value="">Select Payment Method</option>
-                      <option  value="pending">Pending</option>
-                      <option  value="cash">Cash</option>
+                      <option value="pending">Pending</option>
+                      <option value="cash">Cash</option>
                       <option value="pos">POS</option>
                       <option value="transfer">Transfer</option>
                     </select>
@@ -396,9 +397,7 @@ const CheckoutCard = observer(() => {
                 <div className="w-full text-center flex justify-center items-center py-6">
                   <button
                     className={
-                      (staff === ''
-                        ? "bg-gray-700"
-                        : "bg-blue-500") +
+                      (staff === "" ? "bg-gray-700" : "bg-blue-500") +
                       " text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex items-center"
                     }
                     type="submit"
