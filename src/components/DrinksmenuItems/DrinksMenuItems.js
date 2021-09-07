@@ -120,6 +120,13 @@ const DrinksMenuItems = ({ menuItems }) => {
     </tr>
   ));
 
+  const handleChange = (e) => {
+    // const { value, name } = e.target;
+
+    // setOrderDetails({ ...orderDetails, [name]: value });
+    // console.log(item_ids);
+  };
+
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -224,7 +231,7 @@ const DrinksMenuItems = ({ menuItems }) => {
 
             <div className="table_no">
               <label for="table_no">Table Number</label>
-              <input type="number" name="table_no" required />
+              <input onChange={handleChange} type="number" name="table_no" required />
             </div>
             <div className="submit">
               <p onClick={closeOrderModal}>close</p>
