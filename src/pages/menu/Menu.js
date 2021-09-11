@@ -63,6 +63,7 @@ const Menu = observer(() => {
           </div>
         </div>
 
+
         <DrinksMenuItems menuItems={menuItems} />
       </div>
 

@@ -10,12 +10,12 @@ import FullScreenLoader from "../fullScreenLoader";
 
 const StockItemCard = () => {
   const [itemDetails, setItemDetails] = useState({
-    item: '',
-    desc: '',
-    category: '',
-    price: '',
+    item: "",
+    desc: "",
+    category: "",
+    price: "",
     status: null,
-    image: '',
+    image: "",
   });
 
   const { mealService } = useContext(AppStateContext);
@@ -46,6 +46,8 @@ const StockItemCard = () => {
 
   useEffect(() => {
     getMeal();
+    handleImage();
+
     // eslint-disable-next-line
   }, []);
 
@@ -81,13 +83,27 @@ const StockItemCard = () => {
     const { value, name } = e.target;
 
     setItemDetails({ [name]: value });
-    // console.log(itemDetails);console.log(status);
   };
+
+  const [counter, setCounter] = useState(1);
+
+  const onClick = () => {
+    setCounter(counter + 1);
+    console.log(counter);
+  };
+
+  const stockQuantityChecker = (desc) => {
+    if (desc >= 1) {
+      setItemDetails({ status: true });
+    } else if (desc <= 0) {
+      setItemDetails({ status: false });
+    }
+  };
+
   useEffect(() => {
-    handleImage();
-    // console.log("image");
-    //eslint-disable-next-line
-  }, []);
+    stockQuantityChecker(desc);
+  }, [desc]);
+
   const handleCheck = () => {
     setItemDetails((prevDetails) => {
       const newState = {
@@ -229,24 +245,24 @@ const StockItemCard = () => {
                 </label>
               </div>
               <div className="flex mt-6">
-                <label for='status' className="flex items-center">
+                <label for="status" className="flex items-center">
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
                     checked={status}
-                    name='status'
+                    name="status"
                     onChange={handleCheck}
                   />
                   <span className="ml-2 text-gray-700">In stock</span>
                 </label>
               </div>{" "}
-              <div className="flex mt-6">
-                <label for='status' className="flex items-center">
+              <div className= "flex mt-6">
+                <label for="status" className="flex items-center">
                   <input
                     type="checkbox"
                     className="form-checkbox text-green-500"
                     checked={status === false}
-                    name='status'
+                    name="status"
                     onChange={handleCheck}
                   />
                   <span className="ml-2 text-gray-700">Out of stock</span>
@@ -254,7 +270,7 @@ const StockItemCard = () => {
               </div>
               <div className="text-center mt-8">
                 <button
-                  onClick={handleImage}
+                  // onClick={handleImage}
                   className="bg-gray-900 custom-btn text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="submit"
                 >
@@ -265,6 +281,9 @@ const StockItemCard = () => {
           </div>
         </div>
       </Fade>
+      <h2>Start editing to see some magic happen!</h2>
+      {counter}
+      <button onClick={onClick}>Increment</button>
     </>
   );
 };

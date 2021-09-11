@@ -68,7 +68,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                 <tr key={idx}>
                   <th className="border-t-0 px-6 align-middle text-capitalize border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                     <span className="ml-3 font-bold text-gray-700">
-                      {order.staff}
+                      {order.table_no ? 'customer order' : order.staff}
                     </span>
                   </th>
                   <td className="border-t-0 px-6 text-center text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
@@ -94,7 +94,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                     {order.payment_status}
                   </td>
                   <td className="border-t-0 px-6 text-center text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                    {order.payment_method || "Nil"}
+                    {order.payment_method || "Pending payment"}
                   </td>
                   {/* <td className={"border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 " + (currentUser.role === 'waiter' ? "hidden" : "block")}>
                       {order.waiter_name}
@@ -107,6 +107,7 @@ const OrderTable = ({ orders, refresh, deleted }) => {
                       refresh={refresh}
                       id={order.id}
                       orderStatus={order.ordered}
+                      paymentStatus={order.payment_status}
                       deleted={deleted}
                     />
                   </td>

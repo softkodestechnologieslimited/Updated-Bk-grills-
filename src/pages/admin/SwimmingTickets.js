@@ -48,7 +48,7 @@ const SwimmingTickets = () => {
   }, []);
 
   const changeTicketId = () => {
-    let newId = uuid();
+    let newId = uuid().substring(0, 8);
     setTicketId((prev) => (prev = newId));
   };
 
@@ -83,7 +83,7 @@ const SwimmingTickets = () => {
   return (
     <>
       <Sidebar />
-      <div className="relative md:ml-64 bg-gray-900">
+      <div className="relative md:ml-64 bg-gray-900" onClick={() => {console.log(ticketId);}}>
         <AdminNavbar />
         <div className="relative px-4 md:px-10 mx-auto w-full h-90 md:pt-32 pt-12 md:mt-0 mt-24">
           <div className="px-4 mt-6">

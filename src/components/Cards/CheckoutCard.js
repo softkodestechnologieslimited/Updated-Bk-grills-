@@ -115,7 +115,6 @@ const CheckoutCard = observer(() => {
     const { value, name } = e.target;
 
     setOrderDetails({ ...orderDetails, [name]: value });
-    console.log(item_ids);
   };
 
   // payment toggle
@@ -184,14 +183,6 @@ const CheckoutCard = observer(() => {
     e.preventDefault();
 
     try {
-      // further validations can be done on the input
-      // if (!customer_name) {
-      //   addToast("Add a Customer name", {
-      //     appearance: 'error',
-      //     autoDismiss: true,
-      //   })
-      //   return
-      // }
 
       if (!staff) {
         addToast("Select staff", {
@@ -372,7 +363,7 @@ const CheckoutCard = observer(() => {
                 className="flex flex-wrap mt-3 mb-6 px-6"
               >
                 {/* {payment_status === "pending" && ( */}
-                <div className="w-full lg:w-6/12 px-">
+                <div className={(!payment_status ? "hidden" : "w-full lg:w-6/12 px-")}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"

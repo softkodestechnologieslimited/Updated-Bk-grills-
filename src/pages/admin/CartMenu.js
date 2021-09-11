@@ -16,9 +16,7 @@ import Pagination from "../../components/Pagination/Pagination";
 const CartMenu = observer(() => {
   const { mealService } = useContext(AppStateContext);
   const [meals, setMeals] = useState(
-    mealService.meals.filter(
-      (meal) => meal.status === true
-    )
+    mealService.meals.filter((meal) => meal.status === true && meal.desc >= 1)
   );
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
@@ -28,12 +26,19 @@ const CartMenu = observer(() => {
   const { addToast } = useToasts();
 
   useEffect(() => {
-    if (meals.length) return;
+    if (meals.length) {
+      refreshMeals();
+      return;
+    }
 
     getItems();
 
     // eslint-disable-next-line
   }, []);
+
+  const refreshMeals = () => {
+    setMeals(mealService.getMeals());
+  };
 
   const getItems = async () => {
     try {
@@ -123,7 +128,8 @@ const CartMenu = observer(() => {
                 <i className="fas fa-filter"></i> Filter by
               </label>
               <select
-                name="category"f
+                name="category"
+                f
                 onChange={onFilterChange}
                 className="form-select block w-6/12 placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3"
               >

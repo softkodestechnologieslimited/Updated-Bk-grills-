@@ -104,8 +104,10 @@ const StockTable = ({
                         return "Available";
                       } else if (meal.status === true && meal.desc <= 10) {
                         return "Low in Stock";
-                      } else {
+                      } else if(meal.status === false && meal.desc <= 0) {
                         return "Out of Stock";
+                      } else if (meal.status === true & meal.desc >= 1 || meal.status === false & meal.desc >= 1) {
+                        return "error, check quantity"
                       }
                     })()}
 

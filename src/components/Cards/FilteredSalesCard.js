@@ -13,7 +13,7 @@ const FilteredSalesCard = ({
   return (
     <>
       {/* <Fade> */}
-      <div className="body">
+      <div className="card-body">
         <span>
           <h1>SALES REPORT</h1>
           <p onClick={closeModal}>close</p>

@@ -10,6 +10,7 @@
     right: 2%;
     background: #302d32;
     border-radius: 50%;
+    z-index: 9999;
 
     p {
       position: absolute;
@@ -21,16 +22,22 @@
     }
   }
 
+  .tooltip_hide {
+    display: none ;
+  }
+
+  .tooltip_opacity {
+    display: none;
+  }
+
   .orderModal {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
     position: fixed;
     top: 50%;
     left: 50%;
     width: 90%;
     height: 70vh;
     overflow-y: scroll;
+    border-radius: 10px;
     padding: 40px 20px;
     transform: translate(-50%, -50%);
     background: #302d32;
@@ -39,12 +46,8 @@
     h2 {
       text-align: center;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 24px;
       padding-bottom: 20px;
-    }
-
-    .table_no {
-      padding: 50px 20px;
     }
 
     label {
@@ -62,6 +65,93 @@
         outline: 0;
       }
     }
+
+    .cartItems_con {
+      display: block;
+      width: 100%;
+
+      .cartItems {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        border-bottom: 1px solid rgba(234, 234, 234, 0.1);
+        padding: 10px 0px;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        li {
+          width: 22%;
+          &:first-of-type {
+            text-align: left;
+          }
+
+          &:last-of-type {
+            text-align: right;
+          }
+          i {
+            cursor: pointer;
+          }
+        }
+
+        .li_text_center {
+          text-align: center;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        width: 600px;
+        overflow: hidden;
+      }
+    }
+
+    .details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+
+      .table_no {
+        label {
+          font-weight: 700;
+        }
+        input {
+          display: block;
+          width: 50%;
+          padding: 10px 20px;
+          font-size: 15px;
+          font-weight: 700;
+          color: rgba(234, 234, 234, 0.6);
+          background-color: transparent;
+          border-radius: 3px;
+          transition: all 0.4s ease 0s;
+          border: 2px solid rgba(234, 234, 234, 0.2);
+
+          &:focus {
+            outline: 0;
+            border: 2px solid white;
+          }
+        }
+      }
+
+      .total {
+        display: flex;
+
+        p {
+          font-size: 24px;
+          font-weight: 700;
+        }
+      }
+    }
+    // $base-color: #036;
+
+    // @for $i from 2 through 4  {
+    //   ul:nth-child(3n + #{$i}) {
+    //     background-color: lighten($base-color, $i * 5%);
+    //   }
+    // }
 
     .submit {
       display: flex;

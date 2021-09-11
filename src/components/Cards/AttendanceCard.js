@@ -75,7 +75,7 @@ function AttendanceCard({ onClick, staff }) {
                       {staffs.staff}
                     </td>
                     <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                      {new Date(staffs.timeStamp).toString('YYYY-MM-dd')}
+                      {new Date(staffs.timeStamp).toLocaleString('en-US')}
                     </td>
                   </tr>
                 ))}

@@ -17,6 +17,10 @@ export class MealService {
     this.meals = [...meals];
   }
 
+  getMeals(meals) {
+    return this.meals.filter(meal => meal.status === true && meal.desc >= 1)
+  }
+
   setMealsPy(meals) {
     this.mealsPy= [...meals]
   }

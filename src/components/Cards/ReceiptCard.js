@@ -4,7 +4,7 @@ import apiService from "../../context/apiService";
 import { AppStateContext } from "../../context";
 import { useToasts } from "react-toast-notifications";
 import ReactToPrint from "react-to-print";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import FullScreenLoader from "../../components/fullScreenLoader";
 import logo from "../../assets/img/new-logo.jpeg";
 
@@ -45,7 +45,7 @@ const ReceiptCard = () => {
     // eslint-disable-next-line
   }, []);
 
-  const {  payment_method, payment_status,  staff, ref_code} =
+  const {ordered_date, payment_method, payment_status, staff, ref_code} =
     orderDetails;
 
   return (
@@ -69,20 +69,20 @@ const ReceiptCard = () => {
             <img src={logo} alt="logo" className="mx-auto" />
           </div>
 
-          <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+          <h6 className="text-black text-sm mt-3 mb-6 font-bold uppercase">
             Order Information
           </h6>
 
           <table className="items-center w-full bg-transparent border-collapse">
             <thead className="thead-light">
               <tr>
-                <th className="px-3 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                <th className="px-3 bg-gray-100 text-black align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                   Item
                 </th>
-                <th className="px-3 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                <th className="px-3 bg-gray-100 text-black align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                   Quantity
                 </th>
-                <th className="px-3 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                <th className="px-3 bg-gray-100 text-black align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                   Price
                 </th>
               </tr>
@@ -103,7 +103,7 @@ const ReceiptCard = () => {
                           ))}
                       </>
                     </td>
-                    <td className="text-black flex-auto text-center">
+                    <td className="text-black font-bold flex-auto text-center">
                       <>
                         {[orderDetails.quantity]
                           .join()
@@ -153,30 +153,30 @@ const ReceiptCard = () => {
             </div> */}
             <div className="w-full lg:w-6/12 px-4">
               <div className="relative w-full mb-3">
-                <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                <span className="block uppercase text-black text-xs font-bold mb-2">
                   Staff Name
                 </span>
-                <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
+                <p className="px-3 py-3 placeholder-black font-bold text-black rounded text-sm focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
                   {staff}
                 </p>
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="relative w-full mb-3">
-                <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                <span className="block uppercase text-black text-xs font-bold mb-2">
                   Payment Method
                 </span>
-                <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
+                <p className="px-3 py-3 placeholder-black font-bold text-black  rounded text-sm focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
                   {payment_method}
                 </p>
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="relative w-full mb-3">
-                <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                <span className="block uppercase text-black text-xs font-bold mb-2">
                   Payment Status
                 </span>
-                <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
+                <p className="px-3 py-3 placeholder-black font-bold text-black  rounded text-sm focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
                   {
                     payment_status === true ? <p>paid</p> : <p>unpaid</p>
                   }
@@ -185,11 +185,12 @@ const ReceiptCard = () => {
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="relative w-full mb-3">
-                <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                <span className="block uppercase text-black text-xs font-bold mb-2">
                   Date
                 </span>
-                <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
-                  {format(new Date(), "MM/dd/yyyy 'at' h:mm a")}
+                <p className="px-3 py-3 placeholder-black font-bold text-black rounded text-sm focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
+                  {/* {format(new Date(1623000000), "MM/dd/yyyy 'at' h:mm:ss a")} */}
+                  {new Date(ordered_date).toLocaleString('en-US')}
                 </p>
               </div>
             </div>
@@ -205,7 +206,7 @@ const ReceiptCard = () => {
             <ReactToPrint
               trigger={() => (
                 <button
-                  className="bg-blue-800 custom-btn text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex itemss-center"
+                  className="bg-blue-800 custom-btn text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex itemss-center"
                   type="button"
                 >
                   <i className="fas fa-print mr-4"></i>

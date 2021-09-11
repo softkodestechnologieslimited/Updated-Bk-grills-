@@ -1,4 +1,4 @@
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 import { AppStateContext } from "../../context";
 import { observer } from "mobx-react-lite";
 import { useToasts } from "react-toast-notifications";
@@ -23,8 +23,13 @@ const AdminMenuItem = observer(({ meal }) => {
     return itemInCart ? itemInCart.quantity : 0;
   };
 
-  const cartItem = quantityInCart()
+  const cartItem = quantityInCart();
 
+  const imagePlaceholder = () => {
+    const image = document.querySelector("#image");
+    const rect = image.getBoundingClientRect()
+    console.log(rect.height, rect.width, "log");
+  };
 
   const addQuantity = () => {
     cartService.addOne(meal);
@@ -66,8 +71,11 @@ const AdminMenuItem = observer(({ meal }) => {
     <>
       <div className="w-full xl:w-3/12 lg:w-4/12 md:w-6/12 px-4">
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-transparent">
+          {/* <div className=""> */}
           {meal.image ? (
             <Image
+              id="image"
+              onClick={imagePlaceholder}
               alt="meal image"
               src={meal.image}
               className="w-full rounded-t-lg"
@@ -83,6 +91,7 @@ const AdminMenuItem = observer(({ meal }) => {
               className="w-full rounded-t-lg"
             />
           )}
+          {/* </div> */}
 
           <blockquote className="relative p-3">
             <div className="flex justify-between">
@@ -95,24 +104,34 @@ const AdminMenuItem = observer(({ meal }) => {
             </div>
 
             <div className="flex justify-center items-center mt-5">
-              <button
-                className="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={reduceQuantity}
-              >
-                <i className="fas fa-minus"></i>
-              </button>
+              {cartItem < 1 ? (
+                <button
+                  className="text-black-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  // onClick={reduceQuantity}
+                >
+                  <i className="fas fa-minus"></i>
+                </button>
+              ) : (
+                <button
+                  className="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  onClick={reduceQuantity}
+                >
+                  <i className="fas fa-minus"></i>
+                </button>
+              )}
               <span className="text-gray-800 px-4 font-bold">
                 {quantityInCart()}
               </span>
-              {cartItem  === parseInt(meal.desc)? (
+              {cartItem === parseInt(meal.desc) ? (
                 <button
-                className="text-black-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                // onClick={addQuantity}
-              >
-                <i className="fas fa-plus text-gray-500"></i>
-              </button>
+                  className="text-black-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  // onClick={addQuantity}
+                >
+                  <i className="fas fa-plus text-gray-500"></i>
+                </button>
               ) : (
                 <button
                   className="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -121,7 +140,7 @@ const AdminMenuItem = observer(({ meal }) => {
                 >
                   <i className="fas fa-plus"></i>
                 </button>
-               )}
+              )}
             </div>
           </blockquote>
         </div>

@@ -29,6 +29,7 @@ const OrderCard = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+  const [disableCheckbox, setDisableCheckbox] = useState(false);
   const { orderService } = useContext(AppStateContext);
   // const { orderService, authService } = useContext(AppStateContext)
   const { addToast } = useToasts();
@@ -57,11 +58,14 @@ const OrderCard = () => {
     if (!orderService.recentOrders.length) {
       return history.push("/dashboard/orders");
     }
-    disable();
     getOrder();
 
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    disable();
+  });
 
   const {
     // items,
@@ -80,18 +84,6 @@ const OrderCard = () => {
     e.preventDefault();
 
     try {
-      if (payment_status === false && !payment_method) {
-        addToast("Select Payment Method!", {
-          appearance: "error",
-          autoDismiss: true,
-        });
-      } 
-      // else if (editOrder === true) {
-      //   addToast("Finish editing order before you save", {
-      //     appearance: "error",
-      //     autoDismiss: true,
-      //   });
-      // }
       await apiService.updateOrder(id, orderDetails);
       // const updatedOrder = data.data;
       // orderService.updateOrder(updatedOrder);
@@ -137,13 +129,13 @@ const OrderCard = () => {
   //   // setOrderDetails({ ...orderDetails, ordered_date: date });
   //   console.log(orderDetails.ordered_date);
   // };
-  let disabled = false;
+  // let disabled = false;
 
   const disable = () => {
     if (ordered_date !== null) {
-      disabled = true;
+      setDisableCheckbox(true);
+      console.log(disableCheckbox);
     }
-    console.log('disablle');
   };
 
   const toggleOrderStatus = () => {
@@ -152,7 +144,7 @@ const OrderCard = () => {
     // const date = orderStatus ? newDate(new Date()) : null;
 
     setOrderDetails({ ...orderDetails, ordered: orderStatus });
-    console.log(orderStatus, ordered_date);
+    console.log(disableCheckbox, ordered_date);
   };
 
   // const editOrder = false
@@ -285,50 +277,50 @@ const OrderCard = () => {
                     }
                   </>
                 ) : ( */}
-                  <tr className="" valign="top">
-                    <td className="flex-auto text-center text-black">
-                      <>
-                        {[orderDetails.items]
-                          .join()
-                          .split(",")
-                          .map((items, idx) => (
-                            <ul className="flex-1" key={idx}>
-                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
-                                {items}
-                              </li>
-                            </ul>
-                          ))}
-                      </>
-                    </td>
-                    <td className="text-black flex-auto text-center">
-                      <>
-                        {[orderDetails.quantity]
-                          .join()
-                          .split(",")
-                          .map((quantity, idx) => (
-                            <ul className="flex-1" key={idx}>
-                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
-                                {quantity}
-                              </li>
-                            </ul>
-                          ))}
-                      </>
-                    </td>
-                    <td className="text-black  flex-auto text-center">
-                      <>
-                        {[orderDetails.prices]
-                          .join()
-                          .split(",")
-                          .map((prices, idx) => (
-                            <ul className="" key={idx}>
-                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
-                                {prices}
-                              </li>
-                            </ul>
-                          ))}
-                      </>
-                    </td>
-                  </tr>
+                <tr className="" valign="top">
+                  <td className="flex-auto text-center text-black">
+                    <>
+                      {[orderDetails.items]
+                        .join()
+                        .split(",")
+                        .map((items, idx) => (
+                          <ul className="flex-1" key={idx}>
+                            <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
+                              {items}
+                            </li>
+                          </ul>
+                        ))}
+                    </>
+                  </td>
+                  <td className="text-black flex-auto text-center">
+                    <>
+                      {[orderDetails.quantity]
+                        .join()
+                        .split(",")
+                        .map((quantity, idx) => (
+                          <ul className="flex-1" key={idx}>
+                            <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
+                              {quantity}
+                            </li>
+                          </ul>
+                        ))}
+                    </>
+                  </td>
+                  <td className="text-black  flex-auto text-center">
+                    <>
+                      {[orderDetails.prices]
+                        .join()
+                        .split(",")
+                        .map((prices, idx) => (
+                          <ul className="" key={idx}>
+                            <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
+                              {prices}
+                            </li>
+                          </ul>
+                        ))}
+                    </>
+                  </td>
+                </tr>
                 {/* )} */}
 
                 <tr className="py-5 text-black flex-auto border-t-0 font-semibold px-2 align-middle border-l-0 border-r-0 text-m whitespace-no-wrap py-4">
@@ -345,34 +337,38 @@ const OrderCard = () => {
                   <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
                     Staff Name
                   </span>
-                  <input
+                  {/* <input
                     value={staff}
                     name="staff"
                     onChange={handleChange}
                     readOnly
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
-                  />
-                  {/* </p> */}
+                  /> */}
+                  <p className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize">
+                    {orderDetails.table_no ? 'customer order' : staff}
+                  </p>
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
-                    Payment Method
-                  </span>
-                  <select
-                    className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded p-3"
-                    onChange={handleChange}
-                    name="payment_method"
-                    value={payment_method}
-                  >
-                    <option value="">Select Payment Method</option>
-                    <option value="pending">Pending</option>
-                    <option value="cash">Cash</option>
-                    <option value="pos">POS</option>
-                    <option value="transfer">Transfer</option>
-                  </select>
-                </div>
+                {payment_status === true && (
+                  <div className="relative w-full mb-3">
+                    <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
+                      Payment Method
+                    </span>
+                    <select
+                      className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded p-3"
+                      onChange={handleChange}
+                      name="payment_method"
+                      value={payment_method}
+                    >
+                      <option value="">Select Payment Method</option>
+                      {/* <option value="pending">Pending</option> */}
+                      <option value="cash">Cash</option>
+                      <option value="pos">POS</option>
+                      <option value="transfer">Transfer</option>
+                    </select>
+                  </div>
+                )}
               </div>
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full ">
@@ -403,7 +399,7 @@ const OrderCard = () => {
                     className="form-checkbox text-green-500"
                     checked={ordered === true}
                     onChange={toggleOrderStatus}
-                    disabled={disabled}
+                    disabled={disableCheckbox}
                     // onClick={orderedDate}
                   />
                   <span className="ml-2 hidden md:block">Order</span>
@@ -428,15 +424,25 @@ const OrderCard = () => {
           </div>
         )} */}
 
-          <div
+          {/* <div
             className={`flex rounded-t bg-white mb-0 px-6 py-6 ${
-              orderDetails.ordered === true ? "justify-center" : ""
+              orderDetails.ordered === true && payment_status === true
+                ? "justify-center"
+                : ""
             }`}
-          >
-            <div
+          > */}
+
+          <div className="flex rounded-t bg-white mb-0 px-6 py-6">
+            {/* <div
               className={`text-center flex flex-auto  items-center ${
-                orderDetails.ordered === true ? "justify-center" : "justify-end"
+                orderDetails.ordered === true && payment_status === true
+                  ? "justify-center"
+                  : "justify-end"
               }`}
+            > */}
+            <div
+              className="text-center flex mx-auto items-center 
+              "
             >
               <button
                 className="bg-blue-800 custom-btn text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex items-center"
@@ -447,8 +453,8 @@ const OrderCard = () => {
                 Update Order
               </button>
             </div>
-            <div className="flex-auto">
-              {orderDetails.ordered === true && (
+            {/* <div className="flex-auto mx-auto">
+              {(ordered === true) & (payment_status === true) && (
                 // <Jump>
                 <Link
                   to={`/dashboard/orders/print/${id}`}
@@ -461,7 +467,7 @@ const OrderCard = () => {
                 </Link>
                 // </Jump>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </Fade>

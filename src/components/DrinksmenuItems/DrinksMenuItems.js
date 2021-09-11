@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import "./drinksmenuitems.styles.scss";
 // import img from "../../assets/img/team-3-800x800.jpg";
 import { useToasts } from "react-toast-notifications";
+import { useHistory } from "react-router-dom";
 import { nanoid } from "nanoid";
+import { observer } from "mobx-react-lite";
 import AdminMenuItem from "../../components/MenuItem/AdminMenuItem.js";
 import FullScreenLoader from "../../components/fullScreenLoader";
 import Pagination from "../../components/Pagination/Pagination";
@@ -11,17 +13,25 @@ import { AppStateContext } from "../../context";
 
 // import { Link } from "react-router-dom";
 
-const DrinksMenuItems = ({ menuItems }) => {
+const DrinksMenuItems = observer(({ menuItems }) => {
+  const { cartService } = useContext(AppStateContext);
+  const history = useHistory();
+
   const [isLoading, setIsLoading] = useState(false);
+  const [orderDetails, setOrderDetails] = useState(cartService.currentOrder);
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [meals, setMeals] = useState([]);
-  const [category, setCategory] = useState("");
+  const [filteredCategory, setFilteredCategory] = useState("");
   const [orderModal, setOrderModal] = useState(false);
   const [mealsPerPage] = useState(10);
   const { addToast } = useToasts();
 
-  const { cartService } = useContext(AppStateContext);
+  useEffect(() => {
+    if (cartService.meals.length <= 0) {
+      closeOrderModal();
+    }
+  }, [cartService.meals]);
 
   const getMeals = async () => {
     try {
@@ -48,17 +58,18 @@ const DrinksMenuItems = ({ menuItems }) => {
   };
 
   const filteredMeals = meals.filter((meal) => {
-    if (!query && category) {
-      return meal.category === category;
+    if (!query && filteredCategory) {
+      return meal.category === filteredCategory;
     }
 
-    if (query && !category) {
+    if (query && !filteredCategory) {
       return meal.item.toLowerCase().includes(query);
     }
 
-    if (query && category) {
+    if (query && filteredCategory) {
       return (
-        meal.item.toLowerCase().includes(query) && meal.category === category
+        meal.item.toLowerCase().includes(query) &&
+        meal.category === filteredCategory
       );
     }
 
@@ -69,7 +80,7 @@ const DrinksMenuItems = ({ menuItems }) => {
     if (e.target.name === "search") {
       setQuery(e.target.value.toLowerCase());
     } else if (e.target.name === "category") {
-      setCategory(e.target.value.toLowerCase());
+      setFilteredCategory(e.target.value.toLowerCase());
     }
 
     setCurrentPage(1);
@@ -98,35 +109,86 @@ const DrinksMenuItems = ({ menuItems }) => {
   });
 
   const cartitems = cartService.meals.map((meal) => (
-    <tr className="justify-center" key={nanoid()}>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-        {meal.item}
-      </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-        &#8358; {meal.price}
-      </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-        {meal.quantity}
-      </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-        &#8358; {meal.quantity * meal.price}
-      </td>
-      <td className="border-t-0 px-6 text-red-500 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 cursor-pointer">
+    <ul className="cartItems" key={nanoid()}>
+      <li className="">{meal.item}</li>
+      <li className="li_text_center">&#8358; {meal.price}</li>
+      <li className="li_text_center">{meal.quantity}</li>
+      <li className="li_text_center">&#8358; {meal.quantity * meal.price}</li>
+      <li className="">
         <i
           className="fas fa-trash mr-4"
           onClick={() => deleteFromCart(meal.id)}
         ></i>
-      </td>
-    </tr>
+      </li>
+    </ul>
   ));
 
-  const handleChange = (e) => {
-    // const { value, name } = e.target;
+  const orders = cartService.meals;
 
-    // setOrderDetails({ ...orderDetails, [name]: value });
-    // console.log(item_ids);
+  const { table_no} =  orderDetails
+
+  const { item_ids, items, desc, category, prices, ref_code } = {
+    item_ids: orders.map((item) => item.id).toString(),
+    items: orders.map((item) => item.item).toString(),
+    desc: orders.map((quantity) => quantity.quantity).toString(),
+    category: orders.map((category) => category.category).toString(),
+    prices: orders.map((prices) => prices.price).toString(),
+    ref_code: parseInt(cartService.total),
   };
 
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setOrderDetails({ ...orderDetails, [name]: value });
+    console.log(orderDetails);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setIsLoading(true);
+      await apiService.createOrder({
+        item_ids,
+        items,
+        quantity: desc,
+        category,
+        prices,
+        ref_code,
+        table_no
+      });
+
+      // ;await apiService.createOrder({
+      //   items,
+      //   quantity: desc,
+      //   category,
+      //   prices,
+      //   status,
+      //   payment_status,
+      //   payment_method,
+      //   staff,
+      //   // waiter_name,
+      //   // waiter_id,
+      // });
+      // const { data } = response.data;
+      // console.log(data)
+      await cartService.resetCart();
+      addToast("Order successful", {
+        appearance: "success",
+        autoDismiss: true,
+      });
+
+      history.push("/menu");
+      setIsLoading(false);
+      // Redirect to menu on success
+    } catch (error) {
+      const message = apiService.getErrorMessage(error); // the getErrorMessage is a helper function to get the exact messages from the server
+      addToast(message, {
+        appearance: "error",
+        autoDismiss: true,
+      });
+      setIsLoading(false);
+    }
+  };
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -155,7 +217,6 @@ const DrinksMenuItems = ({ menuItems }) => {
               </label>
               <select
                 name="category"
-                f
                 onChange={onFilterChange}
                 className="form-select block w-6/12 placeholder-gray-400 text-gray-700 bg-white rounded my-4 p-3"
               >
@@ -178,8 +239,8 @@ const DrinksMenuItems = ({ menuItems }) => {
                   ))
                 ) : (
                   <div className="w-full flex justify-center">
-                    <p className="py-5 px-6 font-bold text-xl text-red-500">
-                      No Item found!
+                    <p className="py-5 px-6 font-bold text-xl text-center text-red-500">
+                      No Items found, try again.
                     </p>
                   </div>
                 )}
@@ -191,7 +252,7 @@ const DrinksMenuItems = ({ menuItems }) => {
           <>
             {currentMeals.length ? (
               <div className="flex justify-center w-full">
-                <p className="my-4 text-gray-900 font-bold">
+                <p className="my-4 text-white-900 font-bold">
                   Showing{" "}
                   {`${indexOfFirstMeal + 1} - ${
                     isLastPage ? filteredMeals.length : indexOfLastMeal
@@ -217,22 +278,40 @@ const DrinksMenuItems = ({ menuItems }) => {
             ""
           )}
         </div>
-        <div
-          onClick={handleShowModal}
-          className={"" + cartService.meals.length >= 1 ? "tooltip" : ""}
-        >
-          <p>{cartService.meals.length}</p>
-        </div>
+
+        {orderModal === false && (
+          <div
+            onClick={handleShowModal}
+            className={
+              cartService.meals.length >= 1 ? "tooltip" : "tooltip_hide"
+            }
+          >
+            <p>{cartService.meals.length}</p>
+          </div>
+        )}
 
         {orderModal === true ? (
-          <form className="orderModal">
+          <form className="orderModal" onSubmit={handleSubmit}>
             <h2>Order Menu</h2>
-            {cartitems}
+            <div className="cartItems_con">{cartitems}</div>
 
-            <div className="table_no">
-              <label for="table_no">Table Number</label>
-              <input onChange={handleChange} type="number" name="table_no" required />
+            <div className="details">
+              <div className="table_no">
+                <label for="table_no">Table Number</label>
+                <input
+                  onChange={handleChange}
+                  type="number"
+                  name="table_no"
+                  required
+                  min="1"
+                />
+              </div>
+
+              <div className="total">
+                <p>&#8358;</p> <p> {" " + cartService.total}</p>
+              </div>
             </div>
+
             <div className="submit">
               <p onClick={closeOrderModal}>close</p>
               <button className="btn btn-bordered">order</button>
@@ -244,6 +323,6 @@ const DrinksMenuItems = ({ menuItems }) => {
       </div>
     </>
   );
-};
+});
 
 export default DrinksMenuItems;

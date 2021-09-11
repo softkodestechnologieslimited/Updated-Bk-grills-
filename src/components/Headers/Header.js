@@ -1,22 +1,24 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import logo from '../../assets/img/logos/NewLogo.JPG'
+import logo from "../../assets/img/logos/NewLogo.JPG";
 
 import "./header.styles.scss";
-
-
 
 const Header = ({ active }) => {
   const navRef = useRef();
 
   const navToggle = () => {
     navRef.current.classList.toggle("open");
+    setOpenNav(!openNav);
+    console.log(openNav);
   };
 
   //detect scroll snippet https://codesandbox.io/s/detect-scroll-direction-with-memoization-lhwnd?file=/src/App.js
 
   const [y, setY] = useState(window.scrollY);
+
+  const [openNav, setOpenNav] = useState(false);
 
   const handleScroll = useCallback(
     (e) => {
@@ -25,16 +27,21 @@ const Header = ({ active }) => {
         // console.log(y, window.scrollY, "scroll up");
         let nav = document.querySelector(".nav-wrapper");
         // nav.style.backgroundColor = "rgba(48, 45, 50, 0.7)";
-        nav.className =
-        "nav-wrapper nav-scroll";
+        nav.className = "nav-wrapper nav-scroll";
+        console.log(openNav);
       } else if (y < window.scrollY) {
         // console.log(y, "scroll down");
         document.querySelector(".nav-wrapper").className =
           "nav-wrapper nav-height";
+        console.log(openNav);
       }
-      
+
       if (y > window.scrollY && window.scrollY === 0) {
         // console.log('stop');
+        document.querySelector(".nav-wrapper").className = "nav-wrapper";
+      }
+
+       if ( openNav === true) {
         document.querySelector(".nav-wrapper").className = "nav-wrapper";
       }
 
@@ -43,7 +50,7 @@ const Header = ({ active }) => {
       // }
       setY(window.scrollY);
     },
-    [y]
+    [y, openNav]
   );
 
   useEffect(() => {

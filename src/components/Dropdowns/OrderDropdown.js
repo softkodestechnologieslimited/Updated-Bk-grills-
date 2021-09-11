@@ -14,7 +14,7 @@ import Jump from "react-reveal/Jump";
 // import { useReactToPrint } from 'react-to-print';
 
 
-const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
+const OrderDropdown = ({ id, refresh, orderStatus, paymentStatus, deleted }) => {
   const node = useRef();
 
   // dropdown props
@@ -152,7 +152,7 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
                 Process Order
               </Link>
             </Jump>
-            {orderStatus === true && (
+            {orderStatus === true && paymentStatus === true ? (
               <Jump>
                 <Link
                   to={`/dashboard/orders/print/${id}`}
@@ -164,7 +164,7 @@ const OrderDropdown = ({ id, refresh, orderStatus, deleted }) => {
                   Print Receipt
                 </Link>
               </Jump>
-            )}
+            ) : ''}
 
             {currentUser.role === "superAdmin" && (
               <Jump>

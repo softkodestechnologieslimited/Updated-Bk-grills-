@@ -40,8 +40,8 @@ class CartService {
   get currentOrder() { // use this to get the current cart state like so cartService.currentOrder
     return {
       meals: [...this.meals],
-      waiter_id: this.waiter_id,
-      waiter_name: this.waiter_name,
+      // waiter_id: this.waiter_id,
+      // waiter_name: this.waiter_name,
       payment_method: this.payment_method,
       status: this.status
     }
