@@ -350,7 +350,7 @@ const OrderCard = () => {
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
-                {payment_status === true && (
+                {/* {payment_status === true && ( */}
                   <div className="relative w-full mb-3">
                     <span className="block uppercase text-gray-700 text-xs font-bold mb-2">
                       Payment Method
@@ -368,7 +368,7 @@ const OrderCard = () => {
                       <option value="transfer">Transfer</option>
                     </select>
                   </div>
-                )}
+                // )}
               </div>
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full ">
@@ -432,7 +432,7 @@ const OrderCard = () => {
             }`}
           > */}
 
-          <div className="flex rounded-t bg-white mb-0 px-6 py-6">
+          <div className="flex rounded-t bg-white mb-0 px-6 py-6 justify-between">
             {/* <div
               className={`text-center flex flex-auto  items-center ${
                 orderDetails.ordered === true && payment_status === true

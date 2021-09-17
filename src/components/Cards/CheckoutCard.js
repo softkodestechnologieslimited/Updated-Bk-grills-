@@ -16,7 +16,6 @@ const CheckoutCard = observer(() => {
   const [orderDetails, setOrderDetails] = useState(cartService.currentOrder);
   const [isLoading, setIsLoading] = useState(false);
   // const [query, setQuery] = useState("");
-  // const [customers, setCustomers] = useState([]);
   const history = useHistory();
   const { addToast } = useToasts();
 
@@ -34,22 +33,6 @@ const CheckoutCard = observer(() => {
     staff = "",
     // waiter_id,
   } = orderDetails;
-
-  // get customers when component mounts
-  // const createOrder = async () => {
-  //   try {
-  //     const response = await apiService.createOrder(orderDetails);
-  //     const { data } = response.data;
-  //     console.log(data)
-  //     // setCustomers(data)
-  //   } catch (error) {
-  //     const message = apiService.getErrorMessage(error);
-  //     addToast(message, {
-  //       appearance: 'error',
-  //       autoDismiss: true,
-  //     })
-  //   }
-  // }
 
   useEffect(() => {
     setWaiter();
@@ -91,6 +74,7 @@ const CheckoutCard = observer(() => {
       <td className="border-t-0 px-6 text-red-500 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 cursor-pointer">
         <i
           className="fas fa-trash mr-4"
+          
           onClick={() => deleteFromCart(meal.id)}
         ></i>
       </td>
@@ -363,7 +347,7 @@ const CheckoutCard = observer(() => {
                 className="flex flex-wrap mt-3 mb-6 px-6"
               >
                 {/* {payment_status === "pending" && ( */}
-                <div className={(!payment_status ? "hidden" : "w-full lg:w-6/12 px-")}>
+                <div className= "w-full lg:w-6/12 px-">
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
