@@ -147,7 +147,7 @@ const SalesReport = () => {
                           <button
                             className="custom-btn bg-blue-800 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mt-4 mr-2 md:mt-0 ease-linear transition-all duration-150"
                             type="button"
-                            onClick={() => generateReport("day")}
+                            // onClick={() => generateReport("day")}
                           >
                             <i className="fas fa-eye mr-2"></i>
                           View Report
@@ -155,7 +155,7 @@ const SalesReport = () => {
                           <button
                             className="custom-btn bg-blue-800 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mt-4 md:mt-0 ease-linear transition-all duration-150"
                             type="button"
-                            onClick={() => generateReport("day", true)}
+                            // onClick={() => generateReport("day", true)}
                           >
                             <i className="fas fa-file-download mr-2"></i>
                           Generate CSV
@@ -175,7 +175,7 @@ const SalesReport = () => {
                           <button
                             className="custom-btn bg-blue-800 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mt-4 mr-2 md:mt-0 ease-linear transition-all duration-150"
                             type="button"
-                            onClick={() => generateReport("week")}
+                            // onClick={() => generateReport("week")}
                           >
                             <i className="fas fa-eye mr-2"></i>
                           View Report
@@ -183,7 +183,7 @@ const SalesReport = () => {
                           <button
                             className="custom-btn bg-blue-800 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mt-4 md:mt-0 ease-linear transition-all duration-150"
                             type="button"
-                            onClick={() => generateReport("week", true)}
+                            // onClick={() => generateReport("week", true)}
                           >
                             <i className="fas fa-file-download mr-2"></i>
                           Generate CSV
