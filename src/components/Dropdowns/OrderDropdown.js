@@ -152,7 +152,7 @@ const OrderDropdown = ({ id, refresh, orderStatus, paymentStatus, deleted }) => 
                 Process Order
               </Link>
             </Jump>
-            {orderStatus === true && paymentStatus === true ? (
+            {/* {orderStatus === true  ? ( */}
               <Jump>
                 <Link
                   to={`/dashboard/orders/print/${id}`}
@@ -164,7 +164,7 @@ const OrderDropdown = ({ id, refresh, orderStatus, paymentStatus, deleted }) => 
                   Print Receipt
                 </Link>
               </Jump>
-            ) : ''}
+            {/* ) : ''} */}
 
             {currentUser.role === "superAdmin" && (
               <Jump>

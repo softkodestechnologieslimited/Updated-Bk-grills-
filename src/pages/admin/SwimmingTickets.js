@@ -17,6 +17,7 @@ import Spinner from "components/spinner/Spinner";
 
 const SwimmingTickets = () => {
   const [ticketId, setTicketId] = useState("");
+  const [ticketCount, setTicketCount] = useState(0)
   const [date, setDate] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const printComponent = useRef();
@@ -53,7 +54,7 @@ const SwimmingTickets = () => {
   };
 
   const HandlePrint = async () => {
-    const print = await addTicket({ ticket_id: ticketId });
+    const print = await addTicket({ ticket_id: ticketId, number: ticketCount });
     if (print) {
       await handlePrint();
       setShowModal(false);
@@ -107,6 +108,7 @@ const SwimmingTickets = () => {
               <p>
                 Ticket Id: <br /> {ticketId}
               </p>
+              {!showModal  && (<p>Number of persons: <br /> {ticketCount}</p>)}
               <p>
                 Date: <br /> {formatTicketDate(date) || " "}
               </p>
