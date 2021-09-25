@@ -15,11 +15,14 @@ import { Link } from "react-router-dom";
 import { useClockedInContext } from "context/ClockInService";
 import Spinner from "components/spinner/Spinner";
 
+import "./swimmingTickets.styles.scss"
+
 const SwimmingTickets = () => {
   const [ticketId, setTicketId] = useState("");
-  const [ticketCount, setTicketCount] = useState(0)
+  const [ticketCount, setTicketCount] = useState(0);
   const [date, setDate] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [showButtons, setShowButtons] = useState(false)
   const printComponent = useRef();
   const { addTicket, fetchTickets, loading, startDate } = useClockedInContext();
   const { addToast } = useToasts();
@@ -37,6 +40,12 @@ const SwimmingTickets = () => {
     // eslint-disable-next-line
   }, []);
 
+  const add = () => setTicketCount(ticketCount + 1);
+
+  const minus = () => {
+    ticketCount === 0 ? setTicketCount(0) : setTicketCount(ticketCount - 1);
+  };
+
   useEffect(() => {
     let timer = setInterval(() => {
       setDate((prev) => (prev = Date.now()));
@@ -50,7 +59,7 @@ const SwimmingTickets = () => {
 
   const changeTicketId = () => {
     let newId = uuid().substring(0, 8);
-    setTicketId((prev) => (prev = newId));
+    setTicketId((prev) => prev = newId);
   };
 
   const HandlePrint = async () => {
@@ -84,7 +93,12 @@ const SwimmingTickets = () => {
   return (
     <>
       <Sidebar />
-      <div className="relative md:ml-64 bg-gray-900" onClick={() => {console.log(ticketId);}}>
+      <div
+        className="relative md:ml-64 bg-gray-900"
+        onClick={() => {
+          console.log(ticketCount);
+        }}
+      >
         <AdminNavbar />
         <div className="relative px-4 md:px-10 mx-auto w-full h-90 md:pt-32 pt-12 md:mt-0 mt-24">
           <div className="px-4 mt-6">
@@ -108,7 +122,32 @@ const SwimmingTickets = () => {
               <p>
                 Ticket Id: <br /> {ticketId}
               </p>
-              {!showModal  && (<p>Number of persons: <br /> {ticketCount}</p>)}
+              <p>
+                Number of persons: <br />
+                {/* {showModal === false && ( */}
+                  <button
+                    className={` text-blue-500 bg-transparent ${showButtons ? 'visible' : ''} border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
+                    type="button"
+                    onClick={minus}
+                  >
+                    <i className="fas fa-minus"></i>
+                  </button>
+                {/* )} */}
+                {ticketCount}
+                {/* {showModal === false && ( */}
+                  <button
+                    className={` text-blue-500 bg-transparent ${showButtons ? 'visible' : ''} border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
+                    type="button"
+                    onClick={add}
+                  >
+                    <i className="fas fa-plus"></i>
+                  </button>
+                {/* )} */}
+
+                <button className={`${showButtons ? 'visible' : ''}`} onClick={() => {
+                  setShowButtons(true)
+                }}>enter</button>
+              </p>
               <p>
                 Date: <br /> {formatTicketDate(date) || " "}
               </p>
@@ -119,6 +158,14 @@ const SwimmingTickets = () => {
             </div>
             <div className="print-btn">
               <button
+                  // onMouseOver={() => {
+                  //   console.log('focused')
+                  //   setShowButtons(true)
+                  // }}
+                  // onMouseLeave={() => {
+                  //   console.log("unfoc")
+                  //   setShowButtons(false)
+                  // }}
                 onClick={() => {
                   setShowModal(true);
                 }}
@@ -159,6 +206,7 @@ const SwimmingTickets = () => {
                       <button
                         type="button"
                         className="button cancel"
+                    
                         onClick={() => {
                           setShowModal(false);
                         }}
