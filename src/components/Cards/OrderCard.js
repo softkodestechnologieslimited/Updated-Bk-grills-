@@ -368,7 +368,7 @@ const OrderCard = () => {
                       <option value="transfer">Transfer</option>
                     </select>
                   </div>
-                // )}
+                {/* // )} */}
               </div>
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full ">

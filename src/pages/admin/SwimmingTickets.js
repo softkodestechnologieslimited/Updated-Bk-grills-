@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { v4 as uuid } from "uuid";
 import { useReactToPrint } from "react-to-print";
 import Zoom from "react-reveal/Zoom";
 import { useToasts } from "react-toast-notifications";
+import { AppStateContext } from "../../context";
 
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FooterAdmin from "components/Footers/FooterAdmin.js";
@@ -26,6 +27,9 @@ const SwimmingTickets = () => {
   const printComponent = useRef();
   const { addTicket, fetchTickets, loading, startDate } = useClockedInContext();
   const { addToast } = useToasts();
+  const { authService } = useContext(AppStateContext);
+
+  const { currentUser } = authService;
 
   useEffect(() => {
     let mounted = true;
@@ -110,7 +114,8 @@ const SwimmingTickets = () => {
                 </button>
               </Link>
             </div>
-            <div ref={printComponent} className="ticket">
+            {currentUser.user_type === "admin" && (
+                  <div ref={printComponent} className="ticket">
               <div className="img-con">
                 <img src={logo} style={{ borderRadius: "50%" }} alt="logo" />
               </div>
@@ -122,32 +127,9 @@ const SwimmingTickets = () => {
               <p>
                 Ticket Id: <br /> {ticketId}
               </p>
-              <p>
-                Number of persons: <br />
-                {/* {showModal === false && ( */}
-                  <button
-                    className={` text-blue-500 bg-transparent ${showButtons ? 'visible' : ''} border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
-                    type="button"
-                    onClick={minus}
-                  >
-                    <i className="fas fa-minus"></i>
-                  </button>
-                {/* )} */}
-                {ticketCount}
-                {/* {showModal === false && ( */}
-                  <button
-                    className={` text-blue-500 bg-transparent ${showButtons ? 'visible' : ''} border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
-                    type="button"
-                    onClick={add}
-                  >
-                    <i className="fas fa-plus"></i>
-                  </button>
-                {/* )} */}
 
-                <button className={`${showButtons ? 'visible' : ''}`} onClick={() => {
-                  setShowButtons(true)
-                }}>enter</button>
-              </p>
+           
+              
               <p>
                 Date: <br /> {formatTicketDate(date) || " "}
               </p>
@@ -156,7 +138,10 @@ const SwimmingTickets = () => {
               </p>
               <h1>{formatter.format(1000)}</h1>
             </div>
-            <div className="print-btn">
+            )}
+        
+         {currentUser.user_type === "admin" &&(
+              <div className="print-btn">
               <button
                   // onMouseOver={() => {
                   //   console.log('focused')
@@ -174,6 +159,7 @@ const SwimmingTickets = () => {
                 Print Ticket
               </button>
             </div>
+         )}
           </div>
         </div>
         <FooterAdmin />
