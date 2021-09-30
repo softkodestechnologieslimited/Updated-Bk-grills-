@@ -20,10 +20,10 @@ import "./swimmingTickets.styles.scss"
 
 const SwimmingTickets = () => {
   const [ticketId, setTicketId] = useState("");
-  const [ticketCount, setTicketCount] = useState(0);
+  // const [ticketCount, setTicketCount] = useState(0);
   const [date, setDate] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [showButtons, setShowButtons] = useState(false)
+  // const [showButtons, setShowButtons] = useState(false)
   const printComponent = useRef();
   const { addTicket, fetchTickets, loading, startDate } = useClockedInContext();
   const { addToast } = useToasts();
@@ -44,11 +44,11 @@ const SwimmingTickets = () => {
     // eslint-disable-next-line
   }, []);
 
-  const add = () => setTicketCount(ticketCount + 1);
+  // const add = () => setTicketCount(ticketCount + 1);
 
-  const minus = () => {
-    ticketCount === 0 ? setTicketCount(0) : setTicketCount(ticketCount - 1);
-  };
+  // const minus = () => {
+  //   ticketCount === 0 ? setTicketCount(0) : setTicketCount(ticketCount - 1);
+  // };
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -67,7 +67,7 @@ const SwimmingTickets = () => {
   };
 
   const HandlePrint = async () => {
-    const print = await addTicket({ ticket_id: ticketId, number: ticketCount });
+    const print = await addTicket({ ticket_id: ticketId });
     if (print) {
       await handlePrint();
       setShowModal(false);
@@ -99,9 +99,7 @@ const SwimmingTickets = () => {
       <Sidebar />
       <div
         className="relative md:ml-64 bg-gray-900"
-        onClick={() => {
-          console.log(ticketCount);
-        }}
+   
       >
         <AdminNavbar />
         <div className="relative px-4 md:px-10 mx-auto w-full h-90 md:pt-32 pt-12 md:mt-0 mt-24">
