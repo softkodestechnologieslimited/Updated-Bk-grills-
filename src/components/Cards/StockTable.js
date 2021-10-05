@@ -67,73 +67,74 @@ const StockTable = ({
               </tr>
             </thead>
             <tbody>
-              {meals.map((meal, idx) => (
-                <tr key={idx}>
-                  <th className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                    <span className="font-bold text-gray-700">{meal.item}</span>
-                  </th>
-                  <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                    {meal.category}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                    {(() => {
-                      if (meal.status === true && meal.desc >= 10) {
-                        return (
-                          <i className="fas fa-circle mr-2 text-green-500"></i>
-                        );
-                      } else if (meal.status === true && meal.desc <= 10) {
-                        return (
-                          <i className="fas fa-circle mr-2 text-orange-500"></i>
-                        );
-                      } else {
-                        return <i className="fas fa-circle mr-2"></i>;
-                      }
-                    })()}
-
-                    {/* <i
-                      className={
-                        "fas fa-circle mr-2 " +
-                        (meal.status === true
-                          ? "text-green-500"
-                          : "text-yellow-500")
-                      }
-                    ></i> */}
-
-                    {(() => {
-                      if (meal.status === true && meal.desc >= 10) {
-                        return "Available";
-                      } else if (meal.status === true && meal.desc <= 10) {
-                        return "Low in Stock";
-                      } else if(meal.status === false && meal.desc <= 0) {
-                        return "Out of Stock";
-                      } else if (meal.status === true & meal.desc >= 1 || meal.status === false & meal.desc >= 1) {
-                        return "error, check quantity"
-                      }
-                    })()}
-
-                    {/* {meal.status === true ? "Available" : "Out of Stock"} */}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                    {/* {meal.quantity || ( */}
-                    <span className="">{meal.desc}</span>
-                    {/* )} */}
-                  </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                    &#8358;{meal.price}
-                  </td>
-                  {currentUser.user_type === "admin" ? (
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                      <StockmenuDropdown
-                        id={meal.id}
-                        refresh={refresh}
-                        deleted={deleted}
-                      />
+              {meals.map((meal, idx) => {
+                return (
+                  <tr key={idx}>
+                    <th className="border-t-0 px-6 text-capitalize align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+                      <span className="font-bold text-gray-700">{meal.item}</span>
+                    </th>
+                    <td className="border-t-0 text-capitalize px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                      {meal.category}
                     </td>
-                  ) : (
-                    ""
-                  )}
-                </tr>
-              ))}
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                      {(() => {
+                        if (meal.status === true && meal.desc >= 10) {
+                          return (
+                            <i className="fas fa-circle mr-2 text-green-500"></i>
+                          );
+                        } else if (meal.status === true && meal.desc <= 10) {
+                          return (
+                            <i className="fas fa-circle mr-2 text-orange-500"></i>
+                          );
+                        } else {
+                          return <i className="fas fa-circle mr-2"></i>;
+                        }
+                      })()}
+
+                      {/* <i
+              className={
+                "fas fa-circle mr-2 " +
+                (meal.status === true
+                  ? "text-green-500"
+                  : "text-yellow-500")
+              }
+            ></i> */}
+
+                      {(() => {
+                        if (meal.status === true && meal.desc >= 10) {
+                          return "Available";
+                        } else if (meal.status === true && meal.desc <= 10) {
+                          return "Low in Stock";
+                        } else if (meal.status === false && meal.desc <= 0) {
+                          return "Out of Stock";
+                        } else if (meal.status === true & meal.desc >= 1 || meal.status === false & meal.desc >= 1) {
+                          return "error, check quantity";
+                        }
+                      })()}
+
+                      {/* {meal.status === true ? "Available" : "Out of Stock"} */}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                      {/* {meal.quantity || ( */}
+                      <span className="">{meal.desc}</span>
+                      {/* )} */}
+                    </td>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                      &#8358;{meal.price}
+                    </td>
+                    {currentUser.user_type === "admin" ? (
+                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+                        <StockmenuDropdown
+                          id={meal.id}
+                          refresh={refresh}
+                          deleted={deleted} />
+                      </td>
+                    ) : (
+                      ""
+                    )}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
