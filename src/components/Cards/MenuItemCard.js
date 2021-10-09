@@ -22,7 +22,7 @@ const StockItemCard = () => {
 
   const { addToast } = useToasts();
   // const [status, setStatus] = useState(mealService.meals);
-  // const [imageUrl, setImageUrl] = useState(null);
+  const [imageStatus, setImageStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // const [imageUrl, setImageUrl] = useState("");
   const params = useParams();
@@ -36,30 +36,33 @@ const StockItemCard = () => {
 
     const meal = await apiService.getSingleMeal(id);
     console.log(meal.data);
-    // console.log(status);
 
     // const { item, desc, category, price, status, image } = meal;
     setItemDetails(meal.data);
-    // console.log(meal.data);
-    // setImageUrl(image);
+
+    // if (!meal.data.image) {
+    //   console.log('work')
+    // } else {
+    // console.log('work')
+
+    // }
   };
 
   useEffect(() => {
     getMeal();
-    handleImage();
+
 
     // eslint-disable-next-line
   }, []);
 
   const { item, desc, category, price, status, image } = itemDetails;
 
-  //eslint-disable-next-line
-  let newQuantity;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+  
       await apiService.updateMeal(id, itemDetails);
       setIsLoading(true);
 
@@ -82,21 +85,16 @@ const StockItemCard = () => {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    setItemDetails({ [name]: value });
+    setItemDetails({ ...itemDetails, [name]: value });
+    console.log(itemDetails)
   };
 
-  const [counter, setCounter] = useState(1);
-
-  const onClick = () => {
-    setCounter(counter + 1);
-    console.log(counter);
-  };
 
   const stockQuantityChecker = (desc) => {
     if (desc >= 1) {
-      setItemDetails({ status: true });
+      setItemDetails({...itemDetails, status: true });
     } else if (desc <= 0) {
-      setItemDetails({ status: false });
+      setItemDetails({...itemDetails, status: false });
     }
   };
 
@@ -117,9 +115,10 @@ const StockItemCard = () => {
   };
 
   const handleImage = () => {
-    if (image) {
+    if (imageStatus === false) {
       const { image, ...newItemDetails } = itemDetails;
       setItemDetails(newItemDetails);
+      console.log(itemDetails, imageStatus);
     }
   };
 
@@ -140,7 +139,7 @@ const StockItemCard = () => {
         <div className="relative flex flex-col xl:w-8/12 mx-auto min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
           <div className="rounded-t bg-white mb-0 px-6 py-6">
             <div className="text-center flex justify-between">
-              <h6 className="text-gray-800 text-xl font-bold">
+              <h6 className="text-gray-800 text-xl font-bold" onClick = { () => {handleImage()}}>
                 Edit Menu Item
               </h6>
               <Link
@@ -194,7 +193,7 @@ const StockItemCard = () => {
                   <input
                     type="file"
                     accept="image/*"
-                    // onClick={handleImage}
+                    onClick = { () => {setImageStatus(true)}}
                     onChange={handleImageInput}
                     className="form-input text-gray-700 mt-1 block w-full my-4 py-3"
                   />
@@ -270,7 +269,7 @@ const StockItemCard = () => {
               </div>
               <div className="text-center mt-8">
                 <button
-                  // onClick={handleImage}
+                  onClick={handleImage}
                   className="bg-gray-900 custom-btn text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="submit"
                 >
@@ -281,9 +280,9 @@ const StockItemCard = () => {
           </div>
         </div>
       </Fade>
-      <h2>Start editing to see some magic happen!</h2>
+      {/* <h2>Start editing to see some magic happen!</h2>
       {counter}
-      <button onClick={onClick}>Increment</button>
+      <button onClick={onClick}>Increment</button> */}
     </>
   );
 };
