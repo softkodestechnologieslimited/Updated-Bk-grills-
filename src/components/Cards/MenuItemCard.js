@@ -140,7 +140,7 @@ const StockItemCard = () => {
         <div className="relative flex flex-col xl:w-8/12 mx-auto min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
           <div className="rounded-t bg-white mb-0 px-6 py-6">
             <div className="text-center flex justify-between">
-              <h6 className="text-gray-800 text-xl font-bold" onClick = { () => {handleImage()}}>
+              <h6 className="text-gray-800 text-xl font-bold">
                 Edit Menu Item
               </h6>
               <Link
