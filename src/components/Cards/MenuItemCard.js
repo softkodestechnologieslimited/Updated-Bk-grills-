@@ -100,6 +100,7 @@ const StockItemCard = () => {
 
   useEffect(() => {
     stockQuantityChecker(desc);
+    //eslint-disable-next-line
   }, [desc]);
 
   const handleCheck = () => {
