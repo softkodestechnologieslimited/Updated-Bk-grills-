@@ -13,7 +13,7 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import HeaderStats from "../../components/Headers/HeaderStats.js";
 import FooterAdmin from "../../components/Footers/FooterAdmin.js";
-import FilteredSalesCard from "../../components/Cards/FilteredSalesCard.js";
+// import FilteredSalesCard from "../../components/Cards/FilteredSalesCard.js";
 
 const Dashboard = observer(() => {
   const { staffService, orderService, subscriptionService } =
@@ -21,23 +21,15 @@ const Dashboard = observer(() => {
   const { addToast } = useToasts();
   const [staffCount, setStaffCount] = useState("");
   const [pendingSales, setPendingSales] = useState("");
-  const [cashSales, setCashSales] = useState("");
-  const [posSales, setPosSales] = useState("");
-  const [transferSales, setTransferSales] = useState("");
   const [ordersCount, setOrdersCount] = useState("");
   // const [customersCount, setCustomersCount] = useState('');
   const [salesTotal, setSalesTotal] = useState("");
   const [subscribersCount, setSubscribersCount] = useState("");
 
-  const [showModal, setShowModal] = useState(false);
 
-  const handleShowModal = () => {
-    setShowModal((prev) => (prev = true));
-  };
 
-  const closeModal = () => {
-    setShowModal((prev) => (prev = false));
-  };
+
+  
   useEffect(() => {
     getStaff();
     // getCustomers();
@@ -93,9 +85,6 @@ const Dashboard = observer(() => {
       const { data } = response;
       setOrdersCount(data.length);
       setPendingSales(orderService.recentOrders.filter((data) => data.payment_method === "pending"))
-      setCashSales(orderService.recentOrders.filter((data) => data.payment_method === "cash"))
-      setPosSales(orderService.recentOrders.filter((data) => data.payment_method === "pos"))
-      setTransferSales(orderService.recentOrders.filter((data) => data.payment_method === "transfer"))
       const orderTotal = orderService.recentOrders.map((order) => parseInt(order.ref_code));
       console.log(data, pendingSales);
       setSalesTotal(
@@ -120,17 +109,8 @@ const Dashboard = observer(() => {
       <div className="relative md:ml-64 bg-gray-900">
         <AdminNavbar />
         {/* Header */}
-        {showModal && (
-          <FilteredSalesCard
-            closeModal={closeModal}
-            pendingSales={pendingSales}
-            cashSales={cashSales}
-            posSales={posSales}
-            transferSales={transferSales}
-          />
-        )}
+     
         <HeaderStats
-          handleShowModal={handleShowModal}
           staffCount={staffCount}
           subscribersCount={subscribersCount}
           ordersCount={ordersCount}

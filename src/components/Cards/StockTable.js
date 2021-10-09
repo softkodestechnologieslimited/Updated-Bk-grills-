@@ -86,7 +86,7 @@ const StockTable = ({
                           return (
                             <i className="fas fa-circle mr-2 text-orange-500"></i>
                           );
-                        } else {
+                        } else if (meal.status === true && meal.desc === 0) {
                           return <i className="fas fa-circle mr-2"></i>;
                         }
                       })()}
