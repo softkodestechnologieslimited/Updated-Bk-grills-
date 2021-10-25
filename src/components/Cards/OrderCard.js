@@ -13,7 +13,7 @@ const OrderCard = () => {
   const { id } = params;
 
   // const [orderedDate, setOrderedDate] = useState("")
-  // let [editOrder, setEditOrder] = useState(false);
+  let [editOrder, setEditOrder] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     items: "",
     ordered: null,
@@ -149,23 +149,23 @@ const OrderCard = () => {
 
   // const editOrder = false
 
-  // const toggleEditOrder = () => {
-  //   setEditOrder(!editOrder);
-  //   itemsTotal();
-  // };
+  const toggleEditOrder = () => {
+    setEditOrder(!editOrder);
+    itemsTotal();
+  };
 
-  // const itemsTotal = () => {
-  //   let total = 0;
-  //   const quantity = orderDetails.quantity.split(",");
+  const itemsTotal = () => {
+    let total = 0;
+    const quantity = orderDetails.quantity.split(",");
 
-  //   quantity.forEach((quantity, index) => {
-  //     const prices = orderDetails.prices.split(",")[index];
-  //     console.log((total += quantity * prices));
-  //   });
-  //   // console.log(total);
-  //   setOrderDetails({ ...orderDetails, ref_code: total });
-  //   return total;
-  // };
+    quantity.forEach((quantity, index) => {
+      const prices = orderDetails.prices.split(",")[index];
+      console.log((total += quantity * prices));
+    });
+    // console.log(total);
+    setOrderDetails({ ...orderDetails, ref_code: total });
+    return total;
+  };
 
   return (
     <>
@@ -187,7 +187,7 @@ const OrderCard = () => {
           <div className="flex-auto px-2 lg:px-10 py-10 pt-0">
             <div className=" flex justify-between items-center   text-sm mt-3 mb-6 font-bold uppercase">
               <h6 className="text-black">Order Information</h6>
-              {/* {editOrder ? (
+              {editOrder ? (
                 <span className="px-3 text-lg align-middle  py-3 text-xs text-green-500 uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                   <i
                     onClick={() => toggleEditOrder()}
@@ -201,7 +201,7 @@ const OrderCard = () => {
                     className="fas fa-pencil-alt cursor-pointer"
                   ></i>
                 </span>
-              )} */}
+              )}
             </div>
 
             <table className=" w-full items-center w-full bg-transparent border-collapse">
@@ -220,7 +220,7 @@ const OrderCard = () => {
               </thead>
 
               <tbody>
-                {/* {editOrder ? (
+                {editOrder ? (
                   <>
                     {
                       <td colspan="3">
@@ -276,7 +276,7 @@ const OrderCard = () => {
                       </td>
                     }
                   </>
-                ) : ( */}
+                ) : (
                 <tr className="" valign="top">
                   <td className="flex-auto text-center text-black">
                     <>
@@ -321,7 +321,7 @@ const OrderCard = () => {
                     </>
                   </td>
                 </tr>
-                {/* )} */}
+                 )}
 
                 <tr className="py-5 text-black flex-auto border-t-0 font-semibold px-2 align-middle border-l-0 border-r-0 text-m whitespace-no-wrap py-4">
                   TOTAL: &#8358;{ref_code}
