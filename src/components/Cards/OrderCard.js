@@ -13,7 +13,7 @@ const OrderCard = () => {
   const { id } = params;
 
   const { orderService, mealService } = useContext(AppStateContext);
-  const [meals, setMeals] = useState(mealService.meals.filter((meal) => meal.status === true && meal.desc >= 1))
+  const [meals, setMeals] = useState([]);
   let [editOrder, setEditOrder] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     items: "",
@@ -59,7 +59,10 @@ const OrderCard = () => {
       return history.push("/dashboard/orders");
     }
     getOrder();
-
+    if (!meals.length) {
+      getItems();
+    }
+    console.log(meals);
     // eslint-disable-next-line
   }, []);
 
@@ -144,31 +147,43 @@ const OrderCard = () => {
     // const date = orderStatus ? newDate(new Date()) : null;
 
     setOrderDetails({ ...orderDetails, ordered: orderStatus });
-    console.log(
-      disableCheckbox,
-      orderDetails,
-      
-    );
+    console.log(disableCheckbox, orderDetails);
   };
 
-  const refresh = ()=> {
-    setMeals(mealService.getMeals());
-  }
+  const getItems = async () => {
+    try {
+      const response = await apiService.getMeals();
+      const { data } = response;
+
+      mealService.setMeals([...data]);
+      console.log(data);
+
+      setMeals(data.filter((meal) => meal.status === true && meal.desc >= 1));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const toggleEditOrder = () => {
     setEditOrder(!editOrder);
     itemsTotal();
+    setMeals(
+      mealService.meals.filter((meal) => meal.status === true && meal.desc >= 1)
+    );
+    console.log(meals);
   };
 
-  const remove = (idx) => {
+  const handleRemoveItem = (idx) => {
     const items = [orderDetails.items].join().split(",");
     const quantity = [orderDetails.quantity].join().split(",");
     const prices = [orderDetails.prices].join().split(",");
     const item_ids = [orderDetails.item_ids].join().split(",");
-    delete items[idx];
-    delete quantity[idx];
-    delete prices[idx];
-    delete item_ids[idx];
+    if (idx > -1) {
+      items.splice(idx, 1);
+      quantity.splice(idx, 1);
+      prices.splice(idx, 1);
+      item_ids.splice(idx, 1);
+    }
     setOrderDetails({
       ...orderDetails,
       items: items.toString(),
@@ -176,18 +191,53 @@ const OrderCard = () => {
       prices: prices.toString(),
       item_ids: item_ids.toString(),
     });
-    console.log(items, quantity, prices, item_ids);
+    console.log(orderDetails);
   };
 
-  const add = () => {};
+  const handleAddItem = (e) => {
+    const items = [orderDetails.items].join().split(",");
+    const item_ids = [orderDetails.item_ids].join().split(",");
+    const prices = [orderDetails.prices].join().split(",");
+    const quantity = [orderDetails.quantity].join().split(",");
+    const value = [e.target.value].join().split("-");
+
+    let id = parseInt(item_ids[item_ids.length - 1]);
+    id += 1
+    items.push(value[0]);
+    item_ids.push(id);
+    quantity.push(value[1]);
+    prices.push(parseInt(value[2].replace(/,/g, "")));
+
+    setOrderDetails({
+      ...orderDetails,
+      items: items.toString(),
+      item_ids: item_ids.toString(),
+      prices: prices.toString(),
+      quantity: quantity.toString(),
+    });
+    console.log(item_ids,id);
+  };
 
   const increase = (idx) => {
-    const quantity = [orderDetails.quantity].join().split(",");
-    let nw = parseInt(quantity[idx])
-
-    console.log(nw+1);
+    let quantity = [orderDetails.quantity].join().split(",");
+    if ([orderDetails.items].join().split(",").length > 1) {
+      ++quantity[idx];
+    }
+    console.log([orderDetails.items].join().split(","));
+    setOrderDetails({
+      ...orderDetails,
+      quantity: quantity.toString(),
+    });
   };
-  const decrease = () => {};
+
+  const decrease = (idx) => {
+    let quantity = [orderDetails.quantity].join().split(",");
+    if (parseInt(quantity[idx]) > 1) --quantity[idx];
+    setOrderDetails({
+      ...orderDetails,
+      quantity: quantity.toString(),
+    });
+  };
 
   const itemsTotal = () => {
     let total = 0;
@@ -255,109 +305,6 @@ const OrderCard = () => {
               </thead>
 
               <tbody>
-                {/* {editOrder ? (
-                  <>
-                    {
-                      <td colspan="3">
-                        <div className="table-cell">
-                          <p className="py-5">
-                            <label className="text-black font-semibold text-xl my-15">
-                              Items
-                            </label>
-                            <input
-                              className="w-2/6 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
-                              name="items"
-                              value={orderDetails.items}
-                              onChange={handleChange}
-                            />
-                          </p>
-                          <p className="py-5">
-                            <label className="text-black font-semibold text-xl my-15">
-                              Quantity
-                            </label>
-
-                            <input
-                              className="w-2/6 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
-                              name="quantity"
-                              value={orderDetails.quantity}
-                              onChange={handleChange}
-                            />
-                          </p>
-
-                          <p className="py-5">
-                            <label className="text-black font-semibold text-xl my-15">
-                              Prices
-                            </label>
-                            <input
-                              className="w-2/6 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
-                              name="prices"
-                              value={orderDetails.prices}
-                              onChange={handleChange}
-                            />
-                          </p>
-                          <p className="py-5">
-                            <label className="text-black font-semibold text-xl my-15">
-                              Total
-                            </label>
-
-                            <input
-                              className="w-2/6 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150 text-capitalize"
-                              name="ref_code"
-                              value={orderDetails.ref_code}
-                              onChange={handleChange}
-                            />
-                          </p>
-                        </div>
-                      </td>
-                    }
-                  </>
-                ) : (
-                  <tr className="" valign="top">
-                    <td className="flex-auto text-center text-black">
-                      <>
-                        {[orderDetails.items]
-                          .join()
-                          .split(",")
-                          .map((items, idx) => (
-                            <ul className="flex-1" key={idx}>
-                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
-                                {items}
-                              </li>
-                            </ul>
-                          ))}
-                      </>
-                    </td>
-                    <td className="text-black flex-auto text-center">
-                      <>
-                        {[orderDetails.quantity]
-                          .join()
-                          .split(",")
-                          .map((quantity, idx) => (
-                            <ul className="flex-1" key={idx}>
-                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
-                                {quantity}
-                              </li>
-                            </ul>
-                          ))}
-                      </>
-                    </td>
-                    <td className="text-black  flex-auto text-center">
-                      <>
-                        {[orderDetails.prices]
-                          .join()
-                          .split(",")
-                          .map((prices, idx) => (
-                            <ul className="" key={idx}>
-                              <li className=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-no-wrap p-4 text-left">
-                                {prices}
-                              </li>
-                            </ul>
-                          ))}
-                      </>
-                    </td>
-                  </tr>
-                )} */}
-
                 <tr className="" valign="top">
                   <td className="flex-auto text-center text-black">
                     <>
@@ -372,9 +319,9 @@ const OrderCard = () => {
                                 <button
                                   className="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs ml-2 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
                                   type="button"
-                                  onClick={() => remove(idx)}
+                                  onClick={() => handleRemoveItem(idx)}
                                 >
-                                  <i className="fas fa-minus"></i>
+                                  <i className="fas fa-trash"></i>
                                 </button>
                               )}
                             </li>
@@ -394,7 +341,7 @@ const OrderCard = () => {
                                 <button
                                   className="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs mr-2 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
                                   type="button"
-                                  // onClick={reduceQuantity}
+                                  onClick={() => decrease(idx)}
                                 >
                                   <i className="fas fa-minus"></i>
                                 </button>
@@ -429,31 +376,31 @@ const OrderCard = () => {
                     </>
                   </td>
                 </tr>
-
-                {editOrder && (
-                  <tr>
-                    <select
-                    className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded p-3"
-                    onChange={handleChange}
-                    name="payment_method"
-                    value={payment_method}
-                  >
-                    {meals.map((dt) => (
-                      <options>
-                        {dt.item}
-                      </options>
-                    ))}
-                  </select>
-                  </tr>
-                )}
-
-                <tr className="py-5 text-black flex-auto border-t-0 font-semibold px-2 align-middle border-l-0 border-r-0 text-m whitespace-no-wrap py-4">
-                  TOTAL: &#8358;{ref_code}
-                </tr>
               </tbody>
             </table>
 
-            <hr className="mt-6 border-b-1 border-gray-400" />
+            <div>
+              {editOrder && (
+                <div>
+                  <select
+                    className="form-select block w-full placeholder-gray-400 text-gray-700 bg-white rounded p-3"
+                    onChange={(e) => handleAddItem(e)}
+                    name="payment_method"
+                    //  value={payment_method}
+                  >
+                    <option value="">Add item to order</option>
+                    {meals.map((data, idx) => (
+                      <option key={idx} className="text-black">
+                        {data.item}  -  1  -  {data.price}  -  total quantity: {data.desc}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+              <div className="py-5 text-black flex-auto border-t-0 font-semibold px-2 align-middle border-l-0 border-r-0 text-m whitespace-no-wrap py-4 text-right">
+                TOTAL: &#8358;{ref_code}
+              </div>
+            </div>
 
             <div className="flex flex-wrap mt-3 mb-6">
               <div className="w-full lg:w-6/12 px-4">
