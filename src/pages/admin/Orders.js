@@ -42,7 +42,7 @@ const Orders = observer(() => {
 
       return;
     }
-      console.log(currentUser.role);
+    console.log(currentUser.role);
 
     setOrders(
       orderService.recentOrders.filter((order) => order.deleted !== true)
@@ -79,10 +79,8 @@ const Orders = observer(() => {
 
   const filteredOrders = orders.filter((order) => {
     if (!query) return order;
-
     return (
-      // order.id.toLowerCase().includes(query) ||
-      order.ref_code.toLowerCase().includes(query)
+      order.staff?.toLowerCase().includes(query)
     );
   });
 
