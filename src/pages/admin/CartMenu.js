@@ -46,6 +46,7 @@ const CartMenu = observer(() => {
       const response = await apiService.getMeals();
       const { data } = response;
 
+       mealService.setMeals([...data]);
       console.log(data);
 
       // const inStockMeals = data.filter(
@@ -53,8 +54,7 @@ const CartMenu = observer(() => {
       // );
       setMeals(data);
 
-      mealService.setMeals([...data]);
-    } catch (error) {
+   } catch (error) {
       const message = apiService.getErrorMessage(error);
       addToast(message, {
         appearance: "error",
